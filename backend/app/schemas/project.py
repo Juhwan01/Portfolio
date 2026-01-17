@@ -3,34 +3,42 @@ from typing import Optional, List
 from datetime import datetime
 
 
-class Metric(BaseModel):
-    name: str
-    value: str
-
-
 class ProjectBase(BaseModel):
     title: str
     description: str
-    long_description: Optional[str] = None
-    model_type: str
-    frameworks: List[str]
-    technologies: List[str]
-    image_url: str
+    content: Optional[str] = None
+    category: Optional[str] = None
+    tech_stack: List[str] = []
+    thumbnail_url: Optional[str] = None
+    images: List[str] = []
     demo_url: Optional[str] = None
     github_url: Optional[str] = None
-    paper_url: Optional[str] = None
-    model_card_url: Optional[str] = None
     featured: bool = False
-    metrics: Optional[List[Metric]] = None
-    dataset: Optional[str] = None
+    status: str = "completed"
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    order: int = 0
 
 
 class ProjectCreate(ProjectBase):
     id: str
 
 
-class ProjectUpdate(ProjectBase):
-    pass
+class ProjectUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    content: Optional[str] = None
+    category: Optional[str] = None
+    tech_stack: Optional[List[str]] = None
+    thumbnail_url: Optional[str] = None
+    images: Optional[List[str]] = None
+    demo_url: Optional[str] = None
+    github_url: Optional[str] = None
+    featured: Optional[bool] = None
+    status: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    order: Optional[int] = None
 
 
 class ProjectInDB(ProjectBase):

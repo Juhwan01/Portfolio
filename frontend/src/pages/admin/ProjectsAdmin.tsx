@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { getProjects, deleteProject } from '@services/api'
-import type { AIProject } from '@types/index'
+import type { Project } from '@types/index'
 import Button from '@components/common/Button'
 import ProjectForm from '@components/admin/ProjectForm'
 
 const ProjectsAdmin = () => {
-  const [projects, setProjects] = useState<AIProject[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
-  const [editingProject, setEditingProject] = useState<AIProject | null>(null)
+  const [editingProject, setEditingProject] = useState<Project | null>(null)
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
 
   const fetchProjects = async () => {
@@ -31,7 +31,7 @@ const ProjectsAdmin = () => {
     setShowForm(true)
   }
 
-  const handleEdit = (project: AIProject) => {
+  const handleEdit = (project: Project) => {
     setEditingProject(project)
     setShowForm(true)
   }
@@ -79,7 +79,8 @@ const ProjectsAdmin = () => {
             <tr className="border-b border-white/10">
               <th className="text-left p-4 text-gray-400 font-medium">Image</th>
               <th className="text-left p-4 text-gray-400 font-medium">Title</th>
-              <th className="text-left p-4 text-gray-400 font-medium">Type</th>
+              <th className="text-left p-4 text-gray-400 font-medium">Category</th>
+              <th className="text-left p-4 text-gray-400 font-medium">Status</th>
               <th className="text-left p-4 text-gray-400 font-medium">Featured</th>
               <th className="text-left p-4 text-gray-400 font-medium">Actions</th>
             </tr>
@@ -88,11 +89,17 @@ const ProjectsAdmin = () => {
             {projects.map((project) => (
               <tr key={project.id} className="border-b border-white/5 hover:bg-white/5">
                 <td className="p-4">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="w-16 h-12 object-cover rounded"
-                  />
+                  {project.thumbnailUrl ? (
+                    <img
+                      src={project.thumbnailUrl}
+                      alt={project.title}
+                      className="w-16 h-12 object-cover rounded"
+                    />
+                  ) : (
+                    <div className="w-16 h-12 bg-white/10 rounded flex items-center justify-center text-gray-500">
+                      No img
+                    </div>
+                  )}
                 </td>
                 <td className="p-4">
                   <div className="font-medium">{project.title}</div>
@@ -101,8 +108,21 @@ const ProjectsAdmin = () => {
                   </div>
                 </td>
                 <td className="p-4">
-                  <span className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-sm">
-                    {project.modelType}
+                  {project.category && (
+                    <span className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-sm">
+                      {project.category}
+                    </span>
+                  )}
+                </td>
+                <td className="p-4">
+                  <span className={`px-2 py-1 rounded text-sm ${
+                    project.status === 'completed'
+                      ? 'bg-green-600/20 text-green-400'
+                      : project.status === 'in_progress'
+                      ? 'bg-yellow-600/20 text-yellow-400'
+                      : 'bg-gray-600/20 text-gray-400'
+                  }`}>
+                    {project.status === 'completed' ? '완료' : project.status === 'in_progress' ? '진행중' : '보관'}
                   </span>
                 </td>
                 <td className="p-4">{project.featured ? '⭐' : '-'}</td>
@@ -126,7 +146,7 @@ const ProjectsAdmin = () => {
             ))}
             {projects.length === 0 && (
               <tr>
-                <td colSpan={5} className="p-8 text-center text-gray-400">
+                <td colSpan={6} className="p-8 text-center text-gray-400">
                   No projects yet. Click "Add Project" to create one.
                 </td>
               </tr>

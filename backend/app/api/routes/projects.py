@@ -12,13 +12,19 @@ router = APIRouter()
 @router.get("/", response_model=List[ProjectInDB])
 def get_projects(
     featured: Optional[bool] = None,
+    category: Optional[str] = None,
+    status: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
-    """Get all projects, optionally filtered by featured status"""
+    """Get all projects, optionally filtered by featured, category, status"""
     query = db.query(Project)
     if featured is not None:
         query = query.filter(Project.featured == featured)
-    projects = query.order_by(Project.created_at.desc()).all()
+    if category:
+        query = query.filter(Project.category == category)
+    if status:
+        query = query.filter(Project.status == status)
+    projects = query.order_by(Project.order, Project.created_at.desc()).all()
     return projects
 
 
@@ -57,7 +63,8 @@ def update_project(
     if not db_project:
         raise HTTPException(status_code=404, detail="Project not found")
 
-    for key, value in project.model_dump().items():
+    update_data = project.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
         setattr(db_project, key, value)
 
     db.commit()

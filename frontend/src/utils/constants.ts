@@ -8,19 +8,18 @@ export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/yourusername',
 }
 
-export const SKILL_CATEGORIES = {
-  'ml-frameworks': 'ML Frameworks',
-  'languages': 'Languages',
-  'cloud-mlops': 'Cloud & MLOps',
-  'data': 'Data Engineering',
-  'other': 'Other',
-} as const
-
-export const MODEL_TYPES = [
-  'LLM',
-  'Computer Vision',
-  'NLP',
-  'Reinforcement Learning',
-  'Generative AI',
+export const PROJECT_CATEGORIES = [
+  'Web',
+  'Backend',
+  'AI',
+  'Mobile',
+  'DevOps',
+  'Data',
   'Other',
+] as const
+
+export const PROJECT_STATUS = [
+  'completed',
+  'in_progress',
+  'archived',
 ] as const

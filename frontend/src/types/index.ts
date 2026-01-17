@@ -1,23 +1,21 @@
-export interface AIProject {
+export interface Project {
   id: string;
   title: string;
   description: string;
-  longDescription?: string;
-  modelType: 'LLM' | 'Computer Vision' | 'NLP' | 'Reinforcement Learning' | 'Generative AI' | 'Other';
-  frameworks: string[]; // PyTorch, TensorFlow, JAX, etc.
-  technologies: string[];
-  imageUrl: string;
+  content?: string;
+  category?: string;
+  techStack: string[];
+  thumbnailUrl?: string;
+  images: string[];
   demoUrl?: string;
   githubUrl?: string;
-  paperUrl?: string; // Research paper link
-  modelCardUrl?: string; // HuggingFace model card
   featured: boolean;
-  metrics?: {
-    name: string;
-    value: string;
-  }[];
-  dataset?: string;
+  status: 'completed' | 'in_progress' | 'archived';
+  startDate?: string;
+  endDate?: string;
+  order: number;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface BlogPost {
@@ -26,17 +24,19 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   coverImage: string;
-  tags: string[]; // ML, NLP, Computer Vision, etc.
+  tags: string[];
   publishedAt: string;
   readTime: number;
   category: 'research' | 'tutorial' | 'case-study' | 'review';
 }
 
 export interface Skill {
+  id: number;
   name: string;
-  category: 'ml-frameworks' | 'languages' | 'cloud-mlops' | 'data' | 'other';
-  level: number; // 1-5
+  category?: string;
   icon?: string;
+  order: number;
+  createdAt: string;
 }
 
 export interface ContactForm {

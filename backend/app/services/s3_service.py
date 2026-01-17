@@ -25,8 +25,7 @@ async def upload_file_to_s3(file: UploadFile, filename: str) -> str:
             Bucket=settings.S3_BUCKET_NAME,
             Key=filename,
             Body=file_content,
-            ContentType=file.content_type,
-            ACL='public-read'  # Make file publicly accessible
+            ContentType=file.content_type
         )
 
         # Generate file URL

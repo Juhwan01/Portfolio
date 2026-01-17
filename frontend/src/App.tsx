@@ -9,6 +9,7 @@ import Login from '@pages/admin/Login'
 import AdminLayout from '@pages/admin/AdminLayout'
 import Dashboard from '@pages/admin/Dashboard'
 import ProjectsAdmin from '@pages/admin/ProjectsAdmin'
+import SkillsAdmin from '@pages/admin/SkillsAdmin'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="projects" element={<ProjectsAdmin />} />
+          <Route path="skills" element={<SkillsAdmin />} />
         </Route>
 
         {/* 404 */}

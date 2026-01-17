@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { createProject, updateProject, type ProjectCreateData } from '@services/api'
-import type { AIProject } from '@types/index'
+import { createProject, updateProject, type ProjectCreateData, type ProjectUpdateData } from '@services/api'
+import type { Project } from '@types/index'
 import Button from '@components/common/Button'
 import ImageUpload from './ImageUpload'
-import { MODEL_TYPES } from '@utils/constants'
+import { PROJECT_CATEGORIES, PROJECT_STATUS } from '@utils/constants'
 
 interface ProjectFormProps {
-  project?: AIProject | null
+  project?: Project | null
   onSuccess: () => void
   onCancel: () => void
 }
@@ -19,21 +19,20 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     id: project?.id || '',
     title: project?.title || '',
     description: project?.description || '',
-    long_description: project?.longDescription || '',
-    model_type: project?.modelType || 'LLM',
-    frameworks: project?.frameworks || [],
-    technologies: project?.technologies || [],
-    image_url: project?.imageUrl || '',
+    content: project?.content || '',
+    category: project?.category || '',
+    tech_stack: project?.techStack || [],
+    thumbnail_url: project?.thumbnailUrl || '',
+    images: project?.images || [],
     demo_url: project?.demoUrl || '',
     github_url: project?.githubUrl || '',
-    paper_url: project?.paperUrl || '',
-    model_card_url: project?.modelCardUrl || '',
     featured: project?.featured || false,
-    metrics: project?.metrics || [],
-    dataset: project?.dataset || '',
+    status: project?.status || 'completed',
+    start_date: project?.startDate || '',
+    end_date: project?.endDate || '',
+    order: project?.order || 0,
   })
 
-  const [frameworkInput, setFrameworkInput] = useState('')
   const [techInput, setTechInput] = useState('')
 
   const handleChange = (
@@ -46,28 +45,11 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     })
   }
 
-  const handleAddFramework = () => {
-    if (frameworkInput.trim() && !formData.frameworks.includes(frameworkInput.trim())) {
-      setFormData({
-        ...formData,
-        frameworks: [...formData.frameworks, frameworkInput.trim()],
-      })
-      setFrameworkInput('')
-    }
-  }
-
-  const handleRemoveFramework = (fw: string) => {
-    setFormData({
-      ...formData,
-      frameworks: formData.frameworks.filter((f) => f !== fw),
-    })
-  }
-
   const handleAddTech = () => {
-    if (techInput.trim() && !formData.technologies.includes(techInput.trim())) {
+    if (techInput.trim() && !formData.tech_stack.includes(techInput.trim())) {
       setFormData({
         ...formData,
-        technologies: [...formData.technologies, techInput.trim()],
+        tech_stack: [...formData.tech_stack, techInput.trim()],
       })
       setTechInput('')
     }
@@ -76,7 +58,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
   const handleRemoveTech = (tech: string) => {
     setFormData({
       ...formData,
-      technologies: formData.technologies.filter((t) => t !== tech),
+      tech_stack: formData.tech_stack.filter((t) => t !== tech),
     })
   }
 
@@ -88,7 +70,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     try {
       if (project) {
         const { id, ...updateData } = formData
-        await updateProject(project.id, updateData)
+        await updateProject(project.id, updateData as ProjectUpdateData)
       } else {
         const id = formData.id || formData.title.toLowerCase().replace(/\s+/g, '-')
         await createProject({ ...formData, id })
@@ -102,7 +84,10 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
   }
 
   const inputClass =
-    'w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition'
+    'w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white'
+
+  const selectClass =
+    'w-full px-4 py-3 bg-gray-800 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white'
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -125,18 +110,18 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
 
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
-            Model Type <span className="text-red-400">*</span>
+            Category
           </label>
           <select
-            name="model_type"
-            value={formData.model_type}
+            name="category"
+            value={formData.category}
             onChange={handleChange}
-            required
-            className={inputClass}
+            className={selectClass}
           >
-            {MODEL_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
+            <option value="" className="bg-gray-800 text-white">Select category</option>
+            {PROJECT_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat} className="bg-gray-800 text-white">
+                {cat}
               </option>
             ))}
           </select>
@@ -153,7 +138,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           value={formData.title}
           onChange={handleChange}
           required
-          placeholder="My Awesome AI Project"
+          placeholder="프로젝트 제목"
           className={inputClass}
         />
       </div>
@@ -168,21 +153,21 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           onChange={handleChange}
           required
           rows={2}
-          placeholder="A brief description of your project"
+          placeholder="프로젝트에 대한 간단한 설명"
           className={inputClass}
         />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Long Description
+          Content (Markdown 지원)
         </label>
         <textarea
-          name="long_description"
-          value={formData.long_description}
+          name="content"
+          value={formData.content}
           onChange={handleChange}
-          rows={4}
-          placeholder="Detailed description of your project..."
+          rows={6}
+          placeholder="프로젝트에 대한 상세 설명..."
           className={inputClass}
         />
       </div>
@@ -190,55 +175,18 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
       {/* Image Upload */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Project Image <span className="text-red-400">*</span>
+          Thumbnail Image
         </label>
         <ImageUpload
-          value={formData.image_url}
-          onChange={(url) => setFormData({ ...formData, image_url: url })}
+          value={formData.thumbnail_url || ''}
+          onChange={(url) => setFormData({ ...formData, thumbnail_url: url })}
         />
       </div>
 
-      {/* Frameworks */}
+      {/* Tech Stack */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Frameworks <span className="text-red-400">*</span>
-        </label>
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
-            value={frameworkInput}
-            onChange={(e) => setFrameworkInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddFramework())}
-            placeholder="e.g. PyTorch, TensorFlow"
-            className={inputClass}
-          />
-          <Button type="button" variant="secondary" onClick={handleAddFramework}>
-            Add
-          </Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {formData.frameworks.map((fw) => (
-            <span
-              key={fw}
-              className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm flex items-center gap-2"
-            >
-              {fw}
-              <button
-                type="button"
-                onClick={() => handleRemoveFramework(fw)}
-                className="hover:text-red-400"
-              >
-                ×
-              </button>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Technologies */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Technologies <span className="text-red-400">*</span>
+          Tech Stack
         </label>
         <div className="flex gap-2 mb-2">
           <input
@@ -246,7 +194,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
             value={techInput}
             onChange={(e) => setTechInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTech())}
-            placeholder="e.g. Python, Docker"
+            placeholder="e.g. Python, FastAPI, React"
             className={inputClass}
           />
           <Button type="button" variant="secondary" onClick={handleAddTech}>
@@ -254,10 +202,10 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           </Button>
         </div>
         <div className="flex flex-wrap gap-2">
-          {formData.technologies.map((tech) => (
+          {formData.tech_stack.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm flex items-center gap-2"
+              className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm flex items-center gap-2"
             >
               {tech}
               <button
@@ -269,6 +217,37 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
               </button>
             </span>
           ))}
+        </div>
+      </div>
+
+      {/* Dates */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Start Date
+          </label>
+          <input
+            type="text"
+            name="start_date"
+            value={formData.start_date}
+            onChange={handleChange}
+            placeholder="2024.01"
+            className={inputClass}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            End Date
+          </label>
+          <input
+            type="text"
+            name="end_date"
+            value={formData.end_date}
+            onChange={handleChange}
+            placeholder="2024.06 or 진행중"
+            className={inputClass}
+          />
         </div>
       </div>
 
@@ -301,49 +280,40 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
             className={inputClass}
           />
         </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Paper URL
-          </label>
-          <input
-            type="url"
-            name="paper_url"
-            value={formData.paper_url}
-            onChange={handleChange}
-            placeholder="https://arxiv.org/abs/..."
-            className={inputClass}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Model Card URL
-          </label>
-          <input
-            type="url"
-            name="model_card_url"
-            value={formData.model_card_url}
-            onChange={handleChange}
-            placeholder="https://huggingface.co/..."
-            className={inputClass}
-          />
-        </div>
       </div>
 
-      {/* Dataset */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Dataset
-        </label>
-        <input
-          type="text"
-          name="dataset"
-          value={formData.dataset}
-          onChange={handleChange}
-          placeholder="e.g. ImageNet, Custom Dataset"
-          className={inputClass}
-        />
+      {/* Status & Featured */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Status
+          </label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className={selectClass}
+          >
+            {PROJECT_STATUS.map((status) => (
+              <option key={status} value={status} className="bg-gray-800 text-white">
+                {status === 'completed' ? '완료' : status === 'in_progress' ? '진행중' : '보관'}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Order (낮을수록 먼저 표시)
+          </label>
+          <input
+            type="number"
+            name="order"
+            value={formData.order}
+            onChange={handleChange}
+            className={inputClass}
+          />
+        </div>
       </div>
 
       {/* Featured */}
@@ -357,7 +327,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           className="w-5 h-5 rounded bg-white/5 border-white/10"
         />
         <label htmlFor="featured" className="text-gray-300">
-          Featured project (displayed on homepage)
+          Featured project (홈페이지에 표시)
         </label>
       </div>
 
