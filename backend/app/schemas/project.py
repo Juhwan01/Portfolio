@@ -1,6 +1,11 @@
-from pydantic import BaseModel
-from typing import Optional, List
+from pydantic import BaseModel, field_validator
+from typing import Optional, List, Any
 from datetime import datetime
+
+
+class TeamRole(BaseModel):
+    role: str
+    count: int
 
 
 class ProjectBase(BaseModel):
@@ -18,6 +23,14 @@ class ProjectBase(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     order: int = 0
+    notion_page_id: Optional[str] = None
+    video_url: Optional[str] = None
+    team_composition: List[Any] = []
+
+    @field_validator('team_composition', 'images', 'tech_stack', mode='before')
+    @classmethod
+    def empty_list_if_none(cls, v):
+        return v if v is not None else []
 
 
 class ProjectCreate(ProjectBase):
@@ -39,6 +52,9 @@ class ProjectUpdate(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     order: Optional[int] = None
+    notion_page_id: Optional[str] = None
+    video_url: Optional[str] = None
+    team_composition: Optional[List[Any]] = None
 
 
 class ProjectInDB(ProjectBase):

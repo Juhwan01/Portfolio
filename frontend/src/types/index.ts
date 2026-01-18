@@ -1,3 +1,8 @@
+export interface TeamRole {
+  role: string;
+  count: number;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -14,6 +19,9 @@ export interface Project {
   startDate?: string;
   endDate?: string;
   order: number;
+  notionPageId?: string;
+  videoUrl?: string;
+  teamComposition?: TeamRole[];
   createdAt: string;
   updatedAt?: string;
 }

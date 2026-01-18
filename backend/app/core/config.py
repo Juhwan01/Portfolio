@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
+    # Notion
+    NOTION_TOKEN: Optional[str] = None
+
     class Config:
         env_file = ".env"
         case_sensitive = True

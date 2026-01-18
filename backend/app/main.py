@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .core.config import settings
-from .api.routes import projects, blog, contact, upload, auth, skills
+from .api.routes import projects, blog, contact, upload, auth, skills, notion
 from .models import Project, Admin, Skill
 
 app = FastAPI(
@@ -26,6 +26,7 @@ app.include_router(contact.router, prefix="/api/contact", tags=["contact"])
 app.include_router(upload.router, prefix="/api/upload", tags=["upload"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(skills.router, prefix="/api/skills", tags=["skills"])
+app.include_router(notion.router, prefix="/api/notion", tags=["notion"])
 
 
 @app.get("/")

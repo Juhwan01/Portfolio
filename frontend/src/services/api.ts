@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { API_BASE_URL } from '@utils/constants'
-import type { Project, BlogPost, ContactForm, Experience, Research, Skill } from '@types/index'
+import type { Project, BlogPost, ContactForm, Experience, Research, Skill } from '@/types'
 
 // snake_case to camelCase 변환
 const toCamelCase = (str: string): string => {
@@ -63,8 +63,8 @@ export interface LoginData {
 }
 
 export interface TokenResponse {
-  access_token: string
-  token_type: string
+  accessToken: string
+  tokenType: string
 }
 
 export const login = async (data: LoginData): Promise<TokenResponse> => {
@@ -84,7 +84,7 @@ export const getProjects = async (params?: { featured?: boolean; category?: stri
 }
 
 export const getProjectById = async (id: string) => {
-  const response = await api.get<Project>(`/api/projects/${id}`)
+  const response = await api.get<Project>(`/api/projects/${encodeURIComponent(id)}`)
   return response.data
 }
 
@@ -105,6 +105,9 @@ export interface ProjectCreateData {
   start_date?: string
   end_date?: string
   order?: number
+  notion_page_id?: string
+  video_url?: string
+  team_composition?: { role: string; count: number }[]
 }
 
 export interface ProjectUpdateData {
@@ -122,6 +125,9 @@ export interface ProjectUpdateData {
   start_date?: string
   end_date?: string
   order?: number
+  notion_page_id?: string
+  video_url?: string
+  team_composition?: { role: string; count: number }[]
 }
 
 export const createProject = async (data: ProjectCreateData): Promise<Project> => {
@@ -130,12 +136,12 @@ export const createProject = async (data: ProjectCreateData): Promise<Project> =
 }
 
 export const updateProject = async (id: string, data: ProjectUpdateData): Promise<Project> => {
-  const response = await api.put<Project>(`/api/projects/${id}`, data)
+  const response = await api.put<Project>(`/api/projects/${encodeURIComponent(id)}`, data)
   return response.data
 }
 
 export const deleteProject = async (id: string): Promise<void> => {
-  await api.delete(`/api/projects/${id}`)
+  await api.delete(`/api/projects/${encodeURIComponent(id)}`)
 }
 
 // Skills - Read
@@ -222,6 +228,17 @@ export const getResearch = async () => {
 // Contact
 export const submitContactForm = async (data: ContactForm) => {
   const response = await api.post('/api/contact', data)
+  return response.data
+}
+
+// Notion
+export const getNotionPage = async (pageId: string) => {
+  const response = await api.get(`/api/notion/page/${pageId}`)
+  return response.data
+}
+
+export const getNotionBlocks = async (pageId: string) => {
+  const response = await api.get(`/api/notion/blocks/${pageId}`)
   return response.data
 }
 

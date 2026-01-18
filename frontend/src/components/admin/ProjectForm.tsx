@@ -11,6 +11,8 @@ interface ProjectFormProps {
   onCancel: () => void
 }
 
+const TEAM_ROLES = ['AI', 'Backend', 'Frontend', 'DevOps', 'Design', 'PM', 'Full-stack']
+
 const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -31,9 +33,14 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     start_date: project?.startDate || '',
     end_date: project?.endDate || '',
     order: project?.order || 0,
+    notion_page_id: project?.notionPageId || '',
+    video_url: project?.videoUrl || '',
+    team_composition: project?.teamComposition || [],
   })
 
   const [techInput, setTechInput] = useState('')
+  const [teamRole, setTeamRole] = useState('')
+  const [teamCount, setTeamCount] = useState(1)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -62,6 +69,34 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     })
   }
 
+  const handleAddTeamRole = () => {
+    if (teamRole && teamCount > 0) {
+      const existing = formData.team_composition?.find((t) => t.role === teamRole)
+      if (existing) {
+        setFormData({
+          ...formData,
+          team_composition: formData.team_composition?.map((t) =>
+            t.role === teamRole ? { ...t, count: teamCount } : t
+          ),
+        })
+      } else {
+        setFormData({
+          ...formData,
+          team_composition: [...(formData.team_composition || []), { role: teamRole, count: teamCount }],
+        })
+      }
+      setTeamRole('')
+      setTeamCount(1)
+    }
+  }
+
+  const handleRemoveTeamRole = (role: string) => {
+    setFormData({
+      ...formData,
+      team_composition: formData.team_composition?.filter((t) => t.role !== role),
+    })
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -70,13 +105,17 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     try {
       if (project) {
         const { id, ...updateData } = formData
+        console.log('Updating project with ID:', project.id)
+        console.log('Update data:', updateData)
         await updateProject(project.id, updateData as ProjectUpdateData)
       } else {
         const id = formData.id || formData.title.toLowerCase().replace(/\s+/g, '-')
+        console.log('Creating project with ID:', id)
         await createProject({ ...formData, id })
       }
       onSuccess()
     } catch (err: any) {
+      console.error('API Error:', err)
       setError(err.response?.data?.detail || 'An error occurred')
     } finally {
       setLoading(false)
@@ -88,6 +127,8 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
 
   const selectClass =
     'w-full px-4 py-3 bg-gray-800 border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 transition text-white'
+
+  const totalTeam = formData.team_composition?.reduce((sum, t) => sum + t.count, 0) || 0
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -158,6 +199,59 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
         />
       </div>
 
+      {/* Team Composition */}
+      <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+        <label className="block text-sm font-medium text-purple-400 mb-2">
+          Team Composition
+          {totalTeam > 0 && (
+            <span className="text-gray-400 font-normal ml-2">(총 {totalTeam}명)</span>
+          )}
+        </label>
+        <div className="flex gap-2 mb-3">
+          <select
+            value={teamRole}
+            onChange={(e) => setTeamRole(e.target.value)}
+            className={`${selectClass} flex-1`}
+          >
+            <option value="" className="bg-gray-800">역할 선택</option>
+            {TEAM_ROLES.map((role) => (
+              <option key={role} value={role} className="bg-gray-800">
+                {role}
+              </option>
+            ))}
+          </select>
+          <input
+            type="number"
+            value={teamCount}
+            onChange={(e) => setTeamCount(parseInt(e.target.value) || 1)}
+            min={1}
+            className={`${inputClass} w-20 text-center`}
+            placeholder="인원"
+          />
+          <Button type="button" variant="secondary" onClick={handleAddTeamRole}>
+            Add
+          </Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {formData.team_composition?.map((team) => (
+            <span
+              key={team.role}
+              className="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm flex items-center gap-2"
+            >
+              {team.role} {team.count}명
+              <button
+                type="button"
+                onClick={() => handleRemoveTeamRole(team.role)}
+                className="hover:text-red-400"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Content */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
           Content (Markdown 지원)
@@ -168,6 +262,43 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           onChange={handleChange}
           rows={6}
           placeholder="프로젝트에 대한 상세 설명..."
+          className={inputClass}
+        />
+      </div>
+
+      {/* Notion Integration */}
+      <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+        <label className="block text-sm font-medium text-blue-400 mb-2">
+          Notion Page ID
+          <span className="text-gray-500 font-normal ml-2">
+            (Content 아래에 Notion 페이지가 임베드됩니다)
+          </span>
+        </label>
+        <input
+          type="text"
+          name="notion_page_id"
+          value={formData.notion_page_id}
+          onChange={handleChange}
+          placeholder="abc123def456... (Notion URL에서 복사)"
+          className={inputClass}
+        />
+        <p className="mt-2 text-xs text-gray-500">
+          Notion URL 예시: notion.so/My-Page-<span className="text-blue-400">abc123def456</span> → abc123def456 입력
+        </p>
+      </div>
+
+      {/* Video URL */}
+      <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+        <label className="block text-sm font-medium text-green-400 mb-2">
+          Video URL
+          <span className="text-gray-500 font-normal ml-2">(YouTube, Vimeo 등)</span>
+        </label>
+        <input
+          type="url"
+          name="video_url"
+          value={formData.video_url}
+          onChange={handleChange}
+          placeholder="https://www.youtube.com/watch?v=..."
           className={inputClass}
         />
       </div>

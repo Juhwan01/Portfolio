@@ -26,7 +26,7 @@ const Login = () => {
         ? await register(formData)
         : await login(formData)
 
-      setToken(response.access_token)
+      setToken(response.accessToken)
       navigate('/admin')
     } catch (err: any) {
       setError(err.response?.data?.detail || 'An error occurred')
