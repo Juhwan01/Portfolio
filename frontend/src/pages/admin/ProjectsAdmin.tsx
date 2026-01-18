@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getProjects, deleteProject } from '@services/api'
-import type { Project } from '@types/index'
+import type { Project } from '@/types'
 import Button from '@components/common/Button'
 import ProjectForm from '@components/admin/ProjectForm'
 

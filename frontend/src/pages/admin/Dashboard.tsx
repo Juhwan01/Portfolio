@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getProjects } from '@services/api'
-import type { AIProject } from '@types/index'
+import type { Project } from '@/types'
 import Card from '@components/common/Card'
 
 const Dashboard = () => {
-  const [projects, setProjects] = useState<AIProject[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const Dashboard = () => {
   const stats = [
     { label: 'Total Projects', value: projects.length, icon: '🚀' },
     { label: 'Featured', value: projects.filter((p) => p.featured).length, icon: '⭐' },
-    { label: 'LLM Projects', value: projects.filter((p) => p.modelType === 'LLM').length, icon: '🤖' },
-    { label: 'CV Projects', value: projects.filter((p) => p.modelType === 'Computer Vision').length, icon: '👁️' },
+    { label: 'LLM Projects', value: projects.filter((p) => p.category === 'LLM').length, icon: '🤖' },
+    { label: 'CV Projects', value: projects.filter((p) => p.category === 'Computer Vision').length, icon: '👁️' },
   ]
 
   if (loading) {
@@ -99,7 +99,7 @@ const Dashboard = () => {
                   <td className="p-4">{project.title}</td>
                   <td className="p-4">
                     <span className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-sm">
-                      {project.modelType}
+                      {project.category}
                     </span>
                   </td>
                   <td className="p-4">{project.featured ? '⭐' : '-'}</td>

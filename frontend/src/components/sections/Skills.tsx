@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getSkills } from '@services/api'
-import type { Skill } from '@types/index'
+import type { Skill } from '@/types'
 import Card from '@components/common/Card'
 
 const Skills = () => {

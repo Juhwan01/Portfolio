@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getSkills, createSkill, updateSkill, deleteSkill, type SkillCreateData } from '@services/api'
-import type { Skill } from '@types/index'
+import type { Skill } from '@/types'
 import Button from '@components/common/Button'
 
 const SkillsAdmin = () => {

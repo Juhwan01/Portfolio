@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getBlogPosts } from '@services/api'
-import type { BlogPost } from '@types/index'
+import type { BlogPost } from '@/types'
 import Card from '@components/common/Card'
 import { formatDate } from '@utils/helpers'
 

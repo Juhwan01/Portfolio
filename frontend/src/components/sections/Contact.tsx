@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { submitContactForm } from '@services/api'
-import type { ContactForm } from '@types/index'
+import type { ContactForm } from '@/types'
 import Button from '@components/common/Button'
 import Card from '@components/common/Card'
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { createProject, updateProject, type ProjectCreateData, type ProjectUpdateData } from '@services/api'
-import type { Project } from '@types/index'
+import type { Project } from '@/types'
 import Button from '@components/common/Button'
 import ImageUpload from './ImageUpload'
 import { PROJECT_CATEGORIES, PROJECT_STATUS } from '@utils/constants'

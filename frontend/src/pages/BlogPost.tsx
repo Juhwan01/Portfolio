@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getBlogPostById } from '@services/api'
-import type { BlogPost as BlogPostType } from '@types/index'
+import type { BlogPost as BlogPostType } from '@/types'
 import Navbar from '@components/common/Navbar'
 import Footer from '@components/common/Footer'
 import { formatDate } from '@utils/helpers'
