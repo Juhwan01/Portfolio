@@ -17,8 +17,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const [formData, setFormData] = useState<ProjectCreateData>({
-    id: project?.id || '',
+  const [formData, setFormData] = useState<Omit<ProjectCreateData, 'id'>>({
     title: project?.title || '',
     description: project?.description || '',
     content: project?.content || '',
@@ -104,14 +103,11 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
 
     try {
       if (project) {
-        const { id, ...updateData } = formData
         console.log('Updating project with ID:', project.id)
-        console.log('Update data:', updateData)
-        await updateProject(project.id, updateData as ProjectUpdateData)
+        await updateProject(project.id, formData as ProjectUpdateData)
       } else {
-        const id = formData.id || formData.title.toLowerCase().replace(/\s+/g, '-')
-        console.log('Creating project with ID:', id)
-        await createProject({ ...formData, id })
+        console.log('Creating project')
+        await createProject(formData)
       }
       onSuccess()
     } catch (err: any) {
@@ -132,41 +128,24 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Basic Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Project ID {!project && <span className="text-gray-500">(auto-generated if empty)</span>}
-          </label>
-          <input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            disabled={!!project}
-            placeholder="my-project-id"
-            className={`${inputClass} ${project ? 'opacity-50 cursor-not-allowed' : ''}`}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Category
-          </label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className={selectClass}
-          >
-            <option value="" className="bg-gray-800 text-white">Select category</option>
-            {PROJECT_CATEGORIES.map((cat) => (
-              <option key={cat} value={cat} className="bg-gray-800 text-white">
-                {cat}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* Category */}
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Category
+        </label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          className={selectClass}
+        >
+          <option value="" className="bg-gray-800 text-white">Select category</option>
+          {PROJECT_CATEGORIES.map((cat) => (
+            <option key={cat} value={cat} className="bg-gray-800 text-white">
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

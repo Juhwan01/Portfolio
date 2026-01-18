@@ -1,12 +1,17 @@
 from sqlalchemy import Column, String, Boolean, DateTime, JSON, Integer, Text
 from sqlalchemy.sql import func
+import uuid
 from ..core.database import Base
+
+
+def generate_uuid():
+    return str(uuid.uuid4())
 
 
 class Project(Base):
     __tablename__ = "projects"
 
-    id = Column(String, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True, default=generate_uuid)
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)  # 짧은 설명
     content = Column(Text, nullable=True)  # 마크다운 지원 상세 설명

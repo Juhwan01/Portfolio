@@ -34,7 +34,7 @@ class ProjectBase(BaseModel):
 
 
 class ProjectCreate(ProjectBase):
-    id: str
+    pass  # ID는 서버에서 자동 생성
 
 
 class ProjectUpdate(BaseModel):

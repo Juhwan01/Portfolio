@@ -90,7 +90,6 @@ export const getProjectById = async (id: string) => {
 
 // Projects - Write (requires auth)
 export interface ProjectCreateData {
-  id: string
   title: string
   description: string
   content?: string
