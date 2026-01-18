@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 
 interface NotionRendererProps {
   pageId: string
+  onLoadingChange?: (isLoading: boolean) => void
 }
 
-const NotionRenderer = ({ pageId }: NotionRendererProps) => {
+const NotionRenderer = ({ pageId, onLoadingChange }: NotionRendererProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [height, setHeight] = useState(1500)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // Remove hyphens if present and format for embed URL
   const cleanId = pageId.replace(/-/g, '')
@@ -24,6 +26,16 @@ const NotionRenderer = ({ pageId }: NotionRendererProps) => {
     return () => window.removeEventListener('message', handleMessage)
   }, [])
 
+  const handleIframeLoad = useCallback(() => {
+    setIsLoaded(true)
+    onLoadingChange?.(false)
+  }, [onLoadingChange])
+
+  useEffect(() => {
+    setIsLoaded(false)
+    onLoadingChange?.(true)
+  }, [pageId, onLoadingChange])
+
   return (
     <div
       className="notion-embed-container w-full overflow-hidden"
@@ -34,7 +46,7 @@ const NotionRenderer = ({ pageId }: NotionRendererProps) => {
       <iframe
         ref={iframeRef}
         src={embedUrl}
-        className="w-full border-0"
+        className={`w-full border-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{
           background: 'transparent',
           height: `${height}px`,
@@ -42,6 +54,7 @@ const NotionRenderer = ({ pageId }: NotionRendererProps) => {
         }}
         scrolling="no"
         allowFullScreen
+        onLoad={handleIframeLoad}
       />
       <style>{`
         .notion-embed-container iframe::-webkit-scrollbar {

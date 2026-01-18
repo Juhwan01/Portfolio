@@ -1,15 +1,77 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { getProjectById } from '@services/api'
 import type { Project } from '@/types'
 import Navbar from '@components/common/Navbar'
 import Footer from '@components/common/Footer'
 import NotionRenderer from '@components/common/NotionRenderer'
 
+// 전체 페이지 스켈레톤 컴포넌트
+const PageSkeleton = () => (
+  <div className="relative w-full">
+    <Navbar />
+    <main className="min-h-screen pt-24 px-4 md:px-8 lg:px-16">
+      <div className="max-w-4xl mx-auto animate-pulse">
+        {/* 카테고리 */}
+        <div className="h-4 bg-white/10 rounded w-20 mb-4"></div>
+
+        {/* 제목 */}
+        <div className="h-12 bg-white/10 rounded-lg w-3/4 mb-4"></div>
+
+        {/* 설명 */}
+        <div className="h-6 bg-white/5 rounded w-full mb-2"></div>
+        <div className="h-6 bg-white/5 rounded w-2/3 mb-6"></div>
+
+        {/* 기간 & 팀 */}
+        <div className="flex gap-4 mb-6">
+          <div className="h-4 bg-white/10 rounded w-32"></div>
+          <div className="h-4 bg-white/10 rounded w-16"></div>
+        </div>
+
+        {/* 팀 태그 */}
+        <div className="flex gap-2 mb-6">
+          <div className="h-8 bg-purple-500/10 rounded-full w-24"></div>
+          <div className="h-8 bg-purple-500/10 rounded-full w-28"></div>
+        </div>
+
+        {/* 기술 스택 */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="h-8 bg-white/5 rounded-full w-20"></div>
+          ))}
+        </div>
+
+        {/* 썸네일 이미지 */}
+        <div className="w-full h-64 bg-white/5 rounded-lg mb-8"></div>
+
+        {/* 노션 콘텐츠 영역 */}
+        <div className="space-y-4">
+          <div className="h-8 bg-white/10 rounded w-1/2"></div>
+          <div className="h-4 bg-white/5 rounded w-full"></div>
+          <div className="h-4 bg-white/5 rounded w-full"></div>
+          <div className="h-4 bg-white/5 rounded w-5/6"></div>
+          <div className="h-4 bg-white/5 rounded w-4/5"></div>
+          <div className="h-64 bg-white/5 rounded-lg mt-6"></div>
+          <div className="h-4 bg-white/5 rounded w-full"></div>
+          <div className="h-4 bg-white/5 rounded w-3/4"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+)
+
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>()
   const [project, setProject] = useState<Project | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [dataLoading, setDataLoading] = useState(true)
+  const [notionLoading, setNotionLoading] = useState(true)
+
+  // 노션 페이지가 없거나, 노션이 로드 완료되면 false
+  const isLoading = dataLoading || (project?.notionPageId ? notionLoading : false)
+
+  const handleNotionLoadingChange = useCallback((loading: boolean) => {
+    setNotionLoading(loading)
+  }, [])
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -17,10 +79,15 @@ const ProjectDetail = () => {
       try {
         const data = await getProjectById(id)
         setProject(data)
+        // 노션 페이지가 없으면 바로 notionLoading을 false로
+        if (!data.notionPageId) {
+          setNotionLoading(false)
+        }
       } catch (error) {
         console.error('Failed to fetch project:', error)
+        setNotionLoading(false)
       } finally {
-        setLoading(false)
+        setDataLoading(false)
       }
     }
 
@@ -36,20 +103,16 @@ const ProjectDetail = () => {
     return url
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl">Loading...</div>
-      </div>
-    )
-  }
-
-  if (!project) {
+  if (!project && !dataLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-2xl">Project not found</div>
       </div>
     )
+  }
+
+  if (isLoading || !project) {
+    return <PageSkeleton />
   }
 
   const totalTeam = project.teamComposition?.reduce((sum, t) => sum + t.count, 0) || 0
@@ -144,7 +207,10 @@ const ProjectDetail = () => {
           {/* Notion 임베드 */}
           {project.notionPageId && (
             <div className="mb-8">
-              <NotionRenderer pageId={project.notionPageId} />
+              <NotionRenderer
+                pageId={project.notionPageId}
+                onLoadingChange={handleNotionLoadingChange}
+              />
             </div>
           )}
 
