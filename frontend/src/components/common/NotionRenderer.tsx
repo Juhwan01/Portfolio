@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface NotionRendererProps {
   pageId: string
@@ -9,6 +9,12 @@ const NotionRenderer = ({ pageId, onLoadingChange }: NotionRendererProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [height, setHeight] = useState(1500)
   const [isLoaded, setIsLoaded] = useState(false)
+  const onLoadingChangeRef = useRef(onLoadingChange)
+
+  // Keep ref updated
+  useEffect(() => {
+    onLoadingChangeRef.current = onLoadingChange
+  }, [onLoadingChange])
 
   // Remove hyphens if present and format for embed URL
   const cleanId = pageId.replace(/-/g, '')
@@ -26,15 +32,24 @@ const NotionRenderer = ({ pageId, onLoadingChange }: NotionRendererProps) => {
     return () => window.removeEventListener('message', handleMessage)
   }, [])
 
-  const handleIframeLoad = useCallback(() => {
-    setIsLoaded(true)
-    onLoadingChange?.(false)
-  }, [onLoadingChange])
-
+  // 로딩 상태 관리 + fallback 타임아웃
   useEffect(() => {
     setIsLoaded(false)
-    onLoadingChange?.(true)
-  }, [pageId, onLoadingChange])
+    onLoadingChangeRef.current?.(true)
+
+    // cross-origin iframe은 onLoad가 안 불릴 수 있으므로 fallback
+    const timeout = setTimeout(() => {
+      setIsLoaded(true)
+      onLoadingChangeRef.current?.(false)
+    }, 2000)
+
+    return () => clearTimeout(timeout)
+  }, [pageId])
+
+  const handleIframeLoad = () => {
+    setIsLoaded(true)
+    onLoadingChangeRef.current?.(false)
+  }
 
   return (
     <div
