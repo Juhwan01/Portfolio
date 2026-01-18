@@ -46,12 +46,6 @@ const Navbar = () => {
               Skills
             </button>
             <button
-              onClick={() => scrollToSection('blog')}
-              className="hover:text-blue-400 transition"
-            >
-              Blog
-            </button>
-            <button
               onClick={() => scrollToSection('contact')}
               className="px-6 py-2 glass rounded-lg hover:bg-white/20 transition"
             >
