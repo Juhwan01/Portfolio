@@ -2,10 +2,9 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localho
 export const S3_BUCKET_URL = import.meta.env.VITE_S3_BUCKET_URL
 
 export const SOCIAL_LINKS = {
-  github: 'https://github.com/yourusername',
-  linkedin: 'https://linkedin.com/in/yourusername',
+  github: 'https://github.com/Juhwan01',
+  blog: 'https://velog.io/@juhwan01/posts',
   email: 'your.email@example.com',
-  twitter: 'https://twitter.com/yourusername',
 }
 
 export const PROJECT_CATEGORIES = [

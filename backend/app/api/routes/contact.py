@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from ...core.database import get_db
+from ...core.email import send_contact_notification
 from ...models.contact import ContactMessage
 from ...schemas.contact import ContactFormCreate, ContactFormInDB
 
@@ -10,6 +11,7 @@ router = APIRouter()
 @router.post("/", response_model=ContactFormInDB)
 def submit_contact_form(
     form: ContactFormCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """Submit a contact form"""
@@ -18,8 +20,13 @@ def submit_contact_form(
     db.commit()
     db.refresh(db_message)
 
-    # TODO: Send email notification
-    # send_email_notification(form)
+    background_tasks.add_task(
+        send_contact_notification,
+        form.name,
+        form.email,
+        form.subject,
+        form.message
+    )
 
     return db_message
 

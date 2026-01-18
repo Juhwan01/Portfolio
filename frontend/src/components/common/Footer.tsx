@@ -50,20 +50,12 @@ const Footer = () => {
                 GitHub
               </a>
               <a
-                href={SOCIAL_LINKS.linkedin}
+                href={SOCIAL_LINKS.blog}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-400 transition"
               >
-                LinkedIn
-              </a>
-              <a
-                href={SOCIAL_LINKS.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400 transition"
-              >
-                Twitter
+                Blog
               </a>
             </div>
           </div>
