@@ -7,7 +7,7 @@ interface NotionRendererProps {
 
 const NotionRenderer = ({ pageId, onLoadingChange }: NotionRendererProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const [height, setHeight] = useState(4000) // 충분히 큰 기본값
+  const [height, setHeight] = useState(1500)
   const [isLoaded, setIsLoaded] = useState(false)
   const onLoadingChangeRef = useRef(onLoadingChange)
 
