@@ -1,8 +1,8 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { getProjects } from '@services/api'
 import type { Project } from '@/types'
-import ProjectCarousel from '@components/common/ProjectCarousel'
-import { PROJECT_CATEGORIES, CATEGORY_LABELS } from '@/utils/constants'
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([])
@@ -23,19 +23,6 @@ const Projects = () => {
     fetchProjects()
   }, [])
 
-  const projectsByCategory = useMemo(() => {
-    const grouped: Record<string, Project[]> = {}
-
-    PROJECT_CATEGORIES.forEach(category => {
-      const categoryProjects = projects.filter(p => p.category === category)
-      if (categoryProjects.length > 0) {
-        grouped[category] = categoryProjects
-      }
-    })
-
-    return grouped
-  }, [projects])
-
   if (loading) {
     return (
       <section id="projects" className="section-container">
@@ -43,8 +30,6 @@ const Projects = () => {
       </section>
     )
   }
-
-  const categories = Object.keys(projectsByCategory)
 
   return (
     <section id="projects" className="section-container">
@@ -56,14 +41,59 @@ const Projects = () => {
           주요 프로젝트들을 확인해보세요
         </p>
 
-        <div className="space-y-12">
-          {categories.map(category => (
-            <div key={category}>
-              <h3 className="text-2xl font-semibold mb-6 text-white">
-                {CATEGORY_LABELS[category] || category}
-              </h3>
-              <ProjectCarousel projects={projectsByCategory[category]} />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <Link key={project.id} to={`/project/${project.id}`} className="group">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="relative aspect-[16/10] rounded-lg overflow-hidden bg-gray-900 cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+              >
+                {/* Thumbnail */}
+                {project.thumbnailUrl ? (
+                  <img
+                    src={project.thumbnailUrl}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span className="text-4xl text-gray-600">{project.title[0]}</span>
+                  </div>
+                )}
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="text-white font-bold text-lg md:text-xl truncate mb-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm line-clamp-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Category Badge */}
+                {project.category && (
+                  <span className="absolute top-3 left-3 px-2 py-1 bg-blue-500/80 backdrop-blur-sm text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {project.category}
+                  </span>
+                )}
+
+                {/* View Icon on Hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/40">
+                    <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
