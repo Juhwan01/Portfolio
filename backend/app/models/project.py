@@ -29,5 +29,6 @@ class Project(Base):
     notion_page_id = Column(String, nullable=True)  # Notion 페이지 ID
     video_url = Column(String, nullable=True)  # 프로젝트 영상 URL (YouTube 등)
     team_composition = Column(JSON, nullable=True, default=[])  # 팀 구성 [{role, count}]
+    slide_url = Column(String, nullable=True)  # Google Slides embed URL
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

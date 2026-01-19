@@ -26,6 +26,7 @@ class ProjectBase(BaseModel):
     notion_page_id: Optional[str] = None
     video_url: Optional[str] = None
     team_composition: List[Any] = []
+    slide_url: Optional[str] = None
 
     @field_validator('team_composition', 'images', 'tech_stack', mode='before')
     @classmethod
@@ -55,6 +56,7 @@ class ProjectUpdate(BaseModel):
     notion_page_id: Optional[str] = None
     video_url: Optional[str] = None
     team_composition: Optional[List[Any]] = None
+    slide_url: Optional[str] = None
 
 
 class ProjectInDB(ProjectBase):

@@ -22,6 +22,7 @@ export interface Project {
   notionPageId?: string;
   videoUrl?: string;
   teamComposition?: TeamRole[];
+  slideUrl?: string;
   createdAt: string;
   updatedAt?: string;
 }

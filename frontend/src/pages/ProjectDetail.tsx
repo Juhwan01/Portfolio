@@ -5,6 +5,7 @@ import type { Project } from '@/types'
 import Navbar from '@components/common/Navbar'
 import Footer from '@components/common/Footer'
 import NotionRenderer from '@components/common/NotionRenderer'
+import SlideViewer from '@components/common/SlideViewer'
 
 // 전체 페이지 스켈레톤 컴포넌트
 const PageSkeleton = () => (
@@ -243,6 +244,11 @@ const ProjectDetail = () => {
               <div className="prose prose-invert max-w-none mb-8">
                 <p className="text-lg whitespace-pre-wrap leading-relaxed">{project.content}</p>
               </div>
+            )}
+
+            {/* 슬라이드 뷰어 */}
+            {project.slideUrl && (
+              <SlideViewer url={project.slideUrl} title="Presentation" />
             )}
 
             {/* Notion 임베드 */}

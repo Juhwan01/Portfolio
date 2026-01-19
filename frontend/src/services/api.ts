@@ -107,6 +107,7 @@ export interface ProjectCreateData {
   notion_page_id?: string
   video_url?: string
   team_composition?: { role: string; count: number }[]
+  slide_url?: string
 }
 
 export interface ProjectUpdateData {
@@ -127,6 +128,7 @@ export interface ProjectUpdateData {
   notion_page_id?: string
   video_url?: string
   team_composition?: { role: string; count: number }[]
+  slide_url?: string
 }
 
 export const createProject = async (data: ProjectCreateData): Promise<Project> => {

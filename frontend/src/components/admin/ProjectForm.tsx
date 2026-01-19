@@ -35,6 +35,7 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     notion_page_id: project?.notionPageId || '',
     video_url: project?.videoUrl || '',
     team_composition: project?.teamComposition || [],
+    slide_url: project?.slideUrl || '',
   })
 
   const [techInput, setTechInput] = useState('')
@@ -280,6 +281,27 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
           placeholder="https://www.youtube.com/watch?v=..."
           className={inputClass}
         />
+      </div>
+
+      {/* Google Slides */}
+      <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
+        <label className="block text-sm font-medium text-orange-400 mb-2">
+          Google Slides URL
+          <span className="text-gray-500 font-normal ml-2">
+            (Google Drive에 PPT 업로드 후 공유 링크 붙여넣기)
+          </span>
+        </label>
+        <input
+          type="url"
+          name="slide_url"
+          value={formData.slide_url}
+          onChange={handleChange}
+          placeholder="https://docs.google.com/presentation/d/.../edit?usp=sharing"
+          className={inputClass}
+        />
+        <p className="mt-2 text-xs text-gray-500">
+          Google Slides에서 "공유" → "링크 복사" 후 붙여넣기
+        </p>
       </div>
 
       {/* Image Upload */}
