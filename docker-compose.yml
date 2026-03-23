@@ -3,9 +3,10 @@ services:
     image: postgres:15-alpine
     container_name: portfolio-db
     restart: always
+    env_file:
+      - ./backend/.env
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: ${POSTGRES_DB:-portfolio}
     volumes:
       - postgres_data:/var/lib/postgresql/data
