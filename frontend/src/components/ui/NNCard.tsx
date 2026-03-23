@@ -16,13 +16,13 @@ const elevationStyles: Record<Elevation, string> = {
 export const NNCard = forwardRef<HTMLDivElement, NNCardProps>(
   ({ elevation = 'low', hoverable = true, className = '', children, ...props }, ref) => {
     const hoverClass = hoverable
-      ? 'hover:bg-[#1f1f26] hover:shadow-[0_0_40px_rgba(168,164,255,0.08)] transition-all duration-300'
-      : ''
+      ? 'nn-card-lift hover:bg-[#1f1f26] border border-transparent hover:border-[#48474d]/20'
+      : 'border border-transparent'
 
     return (
       <div
         ref={ref}
-        className={`rounded-xl ${elevationStyles[elevation]} ${hoverClass} ${className}`}
+        className={`rounded-2xl ${elevationStyles[elevation]} ${hoverClass} ${className}`}
         {...props}
       >
         {children}

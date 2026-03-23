@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,16 +7,47 @@
 @import './neural-noir.css';
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    @apply bg-[#0e0e13] text-[#f9f5fd] font-sans antialiased;
+    @apply bg-[#0e0e13] text-[#f9f5fd] antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  ::selection {
+    background: rgba(168, 164, 255, 0.3);
+    color: #f9f5fd;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0e0e13;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #25252d;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #48474d;
+  }
 }
 
 @layer utilities {
+  /* Legacy support - keep for admin pages */
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
@@ -24,7 +57,7 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#a8a4ff] via-[#665bff] to-[#ff9dcf];
   }
 
   .section-container {

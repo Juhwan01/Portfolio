@@ -1,4 +1,5 @@
 @layer utilities {
+  /* Glass Effects */
   .nn-glass {
     background: rgba(25, 25, 31, 0.6);
     backdrop-filter: blur(20px);
@@ -12,65 +13,54 @@
     border: 1px solid rgba(72, 71, 77, 0.15);
   }
 
+  /* Glow Effects */
   .nn-glow {
     box-shadow: 0 0 40px rgba(168, 164, 255, 0.08);
   }
 
   .nn-glow-strong {
-    box-shadow: 0 0 60px rgba(168, 164, 255, 0.15);
+    box-shadow: 0 0 80px rgba(168, 164, 255, 0.12);
   }
 
+  .nn-glow-btn {
+    box-shadow: 0 0 20px rgba(102, 91, 255, 0.4), 0 0 60px rgba(102, 91, 255, 0.15);
+  }
+
+  /* Gradient Text - with padding to prevent clip */
   .nn-gradient-text {
-    background: linear-gradient(135deg, #a8a4ff, #665bff, #ff9dcf);
+    background: linear-gradient(135deg, #a8a4ff 0%, #665bff 50%, #ff9dcf 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding-bottom: 0.05em;
+    display: inline-block;
   }
 
   .nn-gradient-primary {
     background: linear-gradient(135deg, #a8a4ff, #665bff);
   }
 
-  .nn-surface-lowest {
-    background-color: #000000;
+  .nn-gradient-bg {
+    background: radial-gradient(ellipse at 50% 0%, rgba(102, 91, 255, 0.15) 0%, transparent 60%);
   }
 
-  .nn-surface-low {
-    background-color: #131319;
-  }
+  /* Surface Levels */
+  .nn-surface-lowest { background-color: #000000; }
+  .nn-surface-low { background-color: #131319; }
+  .nn-surface { background-color: #19191f; }
+  .nn-surface-high { background-color: #1f1f26; }
+  .nn-surface-highest { background-color: #25252d; }
 
-  .nn-surface {
-    background-color: #19191f;
-  }
+  /* Borders */
+  .nn-ghost-border { border: 1px solid rgba(72, 71, 77, 0.15); }
+  .nn-ghost-border-hover { border: 1px solid rgba(72, 71, 77, 0.3); }
 
-  .nn-surface-high {
-    background-color: #1f1f26;
-  }
+  /* Text Colors */
+  .nn-text-primary { color: #f9f5fd; }
+  .nn-text-secondary { color: #acaab1; }
+  .nn-text-accent { color: #a8a4ff; }
 
-  .nn-surface-highest {
-    background-color: #25252d;
-  }
-
-  .nn-ghost-border {
-    border: 1px solid rgba(72, 71, 77, 0.15);
-  }
-
-  .nn-ghost-border-hover {
-    border: 1px solid rgba(72, 71, 77, 0.3);
-  }
-
-  .nn-text-primary {
-    color: #f9f5fd;
-  }
-
-  .nn-text-secondary {
-    color: #acaab1;
-  }
-
-  .nn-text-accent {
-    color: #a8a4ff;
-  }
-
+  /* Typography - Responsive */
   .nn-label {
     font-size: 0.75rem;
     font-weight: 500;
@@ -79,16 +69,43 @@
   }
 
   .nn-display {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1.1;
   }
 
   .nn-headline {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.3;
+  }
+
+  /* Hero Background Glow */
+  .nn-hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(102, 91, 255, 0.2) 0%, transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  /* Card Hover Lift */
+  .nn-card-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .nn-card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(168, 164, 255, 0.1);
+  }
+
+  /* Divider */
+  .nn-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(72, 71, 77, 0.3), transparent);
   }
 }
