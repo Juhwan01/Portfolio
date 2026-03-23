@@ -39,9 +39,11 @@ jobs:
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           port: ${{ secrets.LIGHTSAIL_PORT || 22 }}
           script: |
-            cd ~/Portfolio
-            git pull origin main
-            docker compose down
-            docker compose up -d --build
-            docker image prune -f
-            echo "Deploy complete: $(date)"
+            sudo su - -c '
+              cd /root/Portfolio
+              git pull origin main
+              docker compose down
+              docker compose up -d --build
+              docker image prune -f
+              echo "Deploy complete: $(date)"
+            '
