@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import SEO from '@components/common/SEO'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,6 +15,12 @@ const stagger = {
 
 export default function AboutPage() {
   return (
+    <>
+    <SEO
+      title="About"
+      description="AI 엔지니어 정주환의 경력, 기술 스택, 그리고 비전을 소개합니다."
+      path="/about"
+    />
     <main className="pt-32 pb-20 mesh-gradient-bg min-h-screen">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-8 mb-32 grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -564,5 +571,6 @@ export default function AboutPage() {
         </motion.div>
       </section>
     </main>
+    </>
   )
 }

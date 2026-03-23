@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { getSkills } from '@services/api'
+import SEO from '@components/common/SEO'
 import type { Skill } from '@/types'
 
 const CATEGORY_ICON_MAP: Record<string, string> = {
@@ -255,6 +256,12 @@ export default function SkillsPage() {
   const categories = loading ? [] : buildCategories()
 
   return (
+    <>
+    <SEO
+      title="Skills"
+      description="AI/ML, Backend, Cloud & DevOps, Data Systems, Frontend 기술 스택 소개."
+      path="/skills"
+    />
     <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
       {/* Hero Section */}
       <motion.section
@@ -370,5 +377,6 @@ export default function SkillsPage() {
         </div>
       </section>
     </main>
+    </>
   )
 }

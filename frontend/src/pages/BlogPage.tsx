@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getBlogPosts } from '@services/api'
 import { formatDate, calculateReadTime } from '@utils/helpers'
+import SEO from '@components/common/SEO'
 import type { BlogPost } from '@/types'
 
 const CATEGORIES = ['All', 'AI/ML', 'Engineering', 'Tutorial', 'Thoughts'] as const
@@ -187,6 +188,11 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Blog"
+        description="AI, 엔지니어링, 튜토리얼 등 기술 블로그 글 모음."
+        path="/blog"
+      />
       <main className="pt-32 pb-24 px-8 max-w-7xl mx-auto">
         {/* Hero Title */}
         <motion.section

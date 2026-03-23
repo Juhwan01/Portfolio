@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { getBlogPostById } from '@services/api'
 import MarkdownRenderer from '@components/content/MarkdownRenderer'
 import { NNBadge } from '@components/ui/NNBadge'
+import SEO from '@components/common/SEO'
 import { formatDate } from '@utils/helpers'
 import type { BlogPost as BlogPostType } from '@/types'
 
@@ -50,6 +51,13 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-20 px-4 md:px-8 lg:px-16">
+      <SEO
+        title={post.title}
+        description={post.content?.slice(0, 160)}
+        path={`/blog/${post.id}`}
+        image={post.coverImage || undefined}
+        type="article"
+      />
       <motion.article
         className="max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { submitContactForm } from '@services/api'
 import { SOCIAL_LINKS } from '@utils/constants'
+import SEO from '@components/common/SEO'
 import type { ContactForm } from '@/types'
 
 const SOCIAL_GRID = [
@@ -52,6 +53,11 @@ export default function ContactPage() {
 
   return (
     <div className="mesh-bg min-h-screen flex flex-col">
+      <SEO
+        title="Contact"
+        description="프로젝트 협업, 채용 문의, 기술 상담 등 연락해 주세요."
+        path="/contact"
+      />
       <main className="flex-grow pt-32 pb-20 px-6 md:px-8 max-w-7xl mx-auto w-full">
         {/* Hero Statement */}
         <div className="mb-20">

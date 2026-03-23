@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getProjects } from '@services/api'
 import { PROJECT_CATEGORIES, CATEGORY_LABELS } from '@utils/constants'
+import SEO from '@components/common/SEO'
 import type { Project } from '@/types'
 
 const ICON_MAP: Record<string, string> = {
@@ -296,6 +297,11 @@ export default function ProjectsPage() {
 
   return (
     <div className="mesh-bg min-h-screen">
+      <SEO
+        title="Projects"
+        description="AI, 웹, 백엔드 등 다양한 프로젝트를 확인하세요. React, FastAPI, PyTorch 기반 프로젝트 모음."
+        path="/projects"
+      />
       <main className="pt-32 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
         {/* Hero Section */}
         <motion.section

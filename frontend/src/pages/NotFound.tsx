@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { NNButton } from '@components/ui/NNButton'
+import SEO from '@components/common/SEO'
 
 const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <SEO title="404 - Page Not Found" noindex />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

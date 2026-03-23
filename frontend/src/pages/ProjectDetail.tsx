@@ -6,6 +6,7 @@ import MarkdownRenderer from '@components/content/MarkdownRenderer'
 import ProjectSidebar from '@components/content/ProjectSidebar'
 import SlideViewer from '@components/common/SlideViewer'
 import { NNBadge } from '@components/ui/NNBadge'
+import SEO from '@components/common/SEO'
 import type { Project } from '@/types'
 
 const getYouTubeEmbedUrl = (url: string) => {
@@ -52,6 +53,13 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+      <SEO
+        title={project.title}
+        description={project.description?.slice(0, 160)}
+        path={`/projects/${project.id}`}
+        image={project.thumbnailUrl || undefined}
+        type="article"
+      />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         {/* Header */}
         <div className="mb-10">
