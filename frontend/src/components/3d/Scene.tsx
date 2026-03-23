@@ -1,58 +1,78 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Sphere, MeshDistortMaterial, Float } from '@react-three/drei'
 import * as THREE from 'three'
 
+const PARTICLE_COUNT = 200
+
 const Scene = () => {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const pointsRef = useRef<THREE.Points>(null)
+
+  const { positions, colors } = useMemo(() => {
+    const pos = new Float32Array(PARTICLE_COUNT * 3)
+    const col = new Float32Array(PARTICLE_COUNT * 3)
+
+    const primaryColor = new THREE.Color('#a8a4ff')
+    const tertiaryColor = new THREE.Color('#ff9dcf')
+    const dimColor = new THREE.Color('#665bff')
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3
+      pos[i3] = (Math.random() - 0.5) * 16
+      pos[i3 + 1] = (Math.random() - 0.5) * 16
+      pos[i3 + 2] = (Math.random() - 0.5) * 10
+
+      const colorChoice = Math.random()
+      const color = colorChoice < 0.5 ? primaryColor : colorChoice < 0.8 ? dimColor : tertiaryColor
+      col[i3] = color.r
+      col[i3 + 1] = color.g
+      col[i3 + 2] = color.b
+    }
+
+    return { positions: pos, colors: col }
+  }, [])
 
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.2
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.3
+    if (!pointsRef.current) return
+
+    const time = state.clock.elapsedTime * 0.3
+    const posArray = pointsRef.current.geometry.attributes.position.array as Float32Array
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3
+      posArray[i3 + 1] += Math.sin(time + i * 0.1) * 0.002
+      posArray[i3] += Math.cos(time + i * 0.05) * 0.001
     }
+
+    pointsRef.current.geometry.attributes.position.needsUpdate = true
+    pointsRef.current.rotation.y = time * 0.05
   })
 
   return (
-    <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
-
-      <Float
-        speed={2}
-        rotationIntensity={0.5}
-        floatIntensity={1}
-      >
-        <Sphere ref={meshRef} args={[1, 64, 64]} scale={2.5}>
-          <MeshDistortMaterial
-            color="#8b5cf6"
-            attach="material"
-            distort={0.5}
-            speed={2}
-            roughness={0.2}
-            metalness={0.8}
-          />
-        </Sphere>
-      </Float>
-
-      {/* Particle field */}
-      <group>
-        {Array.from({ length: 50 }).map((_, i) => (
-          <mesh
-            key={i}
-            position={[
-              (Math.random() - 0.5) * 20,
-              (Math.random() - 0.5) * 20,
-              (Math.random() - 0.5) * 20,
-            ]}
-          >
-            <sphereGeometry args={[0.05, 8, 8]} />
-            <meshBasicMaterial color="#3b82f6" />
-          </mesh>
-        ))}
-      </group>
-    </>
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={PARTICLE_COUNT}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={PARTICLE_COUNT}
+          array={colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.04}
+        vertexColors
+        transparent
+        opacity={0.7}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
+    </points>
   )
 }
 

@@ -104,7 +104,6 @@ export interface ProjectCreateData {
   start_date?: string
   end_date?: string
   order?: number
-  notion_page_id?: string
   video_url?: string
   team_composition?: { role: string; count: number }[]
   slide_url?: string
@@ -125,7 +124,6 @@ export interface ProjectUpdateData {
   start_date?: string
   end_date?: string
   order?: number
-  notion_page_id?: string
   video_url?: string
   team_composition?: { role: string; count: number }[]
   slide_url?: string
@@ -214,6 +212,32 @@ export const getBlogPostById = async (id: string) => {
   return response.data
 }
 
+export interface BlogPostCreateData {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  cover_image: string
+  tags: string[]
+  category: string
+  read_time: number
+}
+
+export const createBlogPost = async (data: BlogPostCreateData) => {
+  const response = await api.post('/api/blog', data)
+  return response.data
+}
+
+export const updateBlogPost = async (id: string, data: Partial<BlogPostCreateData>) => {
+  const response = await api.put(`/api/blog/${id}`, data)
+  return response.data
+}
+
+export const deleteBlogPost = async (id: string) => {
+  const response = await api.delete(`/api/blog/${id}`)
+  return response.data
+}
+
 // Experience
 export const getExperiences = async () => {
   const response = await api.get<Experience[]>('/api/experience')
@@ -229,17 +253,6 @@ export const getResearch = async () => {
 // Contact
 export const submitContactForm = async (data: ContactForm) => {
   const response = await api.post('/api/contact', data)
-  return response.data
-}
-
-// Notion
-export const getNotionPage = async (pageId: string) => {
-  const response = await api.get(`/api/notion/page/${pageId}`)
-  return response.data
-}
-
-export const getNotionBlocks = async (pageId: string) => {
-  const response = await api.get(`/api/notion/blocks/${pageId}`)
   return response.data
 }
 

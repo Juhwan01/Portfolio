@@ -1,10 +1,18 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { getBlogPostById } from '@services/api'
-import type { BlogPost as BlogPostType } from '@/types'
-import Navbar from '@components/common/Navbar'
-import Footer from '@components/common/Footer'
+import MarkdownRenderer from '@components/content/MarkdownRenderer'
+import { NNBadge } from '@components/ui/NNBadge'
 import { formatDate } from '@utils/helpers'
+import type { BlogPost as BlogPostType } from '@/types'
+
+const categoryLabels: Record<string, string> = {
+  research: 'Research',
+  tutorial: 'Tutorial',
+  'case-study': 'Case Study',
+  review: 'Review',
+}
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>()
@@ -12,73 +20,74 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchPost = async () => {
-      if (!id) return
-      try {
-        const data = await getBlogPostById(id)
-        setPost(data)
-      } catch (error) {
-        console.error('Failed to fetch blog post:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPost()
+    if (!id) return
+    getBlogPostById(id)
+      .then(setPost)
+      .catch((err) => console.error('Failed to fetch blog post:', err))
+      .finally(() => setLoading(false))
   }, [id])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl">Loading...</div>
+      <div className="min-h-screen pt-24 px-4 md:px-8 lg:px-16 max-w-4xl mx-auto">
+        <div className="animate-pulse space-y-4">
+          <div className="h-4 bg-nn-surface-low rounded w-20" />
+          <div className="h-12 bg-nn-surface-low rounded w-3/4" />
+          <div className="h-64 bg-nn-surface-low rounded-xl" />
+        </div>
       </div>
     )
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl">Post not found</div>
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h2 className="text-2xl text-nn-on-surface mb-4">Post not found</h2>
+        <Link to="/blog" className="text-nn-primary hover:underline">Back to Blog</Link>
       </div>
     )
   }
 
   return (
-    <div className="relative w-full">
-      <Navbar />
-      <main className="min-h-screen pt-24 px-4 md:px-8 lg:px-16">
-        <article className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">{post.title}</h1>
-            <div className="flex items-center gap-4 text-gray-400">
-              <time>{formatDate(post.publishedAt)}</time>
-              <span>•</span>
-              <span>{post.readTime} min read</span>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-sm glass rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </header>
+    <div className="min-h-screen pt-24 pb-20 px-4 md:px-8 lg:px-16">
+      <motion.article
+        className="max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        {/* Header */}
+        <header className="mb-10">
+          <Link to="/blog" className="text-nn-on-surface-variant hover:text-nn-primary text-sm mb-4 inline-block transition-colors">
+            ← Back to Blog
+          </Link>
+          <div className="flex items-center gap-3 mb-4">
+            <NNBadge variant="accent">{categoryLabels[post.category] || post.category}</NNBadge>
+            <span className="text-nn-on-surface-variant text-sm">{post.readTime} min read</span>
+          </div>
+          <h1 className="nn-display text-nn-on-surface mb-4">{post.title}</h1>
+          <p className="text-nn-on-surface-variant text-lg mb-4">{post.excerpt}</p>
+          <time className="text-nn-on-surface-variant text-sm">{formatDate(post.publishedAt)}</time>
+          <div className="flex flex-wrap gap-2 mt-4">
+            {post.tags.map((tag) => (
+              <NNBadge key={tag}>{tag}</NNBadge>
+            ))}
+          </div>
+        </header>
 
+        {/* Cover Image */}
+        {post.coverImage && (
           <img
             src={post.coverImage}
             alt={post.title}
-            className="w-full rounded-lg mb-8"
+            className="w-full rounded-xl mb-10 max-h-[480px] object-cover"
           />
+        )}
 
-          <div className="prose prose-invert prose-lg max-w-none">
-            {post.content}
-          </div>
-        </article>
-      </main>
-      <Footer />
+        {/* Content */}
+        <div className="max-w-3xl mx-auto">
+          <MarkdownRenderer content={post.content} />
+        </div>
+      </motion.article>
     </div>
   )
 }

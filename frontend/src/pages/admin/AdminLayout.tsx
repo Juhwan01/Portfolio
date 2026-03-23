@@ -26,6 +26,7 @@ const AdminLayout = () => {
     { path: '/admin', label: 'Dashboard', icon: '📊' },
     { path: '/admin/projects', label: 'Projects', icon: '🚀' },
     { path: '/admin/skills', label: 'Skills', icon: '⚡' },
+    { path: '/admin/blog', label: 'Blog', icon: '📝' },
   ]
 
   const isActive = (path: string) => {

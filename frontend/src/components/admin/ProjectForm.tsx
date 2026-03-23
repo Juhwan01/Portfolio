@@ -3,6 +3,7 @@ import { createProject, updateProject, type ProjectCreateData, type ProjectUpdat
 import type { Project } from '@/types'
 import Button from '@components/common/Button'
 import ImageUpload from './ImageUpload'
+import MarkdownEditor from './MarkdownEditor'
 import { PROJECT_CATEGORIES, PROJECT_STATUS } from '@utils/constants'
 
 interface ProjectFormProps {
@@ -32,7 +33,6 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
     start_date: project?.startDate || '',
     end_date: project?.endDate || '',
     order: project?.order || 0,
-    notion_page_id: project?.notionPageId || '',
     video_url: project?.videoUrl || '',
     team_composition: project?.teamComposition || [],
     slide_url: project?.slideUrl || '',
@@ -231,40 +231,16 @@ const ProjectForm = ({ project, onSuccess, onCancel }: ProjectFormProps) => {
         </div>
       </div>
 
-      {/* Content */}
+      {/* Content (Markdown Editor) */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Content (Markdown 지원)
+          Content (Markdown)
         </label>
-        <textarea
-          name="content"
-          value={formData.content}
-          onChange={handleChange}
-          rows={6}
-          placeholder="프로젝트에 대한 상세 설명..."
-          className={inputClass}
+        <MarkdownEditor
+          value={formData.content || ''}
+          onChange={(val) => setFormData({ ...formData, content: val })}
+          height={500}
         />
-      </div>
-
-      {/* Notion Integration */}
-      <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-        <label className="block text-sm font-medium text-blue-400 mb-2">
-          Notion Page ID
-          <span className="text-gray-500 font-normal ml-2">
-            (Content 아래에 Notion 페이지가 임베드됩니다)
-          </span>
-        </label>
-        <input
-          type="text"
-          name="notion_page_id"
-          value={formData.notion_page_id}
-          onChange={handleChange}
-          placeholder="abc123def456... (Notion URL에서 복사)"
-          className={inputClass}
-        />
-        <p className="mt-2 text-xs text-gray-500">
-          Notion URL 예시: notion.so/My-Page-<span className="text-blue-400">abc123def456</span> → abc123def456 입력
-        </p>
       </div>
 
       {/* Video URL */}

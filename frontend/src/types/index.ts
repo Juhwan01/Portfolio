@@ -19,7 +19,6 @@ export interface Project {
   startDate?: string;
   endDate?: string;
   order: number;
-  notionPageId?: string;
   videoUrl?: string;
   teamComposition?: TeamRole[];
   slideUrl?: string;

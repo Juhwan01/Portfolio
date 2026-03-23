@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './neural-noir.css';
+
 @layer base {
   body {
-    @apply bg-black text-white font-sans antialiased;
+    @apply bg-[#0e0e13] text-[#f9f5fd] font-sans antialiased;
   }
 
   html {
