@@ -1,11 +1,28 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { submitContactForm } from '@services/api'
-import { NNCard } from '@components/ui/NNCard'
-import { NNButton } from '@components/ui/NNButton'
-import { NNInput, NNTextarea } from '@components/ui/NNInput'
 import { SOCIAL_LINKS } from '@utils/constants'
 import type { ContactForm } from '@/types'
+
+const SOCIAL_GRID = [
+  {
+    icon: 'code',
+    name: 'GitHub',
+    handle: '/Juhwan01',
+    url: SOCIAL_LINKS.github,
+  },
+  {
+    icon: 'share',
+    name: 'LinkedIn',
+    handle: '/in/Juhwan',
+    url: 'https://linkedin.com',
+  },
+  {
+    icon: 'experiment',
+    name: 'ResearchGate',
+    handle: '/profile/Publication',
+    url: 'https://researchgate.net',
+  },
+] as const
 
 export default function ContactPage() {
   const [formData, setFormData] = useState<ContactForm>({
@@ -34,131 +51,171 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 md:px-8 lg:px-16 max-w-5xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <p className="nn-label text-nn-tertiary mb-4">Collaboration</p>
-        <h1 className="nn-display text-nn-on-surface mb-6">
-          Start a <span className="nn-gradient-text">Conversation</span>
-        </h1>
-        <p className="text-nn-on-surface-variant text-lg max-w-3xl mb-16">
-          Have an AI project in mind or want to explore collaboration opportunities? Let's connect.
-        </p>
-      </motion.div>
+    <div className="mesh-bg min-h-screen flex flex-col">
+      <main className="flex-grow pt-32 pb-20 px-6 md:px-8 max-w-7xl mx-auto w-full">
+        {/* Hero Statement */}
+        <div className="mb-20">
+          <span className="font-label text-secondary tracking-[0.3em] uppercase text-xs mb-4 block">
+            Initialization
+          </span>
+          <h1 className="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tighter text-on-surface max-w-4xl leading-none">
+            Constructing <span className="text-secondary">Neural</span> Bridges.
+          </h1>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Form */}
-        <div className="lg:col-span-2">
-          <NNCard className="p-6 md:p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-nn-on-surface mb-2">
-                    Name
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left: Contact Form */}
+          <section className="lg:col-span-8 glass-card rounded-xl p-8 md:p-12">
+            <div className="mb-10">
+              <h2 className="font-headline font-bold text-3xl mb-2">Drop a Signal</h2>
+              <p className="text-on-surface-variant font-body text-lg">
+                Send your parameters for architecture review.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="group">
+                  <label className="font-label text-xs uppercase tracking-widest text-outline mb-2 block">
+                    Identity.Name
                   </label>
-                  <NNInput
+                  <input
                     type="text"
-                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    placeholder="Your name"
+                    className="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 text-on-surface placeholder-outline-variant/50 py-4 transition-all duration-300"
+                    placeholder="Janus Case"
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-nn-on-surface mb-2">
-                    Email
+                <div className="group">
+                  <label className="font-label text-xs uppercase tracking-widest text-outline mb-2 block">
+                    Protocol.Email
                   </label>
-                  <NNInput
+                  <input
                     type="email"
-                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    placeholder="you@example.com"
+                    className="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 text-on-surface placeholder-outline-variant/50 py-4 transition-all duration-300"
+                    placeholder="janus@neural.io"
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-nn-on-surface mb-2">
-                  Subject
+              <div className="group">
+                <label className="font-label text-xs uppercase tracking-widest text-outline mb-2 block">
+                  Payload.Message
                 </label>
-                <NNInput
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-nn-on-surface mb-2">
-                  Message
-                </label>
-                <NNTextarea
-                  id="message"
+                <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={6}
-                  placeholder="Tell me about your project..."
+                  rows={4}
+                  className="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 text-on-surface placeholder-outline-variant/50 py-4 transition-all duration-300 resize-none"
+                  placeholder="Describe the architectural challenge..."
                 />
               </div>
 
-              <NNButton type="submit" size="lg" className="w-full" disabled={status === 'loading'}>
-                {status === 'loading' ? 'Sending...' : 'Send Message'}
-              </NNButton>
-
               {status === 'success' && (
-                <p className="text-green-400 text-center text-sm">Message sent successfully!</p>
+                <p className="text-secondary text-center text-sm font-label">
+                  Signal deployed successfully. Awaiting response...
+                </p>
               )}
               {status === 'error' && (
-                <p className="text-nn-error text-center text-sm">Failed to send. Please try again.</p>
+                <p className="text-error text-center text-sm font-label">
+                  Signal lost. Please retry transmission.
+                </p>
               )}
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-secondary text-sm">bolt</span>
+                  <span className="font-label text-[10px] uppercase tracking-tighter text-outline">
+                    Latency: &lt; 24hrs
+                  </span>
+                </div>
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="bg-gradient-to-r from-primary-container to-secondary-container text-on-primary px-10 py-4 rounded-full font-headline font-black uppercase tracking-tighter hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-primary-container/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === 'loading' ? 'Deploying...' : 'Deploy Signal'}
+                </button>
+              </div>
             </form>
-          </NNCard>
+          </section>
+
+          {/* Right: Links & CTA */}
+          <aside className="lg:col-span-4 space-y-8">
+            {/* Collaboration CTA */}
+            <div className="bg-primary-container rounded-xl p-8 text-on-primary shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-4 opacity-10 scale-150 rotate-12 group-hover:rotate-45 transition-transform duration-700">
+                <span className="material-symbols-outlined text-9xl">auto_awesome</span>
+              </div>
+              <h3 className="font-headline font-black text-2xl uppercase tracking-tighter mb-2 relative z-10">
+                Collaboration Q4
+              </h3>
+              <p className="font-body text-sm mb-6 opacity-90 relative z-10">
+                Currently accepting high-impact AI infrastructure projects for the upcoming cycle.
+              </p>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 font-label font-bold text-xs uppercase tracking-widest bg-on-primary text-primary px-4 py-2 rounded-full hover:bg-white hover:text-on-primary transition-colors relative z-10"
+              >
+                Check Availability
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+
+            {/* Social & Links Bento Card */}
+            <div className="surface-container-high rounded-xl p-8 space-y-6">
+              <h3 className="font-label text-xs uppercase tracking-[0.2em] text-outline mb-4">
+                Network.Grid
+              </h3>
+              {SOCIAL_GRID.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 rounded-lg bg-surface-container-lowest hover:bg-surface-bright transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center text-secondary">
+                      <span className="material-symbols-outlined">{link.icon}</span>
+                    </div>
+                    <div>
+                      <p className="font-headline font-bold text-sm">{link.name}</p>
+                      <p className="font-label text-[10px] text-outline">{link.handle}</p>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">
+                    arrow_outward
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Status Card */}
+            <div className="surface-container-low border border-outline-variant/10 rounded-xl p-6 flex items-center gap-4">
+              <div className="relative">
+                <div className="w-3 h-3 bg-secondary rounded-full animate-pulse" />
+                <div className="absolute inset-0 w-3 h-3 bg-secondary rounded-full animate-ping opacity-75" />
+              </div>
+              <div>
+                <p className="font-label text-[10px] uppercase tracking-widest text-outline">
+                  Current Status
+                </p>
+                <p className="font-body font-bold text-on-surface">Available for Research</p>
+              </div>
+            </div>
+          </aside>
         </div>
-
-        {/* Sidebar */}
-        <div className="space-y-4">
-          <NNCard className="p-6">
-            <p className="nn-label text-nn-tertiary mb-3">Email</p>
-            <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-nn-primary hover:underline">
-              {SOCIAL_LINKS.email}
-            </a>
-          </NNCard>
-
-          <NNCard className="p-6">
-            <p className="nn-label text-nn-tertiary mb-3">GitHub</p>
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-nn-primary hover:underline"
-            >
-              View Profile
-            </a>
-          </NNCard>
-
-          <NNCard className="p-6">
-            <p className="nn-label text-nn-tertiary mb-3">Blog</p>
-            <a
-              href={SOCIAL_LINKS.blog}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-nn-primary hover:underline"
-            >
-              Read Articles
-            </a>
-          </NNCard>
-        </div>
-      </div>
+      </main>
     </div>
   )
 }

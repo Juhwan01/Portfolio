@@ -1,5 +1,5 @@
 @layer utilities {
-  /* Glass Effects */
+  /* Glass Effects - Stitch Design System */
   .nn-glass {
     background: rgba(25, 25, 31, 0.6);
     backdrop-filter: blur(20px);
@@ -11,6 +11,25 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(72, 71, 77, 0.15);
+  }
+
+  .glass-card {
+    background: rgba(19, 19, 25, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-panel {
+    background: rgba(45, 52, 73, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(145, 143, 161, 0.15);
+  }
+
+  .glass-nav {
+    background: rgba(25, 25, 31, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   /* Glow Effects */
@@ -26,7 +45,30 @@
     box-shadow: 0 0 20px rgba(102, 91, 255, 0.4), 0 0 60px rgba(102, 91, 255, 0.15);
   }
 
-  /* Gradient Text - with padding to prevent clip */
+  .neural-glow {
+    box-shadow: 0 0 40px rgba(168, 164, 255, 0.08);
+  }
+
+  /* Gradient Backgrounds */
+  .neural-gradient {
+    background: radial-gradient(circle at 50% 50%, rgba(55, 19, 236, 0.15) 0%, transparent 70%);
+  }
+
+  .mesh-gradient-bg {
+    background: radial-gradient(circle at 0% 0%, #0e0e13 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, #131319 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #1d0098 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, #0e0e13 0%, transparent 50%);
+  }
+
+  .mesh-bg {
+    background-color: #0e0e13;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(102, 91, 255, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(168, 164, 255, 0.15) 0px, transparent 50%);
+  }
+
+  /* Gradient Text */
   .nn-gradient-text {
     background: linear-gradient(135deg, #a8a4ff 0%, #665bff 50%, #ff9dcf 100%);
     -webkit-background-clip: text;
@@ -34,6 +76,13 @@
     background-clip: text;
     padding-bottom: 0.05em;
     display: inline-block;
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #a8a4ff, #665bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .nn-gradient-primary {
@@ -54,6 +103,11 @@
   /* Borders */
   .nn-ghost-border { border: 1px solid rgba(72, 71, 77, 0.15); }
   .nn-ghost-border-hover { border: 1px solid rgba(72, 71, 77, 0.3); }
+
+  /* Ghost border for bento cards */
+  .bento-card:hover .ghost-border {
+    opacity: 0.4;
+  }
 
   /* Text Colors */
   .nn-text-primary { color: #f9f5fd; }

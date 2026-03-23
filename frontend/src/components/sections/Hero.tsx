@@ -1,10 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { NNButton } from '@components/ui/NNButton'
-import { NNCard } from '@components/ui/NNCard'
-import { NNBadge } from '@components/ui/NNBadge'
 import { getProjects, getSkills } from '@services/api'
 import type { Project, Skill } from '@/types'
 
@@ -16,23 +12,20 @@ const Hero = () => {
 
   useEffect(() => {
     getProjects({ featured: true })
-      .then((data) => setFeaturedProjects(data.slice(0, 3)))
+      .then((data) => setFeaturedProjects(data.slice(0, 2)))
       .catch(() => {})
 
     getSkills()
-      .then((data) => setSkills(data.slice(0, 8)))
+      .then((data) => setSkills(data.slice(0, 5)))
       .catch(() => {})
   }, [])
 
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Glow Orbs */}
-        <div className="nn-hero-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" />
-        <div className="nn-hero-glow top-1/3 right-0 translate-x-1/4" style={{ background: 'radial-gradient(circle, rgba(255,157,207,0.1) 0%, transparent 70%)' }} />
-
-        {/* Particle Background */}
+      <main className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+        {/* Neural Network Visualization */}
+        <div className="absolute inset-0 z-0 neural-gradient opacity-60" />
         <div className="absolute inset-0 z-0 opacity-50">
           <Suspense fallback={null}>
             <Canvas
@@ -45,184 +38,196 @@ const Hero = () => {
           </Suspense>
         </div>
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0e0e13]/60 via-transparent to-[#0e0e13]" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <motion.p
-              className="nn-label text-[#a8a4ff] mb-6 tracking-[0.2em]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <h1 className="text-7xl md:text-9xl font-extrabold tracking-tighter text-on-background mb-4">
+            Jung Juhwan
+          </h1>
+          <p className="text-xl md:text-2xl font-medium text-on-surface-variant tracking-wide mb-10 uppercase">
+            AI Engineer <span className="text-primary mx-4">/</span> Research Scientist
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <Link
+              to="/projects"
+              className="px-8 py-4 bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed rounded-md font-bold text-lg shadow-[0_0_30px_rgba(55,19,236,0.3)] hover:brightness-110 transition-all"
             >
-              AI Engineer
-            </motion.p>
-
-            <h1 className="nn-display text-[#f9f5fd] mb-8">
-              Jung{' '}
-              <span className="nn-gradient-text">Juhwan</span>
-            </h1>
-
-            <p className="text-base md:text-lg text-[#acaab1] mb-12 max-w-xl mx-auto leading-relaxed">
-              Building intelligent systems with LLMs, Computer Vision,
-              and Advanced ML — turning complex data into elegant solutions.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/projects">
-                <NNButton size="lg">View Projects</NNButton>
-              </Link>
-              <Link to="/contact">
-                <NNButton variant="secondary" size="lg">Get in Touch</NNButton>
-              </Link>
-            </div>
-          </motion.div>
+              View Projects
+            </Link>
+            <Link
+              to="/blog"
+              className="px-8 py-4 border border-outline-variant/30 text-on-surface rounded-md font-bold text-lg hover:bg-surface-container-high transition-all"
+            >
+              Read Research
+            </Link>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <div className="w-6 h-10 border-2 border-[#48474d]/40 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-[#a8a4ff]/50 rounded-full" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+          <span className="material-symbols-outlined text-3xl">expand_more</span>
+        </div>
+      </main>
+
+      {/* Bento Grid Content */}
+      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto bg-surface">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-6">
+          {/* Featured Project 1 (Large) */}
+          {featuredProjects[0] && (
+            <Link
+              to={`/projects/${featuredProjects[0].id}`}
+              className="md:col-span-2 md:row-span-2 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all"
+            >
+              <div className="h-2/3 bg-surface-container-highest relative overflow-hidden">
+                {featuredProjects[0].thumbnailUrl ? (
+                  <img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+                    src={featuredProjects[0].thumbnailUrl}
+                    alt={featuredProjects[0].title}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-surface-container-highest" />
+                )}
+                <div className="absolute top-4 left-4 flex gap-2">
+                  {featuredProjects[0].category && (
+                    <span className="px-3 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-widest text-primary rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />
+                      {featuredProjects[0].category}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-2">{featuredProjects[0].title}</h3>
+                <p className="text-on-surface-variant mb-4">{featuredProjects[0].description}</p>
+                <div className="flex gap-2">
+                  {featuredProjects[0].techStack.slice(0, 3).map((tech) => (
+                    <span key={tech} className="px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter rounded">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          )}
+          {!featuredProjects[0] && (
+            <div className="md:col-span-2 md:row-span-2 rounded-xl bg-surface-container-low overflow-hidden border border-transparent">
+              <div className="h-2/3 bg-surface-container-highest" />
+              <div className="p-8">
+                <div className="h-6 w-48 bg-surface-container-highest rounded mb-2 animate-pulse" />
+                <div className="h-4 w-full bg-surface-container-highest rounded animate-pulse" />
+              </div>
+            </div>
+          )}
+
+          {/* Skills Card */}
+          <Link
+            to="/skills"
+            className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <span className="material-symbols-outlined text-primary mb-4">memory</span>
+              <h3 className="text-xl font-bold mb-4">Core Tech</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.length > 0
+                  ? skills.map((skill) => (
+                      <span key={skill.id} className="px-3 py-1 bg-surface-container-highest text-[11px] font-bold rounded uppercase tracking-widest">
+                        {skill.name}
+                      </span>
+                    ))
+                  : ['PyTorch', 'LangChain', 'Python', 'Docker'].map((name) => (
+                      <span key={name} className="px-3 py-1 bg-surface-container-highest text-[11px] font-bold rounded uppercase tracking-widest">
+                        {name}
+                      </span>
+                    ))
+                }
+              </div>
+            </div>
+            <div className="mt-6 pt-6 border-t border-outline-variant/10">
+              <p className="text-xs text-on-surface-variant uppercase tracking-widest font-bold">Currently exploring</p>
+              <p className="text-sm font-medium">Multi-modal agents &amp; RAG</p>
+            </div>
+          </Link>
+
+          {/* Github Stats Card */}
+          <div className="rounded-xl bg-surface-container-lowest p-8 border border-outline-variant/15 flex flex-col items-center justify-center text-center">
+            <span className="material-symbols-outlined text-4xl mb-2 text-on-surface">monitoring</span>
+            <div className="text-4xl font-black text-primary mb-1">1.2k+</div>
+            <div className="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Github Contributions</div>
+            <div className="mt-6 w-full flex justify-between gap-1 opacity-40">
+              <div className="h-8 flex-1 bg-primary/20 rounded-sm" />
+              <div className="h-12 flex-1 bg-primary/40 rounded-sm" />
+              <div className="h-10 flex-1 bg-primary/60 rounded-sm" />
+              <div className="h-14 flex-1 bg-primary rounded-sm" />
+              <div className="h-6 flex-1 bg-primary/20 rounded-sm" />
+            </div>
           </div>
-        </motion.div>
-      </section>
 
-      {/* Bento Grid Section */}
-      <section className="relative py-24 px-6 md:px-8 lg:px-16 max-w-7xl mx-auto">
-        {/* Section glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-[#48474d]/30 to-transparent" />
-
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="nn-label text-[#a8a4ff] mb-4">Overview</p>
-          <h2 className="nn-headline text-[#f9f5fd]">What I Do</h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {/* Featured Projects */}
-          {featuredProjects.map((project, i) => (
-            <Link key={project.id} to={`/projects/${project.id}`}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="h-full"
-              >
-                <NNCard className="p-0 overflow-hidden group h-full flex flex-col">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    {project.thumbnailUrl ? (
-                      <img
-                        src={project.thumbnailUrl}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#19191f] to-[#25252d] flex items-center justify-center">
-                        <span className="text-5xl font-bold text-[#25252d]">{project.title[0]}</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#131319] via-transparent to-transparent" />
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      {project.category && (
-                        <NNBadge variant="accent">{project.category}</NNBadge>
-                      )}
-                    </div>
-                    <h3 className="text-[#f9f5fd] font-semibold text-lg mb-2">{project.title}</h3>
-                    <p className="text-[#acaab1] text-sm line-clamp-2 flex-1">{project.description}</p>
-                  </div>
-                </NNCard>
-              </motion.div>
-            </Link>
-          ))}
-
-          {/* Skills Preview Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            viewport={{ once: true }}
-            className="h-full"
+          {/* About Snippet */}
+          <Link
+            to="/about"
+            className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all"
           >
-            <Link to="/skills" className="h-full block">
-              <NNCard className="p-6 h-full flex flex-col justify-between min-h-[240px]">
-                <div>
-                  <p className="nn-label text-[#ff9dcf] mb-3">Technical Arsenal</p>
-                  <h3 className="text-[#f9f5fd] font-semibold text-xl mb-5">Skills & Expertise</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill) => (
-                      <NNBadge key={skill.id}>{skill.name}</NNBadge>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-[#a8a4ff] text-sm mt-6 font-medium">View all skills →</p>
-              </NNCard>
-            </Link>
-          </motion.div>
+            <h3 className="text-xl font-bold mb-4">Bio</h3>
+            <p className="text-on-surface-variant leading-relaxed mb-4">
+              Architecting the next generation of autonomous systems. Focused on making complex AI intuitive and efficient.
+            </p>
+            <span className="text-primary text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+              Full Resume <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </span>
+          </Link>
 
-          {/* About Preview Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            viewport={{ once: true }}
-            className="h-full"
-          >
-            <Link to="/about" className="h-full block">
-              <NNCard className="p-6 h-full flex flex-col justify-between min-h-[240px]">
-                <div>
-                  <p className="nn-label text-[#ff9dcf] mb-3">The Architect</p>
-                  <h3 className="text-[#f9f5fd] font-semibold text-xl mb-4">About Me</h3>
-                  <p className="text-[#acaab1] leading-relaxed text-sm">
-                    AI Engineer building intelligent systems.
-                    Passionate about transforming complex problems into elegant, scalable solutions.
-                  </p>
+          {/* Featured Project 2 */}
+          {featuredProjects[1] && (
+            <Link
+              to={`/projects/${featuredProjects[1].id}`}
+              className="md:col-span-2 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all flex flex-col md:flex-row"
+            >
+              <div className="md:w-1/2 h-48 md:h-auto bg-surface-container-highest relative">
+                {featuredProjects[1].thumbnailUrl ? (
+                  <img
+                    className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-500"
+                    src={featuredProjects[1].thumbnailUrl}
+                    alt={featuredProjects[1].title}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-surface-container-highest" />
+                )}
+              </div>
+              <div className="p-8 md:w-1/2 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold mb-2">{featuredProjects[1].title}</h3>
+                <p className="text-on-surface-variant text-sm mb-4">{featuredProjects[1].description}</p>
+                <div className="flex gap-2">
+                  {featuredProjects[1].techStack.slice(0, 3).map((tech) => (
+                    <span key={tech} className="px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter rounded">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                <p className="text-[#a8a4ff] text-sm mt-6 font-medium">Learn more →</p>
-              </NNCard>
+              </div>
             </Link>
-          </motion.div>
+          )}
+          {!featuredProjects[1] && (
+            <div className="md:col-span-2 rounded-xl bg-surface-container-low overflow-hidden border border-transparent flex flex-col md:flex-row">
+              <div className="md:w-1/2 h-48 md:h-auto bg-surface-container-highest" />
+              <div className="p-8 md:w-1/2 flex flex-col justify-center">
+                <div className="h-6 w-40 bg-surface-container-highest rounded mb-2 animate-pulse" />
+                <div className="h-4 w-full bg-surface-container-highest rounded animate-pulse" />
+              </div>
+            </div>
+          )}
 
-          {/* Contact CTA Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-            className="h-full"
+          {/* Contact Card */}
+          <Link
+            to="/contact"
+            className="md:col-span-3 rounded-xl bg-gradient-to-r from-surface-container-low to-surface-container-high p-8 flex flex-col md:flex-row justify-between items-center gap-8 border border-outline-variant/10"
           >
-            <Link to="/contact" className="h-full block">
-              <NNCard
-                hoverable={false}
-                className="p-6 h-full flex flex-col justify-between min-h-[240px] bg-gradient-to-br from-[#665bff] to-[#3713ec] border-none"
-              >
-                <div>
-                  <p className="nn-label text-white/60 mb-3">Collaboration</p>
-                  <h3 className="text-white font-semibold text-xl mb-4">Let's Build Together</h3>
-                  <p className="text-white/70 leading-relaxed text-sm">
-                    Have an AI project in mind? Let's discuss how we can work together.
-                  </p>
-                </div>
-                <p className="text-white text-sm mt-6 font-semibold">Start a conversation →</p>
-              </NNCard>
-            </Link>
-          </motion.div>
+            <div className="text-center md:text-left">
+              <h3 className="text-2xl font-bold mb-1">Have a project in mind?</h3>
+              <p className="text-on-surface-variant">Let&apos;s build something intelligent together.</p>
+            </div>
+            <span className="w-full md:w-auto px-10 py-4 bg-on-background text-surface font-black uppercase tracking-widest rounded-md hover:bg-primary transition-colors text-center">
+              Start a Conversation
+            </span>
+          </Link>
         </div>
       </section>
     </>
