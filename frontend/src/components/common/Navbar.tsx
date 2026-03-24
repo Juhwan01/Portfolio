@@ -22,7 +22,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#131319]/60 backdrop-blur-xl shadow-[0_0_40px_rgba(55,19,236,0.08)]">
+    <nav aria-label="메인 네비게이션" className="fixed top-0 w-full z-50 bg-[#131319]/60 backdrop-blur-xl shadow-[0_0_40px_rgba(55,19,236,0.08)]">
       <div className="flex justify-between items-center px-8 md:px-12 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold tracking-tighter text-[#f9f5fd]">

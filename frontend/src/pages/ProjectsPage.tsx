@@ -58,6 +58,7 @@ function FeaturedCard({ project }: { project: Project }) {
           <img
             src={project.thumbnailUrl}
             alt={project.title}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40"
           />
         ) : (
@@ -155,6 +156,7 @@ function WideImageCard({ project, index }: { project: Project; index: number }) 
           <img
             src={project.thumbnailUrl}
             alt={project.title}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-30"
           />
         ) : (

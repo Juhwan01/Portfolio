@@ -79,6 +79,7 @@ const ProjectDetail = () => {
           <img
             src={project.thumbnailUrl}
             alt={project.title}
+            loading="lazy"
             className="w-full rounded-xl mb-10 max-h-[480px] object-cover"
           />
         )}
@@ -126,6 +127,7 @@ const ProjectDetail = () => {
                       key={i}
                       src={img}
                       alt={`${project.title} - ${i + 1}`}
+                      loading="lazy"
                       className="w-full rounded-lg"
                     />
                   ))}

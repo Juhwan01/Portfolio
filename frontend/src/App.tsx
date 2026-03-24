@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ErrorBoundary from '@components/common/ErrorBoundary'
+import ToastContainer from '@components/common/Toast'
 import PublicLayout from '@/layouts/PublicLayout'
 import Home from '@pages/Home'
 import AboutPage from '@pages/AboutPage'
@@ -20,7 +22,9 @@ import BlogAdmin from '@pages/admin/BlogAdmin'
 
 function App() {
   return (
+    <ErrorBoundary>
     <Router>
+      <ToastContainer />
       <Routes>
         {/* Public routes with shared layout */}
         <Route element={<PublicLayout />}>
@@ -46,6 +50,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </ErrorBoundary>
   )
 }
 

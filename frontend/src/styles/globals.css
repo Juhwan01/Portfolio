@@ -12,6 +12,13 @@
     box-sizing: border-box;
   }
 
+  /* Keyboard focus indicator (Tab navigation) */
+  *:focus-visible {
+    outline: 2px solid #a8a4ff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
   body {
     background-color: #0e0e13;
     color: #f9f5fd;
@@ -70,4 +77,19 @@
   .section-container {
     @apply min-h-screen w-full px-4 md:px-8 lg:px-16 py-20;
   }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
 }

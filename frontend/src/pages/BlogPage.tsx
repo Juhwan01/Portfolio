@@ -56,6 +56,7 @@ function FeaturedArticle({ post }: { readonly post: BlogPost }) {
             {post.coverImage && (
               <img
                 alt={post.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
                 src={post.coverImage}
               />
@@ -115,6 +116,7 @@ function ArticleCard({ post, index }: { readonly post: BlogPost; readonly index:
             {post.coverImage && (
               <img
                 alt={post.title}
+                loading="lazy"
                 className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                 src={post.coverImage}
               />

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { submitContactForm } from '@services/api'
 import { SOCIAL_LINKS } from '@utils/constants'
 import SEO from '@components/common/SEO'
+import { toast } from '@components/common/Toast'
 import type { ContactForm } from '@/types'
 
 const SOCIAL_GRID = [
@@ -41,9 +42,11 @@ export default function ContactPage() {
       await submitContactForm(formData)
       setStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
+      toast('메시지가 성공적으로 전송되었습니다!', 'success')
     } catch (error) {
       console.error('Failed to submit form:', error)
       setStatus('error')
+      toast('전송에 실패했습니다. 다시 시도해 주세요.', 'error')
     }
   }
 

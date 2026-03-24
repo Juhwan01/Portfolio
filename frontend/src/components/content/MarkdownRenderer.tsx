@@ -77,7 +77,7 @@ const components: Components = {
     <td className="px-4 py-2 border-b border-nn-outline-variant/10">{children}</td>
   ),
   img: ({ src, alt }) => (
-    <img src={src} alt={alt || ''} className="rounded-lg my-4 max-w-full" />
+    <img src={src} alt={alt || ''} loading="lazy" className="rounded-lg my-4 max-w-full" />
   ),
   hr: () => <hr className="my-8 border-nn-outline-variant/15" />,
 }

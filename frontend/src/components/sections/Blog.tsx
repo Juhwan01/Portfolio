@@ -49,6 +49,7 @@ const Blog = () => {
                 <img
                   src={post.coverImage}
                   alt={post.title}
+                  loading="lazy"
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
                 <div className="text-sm text-gray-400 mb-2">
