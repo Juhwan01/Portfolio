@@ -291,135 +291,182 @@ export default function AboutPage() {
         >
           Experience <span className="text-primary">Timeline.</span>
         </motion.h2>
-        <div className="relative border-l-2 border-outline-variant/20 ml-4 md:ml-0 md:left-1/2 md:-translate-x-px space-y-24">
-          {/* kakao x goorm AI 부트캠프 */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="absolute -left-[9px] md:left-1/2 md:-translate-x-[9px] w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(168,164,255,0.6)] z-20" />
-            <div className="md:flex items-center justify-between w-full">
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pr-12 text-left md:text-right">
-                <span className="font-label text-primary font-bold text-sm tracking-widest uppercase mb-2 block">
-                  2025.05 — 2025.11
-                </span>
-                <h3 className="font-headline text-2xl font-black text-on-surface">
-                  AI 부트캠프
-                </h3>
-                <p className="text-secondary font-label text-sm uppercase tracking-wider mb-4">
-                  kakao x goorm
-                </p>
-              </div>
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pl-12 mt-4 md:mt-0">
-                <div className="glass-card p-6 rounded-xl">
-                  <p className="text-on-surface-variant font-light mb-4">
-                    <strong>우수수료생</strong> 선정. 팀 리더로서 AllerGuard(OCR-NLI-RAG),
-                    요기어때(<strong>우수프로젝트상</strong>, RAG + 자체 라우팅 엔진) 등
-                    LLM 기반 실전 프로젝트를 주도.
-                  </p>
-                  <div className="flex gap-2 flex-wrap">
-                    {['LangGraph', 'RAG', 'GPT-4'].map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-label px-2 py-0.5 border border-outline-variant/30 rounded text-outline uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+        <div className="relative max-w-5xl mx-auto">
+          {/* Center Line - 모바일: 왼쪽, 데스크탑: 가운데 */}
+          <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-outline" />
 
-          {/* AI Leaders */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <div className="absolute -left-[9px] md:left-1/2 md:-translate-x-[9px] w-4 h-4 rounded-full bg-secondary shadow-[0_0_15px_rgba(170,143,253,0.6)] z-20" />
-            <div className="md:flex items-center justify-between w-full flex-row-reverse">
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pl-12 text-left">
-                <span className="font-label text-secondary font-bold text-sm tracking-widest uppercase mb-2 block">
-                  2024.03 — 2024.10
-                </span>
-                <h3 className="font-headline text-2xl font-black text-on-surface">
-                  AI Leaders
-                </h3>
-                <p className="text-primary font-label text-sm uppercase tracking-wider mb-4">
-                  SW중심대학사업단 AI 리더 양성
-                </p>
-              </div>
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pr-12 mt-4 md:mt-0">
-                <div className="glass-card p-6 rounded-xl">
-                  <p className="text-on-surface-variant font-light mb-4">
-                    ML/DL 심화 과정 이수. PyTorch 기반 모델 학습부터
-                    경진대회 참여까지 실전 경험. Chef&apos;s Market 추천 시스템,
-                    W:IDE AI 코드 에디터 등 팀 프로젝트 리딩.
+          <div className="space-y-20">
+            {/* 인제대학교 */}
+            <motion.div
+              className="relative pl-12 md:pl-0"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Dot */}
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-primary shadow-[0_0_20px_rgba(168,164,255,0.5)] z-10" />
+              <div className="md:grid md:grid-cols-2 md:gap-12">
+                <div className="md:text-right md:pr-12">
+                  <span className="font-label text-primary font-bold text-sm tracking-widest uppercase mb-1 block">
+                    2020.03 — 2026.02
+                  </span>
+                  <h3 className="font-headline text-2xl font-black text-on-surface">
+                    인제대학교
+                  </h3>
+                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
+                    컴퓨터공학과 졸업
                   </p>
-                  <div className="flex gap-2 flex-wrap md:justify-end">
-                    {['PyTorch', 'FastAPI', 'Team Lead'].map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-label px-2 py-0.5 border border-outline-variant/30 rounded text-outline uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                </div>
+                <div className="mt-4 md:mt-0 md:pl-12">
+                  <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
+                    <p className="text-on-surface-variant font-light mb-4">
+                      GPA <strong>4.16/4.5</strong>. 졸업작품 &ldquo;Chef&apos;s Market&rdquo;
+                      — 강화학습 기반 개인화 레시피 추천 시스템 개발.
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      {['Python', 'PyTorch', 'FastAPI'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-label px-2 py-0.5 border border-primary/30 rounded text-primary/80 uppercase"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* IL LAB & P&N */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="absolute -left-[9px] md:left-1/2 md:-translate-x-[9px] w-4 h-4 rounded-full bg-outline shadow-[0_0_15px_rgba(118,116,123,0.6)] z-20" />
-            <div className="md:flex items-center justify-between w-full">
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pr-12 text-left md:text-right">
-                <span className="font-label text-outline font-bold text-sm tracking-widest uppercase mb-2 block">
-                  2023.03 — 2026.02
-                </span>
-                <h3 className="font-headline text-2xl font-black text-on-surface">
-                  IL LAB &amp; Praises Us
-                </h3>
-                <p className="text-secondary font-label text-sm uppercase tracking-wider mb-4">
-                  학부 연구실 &amp; 개발팀
-                </p>
-              </div>
-              <div className="md:w-5/12 ml-10 md:ml-0 md:pl-12 mt-4 md:mt-0">
-                <div className="glass-card p-6 rounded-xl">
-                  <p className="text-on-surface-variant font-light mb-4">
-                    IL LAB <strong>부팀장</strong>으로 AI/ML 연구 및 데이콘 경진대회 참가.
-                    Praises Us 개발팀 <strong>팀장</strong>으로 운영하며
-                    다수 프로젝트 리딩. W:IDE로 캡스톤 장려상 수상.
+            {/* kakao x goorm AI 부트캠프 */}
+            <motion.div
+              className="relative pl-12 md:pl-0"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-primary shadow-[0_0_20px_rgba(168,164,255,0.5)] z-10" />
+              <div className="md:grid md:grid-cols-2 md:gap-12">
+                <div className="md:text-right md:pr-12 md:order-2 md:text-left md:pl-12">
+                  <span className="font-label text-primary font-bold text-sm tracking-widest uppercase mb-1 block">
+                    2025.05 — 2025.11
+                  </span>
+                  <h3 className="font-headline text-2xl font-black text-on-surface">
+                    kakao x goorm
+                  </h3>
+                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
+                    생성형 AI 부트캠프
                   </p>
-                  <div className="flex gap-2 flex-wrap">
-                    {['Research', 'Team Lead', 'Capstone'].map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-label px-2 py-0.5 border border-outline-variant/30 rounded text-outline uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                </div>
+                <div className="mt-4 md:mt-0 md:order-1 md:pr-12">
+                  <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
+                    <p className="text-on-surface-variant font-light mb-4">
+                      <strong>우수수료생</strong> 선정. 팀 리더로서 AllerGuard(OCR-NLI-RAG),
+                      요기어때(<strong>우수프로젝트상</strong>, RAG + 자체 라우팅 엔진) 등
+                      LLM 기반 실전 프로젝트 주도.
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      {['LangGraph', 'RAG', 'NLI', 'GPT-4'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-label px-2 py-0.5 border border-primary/30 rounded text-primary/80 uppercase"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* AI Leaders */}
+            <motion.div
+              className="relative pl-12 md:pl-0"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-secondary shadow-[0_0_20px_rgba(170,143,253,0.5)] z-10" />
+              <div className="md:grid md:grid-cols-2 md:gap-12">
+                <div className="md:text-right md:pr-12">
+                  <span className="font-label text-secondary font-bold text-sm tracking-widest uppercase mb-1 block">
+                    2024.03 — 2024.10
+                  </span>
+                  <h3 className="font-headline text-2xl font-black text-on-surface">
+                    AI Leaders
+                  </h3>
+                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
+                    SW중심대학사업단 AI 리더 양성
+                  </p>
+                </div>
+                <div className="mt-4 md:mt-0 md:pl-12">
+                  <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
+                    <p className="text-on-surface-variant font-light mb-4">
+                      생성형 AI 심화 과정. 소수정예 팀 리더로 스터디 및 프로젝트 주도.
+                      재정정보 AI 검색 경진대회(4등), 민원누리 SW 경진대회 참가.
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      {['LangChain', 'NLP', 'Team Lead'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-label px-2 py-0.5 border border-secondary/30 rounded text-secondary/80 uppercase"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* IL LAB & Praises Us */}
+            <motion.div
+              className="relative pl-12 md:pl-0"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-outline shadow-[0_0_20px_rgba(118,116,123,0.4)] z-10" />
+              <div className="md:grid md:grid-cols-2 md:gap-12">
+                <div className="md:text-right md:pr-12 md:order-2 md:text-left md:pl-12">
+                  <span className="font-label text-outline font-bold text-sm tracking-widest uppercase mb-1 block">
+                    2023.03 — 2026.02
+                  </span>
+                  <h3 className="font-headline text-2xl font-black text-on-surface">
+                    IL LAB &amp; Praises Us
+                  </h3>
+                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
+                    학부 연구실 &amp; 개발팀
+                  </p>
+                </div>
+                <div className="mt-4 md:mt-0 md:order-1 md:pr-12">
+                  <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
+                    <p className="text-on-surface-variant font-light mb-4">
+                      IL LAB <strong>부팀장</strong>으로 AI/ML 연구 및 데이콘 경진대회 참가.
+                      Praises Us 개발팀 <strong>팀장</strong>으로 운영하며
+                      다수 프로젝트 리딩. W:IDE로 캡스톤 장려상 수상.
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      {['Research', 'Team Lead', 'Capstone'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-label px-2 py-0.5 border border-outline/30 rounded text-outline/80 uppercase"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
