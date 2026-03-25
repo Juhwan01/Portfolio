@@ -23,53 +23,46 @@ const STATIC_SKILLS: Record<string, { label: string; description?: string; techs
     label: 'AI / Machine Learning',
     description:
       'Deep focus on Large Language Models, Transformer architectures, and Retrieval-Augmented Generation (RAG) pipelines.',
-    techs: ['PyTorch', 'TensorFlow', 'Hugging Face', 'LangChain', 'RAG', 'Fine-tuning'],
+    techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'scikit-learn'],
   },
   Backend: {
     label: 'Backend',
-    techs: ['FastAPI', 'Python', 'Node.js', 'PostgreSQL', 'Docker'],
+    techs: ['FastAPI', 'Python', 'PostgreSQL', 'Docker', 'Git'],
   },
   'Cloud & DevOps': {
     label: 'Cloud & DevOps',
-    techs: ['AWS', 'GCP', 'Kubernetes', 'CI/CD'],
+    techs: ['AWS', 'GCP', 'Docker Compose', 'Nginx'],
   },
   'Data Systems': {
     label: 'Data Systems',
-    techs: ['Vector DB', 'Redis', 'Pandas', 'NumPy', 'SQL'],
+    techs: ['ChromaDB', 'OpenSearch', 'Pandas', 'SQL'],
   },
   Frontend: {
     label: 'Frontend',
-    techs: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
+    techs: ['React', 'TypeScript', 'Tailwind CSS', 'Streamlit'],
   },
 }
 
-const PROFICIENCIES = [
-  { name: 'Neural Architectures', percent: 95 },
-  { name: 'Distributed Systems', percent: 88 },
-  { name: 'NLP & LLM Ops', percent: 92 },
-  { name: 'Data Engineering', percent: 84 },
-]
-
-const CERTIFICATIONS = [
+const ACHIEVEMENTS = [
   {
-    title: 'AWS Certified Solutions Architect',
+    title: '우수수료생 & 우수프로젝트상',
     description:
-      'Professional level certification focusing on high-availability and fault-tolerant distributed systems.',
-    date: '2023 - Q4',
+      'kakao x goorm 생성형 AI 부트캠프 — 6개월 과정 우수수료생 선정, "요기어때" 우수프로젝트상 수상.',
+    date: '2025.11',
     align: 'left' as const,
   },
   {
-    title: 'Deep Learning Specialization',
+    title: 'INJE 캡스톤디자인 경진대회 장려상',
     description:
-      'Coursera / DeepLearning.AI — Mastery of CNNs, RNNs, and Transformer optimizations.',
-    date: '2023 - Q2',
+      'LangGraph 기반 AI 코드 에디터 "W:IDE" 개발. Electron IPC 아키텍처로 브라우저 샌드박스 제약 극복.',
+    date: '2024.12',
     align: 'right' as const,
   },
   {
-    title: 'Natural Language Processing Specialization',
+    title: '우수활동팀',
     description:
-      'Advanced sequence modeling and attention mechanisms for generative tasks.',
-    date: '2022 - Q4',
+      '인제대학교 — 개발팀 Praises Us 팀장으로 팀 운영 및 다수 프로젝트 리딩.',
+    date: '2025.02',
     align: 'left' as const,
   },
 ]
@@ -142,26 +135,6 @@ function BentoCard({
         </div>
       </div>
     </motion.div>
-  )
-}
-
-function ProficiencyBar({ name, percent, delay }: { name: string; percent: number; delay: number }) {
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm uppercase tracking-wider font-bold">{name}</span>
-        <span className="text-primary font-bold">{percent}%</span>
-      </div>
-      <div className="h-1 bg-surface-container-highest rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary-dim to-primary"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${percent}%` }}
-          transition={{ duration: 1, delay }}
-          viewport={{ once: true }}
-        />
-      </div>
-    </div>
   )
 }
 
@@ -303,73 +276,27 @@ export default function SkillsPage() {
         )}
       </section>
 
-      {/* Proficiency Visualization */}
-      <section className="mb-32">
+      {/* Achievements */}
+      <section>
         <motion.h2
-          className="text-3xl font-bold mb-12 tracking-tight"
+          className="text-3xl font-bold mb-16 tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Core Proficiencies
+          Achievements
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
-          <div className="space-y-6">
-            {PROFICIENCIES.slice(0, 2).map((p, i) => (
-              <ProficiencyBar key={p.name} name={p.name} percent={p.percent} delay={i * 0.2} />
-            ))}
-          </div>
-          <div className="space-y-6">
-            {PROFICIENCIES.slice(2).map((p, i) => (
-              <ProficiencyBar key={p.name} name={p.name} percent={p.percent} delay={i * 0.2} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications & Growth */}
-      <section>
-        <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
-          <motion.h2
-            className="text-3xl font-bold tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Certifications & Growth
-          </motion.h2>
-          <motion.div
-            className="flex gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/10 text-center">
-              <span className="block text-4xl font-bold text-primary mb-1">12+</span>
-              <span className="text-xs uppercase tracking-widest text-on-surface-variant font-bold">
-                Specializations
-              </span>
-            </div>
-            <div className="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/10 text-center">
-              <span className="block text-4xl font-bold text-primary mb-1">5</span>
-              <span className="text-xs uppercase tracking-widest text-on-surface-variant font-bold">
-                Cloud Certs
-              </span>
-            </div>
-          </motion.div>
-        </div>
 
         <div className="relative">
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-outline-variant/20 hidden md:block" />
           <div className="space-y-16">
-            {CERTIFICATIONS.map((cert, i) => (
+            {ACHIEVEMENTS.map((item, i) => (
               <TimelineItem
-                key={cert.title}
-                title={cert.title}
-                description={cert.description}
-                date={cert.date}
-                align={cert.align}
+                key={item.title}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+                align={item.align}
                 index={i}
               />
             ))}

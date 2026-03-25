@@ -13,16 +13,16 @@ const SOCIAL_GRID = [
     url: SOCIAL_LINKS.github,
   },
   {
-    icon: 'share',
-    name: 'LinkedIn',
-    handle: '/in/Juhwan',
-    url: 'https://linkedin.com',
+    icon: 'article',
+    name: 'Blog',
+    handle: '@juhwan01',
+    url: SOCIAL_LINKS.blog,
   },
   {
-    icon: 'experiment',
-    name: 'ResearchGate',
-    handle: '/profile/Publication',
-    url: 'https://researchgate.net',
+    icon: 'mail',
+    name: 'Email',
+    handle: SOCIAL_LINKS.email,
+    url: `mailto:${SOCIAL_LINKS.email}`,
   },
 ] as const
 
@@ -219,7 +219,7 @@ export default function ContactPage() {
                 <p className="font-label text-[10px] uppercase tracking-widest text-outline">
                   Current Status
                 </p>
-                <p className="font-body font-bold text-on-surface">Available for Research</p>
+                <p className="font-body font-bold text-on-surface">Open to Opportunities</p>
               </div>
             </div>
           </aside>

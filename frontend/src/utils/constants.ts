@@ -4,7 +4,7 @@ export const S3_BUCKET_URL = import.meta.env.VITE_S3_BUCKET_URL
 export const SOCIAL_LINKS = {
   github: 'https://github.com/Juhwan01',
   blog: 'https://velog.io/@juhwan01/posts',
-  email: 'your.email@example.com',
+  email: 'wnghks5432@gmail.com',
 }
 
 export const PROJECT_CATEGORIES = [

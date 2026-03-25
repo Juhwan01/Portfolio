@@ -23,12 +23,10 @@ const Footer = () => {
             Blog
           </a>
           <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${SOCIAL_LINKS.email}`}
             className="hover:text-[#a8a4ff] transition-colors duration-200 opacity-80 hover:opacity-100"
           >
-            LinkedIn
+            Email
           </a>
         </div>
         <div className="text-[#acaab1] text-[10px]">
