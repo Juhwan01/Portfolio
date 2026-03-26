@@ -6,14 +6,14 @@ import { formatDate, calculateReadTime } from '@utils/helpers'
 import SEO from '@components/common/SEO'
 import type { BlogPost } from '@/types'
 
-const CATEGORIES = ['All', 'AI/ML', 'Engineering', 'Tutorial', 'Thoughts'] as const
+const CATEGORIES = ['전체', 'AI/ML', '엔지니어링', '튜토리얼', '회고'] as const
 
 const categoryFilterMap: Record<string, string> = {
-  'All': 'all',
+  '전체': 'all',
   'AI/ML': 'research',
-  'Engineering': 'case-study',
-  'Tutorial': 'tutorial',
-  'Thoughts': 'review',
+  '엔지니어링': 'case-study',
+  '튜토리얼': 'tutorial',
+  '회고': 'review',
 }
 
 function FeaturedSkeleton() {
@@ -85,7 +85,7 @@ function FeaturedArticle({ post }: { readonly post: BlogPost }) {
               </span>
               <div className="h-px w-12 bg-outline-variant/30" />
               <span className="text-primary font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                Read Journal{' '}
+                읽기{' '}
                 <span className="material-symbols-outlined">arrow_forward</span>
               </span>
             </div>
@@ -99,9 +99,9 @@ function FeaturedArticle({ post }: { readonly post: BlogPost }) {
 function ArticleCard({ post, index }: { readonly post: BlogPost; readonly index: number }) {
   const categoryDisplay: Record<string, string> = {
     'research': 'AI/ML',
-    'case-study': 'Engineering',
-    'tutorial': 'Tutorial',
-    'review': 'Thoughts',
+    'case-study': '엔지니어링',
+    'tutorial': '튜토리얼',
+    'review': '회고',
   }
 
   return (
@@ -154,9 +154,9 @@ function EmptyState() {
       <span className="material-symbols-outlined text-6xl text-outline-variant mb-4 block">
         article
       </span>
-      <p className="text-on-surface-variant text-lg mb-2">No posts found</p>
+      <p className="text-on-surface-variant text-lg mb-2">게시글이 없습니다</p>
       <p className="text-outline text-sm">
-        Try selecting a different category or check back later.
+        다른 카테고리를 선택하거나 나중에 다시 확인해 주세요.
       </p>
     </div>
   )
@@ -165,7 +165,7 @@ function EmptyState() {
 export default function BlogPage() {
   const [posts, setPosts] = useState<readonly BlogPost[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeCategory, setActiveCategory] = useState<string>('All')
+  const [activeCategory, setActiveCategory] = useState<string>('전체')
   const [visibleCount, setVisibleCount] = useState(6)
 
   useEffect(() => {
@@ -203,10 +203,10 @@ export default function BlogPage() {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-6xl md:text-7xl font-bold tracking-tight text-on-surface mb-4">
-            Neural Log: <span className="text-primary-dim">Engineering Journal</span>
+            기술 <span className="text-primary-dim">블로그</span>
           </h1>
           <p className="text-on-surface-variant text-xl max-w-2xl font-light leading-relaxed">
-            Insights into architectural logic, latent spaces, and production-ready intelligence. By Jung Juhwan.
+            AI, 엔지니어링, 프로젝트 회고 등 기술적 인사이트를 공유합니다.
           </p>
         </motion.section>
 
@@ -263,7 +263,7 @@ export default function BlogPage() {
               onClick={handleLoadMore}
               className="px-10 py-3 border border-outline-variant hover:border-primary hover:text-primary text-on-surface-variant transition-all font-bold tracking-widest uppercase text-xs rounded-md"
             >
-              Load More Entries
+              더 보기
             </button>
           </div>
         )}
@@ -274,22 +274,22 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl font-bold tracking-tight mb-4">
-              Subscribe to the <span className="text-primary">Intelligence Feed</span>
+              <span className="text-primary">뉴스레터</span> 구독
             </h2>
             <p className="text-on-surface-variant text-lg font-light">
-              Deeply technical updates on AI infrastructure and architectural patterns, delivered once a month.
+              AI 인프라, 아키텍처 패턴에 대한 기술적 업데이트를 월 1회 보내드립니다.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-grow relative">
               <input
                 className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-md px-6 py-4 focus:outline-none focus:border-primary/50 text-on-surface font-body transition-all placeholder:text-outline/50"
-                placeholder="engineer@research.lab"
+                placeholder="example@email.com"
                 type="email"
               />
             </div>
             <button className="bg-primary-dim hover:bg-primary text-on-primary-fixed font-black px-10 py-4 rounded-md transition-all uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(102,91,255,0.2)]">
-              Join
+              구독
             </button>
           </div>
         </div>

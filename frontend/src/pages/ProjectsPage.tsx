@@ -207,10 +207,10 @@ function ArchiveTable({ projects }: { projects: Project[] }) {
     >
       <div className="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10">
         <div className="grid grid-cols-12 p-6 border-b border-outline-variant/10 font-label text-[10px] tracking-widest text-outline uppercase">
-          <div className="col-span-6 md:col-span-4">Project Title</div>
-          <div className="hidden md:block col-span-3">Category</div>
-          <div className="hidden md:block col-span-3">Stack</div>
-          <div className="col-span-6 md:col-span-2 text-right">Year</div>
+          <div className="col-span-6 md:col-span-4">프로젝트</div>
+          <div className="hidden md:block col-span-3">분류</div>
+          <div className="hidden md:block col-span-3">기술 스택</div>
+          <div className="col-span-6 md:col-span-2 text-right">연도</div>
         </div>
         {projects.map((project) => {
           const year = getProjectYear(project)
@@ -314,15 +314,11 @@ export default function ProjectsPage() {
         >
           <div className="flex flex-col md:flex-row items-end justify-between gap-8">
             <div className="max-w-2xl">
-              <span className="font-label text-secondary tracking-[0.3em] uppercase text-sm mb-4 block">
-                Repositories / Archive
-              </span>
               <h1 className="text-6xl md:text-8xl font-headline font-black tracking-tighter leading-none text-on-surface mb-6">
-                PROJECT <span className="text-gradient">ARCHIVE.</span>
+                <span className="text-gradient">프로젝트</span>
               </h1>
               <p className="text-on-surface-variant text-lg md:text-xl max-w-lg font-light leading-relaxed">
-                A curated catalog of AI experiments, web applications, and engineering projects
-                developed across various domains.
+                AI/ML, 웹 서비스, 백엔드 등 다양한 프로젝트를 소개합니다.
               </p>
             </div>
             <div className="hidden lg:block w-32 h-32 border-l border-t border-outline-variant/30 opacity-50 relative">
@@ -340,7 +336,7 @@ export default function ProjectsPage() {
         >
           {categories.map((cat) => {
             const isActive = activeCategory === cat
-            const label = cat === 'All' ? 'All Projects' : (CATEGORY_LABELS[cat] ?? cat)
+            const label = cat === 'All' ? '전체' : (CATEGORY_LABELS[cat] ?? cat)
             return (
               <button
                 key={cat}
@@ -367,7 +363,7 @@ export default function ProjectsPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="QUERY ARCHIVE..."
+              placeholder="프로젝트 검색..."
               className="bg-surface-container-lowest border-none border-b-2 border-transparent focus:ring-0 focus:border-secondary transition-all font-label text-xs tracking-widest pl-10 pr-6 py-3 rounded-full w-64 placeholder:text-outline-variant text-on-surface"
             />
           </div>
@@ -381,7 +377,7 @@ export default function ProjectsPage() {
             <span className="material-symbols-outlined text-6xl mb-4 block text-outline-variant/50">
               search_off
             </span>
-            <p className="text-lg">No projects found matching your criteria.</p>
+            <p className="text-lg">검색 결과가 없습니다.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -415,7 +411,7 @@ export default function ProjectsPage() {
               onClick={handleLoadMore}
               className="group flex items-center gap-3 font-label text-sm tracking-widest text-on-surface-variant hover:text-on-surface transition-colors"
             >
-              VIEW OLDER EXPERIMENTS
+              더 보기
               <span className="material-symbols-outlined group-hover:translate-y-1 transition-transform">
                 keyboard_double_arrow_down
               </span>

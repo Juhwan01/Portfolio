@@ -40,23 +40,23 @@ const Hero = () => {
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h1 className="text-7xl md:text-9xl font-extrabold tracking-tighter text-on-background mb-4">
-            Jung Juhwan
+            정주환
           </h1>
-          <p className="text-xl md:text-2xl font-medium text-on-surface-variant tracking-wide mb-10 uppercase">
-            AI Engineer <span className="text-primary mx-4">/</span> Research Scientist
+          <p className="text-xl md:text-2xl font-medium text-on-surface-variant tracking-wide mb-10">
+            AI 엔지니어
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <Link
               to="/projects"
               className="px-8 py-4 bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed rounded-md font-bold text-lg shadow-[0_0_30px_rgba(55,19,236,0.3)] hover:brightness-110 transition-all"
             >
-              View Projects
+              프로젝트 보기
             </Link>
             <Link
               to="/blog"
               className="px-8 py-4 border border-outline-variant/30 text-on-surface rounded-md font-bold text-lg hover:bg-surface-container-high transition-all"
             >
-              Read Research
+              기술 블로그
             </Link>
           </div>
         </div>
@@ -125,7 +125,7 @@ const Hero = () => {
           >
             <div>
               <span className="material-symbols-outlined text-primary mb-4">memory</span>
-              <h3 className="text-xl font-bold mb-4">Core Tech</h3>
+              <h3 className="text-xl font-bold mb-4">핵심 기술</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.length > 0
                   ? skills.map((skill) => (
@@ -142,8 +142,8 @@ const Hero = () => {
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-outline-variant/10">
-              <p className="text-xs text-on-surface-variant uppercase tracking-widest font-bold">Currently exploring</p>
-              <p className="text-sm font-medium">Multi-modal agents &amp; RAG</p>
+              <p className="text-xs text-on-surface-variant tracking-widest font-bold">현재 관심 분야</p>
+              <p className="text-sm font-medium">Multi-Agent 시스템 &amp; RAG</p>
             </div>
           </Link>
 
@@ -151,7 +151,7 @@ const Hero = () => {
           <div className="rounded-xl bg-surface-container-lowest p-8 border border-outline-variant/15 flex flex-col items-center justify-center text-center">
             <span className="material-symbols-outlined text-4xl mb-2 text-on-surface">monitoring</span>
             <div className="text-4xl font-black text-primary mb-1">1.2k+</div>
-            <div className="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Github Contributions</div>
+            <div className="text-sm font-bold tracking-widest text-on-surface-variant">GitHub 기여</div>
             <div className="mt-6 w-full flex justify-between gap-1 opacity-40">
               <div className="h-8 flex-1 bg-primary/20 rounded-sm" />
               <div className="h-12 flex-1 bg-primary/40 rounded-sm" />
@@ -166,12 +166,12 @@ const Hero = () => {
             to="/about"
             className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all"
           >
-            <h3 className="text-xl font-bold mb-4">Bio</h3>
+            <h3 className="text-xl font-bold mb-4">소개</h3>
             <p className="text-on-surface-variant leading-relaxed mb-4">
-              Architecting the next generation of autonomous systems. Focused on making complex AI intuitive and efficient.
+              문제를 정의하고, AI로 해결하고, 프로덕션까지 서빙하는 전 과정을 다루는 엔지니어입니다.
             </p>
-            <span className="text-primary text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-              Full Resume <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            <span className="text-primary text-sm font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+              자세히 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </span>
           </Link>
 
@@ -221,11 +221,11 @@ const Hero = () => {
             className="md:col-span-3 rounded-xl bg-gradient-to-r from-surface-container-low to-surface-container-high p-8 flex flex-col md:flex-row justify-between items-center gap-8 border border-outline-variant/10"
           >
             <div className="text-center md:text-left">
-              <h3 className="text-2xl font-bold mb-1">Have a project in mind?</h3>
-              <p className="text-on-surface-variant">Let&apos;s build something intelligent together.</p>
+              <h3 className="text-2xl font-bold mb-1">함께 할 프로젝트가 있으신가요?</h3>
+              <p className="text-on-surface-variant">AI 프로젝트 협업, 채용 문의 등 편하게 연락해 주세요.</p>
             </div>
-            <span className="w-full md:w-auto px-10 py-4 bg-on-background text-surface font-black uppercase tracking-widest rounded-md hover:bg-primary transition-colors text-center">
-              Start a Conversation
+            <span className="w-full md:w-auto px-10 py-4 bg-on-background text-surface font-black tracking-widest rounded-md hover:bg-primary transition-colors text-center">
+              연락하기
             </span>
           </Link>
         </div>

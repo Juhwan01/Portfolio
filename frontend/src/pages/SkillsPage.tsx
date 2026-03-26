@@ -20,9 +20,9 @@ const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems', 'F
 
 const STATIC_SKILLS: Record<string, { label: string; description?: string; techs: string[] }> = {
   'AI/ML': {
-    label: 'AI / Machine Learning',
+    label: 'AI / ML',
     description:
-      'Deep focus on Large Language Models, Transformer architectures, and Retrieval-Augmented Generation (RAG) pipelines.',
+      'LLM, RAG 파이프라인, 강화학습 기반 추천 시스템 등 AI/ML 전 영역을 다룹니다.',
     techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'scikit-learn'],
   },
   Backend: {
@@ -43,29 +43,6 @@ const STATIC_SKILLS: Record<string, { label: string; description?: string; techs
   },
 }
 
-const ACHIEVEMENTS = [
-  {
-    title: '우수수료생 & 우수프로젝트상',
-    description:
-      'kakao x goorm 생성형 AI 부트캠프 — 6개월 과정 우수수료생 선정, "요기어때" 우수프로젝트상 수상.',
-    date: '2025.11',
-    align: 'left' as const,
-  },
-  {
-    title: 'INJE 캡스톤디자인 경진대회 장려상',
-    description:
-      'LangGraph 기반 AI 코드 에디터 "W:IDE" 개발. Electron IPC 아키텍처로 브라우저 샌드박스 제약 극복.',
-    date: '2024.12',
-    align: 'right' as const,
-  },
-  {
-    title: '우수활동팀',
-    description:
-      '인제대학교 — 개발팀 Praises Us 팀장으로 팀 운영 및 다수 프로젝트 리딩.',
-    date: '2025.02',
-    align: 'left' as const,
-  },
-]
 
 const filledIconStyle = { fontVariationSettings: "'FILL' 1" }
 
@@ -138,53 +115,6 @@ function BentoCard({
   )
 }
 
-function TimelineItem({
-  title,
-  description,
-  date,
-  align,
-  index,
-}: {
-  title: string
-  description: string
-  date: string
-  align: 'left' | 'right'
-  index: number
-}) {
-  return (
-    <motion.div
-      className="flex flex-col md:flex-row items-start md:items-center gap-8 relative"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.15 }}
-      viewport={{ once: true }}
-    >
-      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full z-10 neural-glow border-4 border-surface" />
-      {align === 'left' ? (
-        <>
-          <div className="order-2 md:order-1 md:w-1/2 md:pr-12 md:text-right">
-            <h4 className="text-xl font-bold mb-2">{title}</h4>
-            <p className="text-on-surface-variant text-sm">{description}</p>
-          </div>
-          <div className="order-1 md:order-2 md:w-1/2 md:pl-12">
-            <span className="text-primary font-bold tracking-widest text-sm">{date}</span>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="order-1 md:w-1/2 md:pr-12 md:text-right">
-            <span className="text-primary font-bold tracking-widest text-sm">{date}</span>
-          </div>
-          <div className="order-2 md:w-1/2 md:pl-12">
-            <h4 className="text-xl font-bold mb-2">{title}</h4>
-            <p className="text-on-surface-variant text-sm">{description}</p>
-          </div>
-        </>
-      )}
-    </motion.div>
-  )
-}
-
 export default function SkillsPage() {
   const [skills, setSkills] = useState<Skill[]>([])
   const [loading, setLoading] = useState(true)
@@ -244,16 +174,12 @@ export default function SkillsPage() {
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-3xl">
-          <span className="text-sm uppercase tracking-[0.2em] text-primary mb-4 block font-bold">
-            Capabilities
-          </span>
           <h1 className="text-5xl md:text-7xl font-bold tracking-[-0.04em] mb-6 leading-tight">
-            Technical <span className="text-primary-dim">Arsenal.</span>
+            기술 <span className="text-primary-dim">스택</span>
           </h1>
           <p className="text-xl text-on-surface-variant leading-relaxed max-w-2xl">
-            A multi-disciplinary stack engineered for the age of intelligence. Architecting
-            complex AI systems from low-level model fine-tuning to high-performance cloud
-            deployments.
+            모델 학습부터 LLM 에이전트 오케스트레이션, 백엔드 개발, 클라우드 배포까지
+            AI 시스템 전체 파이프라인을 다룹니다.
           </p>
         </div>
       </motion.section>
@@ -276,33 +202,6 @@ export default function SkillsPage() {
         )}
       </section>
 
-      {/* Achievements */}
-      <section>
-        <motion.h2
-          className="text-3xl font-bold mb-16 tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Achievements
-        </motion.h2>
-
-        <div className="relative">
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-outline-variant/20 hidden md:block" />
-          <div className="space-y-16">
-            {ACHIEVEMENTS.map((item, i) => (
-              <TimelineItem
-                key={item.title}
-                title={item.title}
-                description={item.description}
-                date={item.date}
-                align={item.align}
-                index={i}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
     </main>
     </>
   )

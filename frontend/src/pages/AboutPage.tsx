@@ -31,24 +31,25 @@ export default function AboutPage() {
           variants={stagger}
         >
           <motion.span
-            className="font-label text-secondary tracking-[0.3em] uppercase text-sm mb-6 block"
+            className="font-label text-secondary tracking-[0.3em] text-sm mb-6 block"
             variants={fadeUp}
           >
-            AI / Multi-Agent / Full-Stack
+            AI 엔지니어
           </motion.span>
           <motion.h1
             className="font-headline text-6xl md:text-8xl font-black tracking-tighter text-on-surface mb-8 leading-[0.9]"
             variants={fadeUp}
           >
-            Building <span className="text-primary">Intelligent</span>{' '}
-            <span className="text-secondary">Systems.</span>
+            문제를 정의하고, <br />
+            <span className="text-primary">끝까지</span>{' '}
+            <span className="text-secondary">해결합니다.</span>
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed"
             variants={fadeUp}
           >
-            LLM 기반 Multi-Agent 시스템부터 추천 엔진, 컴퓨터 비전까지 —
-            문제를 정의하고, 해결하고, 서빙하는 전 과정을 다룹니다.
+            LangGraph 기반 Multi-Agent 워크플로우 설계부터 FastAPI 백엔드, AWS 배포까지 —
+            아이디어를 실제 서비스로 만드는 전 과정을 경험했습니다.
           </motion.p>
         </motion.div>
         <motion.div
@@ -82,7 +83,7 @@ export default function AboutPage() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary/10 blur-[80px] rounded-full" />
             <div className="glass-card p-10 rounded-xl relative z-10">
               <h3 className="font-headline text-3xl font-bold text-on-surface mb-6">
-                My Approach
+                접근 방식
               </h3>
               <div className="space-y-6 text-on-surface-variant text-lg font-light leading-relaxed">
                 <p>
@@ -100,8 +101,8 @@ export default function AboutPage() {
                   <span className="font-label text-secondary text-2xl font-bold">
                     16+
                   </span>
-                  <span className="font-label text-xs uppercase tracking-widest opacity-60">
-                    Projects
+                  <span className="font-label text-xs tracking-widest opacity-60">
+                    프로젝트
                   </span>
                 </div>
                 <div className="w-px h-12 bg-outline-variant/30" />
@@ -124,9 +125,9 @@ export default function AboutPage() {
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="font-headline text-5xl font-black text-on-surface mb-6 uppercase tracking-tighter">
-              Problem First, <br />
-              <span className="text-outline-variant">Code Second.</span>
+            <h2 className="font-headline text-5xl font-black text-on-surface mb-6 tracking-tighter">
+              문제 중심, <br />
+              <span className="text-outline-variant">해결 중심.</span>
             </h2>
             <p className="text-on-surface-variant font-light text-lg mb-8">
               기술은 도구일 뿐, 핵심은 문제를 정확히 정의하고
@@ -134,8 +135,8 @@ export default function AboutPage() {
             </p>
             <div className="flex items-center gap-4 text-secondary">
               <span className="material-symbols-outlined">psychology</span>
-              <span className="font-label tracking-widest uppercase text-sm">
-                Problem-Driven Engineering
+              <span className="font-label tracking-widest text-sm">
+                문제 정의 → 해결 → 검증
               </span>
             </div>
           </motion.div>
@@ -150,7 +151,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          Technical Toolkit
+          기술 스택
         </motion.h2>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6"
@@ -289,7 +290,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Experience <span className="text-primary">Timeline.</span>
+          경험
         </motion.h2>
         <div className="relative max-w-5xl mx-auto">
           {/* Center Line - 모바일: 왼쪽, 데스크탑: 가운데 */}
@@ -339,39 +340,39 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* kakao x goorm AI 부트캠프 */}
+            {/* IL LAB & Praises Us — 2023.03 */}
             <motion.div
               className="relative pl-12 md:pl-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-primary shadow-[0_0_20px_rgba(168,164,255,0.5)] z-10" />
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-outline shadow-[0_0_20px_rgba(118,116,123,0.4)] z-10" />
               <div className="md:grid md:grid-cols-2 md:gap-12">
                 <div className="md:text-right md:pr-12 md:order-2 md:text-left md:pl-12">
-                  <span className="font-label text-primary font-bold text-sm tracking-widest uppercase mb-1 block">
-                    2025.05 — 2025.11
+                  <span className="font-label text-outline font-bold text-sm tracking-widest mb-1 block">
+                    2023.03 — 2026.02
                   </span>
                   <h3 className="font-headline text-2xl font-black text-on-surface">
-                    kakao x goorm
+                    IL LAB &amp; Praises Us
                   </h3>
-                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
-                    생성형 AI 부트캠프
+                  <p className="text-secondary font-label text-sm tracking-wider">
+                    학부 연구실 &amp; 개발팀
                   </p>
                 </div>
                 <div className="mt-4 md:mt-0 md:order-1 md:pr-12">
                   <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
                     <p className="text-on-surface-variant font-light mb-4">
-                      <strong>우수수료생</strong> 선정. 팀 리더로서 AllerGuard(OCR-NLI-RAG),
-                      요기어때(<strong>우수프로젝트상</strong>, RAG + 자체 라우팅 엔진) 등
-                      LLM 기반 실전 프로젝트 주도.
+                      IL LAB <strong>부팀장</strong>으로 AI/ML 연구 및 데이콘 경진대회 참가(상위 9%).
+                      Praises Us 개발팀 <strong>팀장</strong>으로 운영하며
+                      다수 프로젝트 리딩. W:IDE로 캡스톤 장려상 수상.
                     </p>
                     <div className="flex gap-2 flex-wrap">
-                      {['LangGraph', 'RAG', 'NLI', 'GPT-4'].map((tag) => (
+                      {['PyTorch', 'FastAPI', 'Docker', 'AWS'].map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-label px-2 py-0.5 border border-primary/30 rounded text-primary/80 uppercase"
+                          className="text-[10px] font-label px-2 py-0.5 border border-outline/30 rounded text-outline/80 uppercase"
                         >
                           {tag}
                         </span>
@@ -382,7 +383,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* AI Leaders */}
+            {/* AI Leaders — 2024.03 */}
             <motion.div
               className="relative pl-12 md:pl-0"
               initial={{ opacity: 0, y: 30 }}
@@ -424,7 +425,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* IL LAB & Praises Us */}
+            {/* kakao x goorm 부트캠프 — 2025.05 (최신) */}
             <motion.div
               className="relative pl-12 md:pl-0"
               initial={{ opacity: 0, y: 30 }}
@@ -432,31 +433,31 @@ export default function AboutPage() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-outline shadow-[0_0_20px_rgba(118,116,123,0.4)] z-10" />
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-primary shadow-[0_0_20px_rgba(168,164,255,0.5)] z-10" />
               <div className="md:grid md:grid-cols-2 md:gap-12">
                 <div className="md:text-right md:pr-12 md:order-2 md:text-left md:pl-12">
-                  <span className="font-label text-outline font-bold text-sm tracking-widest uppercase mb-1 block">
-                    2023.03 — 2026.02
+                  <span className="font-label text-primary font-bold text-sm tracking-widest mb-1 block">
+                    2025.05 — 2025.11
                   </span>
                   <h3 className="font-headline text-2xl font-black text-on-surface">
-                    IL LAB &amp; Praises Us
+                    kakao x goorm
                   </h3>
-                  <p className="text-secondary font-label text-sm uppercase tracking-wider">
-                    학부 연구실 &amp; 개발팀
+                  <p className="text-secondary font-label text-sm tracking-wider">
+                    생성형 AI 부트캠프
                   </p>
                 </div>
                 <div className="mt-4 md:mt-0 md:order-1 md:pr-12">
                   <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
                     <p className="text-on-surface-variant font-light mb-4">
-                      IL LAB <strong>부팀장</strong>으로 AI/ML 연구 및 데이콘 경진대회 참가.
-                      Praises Us 개발팀 <strong>팀장</strong>으로 운영하며
-                      다수 프로젝트 리딩. W:IDE로 캡스톤 장려상 수상.
+                      <strong>우수수료생</strong> 선정. 팀 리더로서 AllerGuard(OCR-NLI-RAG),
+                      요기어때(<strong>우수프로젝트상</strong>, RAG + 자체 GraphHopper 라우팅 엔진) 등
+                      LLM 기반 실전 프로젝트 주도.
                     </p>
                     <div className="flex gap-2 flex-wrap">
-                      {['Research', 'Team Lead', 'Capstone'].map((tag) => (
+                      {['LangGraph', 'RAG', 'NLI', 'GPT-4'].map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-label px-2 py-0.5 border border-outline/30 rounded text-outline/80 uppercase"
+                          className="text-[10px] font-label px-2 py-0.5 border border-primary/30 rounded text-primary/80 uppercase"
                         >
                           {tag}
                         </span>
@@ -479,12 +480,9 @@ export default function AboutPage() {
           viewport={{ once: true }}
         >
           <div>
-            <h2 className="font-headline text-5xl font-black text-on-surface uppercase tracking-tighter">
-              Recognition.
+            <h2 className="font-headline text-5xl font-black text-on-surface tracking-tighter">
+              수상 및 성과
             </h2>
-            <p className="text-on-surface-variant font-light text-lg mt-2">
-              Awards &amp; Open Source Contributions
-            </p>
           </div>
           <a
             href="https://github.com/Juhwan01"
@@ -492,7 +490,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="font-label text-xs tracking-widest uppercase text-primary hover:text-secondary transition-colors flex items-center gap-2"
           >
-            View GitHub{' '}
+            GitHub 보기{' '}
             <span className="material-symbols-outlined text-sm">
               open_in_new
             </span>
@@ -527,7 +525,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              2024.12 — Competition Award
+              2024.12 — 캡스톤디자인 경진대회
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               INJE 캡스톤디자인 경진대회 장려상
@@ -543,7 +541,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              Open Source — PyPI Published
+              오픈소스 — PyPI 배포
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               Jira Extended MCP Server
@@ -558,7 +556,7 @@ export default function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              GitHub Repository
+              GitHub 저장소
             </a>
           </motion.div>
 
@@ -567,7 +565,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              DACON — AI Competition
+              DACON — AI 경진대회
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               구조물 안정성 물리 추론 AI 경진대회
@@ -582,7 +580,7 @@ export default function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View Project
+              프로젝트 보기
             </a>
           </motion.div>
 
@@ -591,7 +589,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              Production — Full-Stack AI
+              프로덕션 — 풀스택 AI
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               SAiM RecSys: Hit@10 70.6%
@@ -606,7 +604,7 @@ export default function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View Project
+              프로젝트 보기
             </a>
           </motion.div>
         </motion.div>
@@ -631,7 +629,7 @@ export default function AboutPage() {
               to="/contact"
               className="inline-block bg-primary text-on-primary font-headline font-extrabold text-lg px-12 py-5 rounded-full hover:scale-110 transition-transform active:scale-95 shadow-xl"
             >
-              Contact Me
+              연락하기
             </Link>
           </div>
         </motion.div>
