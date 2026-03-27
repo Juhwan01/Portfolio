@@ -486,13 +486,13 @@ export default function AboutPage() {
                     Beans Pirates
                   </h3>
                   <p className="text-secondary font-label text-sm tracking-wider">
-                    개발팀
+                    AI/ML Engineer
                   </p>
                 </div>
                 <div className="mt-4 md:mt-0 md:pl-12">
                   <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
                     <p className="text-on-surface-variant font-light mb-4">
-                      개발팀 운영 중. AI/ML 프로젝트 및 서비스 개발.
+                      AI/ML 엔지니어로 활동 중. LLM 기반 서비스 설계 및 개발, 데이터 파이프라인 구축.
                     </p>
                     <div className="flex gap-2 flex-wrap">
                       {['AI/ML', 'LangGraph', 'FastAPI'].map((tag) => (
