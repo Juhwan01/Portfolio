@@ -59,7 +59,7 @@ function FeaturedCard({ project }: { project: Project }) {
             src={project.thumbnailUrl}
             alt={project.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40"
+            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-primary-dim/20 to-secondary/10" />
@@ -109,10 +109,21 @@ function MediumCard({ project, index }: { project: Project; index: number }) {
       className="md:col-span-4 bg-surface-container-high rounded-xl p-8 border border-outline-variant/10 flex flex-col group hover:bg-surface-bright transition-all"
     >
       <Link to={`/projects/${project.id}`} className="flex flex-col h-full">
-        <div className="flex justify-between items-start mb-12">
-          <span className="material-symbols-outlined text-4xl text-secondary">{icon}</span>
-          <span className="font-label text-xs text-on-surface-variant tracking-widest">{year}</span>
-        </div>
+        {project.thumbnailUrl ? (
+          <div className="aspect-video rounded-lg overflow-hidden mb-6 bg-surface-container-lowest">
+            <img
+              src={project.thumbnailUrl}
+              alt={project.title}
+              loading="lazy"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        ) : (
+          <div className="flex justify-between items-start mb-6">
+            <span className="material-symbols-outlined text-4xl text-secondary">{icon}</span>
+            <span className="font-label text-xs text-on-surface-variant tracking-widest">{year}</span>
+          </div>
+        )}
         <div className="mt-auto">
           {project.category && (
             <span className="font-label text-xs text-secondary font-bold tracking-widest mb-2 block">
@@ -157,7 +168,7 @@ function WideImageCard({ project, index }: { project: Project; index: number }) 
             src={project.thumbnailUrl}
             alt={project.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-30"
+            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-r from-primary-dim/10 to-secondary/5" />
@@ -192,63 +203,6 @@ function WideImageCard({ project, index }: { project: Project; index: number }) 
         <span className="material-symbols-outlined">north_east</span>
       </Link>
     </motion.article>
-  )
-}
-
-function ArchiveTable({ projects }: { projects: Project[] }) {
-  if (projects.length === 0) return null
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      className="md:col-span-12 mt-8"
-    >
-      <div className="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10">
-        <div className="grid grid-cols-12 p-6 border-b border-outline-variant/10 font-label text-[10px] tracking-widest text-outline uppercase">
-          <div className="col-span-6 md:col-span-4">프로젝트</div>
-          <div className="hidden md:block col-span-3">분류</div>
-          <div className="hidden md:block col-span-3">기술 스택</div>
-          <div className="col-span-6 md:col-span-2 text-right">연도</div>
-        </div>
-        {projects.map((project) => {
-          const year = getProjectYear(project)
-          return (
-            <Link
-              key={project.id}
-              to={`/projects/${project.id}`}
-              className="grid grid-cols-12 p-6 hover:bg-surface-container-high transition-colors items-center group"
-            >
-              <div className="col-span-6 md:col-span-4 font-headline font-bold text-on-surface group-hover:text-secondary transition-colors">
-                {project.title}
-              </div>
-              <div className="hidden md:block col-span-3 font-label text-xs text-on-surface-variant">
-                {project.category
-                  ? (CATEGORY_LABELS[project.category] ?? project.category).toUpperCase()
-                  : ''}
-              </div>
-              <div className="hidden md:flex col-span-3 gap-2">
-                {project.techStack.slice(0, 2).map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[10px] bg-surface-container-high text-outline px-2 py-0.5 rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                {project.techStack.length > 2 && (
-                  <span className="text-[10px] text-outline">+{project.techStack.length - 2}</span>
-                )}
-              </div>
-              <div className="col-span-6 md:col-span-2 text-right font-label text-xs text-outline">
-                {year}
-              </div>
-            </Link>
-          )
-        })}
-      </div>
-    </motion.div>
   )
 }
 
@@ -289,9 +243,8 @@ export default function ProjectsPage() {
   const secondProject = filtered[1] ?? null
   const thirdProject = filtered[2] ?? null
   const fourthProject = filtered[3] ?? null
-  const archiveProjects = filtered.slice(4)
-  const visibleArchive = archiveProjects.slice(0, visibleArchiveCount)
-  const hasMoreArchive = archiveProjects.length > visibleArchiveCount
+  const remainingProjects = filtered.slice(4, 4 + visibleArchiveCount)
+  const hasMoreArchive = filtered.length > 4 + visibleArchiveCount
 
   const handleLoadMore = () => {
     setVisibleArchiveCount((prev) => prev + 5)
@@ -393,8 +346,10 @@ export default function ProjectsPage() {
             {/* Wide Image Card (4th project) */}
             {fourthProject && <WideImageCard project={fourthProject} index={3} />}
 
-            {/* Archive Table (remaining projects) */}
-            <ArchiveTable projects={visibleArchive} />
+            {/* 나머지 프로젝트 카드 */}
+            {remainingProjects.map((project, i) => (
+              <MediumCard key={project.id} project={project} index={i + 4} />
+            ))}
           </div>
         )}
 

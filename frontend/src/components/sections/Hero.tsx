@@ -69,17 +69,17 @@ const Hero = () => {
 
       {/* Bento Grid Content */}
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto bg-surface">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-6">
-          {/* Featured Project 1 (Large) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 메인 프로젝트 (풀 와이드) */}
           {featuredProjects[0] && (
             <Link
               to={`/projects/${featuredProjects[0].id}`}
-              className="md:col-span-2 md:row-span-2 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all"
+              className="md:col-span-3 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all"
             >
-              <div className="h-2/3 bg-surface-container-highest relative overflow-hidden">
+              <div className="aspect-[21/9] bg-surface-container-highest relative overflow-hidden">
                 {featuredProjects[0].thumbnailUrl ? (
                   <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+                    className="w-full h-full object-contain bg-surface-container-highest group-hover:scale-[1.02] transition-transform duration-500"
                     src={featuredProjects[0].thumbnailUrl}
                     alt={featuredProjects[0].title}
                   />
@@ -88,7 +88,7 @@ const Hero = () => {
                 )}
                 <div className="absolute top-4 left-4 flex gap-2">
                   {featuredProjects[0].category && (
-                    <span className="px-3 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-widest text-primary rounded-full flex items-center gap-1">
+                    <span className="px-3 py-1 bg-surface-container-highest/80 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest text-primary rounded-full flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />
                       {featuredProjects[0].category}
                     </span>
@@ -98,8 +98,8 @@ const Hero = () => {
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2">{featuredProjects[0].title}</h3>
                 <p className="text-on-surface-variant mb-4">{featuredProjects[0].description}</p>
-                <div className="flex gap-2">
-                  {featuredProjects[0].techStack.slice(0, 3).map((tech) => (
+                <div className="flex gap-2 flex-wrap">
+                  {featuredProjects[0].techStack.slice(0, 5).map((tech) => (
                     <span key={tech} className="px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter rounded">
                       {tech}
                     </span>
@@ -109,8 +109,8 @@ const Hero = () => {
             </Link>
           )}
           {!featuredProjects[0] && (
-            <div className="md:col-span-2 md:row-span-2 rounded-xl bg-surface-container-low overflow-hidden border border-transparent">
-              <div className="h-2/3 bg-surface-container-highest" />
+            <div className="md:col-span-3 rounded-xl bg-surface-container-low overflow-hidden border border-transparent">
+              <div className="aspect-[21/9] bg-surface-container-highest animate-pulse" />
               <div className="p-8">
                 <div className="h-6 w-48 bg-surface-container-highest rounded mb-2 animate-pulse" />
                 <div className="h-4 w-full bg-surface-container-highest rounded animate-pulse" />
@@ -118,7 +118,7 @@ const Hero = () => {
             </div>
           )}
 
-          {/* Skills Card */}
+          {/* 핵심 기술 */}
           <Link
             to="/skills"
             className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all flex flex-col justify-between"
@@ -133,7 +133,7 @@ const Hero = () => {
                         {skill.name}
                       </span>
                     ))
-                  : ['PyTorch', 'LangChain', 'Python', 'Docker'].map((name) => (
+                  : ['PyTorch', 'LangGraph', 'FastAPI', 'Docker'].map((name) => (
                       <span key={name} className="px-3 py-1 bg-surface-container-highest text-[11px] font-bold rounded uppercase tracking-widest">
                         {name}
                       </span>
@@ -147,85 +147,32 @@ const Hero = () => {
             </div>
           </Link>
 
-          {/* Github Stats Card */}
-          <div className="rounded-xl bg-surface-container-lowest p-8 border border-outline-variant/15 flex flex-col items-center justify-center text-center">
-            <span className="material-symbols-outlined text-4xl mb-2 text-on-surface">monitoring</span>
-            <div className="text-4xl font-black text-primary mb-1">1.2k+</div>
-            <div className="text-sm font-bold tracking-widest text-on-surface-variant">GitHub 기여</div>
-            <div className="mt-6 w-full flex justify-between gap-1 opacity-40">
-              <div className="h-8 flex-1 bg-primary/20 rounded-sm" />
-              <div className="h-12 flex-1 bg-primary/40 rounded-sm" />
-              <div className="h-10 flex-1 bg-primary/60 rounded-sm" />
-              <div className="h-14 flex-1 bg-primary rounded-sm" />
-              <div className="h-6 flex-1 bg-primary/20 rounded-sm" />
-            </div>
-          </div>
-
-          {/* About Snippet */}
+          {/* 소개 */}
           <Link
             to="/about"
-            className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all"
+            className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all flex flex-col justify-between"
           >
-            <h3 className="text-xl font-bold mb-4">소개</h3>
-            <p className="text-on-surface-variant leading-relaxed mb-4">
-              문제를 정의하고, AI로 해결하고, 프로덕션까지 서빙하는 전 과정을 다루는 엔지니어입니다.
-            </p>
-            <span className="text-primary text-sm font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+            <div>
+              <h3 className="text-xl font-bold mb-4">소개</h3>
+              <p className="text-on-surface-variant leading-relaxed">
+                문제를 정의하고, AI로 해결하고, 프로덕션까지 서빙하는 전 과정을 다루는 엔지니어입니다.
+              </p>
+            </div>
+            <span className="mt-6 text-primary text-sm font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
               자세히 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </span>
           </Link>
 
-          {/* Featured Project 2 */}
-          {featuredProjects[1] && (
-            <Link
-              to={`/projects/${featuredProjects[1].id}`}
-              className="md:col-span-2 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all flex flex-col md:flex-row"
-            >
-              <div className="md:w-1/2 h-48 md:h-auto bg-surface-container-highest relative">
-                {featuredProjects[1].thumbnailUrl ? (
-                  <img
-                    className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-500"
-                    src={featuredProjects[1].thumbnailUrl}
-                    alt={featuredProjects[1].title}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-surface-container-highest" />
-                )}
-              </div>
-              <div className="p-8 md:w-1/2 flex flex-col justify-center">
-                <h3 className="text-2xl font-bold mb-2">{featuredProjects[1].title}</h3>
-                <p className="text-on-surface-variant text-sm mb-4">{featuredProjects[1].description}</p>
-                <div className="flex gap-2">
-                  {featuredProjects[1].techStack.slice(0, 3).map((tech) => (
-                    <span key={tech} className="px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter rounded">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-          )}
-          {!featuredProjects[1] && (
-            <div className="md:col-span-2 rounded-xl bg-surface-container-low overflow-hidden border border-transparent flex flex-col md:flex-row">
-              <div className="md:w-1/2 h-48 md:h-auto bg-surface-container-highest" />
-              <div className="p-8 md:w-1/2 flex flex-col justify-center">
-                <div className="h-6 w-40 bg-surface-container-highest rounded mb-2 animate-pulse" />
-                <div className="h-4 w-full bg-surface-container-highest rounded animate-pulse" />
-              </div>
-            </div>
-          )}
-
-          {/* Contact Card */}
+          {/* 전체 프로젝트 보기 */}
           <Link
-            to="/contact"
-            className="md:col-span-3 rounded-xl bg-gradient-to-r from-surface-container-low to-surface-container-high p-8 flex flex-col md:flex-row justify-between items-center gap-8 border border-outline-variant/10"
+            to="/projects"
+            className="rounded-xl bg-surface-container-lowest p-8 border border-outline-variant/15 flex flex-col items-center justify-center text-center hover:border-primary/30 transition-all"
           >
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl font-bold mb-1">함께 할 프로젝트가 있으신가요?</h3>
-              <p className="text-on-surface-variant">AI 프로젝트 협업, 채용 문의 등 편하게 연락해 주세요.</p>
-            </div>
-            <span className="w-full md:w-auto px-10 py-4 bg-on-background text-surface font-black tracking-widest rounded-md hover:bg-primary transition-colors text-center">
-              연락하기
+            <span className="material-symbols-outlined text-4xl mb-2 text-primary">folder_open</span>
+            <div className="text-4xl font-black text-primary mb-1">16+</div>
+            <div className="text-sm font-bold tracking-widest text-on-surface-variant">프로젝트</div>
+            <span className="mt-4 text-primary text-xs font-bold tracking-widest flex items-center gap-1">
+              전체 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </span>
           </Link>
         </div>
