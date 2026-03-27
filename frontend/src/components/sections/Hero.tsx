@@ -40,10 +40,10 @@ const Hero = () => {
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h1 className="text-7xl md:text-9xl font-extrabold tracking-tighter text-on-background mb-4">
-            정주환
+            Jung Juhwan
           </h1>
           <p className="text-xl md:text-2xl font-medium text-on-surface-variant tracking-wide mb-10">
-            AI 엔지니어
+            AI/ML Engineer
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <Link

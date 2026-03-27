@@ -34,7 +34,7 @@ export default function AboutPage() {
             className="font-label text-secondary tracking-[0.3em] text-sm mb-6 block"
             variants={fadeUp}
           >
-            AI 엔지니어
+            AI/ML Engineer
           </motion.span>
           <motion.h1
             className="font-headline text-6xl md:text-8xl font-black tracking-tighter text-on-surface mb-8 leading-[0.9]"
@@ -458,6 +458,47 @@ export default function AboutPage() {
                         <span
                           key={tag}
                           className="text-[10px] font-label px-2 py-0.5 border border-primary/30 rounded text-primary/80 uppercase"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Beans Pirates — 2026.02 (현재) */}
+            <motion.div
+              className="relative pl-12 md:pl-0"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="absolute left-[9px] md:left-1/2 md:-translate-x-[9px] top-2 w-[18px] h-[18px] rounded-full bg-surface border-[3px] border-tertiary shadow-[0_0_20px_rgba(255,157,207,0.5)] z-10" />
+              <div className="md:grid md:grid-cols-2 md:gap-12">
+                <div className="md:text-right md:pr-12">
+                  <span className="font-label text-tertiary font-bold text-sm tracking-widest mb-1 block">
+                    2026.02 — 현재
+                  </span>
+                  <h3 className="font-headline text-2xl font-black text-on-surface">
+                    Beans Pirates
+                  </h3>
+                  <p className="text-secondary font-label text-sm tracking-wider">
+                    개발팀
+                  </p>
+                </div>
+                <div className="mt-4 md:mt-0 md:pl-12">
+                  <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
+                    <p className="text-on-surface-variant font-light mb-4">
+                      개발팀 운영 중. AI/ML 프로젝트 및 서비스 개발.
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      {['AI/ML', 'LangGraph', 'FastAPI'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-label px-2 py-0.5 border border-tertiary/30 rounded text-tertiary/80 uppercase"
                         >
                           {tag}
                         </span>

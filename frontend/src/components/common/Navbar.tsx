@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center px-8 md:px-12 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold tracking-tighter text-[#f9f5fd]">
-          정주환
+          Jung Juhwan
         </Link>
 
         {/* Desktop Nav */}
