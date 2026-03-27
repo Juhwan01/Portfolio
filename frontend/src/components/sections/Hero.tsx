@@ -77,7 +77,20 @@ const Hero = () => {
               className="md:col-span-3 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all"
             >
               <div className="aspect-[21/9] bg-surface-container-highest relative overflow-hidden">
-                {featuredProjects[0].thumbnailUrl ? (
+                {featuredProjects[0].images && featuredProjects[0].images.length >= 2 ? (
+                  <div className="w-full h-full flex gap-1">
+                    <img
+                      className="w-1/2 h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      src={featuredProjects[0].images[0]}
+                      alt={`${featuredProjects[0].title} 1`}
+                    />
+                    <img
+                      className="w-1/2 h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      src={featuredProjects[0].images[1]}
+                      alt={`${featuredProjects[0].title} 2`}
+                    />
+                  </div>
+                ) : featuredProjects[0].thumbnailUrl ? (
                   <img
                     className="w-full h-full object-contain bg-surface-container-highest group-hover:scale-[1.02] transition-transform duration-500"
                     src={featuredProjects[0].thumbnailUrl}
