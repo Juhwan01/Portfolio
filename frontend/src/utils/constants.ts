@@ -8,23 +8,17 @@ export const SOCIAL_LINKS = {
 }
 
 export const PROJECT_CATEGORIES = [
-  'Web',
-  'Backend',
   'AI',
-  'Mobile',
-  'DevOps',
-  'Data',
-  'Other',
+  'ML',
+  'Web',
+  'MCP',
 ] as const
 
 export const CATEGORY_LABELS: Record<string, string> = {
+  AI: 'AI',
+  ML: 'ML',
   Web: 'Web',
-  Backend: 'Backend',
-  AI: 'AI / ML',
-  Mobile: 'Mobile',
-  DevOps: 'DevOps',
-  Data: 'Data',
-  Other: 'Other',
+  MCP: 'MCP',
 }
 
 export const PROJECT_STATUS = [

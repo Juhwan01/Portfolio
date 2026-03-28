@@ -80,7 +80,7 @@ const ProjectDetail = () => {
             src={project.thumbnailUrl}
             alt={project.title}
             loading="lazy"
-            className="w-full rounded-xl mb-10 max-h-[480px] object-cover"
+            className="w-full rounded-xl mb-10 max-h-[600px] object-contain bg-nn-surface-lowest"
           />
         )}
 

@@ -8,12 +8,9 @@ import type { Project } from '@/types'
 
 const ICON_MAP: Record<string, string> = {
   AI: 'psychology',
+  ML: 'model_training',
   Web: 'language',
-  Backend: 'dns',
-  Mobile: 'phone_iphone',
-  DevOps: 'cloud',
-  Data: 'analytics',
-  Other: 'layers',
+  MCP: 'hub',
 }
 
 function getProjectYear(project: Project): string {
