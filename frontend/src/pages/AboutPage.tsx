@@ -677,8 +677,9 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full" />
           <div className="relative z-10">
             <h2 className="font-headline text-4xl font-black text-on-surface mb-8">
-              함께 만들어갈{' '}
-              <span className="text-secondary italic">프로젝트</span>가 있나요?
+              Got a{' '}
+              <span className="text-secondary italic">project</span>{' '}
+              in mind?
             </h2>
             <Link
               to="/contact"
