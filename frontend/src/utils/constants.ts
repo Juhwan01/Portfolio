@@ -18,13 +18,13 @@ export const PROJECT_CATEGORIES = [
 ] as const
 
 export const CATEGORY_LABELS: Record<string, string> = {
-  Web: '웹 서비스',
-  Backend: '백엔드',
+  Web: 'Web',
+  Backend: 'Backend',
   AI: 'AI / ML',
-  Mobile: '모바일',
+  Mobile: 'Mobile',
   DevOps: 'DevOps',
-  Data: '데이터',
-  Other: '기타',
+  Data: 'Data',
+  Other: 'Other',
 }
 
 export const PROJECT_STATUS = [

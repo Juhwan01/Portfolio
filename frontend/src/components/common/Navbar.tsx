@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { path: '/', label: '홈' },
-  { path: '/about', label: '소개' },
-  { path: '/projects', label: '프로젝트' },
-  { path: '/skills', label: '기술' },
-  { path: '/blog', label: '블로그' },
-  { path: '/contact', label: '연락' },
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/skills', label: 'Skills' },
+  { path: '/blog', label: 'Blog' },
+  { path: '/contact', label: 'Contact' },
 ]
 
 const Navbar = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav aria-label="메인 네비게이션" className="fixed top-0 w-full z-50 bg-[#131319]/60 backdrop-blur-xl shadow-[0_0_40px_rgba(55,19,236,0.08)]">
+    <nav aria-label="Main Navigation" className="fixed top-0 w-full z-50 bg-[#131319]/60 backdrop-blur-xl shadow-[0_0_40px_rgba(55,19,236,0.08)]">
       <div className="flex justify-between items-center px-8 md:px-12 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold tracking-tighter text-[#f9f5fd]">
@@ -51,7 +51,7 @@ const Navbar = () => {
           to="/contact"
           className="hidden md:block bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed px-6 py-2 rounded-md font-bold scale-95 active:scale-90 transition-transform"
         >
-          연락하기
+          Contact
         </Link>
 
         {/* Mobile hamburger */}
@@ -90,7 +90,7 @@ const Navbar = () => {
             to="/contact"
             className="mt-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed px-6 py-2 rounded-md font-bold text-center text-sm"
           >
-            연락하기
+            Contact
           </Link>
         </div>
       )}

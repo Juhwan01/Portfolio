@@ -268,7 +268,7 @@ export default function ProjectsPage() {
           <div className="flex flex-col md:flex-row items-end justify-between gap-8">
             <div className="max-w-2xl">
               <h1 className="text-6xl md:text-8xl font-headline font-black tracking-tighter leading-none text-on-surface mb-6">
-                <span className="text-gradient">프로젝트</span>
+                <span className="text-gradient">Projects</span>
               </h1>
               <p className="text-on-surface-variant text-lg md:text-xl max-w-lg font-light leading-relaxed">
                 AI/ML, 웹 서비스, 백엔드 등 다양한 프로젝트를 소개합니다.
@@ -289,7 +289,7 @@ export default function ProjectsPage() {
         >
           {categories.map((cat) => {
             const isActive = activeCategory === cat
-            const label = cat === 'All' ? '전체' : (CATEGORY_LABELS[cat] ?? cat)
+            const label = cat === 'All' ? 'All' : (CATEGORY_LABELS[cat] ?? cat)
             return (
               <button
                 key={cat}
@@ -316,7 +316,7 @@ export default function ProjectsPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="프로젝트 검색..."
+              placeholder="Search projects..."
               className="bg-surface-container-lowest border-none border-b-2 border-transparent focus:ring-0 focus:border-secondary transition-all font-label text-xs tracking-widest pl-10 pr-6 py-3 rounded-full w-64 placeholder:text-outline-variant text-on-surface"
             />
           </div>
@@ -330,7 +330,7 @@ export default function ProjectsPage() {
             <span className="material-symbols-outlined text-6xl mb-4 block text-outline-variant/50">
               search_off
             </span>
-            <p className="text-lg">검색 결과가 없습니다.</p>
+            <p className="text-lg">No results found.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -366,7 +366,7 @@ export default function ProjectsPage() {
               onClick={handleLoadMore}
               className="group flex items-center gap-3 font-label text-sm tracking-widest text-on-surface-variant hover:text-on-surface transition-colors"
             >
-              더 보기
+              Load More
               <span className="material-symbols-outlined group-hover:translate-y-1 transition-transform">
                 keyboard_double_arrow_down
               </span>

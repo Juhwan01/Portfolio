@@ -48,7 +48,7 @@ export default function AboutPage() {
             className="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed"
             variants={fadeUp}
           >
-            LangGraph 기반 Multi-Agent 워크플로우 설계부터 FastAPI 백엔드, AWS 배포까지 —
+            LangGraph 기반 Multi-Agent 워크플로우 설계부터 FastAPI 백엔드, AWS 배포까지.
             아이디어를 실제 서비스로 만드는 전 과정을 경험했습니다.
           </motion.p>
         </motion.div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary/10 blur-[80px] rounded-full" />
             <div className="glass-card p-10 rounded-xl relative z-10">
               <h3 className="font-headline text-3xl font-bold text-on-surface mb-6">
-                접근 방식
+                Approach
               </h3>
               <div className="space-y-6 text-on-surface-variant text-lg font-light leading-relaxed">
                 <p>
@@ -92,7 +92,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   콜드 스타트 문제를 Q-learning으로 해결하고, Domain Shift를
-                  FDA로 극복하고, LLM의 비일관성을 NLI 파이프라인으로 제어하는 것 —
+                  FDA로 극복하고, LLM의 비일관성을 NLI 파이프라인으로 제어했습니다.
                   문제 정의부터 프로덕션까지의 전 과정을 경험했습니다.
                 </p>
               </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          기술 스택
+          Tech Stack
         </motion.h2>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6"
@@ -290,7 +290,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          경험
+          Experience
         </motion.h2>
         <div className="relative max-w-5xl mx-auto">
           {/* Center Line - 모바일: 왼쪽, 데스크탑: 가운데 */}
@@ -322,8 +322,8 @@ export default function AboutPage() {
                 <div className="mt-4 md:mt-0 md:pl-12">
                   <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
                     <p className="text-on-surface-variant font-light mb-4">
-                      GPA <strong>4.16/4.5</strong>. 졸업작품 &ldquo;Chef&apos;s Market&rdquo;
-                      — 강화학습 기반 개인화 레시피 추천 시스템 개발.
+                      GPA <strong>4.16/4.5</strong>. 졸업작품 &ldquo;Chef&apos;s Market&rdquo;으로
+                      강화학습 기반 개인화 레시피 추천 시스템 개발.
                     </p>
                     <div className="flex gap-2 flex-wrap">
                       {['Python', 'PyTorch', 'FastAPI'].map((tag) => (
@@ -522,7 +522,7 @@ export default function AboutPage() {
         >
           <div>
             <h2 className="font-headline text-5xl font-black text-on-surface tracking-tighter">
-              수상 및 성과
+              Awards &amp; Achievements
             </h2>
           </div>
           <a
@@ -531,7 +531,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="font-label text-xs tracking-widest uppercase text-primary hover:text-secondary transition-colors flex items-center gap-2"
           >
-            GitHub 보기{' '}
+            View GitHub{' '}
             <span className="material-symbols-outlined text-sm">
               open_in_new
             </span>
@@ -549,7 +549,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              2025.11 — kakao x goorm 부트캠프
+              2025.11 · kakao x goorm Bootcamp
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               우수수료생 &amp; 우수프로젝트상
@@ -566,7 +566,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              2024.12 — 캡스톤디자인 경진대회
+              2024.12 · Capstone Design Competition
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               INJE 캡스톤디자인 경진대회 장려상
@@ -582,7 +582,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              오픈소스 — PyPI 배포
+              Open Source · PyPI
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               Jira Extended MCP Server
@@ -606,7 +606,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              DACON — AI 경진대회
+              DACON · AI Competition
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               구조물 안정성 물리 추론 AI 경진대회
@@ -630,7 +630,7 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              프로덕션 — 풀스택 AI
+              Production · Full-Stack AI
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
               SAiM RecSys: Hit@10 70.6%
@@ -670,7 +670,7 @@ export default function AboutPage() {
               to="/contact"
               className="inline-block bg-primary text-on-primary font-headline font-extrabold text-lg px-12 py-5 rounded-full hover:scale-110 transition-transform active:scale-95 shadow-xl"
             >
-              연락하기
+              Contact
             </Link>
           </div>
         </motion.div>

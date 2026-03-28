@@ -65,7 +65,7 @@ export default function ContactPage() {
         {/* Hero Statement */}
         <div className="mb-20">
           <h1 className="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tighter text-on-surface max-w-4xl leading-none">
-            <span className="text-secondary">연락</span>하기
+            <span className="text-secondary">Contact</span>
           </h1>
         </div>
 
@@ -73,7 +73,7 @@ export default function ContactPage() {
           {/* Left: Contact Form */}
           <section className="lg:col-span-8 glass-card rounded-xl p-8 md:p-12">
             <div className="mb-10">
-              <h2 className="font-headline font-bold text-3xl mb-2">메시지 보내기</h2>
+              <h2 className="font-headline font-bold text-3xl mb-2">Send Message</h2>
               <p className="text-on-surface-variant font-body text-lg">
                 프로젝트 협업, 채용 문의 등 편하게 연락해 주세요.
               </p>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                 <span className="material-symbols-outlined text-9xl">auto_awesome</span>
               </div>
               <h3 className="font-headline font-black text-2xl tracking-tighter mb-2 relative z-10">
-                협업 가능
+                Available for Collaboration
               </h3>
               <p className="font-body text-sm mb-6 opacity-90 relative z-10">
                 AI 시스템 설계, LLM 파이프라인, 백엔드/인프라 관련 프로젝트 협업이 가능합니다.
@@ -172,7 +172,7 @@ export default function ContactPage() {
                 href="#"
                 className="inline-flex items-center gap-2 font-label font-bold text-xs uppercase tracking-widest bg-on-primary text-primary px-4 py-2 rounded-full hover:bg-white hover:text-on-primary transition-colors relative z-10"
               >
-                문의하기
+                Inquire
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </a>
             </div>
@@ -214,9 +214,9 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="font-label text-[10px] tracking-widest text-outline">
-                  현재 상태
+                  Status
                 </p>
-                <p className="font-body font-bold text-on-surface">구직 중</p>
+                <p className="font-body font-bold text-on-surface">Open to Work</p>
               </div>
             </div>
           </aside>

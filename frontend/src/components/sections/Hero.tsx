@@ -50,13 +50,13 @@ const Hero = () => {
               to="/projects"
               className="px-8 py-4 bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed rounded-md font-bold text-lg shadow-[0_0_30px_rgba(55,19,236,0.3)] hover:brightness-110 transition-all"
             >
-              프로젝트 보기
+              View Projects
             </Link>
             <Link
               to="/blog"
               className="px-8 py-4 border border-outline-variant/30 text-on-surface rounded-md font-bold text-lg hover:bg-surface-container-high transition-all"
             >
-              기술 블로그
+              Tech Blog
             </Link>
           </div>
         </div>
@@ -138,7 +138,7 @@ const Hero = () => {
           >
             <div>
               <span className="material-symbols-outlined text-primary mb-4">memory</span>
-              <h3 className="text-xl font-bold mb-4">핵심 기술</h3>
+              <h3 className="text-xl font-bold mb-4">Core Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.length > 0
                   ? skills.map((skill) => (
@@ -155,7 +155,7 @@ const Hero = () => {
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-outline-variant/10">
-              <p className="text-xs text-on-surface-variant tracking-widest font-bold">현재 관심 분야</p>
+              <p className="text-xs text-on-surface-variant tracking-widest font-bold">Current Interest</p>
               <p className="text-sm font-medium">Multi-Agent 시스템 &amp; RAG</p>
             </div>
           </Link>
@@ -166,13 +166,13 @@ const Hero = () => {
             className="rounded-xl bg-surface-container-low p-8 border border-transparent hover:border-outline-variant/20 transition-all flex flex-col justify-between"
           >
             <div>
-              <h3 className="text-xl font-bold mb-4">소개</h3>
+              <h3 className="text-xl font-bold mb-4">About</h3>
               <p className="text-on-surface-variant leading-relaxed">
                 문제를 정의하고, AI로 해결하고, 프로덕션까지 서빙하는 전 과정을 다루는 엔지니어입니다.
               </p>
             </div>
             <span className="mt-6 text-primary text-sm font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-              자세히 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </span>
           </Link>
 
@@ -183,9 +183,9 @@ const Hero = () => {
           >
             <span className="material-symbols-outlined text-4xl mb-2 text-primary">folder_open</span>
             <div className="text-4xl font-black text-primary mb-1">16+</div>
-            <div className="text-sm font-bold tracking-widest text-on-surface-variant">프로젝트</div>
+            <div className="text-sm font-bold tracking-widest text-on-surface-variant">Projects</div>
             <span className="mt-4 text-primary text-xs font-bold tracking-widest flex items-center gap-1">
-              전체 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              View All <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </span>
           </Link>
         </div>

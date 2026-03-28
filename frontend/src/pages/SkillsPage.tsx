@@ -175,7 +175,7 @@ export default function SkillsPage() {
       >
         <div className="max-w-3xl">
           <h1 className="text-5xl md:text-7xl font-bold tracking-[-0.04em] mb-6 leading-tight">
-            기술 <span className="text-primary-dim">스택</span>
+            Tech <span className="text-primary-dim">Stack</span>
           </h1>
           <p className="text-xl text-on-surface-variant leading-relaxed max-w-2xl">
             모델 학습부터 LLM 에이전트 오케스트레이션, 백엔드 개발, 클라우드 배포까지
