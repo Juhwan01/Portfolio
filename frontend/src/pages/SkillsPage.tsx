@@ -13,9 +13,11 @@ const CATEGORY_ICON_MAP: Record<string, string> = {
   'Cloud & DevOps': 'cloud',
   Data: 'database',
   'Data Systems': 'database',
+  Language: 'code',
+  Tools: 'build',
 }
 
-const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems']
+const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems', 'Language', 'Tools']
 
 const STATIC_SKILLS: Record<string, { label: string; description?: string; techs: string[] }> = {
   'AI/ML': {
@@ -36,6 +38,14 @@ const STATIC_SKILLS: Record<string, { label: string; description?: string; techs
     label: 'Data Systems',
     techs: ['ChromaDB', 'OpenSearch', 'Pandas', 'SQL'],
   },
+  Language: {
+    label: 'Language',
+    techs: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
+  },
+  Tools: {
+    label: 'Tools',
+    techs: ['MCP', 'Claude Code', 'Jira'],
+  },
 }
 
 
@@ -50,6 +60,8 @@ function normalizeCategoryKey(category: string): string {
   if (category.includes('Cloud') || category.includes('DevOps')) return 'Cloud & DevOps'
   if (category.includes('Data')) return 'Data Systems'
   if (category.includes('Backend')) return 'Backend'
+  if (category.includes('Language')) return 'Language'
+  if (category.includes('Tools')) return 'Tools'
   return category
 }
 
@@ -156,7 +168,7 @@ export default function SkillsPage() {
     <>
     <SEO
       title="Skills"
-      description="AI/ML, Backend, Cloud & DevOps, Data Systems, Frontend 기술 스택 소개."
+      description="AI/ML, Backend, Cloud & DevOps, Data Systems, Language, Tools 기술 스택 소개."
       path="/skills"
     />
     <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
