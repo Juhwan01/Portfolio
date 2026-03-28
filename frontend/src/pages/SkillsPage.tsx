@@ -12,39 +12,38 @@ const CATEGORY_ICON_MAP: Record<string, string> = {
   DevOps: 'cloud',
   'Cloud & DevOps': 'cloud',
   Data: 'database',
+  Database: 'database',
   'Data Systems': 'database',
   Language: 'code',
   Tools: 'build',
 }
 
-const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems', 'Language', 'Tools']
+const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Database', 'Language', 'Tools']
 
 const STATIC_SKILLS: Record<string, { label: string; description?: string; techs: string[] }> = {
   'AI/ML': {
     label: 'AI / ML',
-    description:
-      'LLM, RAG 파이프라인, 강화학습 기반 추천 시스템 등 AI/ML 전 영역을 다룹니다.',
-    techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG'],
+    techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'MLflow'],
   },
   Backend: {
     label: 'Backend',
-    techs: ['FastAPI', 'Python', 'PostgreSQL', 'Docker', 'Git'],
+    techs: ['FastAPI', 'Python', 'Docker', 'Git'],
   },
   'Cloud & DevOps': {
     label: 'Cloud & DevOps',
     techs: ['AWS', 'GCP', 'Docker Compose'],
   },
-  'Data Systems': {
-    label: 'Data Systems',
-    techs: ['ChromaDB', 'OpenSearch', 'Pandas', 'SQL'],
+  Database: {
+    label: 'Database',
+    techs: ['ChromaDB', 'OpenSearch', 'PostgreSQL'],
   },
   Language: {
     label: 'Language',
-    techs: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
+    techs: ['Python'],
   },
   Tools: {
     label: 'Tools',
-    techs: ['MCP', 'Claude Code', 'Jira'],
+    techs: ['MCP', 'Claude Code', 'Jira', 'GitHub', 'Notion'],
   },
 }
 
@@ -58,7 +57,7 @@ function getCategoryIcon(category: string): string {
 function normalizeCategoryKey(category: string): string {
   if (category.includes('AI') || category.includes('ML')) return 'AI/ML'
   if (category.includes('Cloud') || category.includes('DevOps')) return 'Cloud & DevOps'
-  if (category.includes('Data')) return 'Data Systems'
+  if (category.includes('Data') || category.includes('Database')) return 'Database'
   if (category.includes('Backend')) return 'Backend'
   if (category.includes('Language')) return 'Language'
   if (category.includes('Tools')) return 'Tools'

@@ -177,7 +177,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
-              {['Python', 'TypeScript', 'JavaScript', 'SQL'].map((tag) => (
+              {['Python'].map((tag) => (
                 <span
                   key={tag}
                   className="bg-surface-container-highest px-3 py-1 rounded-md text-xs font-label text-on-surface"
@@ -205,7 +205,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
-              {['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG'].map(
+              {['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'MLflow'].map(
                 (tag) => (
                   <span
                     key={tag}
@@ -229,7 +229,7 @@ export default function AboutPage() {
             <div className="text-right lg:text-left">
               <h4 className="font-headline font-bold text-xl">Cloud</h4>
               <p className="text-on-surface-variant text-xs mt-1">
-                AWS / GCP
+                AWS / GCP / Docker Compose
               </p>
             </div>
           </motion.div>
@@ -246,8 +246,9 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
                   { name: 'FastAPI', color: 'bg-secondary' },
-                  { name: 'Docker', color: 'bg-primary' },
-                  { name: 'PostgreSQL', color: 'bg-secondary' },
+                  { name: 'Python', color: 'bg-primary' },
+                  { name: 'Docker', color: 'bg-outline' },
+                  { name: 'Git', color: 'bg-secondary' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${item.color}`} />
@@ -263,18 +264,33 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* Data Systems */}
+          {/* Database */}
           <motion.div
-            className="md:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+            className="md:col-span-2 lg:col-span-1 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
             variants={fadeUp}
           >
             <h4 className="font-headline font-bold text-xl mb-4">
-              Data Systems
+              Database
             </h4>
             <ul className="space-y-2 font-label text-sm text-on-surface-variant">
-              <li>&#8226; ChromaDB / OpenSearch</li>
-              <li>&#8226; Pandas / SQL</li>
-              <li>&#8226; Streamlit / Gradio</li>
+              <li>&#8226; ChromaDB</li>
+              <li>&#8226; OpenSearch</li>
+              <li>&#8226; PostgreSQL</li>
+            </ul>
+          </motion.div>
+
+          {/* Tools */}
+          <motion.div
+            className="md:col-span-2 lg:col-span-1 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+            variants={fadeUp}
+          >
+            <h4 className="font-headline font-bold text-xl mb-4">
+              Tools
+            </h4>
+            <ul className="space-y-2 font-label text-sm text-on-surface-variant">
+              <li>&#8226; MCP / Claude Code</li>
+              <li>&#8226; GitHub / Jira</li>
+              <li>&#8226; Notion</li>
             </ul>
           </motion.div>
         </motion.div>
