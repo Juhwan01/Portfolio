@@ -1,12 +1,16 @@
+import sys
 from pydantic_settings import BaseSettings
 from typing import Optional
+
+
+_INSECURE_SECRET = "your-secret-key-here-change-in-production"
 
 
 class Settings(BaseSettings):
     # App
     APP_NAME: str = "Portfolio API"
     VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     # Database
     DATABASE_URL: str = "postgresql://user:password@localhost/portfolio"
@@ -28,9 +32,9 @@ class Settings(BaseSettings):
     CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
     # Security
-    SECRET_KEY: str = "your-secret-key-here-change-in-production"
+    SECRET_KEY: str = _INSECURE_SECRET
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
     # Notion
     NOTION_TOKEN: Optional[str] = None
@@ -42,3 +46,7 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+if not settings.DEBUG and settings.SECRET_KEY == _INSECURE_SECRET:
+    print("FATAL: SECRET_KEY is using the default insecure value. Set SECRET_KEY in .env")
+    sys.exit(1)

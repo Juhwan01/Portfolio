@@ -8,6 +8,12 @@ router = APIRouter()
 @router.post("/image")
 async def upload_image(file: UploadFile = File(...)):
     """Upload an image to S3"""
+    # Validate file size (max 10MB)
+    contents = await file.read()
+    if len(contents) > 10 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File size exceeds 10MB limit")
+    await file.seek(0)
+
     # Validate file type
     allowed_types = ["image/jpeg", "image/png", "image/gif", "image/webp"]
     if file.content_type not in allowed_types:

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from ...core.database import get_db
 from ...core.email import send_contact_notification
+from ...core.security import get_current_user
 from ...models.contact import ContactMessage
 from ...schemas.contact import ContactFormCreate, ContactFormInDB
 
@@ -32,7 +33,7 @@ def submit_contact_form(
 
 
 @router.get("/")
-def get_contact_messages(db: Session = Depends(get_db)):
+def get_contact_messages(db: Session = Depends(get_db), _: dict = Depends(get_current_user)):
     """Get all contact messages (admin only)"""
     messages = db.query(ContactMessage).order_by(
         ContactMessage.created_at.desc()

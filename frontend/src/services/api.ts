@@ -29,12 +29,9 @@ const api = axios.create({
 
 // Add auth token to requests
 api.interceptors.request.use((config) => {
-  const authStorage = localStorage.getItem('auth-storage')
-  if (authStorage) {
-    const { state } = JSON.parse(authStorage)
-    if (state?.token) {
-      config.headers.Authorization = `Bearer ${state.token}`
-    }
+  const token = sessionStorage.getItem('auth-token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })
@@ -49,7 +46,7 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('auth-storage')
+      sessionStorage.removeItem('auth-token')
       window.location.href = '/admin/login'
     }
     return Promise.reject(error)

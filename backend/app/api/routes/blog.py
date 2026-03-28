@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from ...core.database import get_db
+from ...core.security import get_current_user
 from ...models.blog import BlogPost
 from ...schemas.blog import BlogPostCreate, BlogPostUpdate, BlogPostInDB
 
@@ -25,7 +26,7 @@ def get_blog_post(post_id: str, db: Session = Depends(get_db)):
 
 
 @router.post("/", response_model=BlogPostInDB)
-def create_blog_post(post: BlogPostCreate, db: Session = Depends(get_db)):
+def create_blog_post(post: BlogPostCreate, db: Session = Depends(get_db), _: dict = Depends(get_current_user)):
     """Create a new blog post"""
     db_post = BlogPost(**post.model_dump())
     db.add(db_post)
@@ -38,7 +39,8 @@ def create_blog_post(post: BlogPostCreate, db: Session = Depends(get_db)):
 def update_blog_post(
     post_id: str,
     post: BlogPostUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _: dict = Depends(get_current_user),
 ):
     """Update an existing blog post"""
     db_post = db.query(BlogPost).filter(BlogPost.id == post_id).first()
@@ -54,7 +56,7 @@ def update_blog_post(
 
 
 @router.delete("/{post_id}")
-def delete_blog_post(post_id: str, db: Session = Depends(get_db)):
+def delete_blog_post(post_id: str, db: Session = Depends(get_db), _: dict = Depends(get_current_user)):
     """Delete a blog post"""
     db_post = db.query(BlogPost).filter(BlogPost.id == post_id).first()
     if not db_post:
