@@ -210,15 +210,6 @@ export default function BlogPage() {
           </p>
         </motion.section>
 
-        {/* Featured Article */}
-        {loading ? (
-          <div className="mb-20">
-            <FeaturedSkeleton />
-          </div>
-        ) : (
-          featuredPost && <FeaturedArticle post={featuredPost} />
-        )}
-
         {/* Filter Tabs */}
         <div className="flex flex-wrap gap-4 mb-12 items-center">
           {CATEGORIES.map((category) => (
@@ -238,6 +229,15 @@ export default function BlogPage() {
             </button>
           ))}
         </div>
+
+        {/* Featured Article */}
+        {loading ? (
+          <div className="mb-20">
+            <FeaturedSkeleton />
+          </div>
+        ) : (
+          featuredPost && <FeaturedArticle post={featuredPost} />
+        )}
 
         {/* Article Grid */}
         {loading ? (
