@@ -48,7 +48,7 @@ export default function AboutPage() {
             className="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed"
             variants={fadeUp}
           >
-            LangGraph 기반 Multi-Agent 워크플로우 설계부터 FastAPI 백엔드, AWS 배포까지.
+            AI 모델 설계부터 백엔드 개발, 클라우드 배포까지.
             아이디어를 실제 서비스로 만드는 전 과정을 경험했습니다.
           </motion.p>
         </motion.div>
@@ -91,9 +91,9 @@ export default function AboutPage() {
                   어떤 문제를 해결했는지, 정량적으로 얼마나 나아졌는지를 증명합니다.
                 </p>
                 <p>
-                  콜드 스타트 문제를 Q-learning으로 해결하고, Domain Shift를
-                  FDA로 극복하고, LLM의 비일관성을 NLI 파이프라인으로 제어했습니다.
-                  문제 정의부터 프로덕션까지의 전 과정을 경험했습니다.
+                  문제를 정확히 분석하고, 논문과 사례를 근거로 기술을 선택하고,
+                  정량적 결과로 검증합니다. 문제 정의부터 프로덕션 배포까지
+                  전 과정을 직접 설계하고 구현합니다.
                 </p>
               </div>
               <div className="mt-8 flex gap-4">
