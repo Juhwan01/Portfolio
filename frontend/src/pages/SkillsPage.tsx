@@ -13,17 +13,16 @@ const CATEGORY_ICON_MAP: Record<string, string> = {
   'Cloud & DevOps': 'cloud',
   Data: 'database',
   'Data Systems': 'database',
-  Frontend: 'web',
 }
 
-const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems', 'Frontend']
+const CATEGORY_ORDER = ['AI/ML', 'Backend', 'Cloud & DevOps', 'Data Systems']
 
 const STATIC_SKILLS: Record<string, { label: string; description?: string; techs: string[] }> = {
   'AI/ML': {
     label: 'AI / ML',
     description:
       'LLM, RAG 파이프라인, 강화학습 기반 추천 시스템 등 AI/ML 전 영역을 다룹니다.',
-    techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'scikit-learn'],
+    techs: ['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG'],
   },
   Backend: {
     label: 'Backend',
@@ -31,15 +30,11 @@ const STATIC_SKILLS: Record<string, { label: string; description?: string; techs
   },
   'Cloud & DevOps': {
     label: 'Cloud & DevOps',
-    techs: ['AWS', 'GCP', 'Docker Compose', 'Nginx'],
+    techs: ['AWS', 'GCP', 'Docker Compose'],
   },
   'Data Systems': {
     label: 'Data Systems',
     techs: ['ChromaDB', 'OpenSearch', 'Pandas', 'SQL'],
-  },
-  Frontend: {
-    label: 'Frontend',
-    techs: ['React', 'TypeScript', 'Tailwind CSS', 'Streamlit'],
   },
 }
 
@@ -55,7 +50,6 @@ function normalizeCategoryKey(category: string): string {
   if (category.includes('Cloud') || category.includes('DevOps')) return 'Cloud & DevOps'
   if (category.includes('Data')) return 'Data Systems'
   if (category.includes('Backend')) return 'Backend'
-  if (category.includes('Frontend')) return 'Frontend'
   return category
 }
 

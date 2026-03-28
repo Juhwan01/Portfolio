@@ -205,7 +205,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
-              {['PyTorch', 'LangGraph', 'LangChain', 'scikit-learn', 'XGBoost', 'Hugging Face'].map(
+              {['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG'].map(
                 (tag) => (
                   <span
                     key={tag}
@@ -247,7 +247,6 @@ export default function AboutPage() {
                 {[
                   { name: 'FastAPI', color: 'bg-secondary' },
                   { name: 'Docker', color: 'bg-primary' },
-                  { name: 'Nginx', color: 'bg-outline' },
                   { name: 'PostgreSQL', color: 'bg-secondary' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center gap-2">
@@ -264,19 +263,18 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* Data & Frontend */}
+          {/* Data Systems */}
           <motion.div
             className="md:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
             variants={fadeUp}
           >
             <h4 className="font-headline font-bold text-xl mb-4">
-              Frontend &amp; Data
+              Data Systems
             </h4>
             <ul className="space-y-2 font-label text-sm text-on-surface-variant">
-              <li>&#8226; React / Tailwind CSS</li>
               <li>&#8226; ChromaDB / OpenSearch</li>
+              <li>&#8226; Pandas / SQL</li>
               <li>&#8226; Streamlit / Gradio</li>
-              <li>&#8226; Three.js / Vite</li>
             </ul>
           </motion.div>
         </motion.div>
