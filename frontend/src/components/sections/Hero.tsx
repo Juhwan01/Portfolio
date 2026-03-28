@@ -131,6 +131,46 @@ const Hero = () => {
             </div>
           )}
 
+          {/* 두 번째 프로젝트 */}
+          {featuredProjects[1] && (
+            <Link
+              to={`/projects/${featuredProjects[1].id}`}
+              className="md:col-span-3 rounded-xl bg-surface-container-low overflow-hidden group border border-transparent hover:border-outline-variant/20 transition-all"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="aspect-video bg-surface-container-highest relative overflow-hidden">
+                  {featuredProjects[1].thumbnailUrl ? (
+                    <img
+                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      src={featuredProjects[1].thumbnailUrl}
+                      alt={featuredProjects[1].title}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-surface-container-highest" />
+                  )}
+                </div>
+                <div className="p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-2 mb-3">
+                    {featuredProjects[1].category && (
+                      <span className="px-3 py-1 bg-surface-container-highest/80 text-[10px] font-bold uppercase tracking-widest text-secondary rounded-full">
+                        {featuredProjects[1].category}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{featuredProjects[1].title}</h3>
+                  <p className="text-on-surface-variant mb-4 line-clamp-3">{featuredProjects[1].description}</p>
+                  <div className="flex gap-2 flex-wrap">
+                    {featuredProjects[1].techStack.slice(0, 5).map((tech) => (
+                      <span key={tech} className="px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
           {/* 핵심 기술 */}
           <Link
             to="/skills"
