@@ -1,35 +1,23 @@
 ---
 title: Delusion Diary
-description: 생성형 AI 활용한 망상 일기장
+summary: 생성형 AI 활용한 망상 일기장
+period:
+  start: 2024-11
+  end: 2024-11
+team: AI 1 · Backend 1 · Frontend 2
+status: completed
+featured: false
+order: 19
 category: AI
-tech_stack:
+tags:
 - Python
 - Generative AI
 - Prompt Engineering
 - Docker
-thumbnail_url: /images/projects/delusion-diary/thumbnail.png
-images: []
-demo_url: ''
-github_url: https://github.com/Juhwan01/Delusion-Diary.git
-featured: true
-status: completed
-start_date: 2024.11.09
-end_date: 2024.11.11
-order: 8
-notion_page_id: ''
-video_url: ''
-team_composition:
-- role: AI
-  count: 1
-- role: Backend
-  count: 1
-- role: Frontend
-  count: 2
-slide_url: https://docs.google.com/presentation/d/1wunV-zf--46IJUpXNEKnB7QuYXVegpX6/edit?slide=id.p1#slide=id.p1
-highlight: null
-id: e59069e5-86d4-4567-99b1-28acbc28f8fc
-created_at: '2026-01-19T06:24:37.825817Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Juhwan01/Delusion-Diary.git
+  slides: https://docs.google.com/presentation/d/1wunV-zf--46IJUpXNEKnB7QuYXVegpX6/edit?slide=id.p1#slide=id.p1
+cover: /images/projects/delusion-diary/thumbnail.png
 ---
 
 ## Problem

@@ -1,35 +1,26 @@
 ---
-title: 'Track1 알고리즘 부문 : K리그-서울시립대 공개 AI 경진대회'
-description: 'K리그 경기 내 주어진 플레이 시퀀스의 마지막 패스 도착 좌표(X,Y)를 예측하는 AI 모델을 개발해야합니다.
-
-  제공되는 좌표 값은 모든 경기장의 실제 크기 차이를 보정하고 일관된 분석을 제공하기 위해, 피파 공식 권장 경기장 규격인 105 x 68 크기의 그리드에 매핑한 상대 좌표 값입니다.'
+title: K리그 패스 도착 좌표 예측
+summary: 경기 플레이 시퀀스를 보고 마지막 패스가 도착할 좌표를 예측하는 모델(LSTM + Mixture Density Network).
+org: K리그 · 서울시립대 공개 AI 경진대회 Track1
+period:
+  start: 2025-12
+  end: 2026-01
+role: 1인 참가
+team: AI 1
+status: completed
+featured: false
+order: 12
 category: ML
-tech_stack:
+tags:
 - Python
 - PyTorch
 - LSTM
 - MDN
 - scikit-learn
 - pandas
-thumbnail_url: /images/projects/kleague-pass-prediction/thumbnail.png
-images: []
-demo_url: ''
-github_url: https://github.com/Juhwan01/KLeague-Pass-Prediction
-featured: true
-status: completed
-start_date: 2025.12.01
-end_date: 2025.01.12
-order: 10
-notion_page_id: 2ed6efa211b280359b40f50da83013f5
-video_url: ''
-team_composition:
-- role: AI
-  count: 1
-slide_url: ''
-highlight: 상위 9%
-id: 40f91fa2-56bc-461a-b818-50309672acf2
-created_at: '2026-01-19T07:27:00.601079Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Juhwan01/KLeague-Pass-Prediction
+cover: /images/projects/kleague-pass-prediction/thumbnail.png
 ---
 
 ## Problem

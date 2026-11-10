@@ -1,38 +1,29 @@
 ---
 title: W:IDE
-description: W:IDE는 생성형 AI를 활용한 데스크톱 코드 에디터입니다.
+summary: LangGraph 에이전트의 실시간 코드 분석·자동완성·오류 수정 제안을 Electron 데스크톱 앱에 통합한 AI 코드 에디터.
+org: 인제대학교 캡스톤디자인
+period:
+  start: 2024-09
+  end: 2024-12
+role: 메인 개발자(2인 팀) · AI 코드 분석·자동완성, 백엔드, 데스크톱 앱 통합
+team: 2인
+status: completed
+featured: true
+order: 5
 category: AI
-tech_stack:
+tags:
 - Python
 - FastAPI
 - LangGraph
 - React
 - Electron
 - Node.js
-thumbnail_url: /images/projects/wide/thumbnail.png
-images:
-- /images/projects/wide/thumbnail.png
-demo_url: ''
-github_url: https://github.com/Juhwan01/Capstone-Design
-featured: true
-status: completed
-start_date: ''
-end_date: ''
-order: 5
-notion_page_id: 2ac6efa211b280df96dfe33974007044
-video_url: /videos/projects/wide/demo.mp4
-team_composition:
-- role: AI
-  count: 2
-- role: Backend
-  count: 2
-- role: Frontend
-  count: 1
-slide_url: ''
-highlight: 캡스톤 장려상
-id: 71c26b00-924b-447f-a84e-25f1753d89df
-created_at: '2026-01-18T13:32:20.516416Z'
-updated_at: '2026-03-27T16:26:36.436344Z'
+awards:
+- 2024 INJE 캡스톤디자인 경진대회 장려상
+links:
+  github: https://github.com/Juhwan01/Capstone-Design
+  video: /videos/projects/wide/demo.mp4
+cover: /images/projects/wide/thumbnail.png
 ---
 
 ## Problem

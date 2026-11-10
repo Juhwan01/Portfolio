@@ -1,0 +1,96 @@
+# 사이트 전체에서 쓰는 프로필. 홈 첫 화면, About, 경력·수상 목록이 이 파일을 읽는다.
+# 기간은 YYYY-MM. end 가 없으면 진행 중.
+
+name: 정주환
+name_en: Jung Juhwan
+headline: LLM 에이전트를 실서비스로 내보내는 AI 엔지니어
+focus: LLM Pipeline · RAG · Multi-Agent Systems
+intro: 문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백엔드, 배포와 운영까지 아이디어를 실제 서비스로 만드는 전 과정을 직접 맡아 왔습니다.
+
+current:
+  org: Beans Pirates
+  role: AI Engineer
+  summary: PITZ AI 트레이너 챗봇 설계·개발·운영 전담 · 사내 AX 전환
+
+links:
+  github: https://github.com/Juhwan01
+  blog: https://velog.io/@juhwan01/posts
+  email: wnghks5432@gmail.com
+
+# 첫 화면의 증거 한 줄
+highlights:
+  - text: App Store·Google Play 출시
+    project: pitz-ai-trainer
+  - text: 데이콘 4위 / 359팀
+    project: dacon-fiscal-ai-search
+  - text: kakao x goorm 우수프로젝트상
+    project: yogi-eottae
+  - text: INJE 캡스톤디자인 장려상
+    project: wide
+
+experience:
+  - org: Beans Pirates
+    role: AI Engineer
+    period: { start: 2026-02 }
+    points:
+      - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
+      - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
+      - 사내 AX 전환 — Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계
+  - org: kakao x goorm 생성형 AI 부트캠프
+    role: 팀 리더 · 우수수료생
+    period: { start: 2025-05, end: 2025-11 }
+    points:
+      - 요기어때?(우수프로젝트상), AllerGuard 등 LLM 기반 실전 프로젝트 팀 리드
+  - org: AI Leaders (SW중심대학사업단)
+    role: 팀 리더
+    period: { start: 2024-03, end: 2024-10 }
+    points:
+      - 생성형 AI 심화 과정에서 소수정예 팀 리더로 스터디와 프로젝트 주도
+      - 재정정보 AI 검색 경진대회 Private 4위 / 359팀, 민원누리 SW 경진대회 참가
+  - org: IL LAB · Praises Us
+    role: 학부 연구실 부팀장 · 개발팀 팀장
+    period: { start: 2023-03, end: 2026-02 }
+    points:
+      - IL LAB 부팀장으로 AI/ML 연구 및 데이콘 경진대회 참가(상위 9%)
+      - Praises Us 개발팀 팀장으로 다수 프로젝트 리딩
+
+education:
+  - org: 인제대학교
+    degree: 컴퓨터공학과 졸업
+    period: { start: 2020-03, end: 2026-02 }
+    note: GPA 4.16 / 4.5 · 졸업작품 Chef's Market
+
+awards:
+  - date: 2025-11
+    title: kakao x goorm 생성형 AI 과정 우수프로젝트상 · 우수수료생
+    project: yogi-eottae
+  - date: 2024-12
+    title: INJE 캡스톤디자인 경진대회 장려상
+    project: wide
+
+competitions:
+  - date: 2024-08
+    title: 데이콘 재정정보 AI 검색 알고리즘 경진대회 — Private 4위 / 359팀
+    project: dacon-fiscal-ai-search
+
+open_source:
+  - title: Jira Extended MCP Server
+    note: PyPI jira-extended-mcp · Jira 도구 27개
+    project: jira-extended-mcp
+  - title: ArchFlow
+    note: PyPI archflow-hub · Jira·GitHub·draw.io 통합 MCP 서버
+    project: archflow
+
+activities:
+  - title: SURF 2026 INCHEON (인천스타트업위크) 전시 참가
+    org: Beans Pirates
+    period: { start: 2026-10, end: 2026-10 }
+    date_detail: 2026.10.14 – 10.15
+    place: 인천 송도컨벤시아 · 부스 D-04 (Seed)
+    summary: AI 피트니스 앱 PITZ와 헬스장 CRM PITZ Manager를 부스에서 시연했습니다.
+    photos:
+      - /images/activity/surf-2026/booth-sign.jpg
+      - /images/activity/surf-2026/booth-desk.jpg
+      - /images/activity/surf-2026/booth-demo.jpg
+    links:
+      event: https://www.iswsurf.com/

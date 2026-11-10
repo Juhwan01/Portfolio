@@ -1,34 +1,26 @@
 ---
 title: Allerguard
-description: LLM을 활용한 지능형 알레르기 추출
+summary: 식품 라벨 OCR과 3단계 판별(RAG·NLI·웹 검색)로 알레르기 성분을 자동으로 찾아내는 서비스.
+org: kakao x goorm 생성형 AI 부트캠프
+period:
+  start: 2025-09
+  end: 2025-09
+role: 팀 리더 · 4인 AI 팀
+team: AI 4
+status: completed
+featured: false
+order: 10
 category: AI
-tech_stack:
+tags:
 - Python
 - LangGraph
 - GCP Vision API
 - OpenAI GPT-4
 - NLI
 - Gradio
-thumbnail_url: /images/projects/allerguard/thumbnail.png
-images:
-- /images/projects/allerguard/thumbnail.png
-demo_url: ''
-github_url: https://github.com/Goorm-AI-Semi-Project/AllerGuard
-featured: true
-status: completed
-start_date: '2025.09.03 '
-end_date: 2025.09.16
-order: 4
-notion_page_id: 2ac6efa211b2804ba90eddd43e0a66a6
-video_url: ''
-team_composition:
-- role: AI
-  count: 4
-slide_url: ''
-highlight: OCR + NLI + RAG
-id: allerguard
-created_at: '2026-01-18T09:34:51.830392Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Goorm-AI-Semi-Project/AllerGuard
+cover: /images/projects/allerguard/thumbnail.png
 ---
 
 ## Problem

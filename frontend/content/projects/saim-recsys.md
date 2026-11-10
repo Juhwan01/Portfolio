@@ -1,8 +1,14 @@
 ---
 title: SAiM RecSys
-description: 개인 맞춤형 운동 추천 엔진. LinUCB Contextual Bandit + FastAPI + Full MLOps Pipeline. 605개 운동 x 6개 페르소나 기반 추천 시스템.
+summary: 개인 맞춤형 운동 추천 엔진. LinUCB Contextual Bandit + FastAPI + Full MLOps Pipeline. 605개 운동 x 6개 페르소나 기반 추천 시스템.
+period:
+  start: 2026-03
+  end: 2026-03
+status: archived
+featured: false
+order: 90
 category: ML
-tech_stack:
+tags:
 - Python
 - FastAPI
 - LinUCB
@@ -10,23 +16,10 @@ tech_stack:
 - Docker
 - pytest
 - MLOps
-thumbnail_url: /images/projects/saim-recsys/thumbnail.png
-images: []
-demo_url: null
-github_url: https://github.com/Juhwan01/SAiM-RecSys
-featured: true
-status: completed
-start_date: null
-end_date: null
-order: 2
-notion_page_id: null
-video_url: null
-team_composition: []
-slide_url: null
-highlight: Hit@10 70.6%
-id: 5efd3a9a-ef62-4d0f-9959-5203cc6f437a
-created_at: '2026-03-25T11:08:39.833944Z'
-updated_at: '2026-03-27T16:26:36.436344Z'
+links:
+  github: https://github.com/Juhwan01/SAiM-RecSys
+cover: /images/projects/saim-recsys/thumbnail.png
+note: 폐기한 프로젝트 — 목록에 노출하지 않음
 ---
 
 ## Problem

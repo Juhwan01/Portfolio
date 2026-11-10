@@ -1,39 +1,29 @@
 ---
 title: Chef's Market
-description: 유저가 가지고 있는 식재료를 기반으로 레시피 추천 및 식료품 거래 플랫폼
+summary: 데이터가 없는 서비스 초기에도 추천이 동작하도록, 프로필 점수로 시작해 행동 데이터가 쌓이면 Q-learning이 주도하는 하이브리드 레시피 추천.
+org: 인제대학교 졸업작품
+period:
+  start: 2025-01
+  end: 2025-04
+role: 팀장(5인 팀) · 강화학습 기반 추천 엔진 설계 및 개발 총괄
+team: Frontend 1 · Backend 2 · AI 2
+status: completed
+featured: true
+order: 6
 category: ML
-tech_stack:
+tags:
 - Python
 - FastAPI
 - Q-learning
 - AWS RDS
 - AWS S3
 - PostgreSQL
-thumbnail_url: /images/projects/chefs-market/thumbnail.png
-images:
-- /images/projects/chefs-market/thumbnail.png
+links:
+  github: https://github.com/Juhwan01/Capstone_II
+  video: /videos/projects/chefs-market/demo.mp4
+cover: /images/projects/chefs-market/thumbnail.png
+gallery:
 - /images/projects/chefs-market/image-01.png
-demo_url: ''
-github_url: https://github.com/Juhwan01/Capstone_II
-featured: true
-status: completed
-start_date: 2025. 1. 1.
-end_date: 2025. 4. 30.
-order: 0
-notion_page_id: 2ac6efa211b280e9a31ccb03ccdb18d4
-video_url: /videos/projects/chefs-market/demo.mp4
-team_composition:
-- role: Frontend
-  count: 1
-- role: Backend
-  count: 2
-- role: AI
-  count: 2
-slide_url: ''
-highlight: 졸업작품 · 강화학습
-id: chef's-market
-created_at: '2026-01-17T15:29:49.453417Z'
-updated_at: '2026-03-27T16:39:34.089230Z'
 ---
 
 ## Problem

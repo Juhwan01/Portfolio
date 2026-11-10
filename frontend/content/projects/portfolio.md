@@ -1,8 +1,15 @@
 ---
 title: 포트폴리오
-description: Neural Noir 디자인 시스템 기반 AI 엔지니어 포트폴리오
+summary: Neural Noir 디자인 시스템 기반 AI 엔지니어 포트폴리오
+period:
+  start: 2026-01
+  end: 2026-01
+team: Full-stack 1
+status: completed
+featured: false
+order: 21
 category: Web
-tech_stack:
+tags:
 - React
 - TypeScript
 - FastAPI
@@ -11,25 +18,10 @@ tech_stack:
 - AWS Lightsail
 - Three.js
 - Nginx
-thumbnail_url: /images/projects/portfolio/thumbnail.png
-images: []
-demo_url: http://13.124.78.178/
-github_url: https://github.com/Juhwan01/Portfolio
-featured: true
-status: completed
-start_date: 2026.01.17
-end_date: 2026.01.19
-order: 11
-notion_page_id: 2f16efa211b280ca8c38df0891158066
-video_url: ''
-team_composition:
-- role: Full-stack
-  count: 1
-slide_url: ''
-highlight: null
-id: 003ff04d-a536-4526-94aa-e0bd9b54ada6
-created_at: '2026-01-23T14:24:24.376510Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Juhwan01/Portfolio
+  demo: http://13.124.78.178/
+cover: /images/projects/portfolio/thumbnail.png
 ---
 
 ## Problem

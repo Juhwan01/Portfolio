@@ -1,31 +1,22 @@
 ---
 title: Q&A 반박봇
-description: 발표에 대비하여 발표 원고에서 나올만한 질문쌍을 생성해주는 Q&A 반박 봇
+summary: 발표에 대비하여 발표 원고에서 나올만한 질문쌍을 생성해주는 Q&A 반박 봇
+period:
+  start: 2024-08
+  end: 2024-08
+team: AI 1
+status: completed
+featured: false
+order: 18
 category: AI
-tech_stack:
+tags:
 - Python
 - LangGraph
 - LLM
 - Streamlit
-thumbnail_url: /images/projects/qa-rebuttal-bot/thumbnail.png
-images: []
-demo_url: ''
-github_url: https://github.com/Juhwan01/LANGGRAPH-Prj
-featured: true
-status: completed
-start_date: 2024.08.04
-end_date: 2024.08.14
-order: 9
-notion_page_id: 2ed6efa211b2802da409cbbd48e0f71a
-video_url: ''
-team_composition:
-- role: AI
-  count: 1
-slide_url: ''
-highlight: null
-id: 3b0a6432-3ea0-4358-8549-6d4873fb4dbe
-created_at: '2026-01-19T03:43:22.734684Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Juhwan01/LANGGRAPH-Prj
+cover: /images/projects/qa-rebuttal-bot/thumbnail.png
 ---
 
 ## Problem

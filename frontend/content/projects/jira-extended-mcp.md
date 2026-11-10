@@ -1,33 +1,25 @@
 ---
 title: Jira Extended MCP Server
-description: AI 에이전트를 위한 풀스택 Jira Cloud 통합 MCP 서버. 27개 도구, 벌크 작업, 릴리스 관리, 이슈 링크 지원. PyPI 배포.
+summary: AI 에이전트를 위한 풀스택 Jira Cloud 통합 MCP 서버. 27개 도구, 벌크 작업, 릴리스 관리, 이슈 링크 지원. PyPI 배포.
+period:
+  start: 2026-03
+  end: 2026-03
+team: DevTools 1
+status: completed
+featured: false
+order: 13
 category: MCP
-tech_stack:
+tags:
 - Python
 - MCP
 - Jira API
 - uvx
 - PyPI
-thumbnail_url: /images/projects/jira-extended-mcp/thumbnail.png
-images:
-- /images/projects/jira-extended-mcp/thumbnail.png
-demo_url: https://pypi.org/project/jira-extended-mcp/
-github_url: https://github.com/Juhwan01/jira-extended-mcp-server
-featured: true
-status: completed
-start_date: 2025-03
-end_date: 2025-03
-order: 13
-notion_page_id: null
-video_url: null
-team_composition:
-- role: DevTools
-  count: 1
-slide_url: null
-highlight: 27 Tools · PyPI
-id: 5337de6d-1891-4e06-885d-f35ee08104fd
-created_at: '2026-03-25T11:08:40.115943Z'
-updated_at: null
+links:
+  github: https://github.com/Juhwan01/jira-extended-mcp-server
+  demo: https://pypi.org/project/jira-extended-mcp/
+cover: /images/projects/jira-extended-mcp/thumbnail.png
+part_of: beans-pirates-ax
 ---
 
 ## Problem

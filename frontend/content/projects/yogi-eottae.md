@@ -1,8 +1,17 @@
 ---
 title: 요기어때?
-description: 여긴어때는 외국인 관광객을 대상으로 하는 다국어 음식 추천 서비스이다.
+summary: 평점뿐 아니라 실제 이동 부담까지 반영해 식당을 추천하는 외국인 관광객용 다국어 서비스.
+org: kakao x goorm 생성형 AI 부트캠프
+period:
+  start: 2025-09
+  end: 2025-11
+role: AI Lead(팀장) · 4인 AI 팀 리드, 추천 엔진 설계, 자체 대중교통 라우팅 서버 구축
+team: AI 4
+status: completed
+featured: true
+order: 4
 category: AI
-tech_stack:
+tags:
 - Python
 - FastAPI
 - GPT-4
@@ -12,25 +21,11 @@ tech_stack:
 - React
 - Docker
 - AWS EC2
-thumbnail_url: /images/projects/yogi-eottae/thumbnail.png
-images: []
-demo_url: ''
-github_url: https://github.com/Goorm-AI-Semi-Project/YGYT
-featured: true
-status: completed
-start_date: '2025.09.18 '
-end_date: 2025.11.28
-order: 3
-notion_page_id: 2ac6efa211b28039850ec2d2a22e4641
-video_url: ''
-team_composition:
-- role: AI
-  count: 4
-slide_url: ''
-highlight: 우수프로젝트상
-id: 277c5baa-98e7-410d-9a28-9cd4b87ed6aa
-created_at: '2026-01-18T13:07:05.434622Z'
-updated_at: '2026-03-27T16:26:36.436344Z'
+awards:
+- kakao x goorm 생성형 AI 과정 우수프로젝트상
+links:
+  github: https://github.com/Goorm-AI-Semi-Project/YGYT
+cover: /images/projects/yogi-eottae/thumbnail.png
 ---
 
 ## Problem

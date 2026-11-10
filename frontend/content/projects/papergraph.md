@@ -1,33 +1,24 @@
 ---
 title: PaperGraph
-description: PaperGraph는 연구자들이 학술 논문을 빠르고 정확하게 검색하고 이해할 수 있도록 돕는 Electron 기반 AI 챗봇입니다. 데스크톱 사이드 패널 형태로 언제든 호출 가능하며, 대화형 인터페이스를 통해 논문 검색과 탐색을 지원합니다.
+summary: PaperGraph는 연구자들이 학술 논문을 빠르고 정확하게 검색하고 이해할 수 있도록 돕는 Electron 기반 AI 챗봇입니다. 데스크톱 사이드 패널 형태로 언제든 호출 가능하며, 대화형 인터페이스를 통해 논문 검색과 탐색을 지원합니다.
+period:
+  start: 2026-01
+  end: null
+team: AI 1
+status: in-progress
+featured: false
+order: 16
 category: AI
-tech_stack:
+tags:
 - OpenSearch
 - FastAPI
 - Electron
-thumbnail_url: /images/projects/papergraph/thumbnail.png
-images:
-- /images/projects/papergraph/thumbnail.png
+links:
+  github: https://github.com/Juhwan01/PaperGraph
+cover: /images/projects/papergraph/thumbnail.png
+gallery:
 - /images/projects/papergraph/image-01.png
 - /images/projects/papergraph/image-02.png
-demo_url: ''
-github_url: https://github.com/Juhwan01/PaperGraph
-featured: true
-status: in_progress
-start_date: ''
-end_date: ''
-order: 6
-notion_page_id: 2f26efa211b2802d9fdad0101ebcec56
-video_url: ''
-team_composition:
-- role: AI
-  count: 1
-slide_url: ''
-highlight: null
-id: 5e8986af-a27d-493b-86fc-3d5108939876
-created_at: '2026-01-28T06:38:00.389027Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
 ---
 
 ## Problem

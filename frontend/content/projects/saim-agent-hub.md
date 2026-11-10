@@ -1,32 +1,23 @@
 ---
 title: SAiM Agent Hub
-description: 7개 전문 AI 에이전트가 협업하는 헬스 트레이닝 오케스트레이션 시스템. Orchestrator 기반 자동 라우팅, Guardrails 안전장치, Context Engine 토큰 최적화.
+summary: 7개 전문 AI 에이전트가 협업하는 헬스 트레이닝 오케스트레이션 시스템. Orchestrator 기반 자동 라우팅, Guardrails 안전장치, Context Engine 토큰 최적화.
+period:
+  start: 2026-03
+  end: 2026-03
+status: completed
+featured: false
+order: 15
 category: AI
-tech_stack:
+tags:
 - Python
 - FastAPI
 - Pydantic v2
 - OpenAI
 - LangGraph
 - Redis
-thumbnail_url: /images/projects/saim-agent-hub/thumbnail.png
-images:
-- /images/projects/saim-agent-hub/thumbnail.png
-demo_url: null
-github_url: https://github.com/Juhwan01/SAiM-Agent-Hub
-featured: true
-status: completed
-start_date: 2025-03
-end_date: 2025-03
-order: 1
-notion_page_id: null
-video_url: null
-team_composition: []
-slide_url: null
-highlight: Multi-Agent Hub
-id: d2c8c285-0d6b-4201-875e-32867300790e
-created_at: '2026-03-28T13:30:07.966750Z'
-updated_at: null
+links:
+  github: https://github.com/Juhwan01/SAiM-Agent-Hub
+cover: /images/projects/saim-agent-hub/thumbnail.png
 ---
 
 ## Problem

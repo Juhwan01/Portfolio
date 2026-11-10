@@ -1,31 +1,22 @@
 ---
 title: K리그 패스 좌표 예측 AI
-description: K리그 경기 내 최종 패스 좌표 예측 AI 모델. 축구 경기 데이터 기반 공간 예측.
+summary: K리그 경기 내 최종 패스 좌표 예측 AI 모델. 축구 경기 데이터 기반 공간 예측.
+team: AI 1
+period:
+  start: 2025-12
+  end: 2026-01
+status: archived
+featured: false
+order: 91
 category: ML
-tech_stack:
+tags:
 - Python
 - Jupyter Notebook
 - scikit-learn
 - pandas
-thumbnail_url: null
-images: []
-demo_url: null
-github_url: https://github.com/Juhwan01/KLeague-Pass-Prediction
-featured: false
-status: completed
-start_date: null
-end_date: null
-order: 15
-notion_page_id: null
-video_url: null
-team_composition:
-- role: AI
-  count: 1
-slide_url: null
-highlight: K리그 공개 AI
-id: 42d9317b-6c7d-4f3d-82c6-7cef43449917
-created_at: '2026-03-25T11:08:40.182737Z'
-updated_at: null
+links:
+  github: https://github.com/Juhwan01/KLeague-Pass-Prediction
+merged_into: kleague-pass-prediction
 ---
 
 ## My Role: AI Engineer (1인 개발)

@@ -1,34 +1,25 @@
 ---
 title: ArchFlow
-description: Jira + GitHub + Draw.io를 하나의 MCP 서버로 통합. Claude Code에서 자연어 질문 하나로 스프린트 현황, 이슈-PR-코드 추적, 아키텍처 탐색이 가능한 Context Hub.
+summary: Jira + GitHub + Draw.io를 하나의 MCP 서버로 통합. Claude Code에서 자연어 질문 하나로 스프린트 현황, 이슈-PR-코드 추적, 아키텍처 탐색이 가능한 Context Hub.
+period:
+  start: 2026-03
+  end: 2026-03
+team: AI 1
+status: completed
+featured: false
+order: 14
 category: MCP
-tech_stack:
+tags:
 - Python
 - MCP
 - Jira API
 - GitHub API
 - Google Drive API
 - PyPI
-thumbnail_url: /images/projects/archflow/thumbnail.png
-images:
-- /images/projects/archflow/thumbnail.png
-demo_url: null
-github_url: https://github.com/Juhwan01/ArchFlow
-featured: true
-status: completed
-start_date: 2025-03
-end_date: 2025-03
-order: 12
-notion_page_id: null
-video_url: null
-team_composition:
-- role: AI
-  count: 1
-slide_url: null
-highlight: Open Source · PyPI
-id: 446b115a-a028-421d-8e8b-df443509dc66
-created_at: '2026-03-25T11:08:40.045291Z'
-updated_at: null
+links:
+  github: https://github.com/Juhwan01/ArchFlow
+cover: /images/projects/archflow/thumbnail.png
+part_of: beans-pirates-ax
 ---
 
 ## Problem

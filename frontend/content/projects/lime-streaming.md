@@ -1,37 +1,24 @@
 ---
 title: Lime
-description: FastAPI와 AWS를 기반으로 구축한 실시간 스트리밍 및 VOD 플랫폼
+summary: FastAPI와 AWS를 기반으로 구축한 실시간 스트리밍 및 VOD 플랫폼
+period:
+  start: 2020-10
+  end: 2021-08
+team: AI 1 · Backend 1 · Frontend 1
+status: completed
+featured: false
+order: 20
 category: Web
-tech_stack:
+tags:
 - Python
 - FastAPI
 - Docker
 - AWS EC2
 - WebSocket
 - Nginx
-thumbnail_url: /images/projects/lime-streaming/thumbnail.png
-images: []
-demo_url: ''
-github_url: https://github.com/Juhwan01/Streaming-Site
-featured: true
-status: completed
-start_date: 2020. 10. 1.
-end_date: 2021. 8. 1.
-order: 7
-notion_page_id: 2ac6efa211b2805183bfc2d09cfde612
-video_url: ''
-team_composition:
-- role: AI
-  count: 1
-- role: Backend
-  count: 1
-- role: Frontend
-  count: 1
-slide_url: ''
-highlight: null
-id: lime
-created_at: '2026-01-17T16:19:37.175901Z'
-updated_at: '2026-03-27T11:40:39.360573Z'
+links:
+  github: https://github.com/Juhwan01/Streaming-Site
+cover: /images/projects/lime-streaming/thumbnail.png
 ---
 
 ## Problem

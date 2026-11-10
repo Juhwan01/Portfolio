@@ -1,8 +1,15 @@
 ---
 title: SmartFlow
-description: LLM 기반 Multi-Agent 협상을 통한 다단계 제조 공정의 사전 품질 예측 및 자율 조정 시스템.
+summary: LLM 기반 Multi-Agent 협상을 통한 다단계 제조 공정의 사전 품질 예측 및 자율 조정 시스템.
+period:
+  start: 2025-12
+  end: 2025-12
+team: AI 1
+status: completed
+featured: false
+order: 17
 category: AI
-tech_stack:
+tags:
 - Python
 - GPT-4
 - Claude 3.5
@@ -11,25 +18,8 @@ tech_stack:
 - ChromaDB
 - XGBoost
 - Streamlit
-thumbnail_url: null
-images: []
-demo_url: null
-github_url: https://github.com/Juhwan01/SmartFlow
-featured: false
-status: completed
-start_date: null
-end_date: null
-order: 14
-notion_page_id: null
-video_url: null
-team_composition:
-- role: AI
-  count: 1
-slide_url: null
-highlight: LangGraph Workflow
-id: cae41c4a-7231-4feb-9d10-4dd66605d377
-created_at: '2026-03-25T11:08:39.978256Z'
-updated_at: '2026-03-27T16:26:36.436344Z'
+links:
+  github: https://github.com/Juhwan01/SmartFlow
 ---
 
 ## My Role: AI Engineer (1인 개발)

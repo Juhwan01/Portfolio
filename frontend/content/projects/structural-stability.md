@@ -1,33 +1,25 @@
 ---
 title: 구조물 안정성 물리 추론 AI
-description: DACON 경진대회. 멀티뷰 이미지 기반 구조물 안정성 예측. Dual-Stream ConvNeXt-V2 + Fourier Domain Adaptation.
+summary: 멀티뷰 이미지로 구조물 붕괴 여부를 예측. 학습·평가 데이터의 도메인 차이를 Fourier Domain Adaptation으로 줄임.
+org: DACON
+period:
+  start: 2026-03
+  end: 2026-03
+role: 1인 참가
+team: AI 1
+status: completed
+featured: false
+order: 11
 category: ML
-tech_stack:
+tags:
 - Python
 - PyTorch
 - ConvNeXt-V2
 - FDA
 - Knowledge Distillation
 - Transformer
-thumbnail_url: null
-images: []
-demo_url: null
-github_url: https://github.com/Juhwan01/structural-stability-prediction
-featured: false
-status: completed
-start_date: null
-end_date: null
-order: 16
-notion_page_id: null
-video_url: null
-team_composition:
-- role: AI
-  count: 1
-slide_url: null
-highlight: 물리 추론 AI
-id: 46d56a4e-f319-404d-a094-d01692f38794
-created_at: '2026-03-25T11:08:39.898539Z'
-updated_at: '2026-03-27T16:26:36.436344Z'
+links:
+  github: https://github.com/Juhwan01/structural-stability-prediction
 ---
 
 ## My Role: AI Engineer (1인 참가)
