@@ -10,7 +10,7 @@ intro: 문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백
 current:
   org: Beans Pirates
   role: AI Engineer
-  summary: PITZ AI 트레이너 챗봇 설계·개발·운영 전담 · 사내 AX 전환
+  summary: PITZ AI 트레이너 챗봇 · AI 리포트 담당 · 사내 AX 전환
 
 links:
   github: https://github.com/Juhwan01
@@ -35,6 +35,7 @@ experience:
     points:
       - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
       - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
+      - AI 리포트 담당 — 운동 기록 해석 리포트와 월간 종합 리포트 배치 파이프라인
       - 사내 AX 전환 — Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계
   - org: kakao x goorm 생성형 AI 부트캠프
     role: 팀 리더 · 우수수료생

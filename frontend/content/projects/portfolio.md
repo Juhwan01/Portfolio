@@ -1,9 +1,9 @@
 ---
 title: 포트폴리오
-summary: Neural Noir 디자인 시스템 기반 AI 엔지니어 포트폴리오
+summary: 이 사이트. 내용을 DB에서 레포 파일로 옮기고, 결과 중심의 에디토리얼 디자인으로 다시 만들었다.
 period:
   start: 2026-01
-  end: 2026-01
+  end: 2026-11
 team: Full-stack 1
 status: completed
 featured: false
