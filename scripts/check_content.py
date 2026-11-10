@@ -65,7 +65,16 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
     if meta.get("status") not in STATUSES:
         problems.append(f"{owner}: status '{meta.get('status')}'")
     check_period(owner, meta.get("period"))
+    # The page calls string methods on these; an unquoted ": " turns a list item into a mapping
+    # and blanks the whole page at runtime.
+    for key in ("responsibilities", "tags", "awards", "gallery"):
+        for i, item in enumerate(meta.get(key) or []):
+            if not isinstance(item, str):
+                problems.append(f"{owner}: {key}[{i}] is a {type(item).__name__}, not text (quote it if it contains ': ')")
     for m in meta.get("metrics") or []:
+        for key in ("value", "label", "scope", "group", "unit"):
+            if key in m and not isinstance(m[key], str):
+                problems.append(f"{owner}: metric '{m.get('value')}' {key} is not text")
         if not m.get("scope"):
             problems.append(f"{owner}: metric '{m.get('value')}' has no scope")
         for pair in (("before", "after"), ("part", "whole")):
