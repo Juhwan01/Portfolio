@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getSkills } from '@services/api'
 import SEO from '@components/common/SEO'
@@ -39,7 +40,7 @@ const STATIC_SKILLS: Record<string, { label: string; description?: string; techs
   },
   Language: {
     label: 'Language',
-    techs: ['Python'],
+    techs: ['Python', 'SQL', 'JavaScript'],
   },
   Tools: {
     label: 'Tools',
@@ -106,13 +107,14 @@ function BentoCard({
         </div>
         <div className="flex flex-wrap gap-2">
           {category.techs.map((tech) => (
-            <span
+            <Link
               key={tech}
-              className="bg-surface-container-highest px-3 py-1 rounded text-[0.75rem] uppercase tracking-widest font-bold flex items-center gap-2"
+              to={`/projects?search=${encodeURIComponent(tech)}`}
+              className="bg-surface-container-highest px-3 py-1 rounded text-[0.75rem] uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-primary/15 hover:text-primary transition-colors cursor-pointer"
             >
               {isLarge && <span className="w-1 h-1 rounded-full bg-tertiary" />}
               {tech}
-            </span>
+            </Link>
           ))}
         </div>
       </div>

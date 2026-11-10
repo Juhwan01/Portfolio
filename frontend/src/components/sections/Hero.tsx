@@ -43,7 +43,7 @@ const Hero = () => {
             Jung Juhwan
           </h1>
           <p className="text-xl md:text-2xl font-medium text-on-surface-variant tracking-wide mb-10">
-            AI/ML Engineer
+            LLM Pipeline · RAG · Multi-Agent Systems
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <Link
@@ -109,7 +109,14 @@ const Hero = () => {
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold mb-2">{featuredProjects[0].title}</h3>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-2xl font-bold">{featuredProjects[0].title}</h3>
+                  {featuredProjects[0].highlight && (
+                    <span className="px-3 py-1 bg-primary/15 text-primary text-xs font-bold rounded-full border border-primary/30">
+                      {featuredProjects[0].highlight}
+                    </span>
+                  )}
+                </div>
                 <p className="text-on-surface-variant mb-4">{featuredProjects[0].description}</p>
                 <div className="flex gap-2 flex-wrap">
                   {featuredProjects[0].techStack.slice(0, 5).map((tech) => (
@@ -157,7 +164,14 @@ const Hero = () => {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">{featuredProjects[1].title}</h3>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-2xl font-bold">{featuredProjects[1].title}</h3>
+                    {featuredProjects[1].highlight && (
+                      <span className="px-3 py-1 bg-primary/15 text-primary text-xs font-bold rounded-full border border-primary/30">
+                        {featuredProjects[1].highlight}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-on-surface-variant mb-4 line-clamp-3">{featuredProjects[1].description}</p>
                   <div className="flex gap-2 flex-wrap">
                     {featuredProjects[1].techStack.slice(0, 5).map((tech) => (

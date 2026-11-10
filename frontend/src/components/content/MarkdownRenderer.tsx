@@ -42,14 +42,14 @@ function CodeBlock({ children }: { readonly children: ReactNode }) {
   }, [])
 
   return (
-    <div className="relative rounded-lg border border-nn-outline-variant/10 bg-nn-surface-lowest my-4 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-nn-outline-variant/10 bg-nn-surface-container/50">
-        <span className="text-xs text-nn-on-surface-variant font-mono uppercase tracking-wider">
+    <div className="relative rounded-lg border border-outline-variant/10 bg-surface-container-lowest my-4 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-outline-variant/10 bg-surface-container/50">
+        <span className="text-xs text-on-surface-variant font-mono uppercase tracking-wider">
           {language || 'code'}
         </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1 text-xs text-nn-on-surface-variant hover:text-nn-primary transition-colors"
+          className="flex items-center gap-1 text-xs text-on-surface-variant hover:text-primary transition-colors"
           aria-label="Copy code"
         >
           <span className="material-symbols-outlined text-base">
@@ -97,7 +97,7 @@ function Blockquote({ children }: { readonly children: ReactNode }) {
 
   if (!calloutType) {
     return (
-      <blockquote className="border-l-2 border-nn-primary-dim pl-4 my-4 text-nn-on-surface-variant italic">
+      <blockquote className="border-l-2 border-primary-dim pl-4 my-4 text-on-surface-variant italic">
         {children}
       </blockquote>
     )
@@ -110,7 +110,7 @@ function Blockquote({ children }: { readonly children: ReactNode }) {
         <span className={`material-symbols-outlined ${config.iconColor} text-xl flex-shrink-0 mt-0.5`}>
           {config.icon}
         </span>
-        <div className="text-nn-on-surface-variant [&>p]:mb-2 [&>p:last-child]:mb-0">
+        <div className="text-on-surface-variant [&>p]:mb-2 [&>p:last-child]:mb-0">
           {children}
         </div>
       </div>
@@ -134,7 +134,7 @@ function Paragraph({ children }: { readonly children: ReactNode }) {
           }
           if (isValidElement(child) && child.type === 'em') {
             return (
-              <figcaption key={i} className="text-sm text-nn-on-surface-variant mt-2 text-center">
+              <figcaption key={i} className="text-sm text-on-surface-variant mt-2 text-center">
                 {(child.props as { children?: ReactNode }).children}
               </figcaption>
             )
@@ -149,7 +149,7 @@ function Paragraph({ children }: { readonly children: ReactNode }) {
     return <div className="my-4">{children}</div>
   }
 
-  return <p className="text-nn-on-surface-variant leading-relaxed mb-4">{children}</p>
+  return <p className="text-on-surface-variant leading-relaxed mb-4">{children}</p>
 }
 
 // --- List item with card-style reference link detection ---
@@ -185,15 +185,15 @@ function ListItem({ children }: { readonly children: ReactNode }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-start gap-3 p-3 rounded-lg border border-nn-outline-variant/15 bg-nn-surface-container hover:border-nn-primary/30 hover:bg-nn-surface-container-high transition-all my-2 no-underline group"
+        className="flex items-start gap-3 p-3 rounded-lg border border-outline-variant/15 bg-surface-containerhover:border-primary/30 hover:bg-surface-container-high transition-all my-2 no-underline group"
       >
-        <span className="material-symbols-outlined text-nn-primary text-lg flex-shrink-0 mt-0.5">
+        <span className="material-symbols-outlined text-primary text-lg flex-shrink-0 mt-0.5">
           open_in_new
         </span>
         <div className="min-w-0">
-          <span className="text-nn-primary font-medium group-hover:underline block">{title}</span>
+          <span className="text-primary font-medium group-hover:underline block">{title}</span>
           {description && (
-            <span className="text-nn-on-surface-variant text-sm block mt-1">{description}</span>
+            <span className="text-on-surface-variant text-sm block mt-1">{description}</span>
           )}
         </div>
       </a>
@@ -205,27 +205,27 @@ function ListItem({ children }: { readonly children: ReactNode }) {
 const components: Components = {
   h1: ({ children }) => {
     const text = extractText(children as ReactNode)
-    return <h1 id={slugify(text)} className="text-3xl font-bold text-nn-on-surface mt-10 mb-4">{children}</h1>
+    return <h1 id={slugify(text)} className="text-3xl font-bold text-on-surface mt-10 mb-4">{children}</h1>
   },
   h2: ({ children }) => {
     const text = extractText(children as ReactNode)
-    return <h2 id={slugify(text)} className="text-2xl font-semibold text-nn-on-surface mt-8 mb-3 scroll-mt-24">{children}</h2>
+    return <h2 id={slugify(text)} className="text-2xl font-semibold text-on-surface mt-8 mb-3 scroll-mt-24">{children}</h2>
   },
   h3: ({ children }) => {
     const text = extractText(children as ReactNode)
-    return <h3 id={slugify(text)} className="text-xl font-semibold text-nn-on-surface mt-6 mb-2 scroll-mt-24">{children}</h3>
+    return <h3 id={slugify(text)} className="text-xl font-semibold text-on-surface mt-6 mb-2 scroll-mt-24">{children}</h3>
   },
   p: Paragraph as Components['p'],
   a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-nn-primary hover:underline">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
       {children}
     </a>
   ),
   ul: ({ children }) => (
-    <ul className="list-disc list-inside space-y-1 mb-4 text-nn-on-surface-variant">{children}</ul>
+    <ul className="list-disc list-inside space-y-1 mb-4 text-on-surface-variant">{children}</ul>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal list-inside space-y-1 mb-4 text-nn-on-surface-variant">{children}</ol>
+    <ol className="list-decimal list-inside space-y-1 mb-4 text-on-surface-variant">{children}</ol>
   ),
   li: ListItem as Components['li'],
   blockquote: Blockquote as Components['blockquote'],
@@ -233,7 +233,7 @@ const components: Components = {
     const isInline = !className
     if (isInline) {
       return (
-        <code className="px-1.5 py-0.5 bg-nn-surface-highest rounded text-nn-primary text-sm font-mono">
+        <code className="px-1.5 py-0.5 bg-surface-container-highest rounded text-primary text-sm font-mono">
           {children}
         </code>
       )
@@ -243,27 +243,27 @@ const components: Components = {
   pre: CodeBlock as Components['pre'],
   table: ({ children }) => (
     <div className="overflow-x-auto my-4">
-      <table className="w-full text-sm text-nn-on-surface-variant">{children}</table>
+      <table className="w-full text-sm text-on-surface-variant">{children}</table>
     </div>
   ),
   th: ({ children }) => (
-    <th className="px-4 py-2 text-left text-nn-on-surface font-semibold border-b border-nn-outline-variant/20">
+    <th className="px-4 py-2 text-left text-on-surface font-semibold border-b border-outline-variant/20">
       {children}
     </th>
   ),
   td: ({ children }) => (
-    <td className="px-4 py-2 border-b border-nn-outline-variant/10">{children}</td>
+    <td className="px-4 py-2 border-b border-outline-variant/10">{children}</td>
   ),
   strong: ({ children }) => (
-    <strong className="font-semibold text-nn-on-surface">{children}</strong>
+    <strong className="font-semibold text-on-surface">{children}</strong>
   ),
   em: ({ children }) => (
-    <em className="italic text-nn-on-surface-variant">{children}</em>
+    <em className="italic text-on-surface-variant">{children}</em>
   ),
   img: ({ src, alt }) => (
     <img src={src} alt={alt ?? ''} loading="lazy" className="rounded-lg my-4 max-w-full" />
   ),
-  hr: () => <hr className="my-8 border-nn-outline-variant/15" />,
+  hr: () => <hr className="my-8 border-outline-variant/15" />,
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
