@@ -38,20 +38,20 @@ experience:
     role: 팀 리더 · 우수수료생
     period: { start: 2025-05, end: 2025-11 }
     points:
-      - 요기어때?(우수프로젝트상), AllerGuard 등 LLM 기반 실전 프로젝트 팀 리드
+      - 요기어때?(우수프로젝트상) AI 팀 리드, AllerGuard AI 베이스라인 설계
   - org: AI Leaders (SW중심대학사업단)
     mark: AI
     role: 팀 리더
     period: { start: 2024-03, end: 2024-10 }
     points:
       - 생성형 AI 심화 과정에서 소수정예 팀 리더로 스터디와 프로젝트 주도
-      - 재정정보 AI 검색 경진대회 Private 4위 / 359팀, 민원누리 SW 경진대회 참가
+      - 재정정보 AI 검색 경진대회 Private 4위 / 359팀(팀 DongBee 팀원), 민원누리 SW 경진대회 참가
   - org: IL LAB · Praises Us
     mark: IL
     role: 학부 연구실 부팀장 · 개발팀 팀장
     period: { start: 2023-03, end: 2026-02 }
     points:
-      - IL LAB 부팀장으로 AI/ML 연구 및 데이콘 경진대회 참가(상위 9%)
+      - IL LAB 부팀장으로 AI/ML 연구, 데이콘 K리그 패스 도착 좌표 예측 대회 상위 9%
       - Praises Us 개발팀 팀장으로 다수 프로젝트 리딩
 
 education:
@@ -70,6 +70,12 @@ awards:
     project: wide
 
 competitions:
+  - date: 2026-01
+    title: 데이콘 K리그-서울시립대 공개 AI 경진대회 Track1 — 상위 9%
+    project: kleague-pass-prediction
+  - date: 2025-12
+    title: 데이콘 스마트 제조 AI Agent 해커톤 2025 — 본선 진출
+    project: smartflow
   - date: 2024-08
     title: 데이콘 재정정보 AI 검색 알고리즘 경진대회 — Private 4위 / 359팀
     project: dacon-fiscal-ai-search

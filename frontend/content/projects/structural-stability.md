@@ -25,20 +25,10 @@ responsibilities:
 - FDA 적용 — 별도 학습 없이 Train 이미지의 저주파 성분만 Dev 것으로 바꿔 색 분포를 맞춤
 metrics:
 - value: −81%
-  label: LogLoss v1 → v8
+  label: 예측 오차(LogLoss)
   before: 0.1296
   after: 0.0242
-  scope: 버전별 실험 기록 · 베이스라인 대비
-- value: −31%
-  label: LogLoss v1 → v4
-  before: 0.1296
-  after: 0.0891
-  scope: 버전별 실험 기록 · v4에서 두 시점 분리 적용
-- value: −73%
-  label: LogLoss v4 → v8
-  before: 0.0891
-  after: 0.0242
-  scope: 버전별 실험 기록 · v8에서 소프트 레이블·보조 과제 추가
+  scope: 버전별 실험 기록 · 베이스라인(v1) → v8
 links:
   github: https://github.com/Juhwan01/structural-stability-prediction
 ---

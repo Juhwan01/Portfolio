@@ -7,8 +7,8 @@ period:
 role: 1인 설계·개발 · Jira API 클라이언트, 도구 설계, API 버전 전략, PyPI 배포와 문서화
 team: DevTools 1
 status: completed
-featured: false
-order: 13
+featured: true
+order: 3
 category: MCP
 tags:
 - Python
