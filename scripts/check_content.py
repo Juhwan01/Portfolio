@@ -68,6 +68,12 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
     for m in meta.get("metrics") or []:
         if not m.get("scope"):
             problems.append(f"{owner}: metric '{m.get('value')}' has no scope")
+        for pair in (("before", "after"), ("part", "whole")):
+            given = [k for k in pair if k in m]
+            if given and (len(given) == 1 or not all(isinstance(m[k], (int, float)) for k in pair)):
+                problems.append(f"{owner}: metric '{m.get('value')}' needs numeric {' and '.join(pair)}")
+        if "part" in m and "whole" in m and not 0 <= m["part"] <= m["whole"]:
+            problems.append(f"{owner}: metric '{m.get('value')}' part must be within 0..whole")
     check_local(owner, meta)
     check_local(owner, body)
 
@@ -97,21 +103,19 @@ for path in sorted((CONTENT / "blog").glob("*.md")):
 skills = load((CONTENT / "skills.yaml").read_text(encoding="utf-8"))
 all_tags = {t.lower() for m in projects.values() if m.get("status") != "archived" for t in m.get("tags") or []}
 seen_skills: set[str] = set()
-for g in (skills or {}).get("groups") or []:
-    if not g.get("name") or not g.get("items"):
-        problems.append(f"skills.yaml: group {g.get('name')!r} needs name and items")
+if not (skills or {}).get("items"):
+    problems.append("skills.yaml: items missing")
+for item in (skills or {}).get("items") or []:
+    name = item.get("name")
+    if not name:
+        problems.append("skills.yaml: item without name")
         continue
-    for item in g["items"]:
-        name = item.get("name")
-        if not name:
-            problems.append(f"skills.yaml {g['name']}: item without name")
-            continue
-        if name in seen_skills:
-            problems.append(f"skills.yaml: '{name}' listed twice")
-        seen_skills.add(name)
-        unused = [t for t in item.get("match") or [] if t.lower() not in all_tags]
-        if unused:
-            print(f"note: skills.yaml '{name}' match {unused} is on no visible project")
+    if name in seen_skills:
+        problems.append(f"skills.yaml: '{name}' listed twice")
+    seen_skills.add(name)
+    unused = [t for t in item.get("match") or [] if t.lower() not in all_tags]
+    if unused:
+        print(f"note: skills.yaml '{name}' match {unused} is on no visible project")
 
 visible = sum(1 for m in projects.values() if m.get("status") != "archived")
 featured = sorted((m["order"], s) for s, m in projects.items() if m.get("featured"))

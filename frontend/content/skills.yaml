@@ -1,64 +1,25 @@
-# 첫 화면 "기술" 섹션. 분류 순서와 항목 순서가 그대로 화면 순서다.
-# 쓴 프로젝트는 프로젝트 파일의 tags에서 자동으로 모은다(대소문자 무시).
+# 첫 화면 "기술". 대표 기술만, 중요한 순서로 적는다. 화면에는 배지 한 줄로 보인다.
+# 라이브러리 단위의 세부 항목(scikit-learn, XGBoost, pandas 등)은 여기 말고 각 프로젝트의 tags에 둔다.
+# 배지에 마우스를 올리면 그 기술을 쓴 프로젝트가 보인다. 프로젝트 tags에서 자동으로 모은다(대소문자 무시).
 #   match: 이 기술로 칠 태그 이름들. 없으면 name 하나만 맞춘다.
-#   note:  이름 옆 짧은 설명(선택).
 # 예전 DB 원본은 _backup/2026-11-10/skills.json.
 
-groups:
-  - name: LLM · 에이전트
-    items:
-      - name: LangGraph
-      - name: OpenAI API
-        match: [OpenAI, GPT-4]
-        note: Batch API
-      - name: LangChain
-      - name: Claude
-        match: [Claude 3.5]
-      - name: MCP
-        note: 서버 2종 PyPI 공개
-      - name: RAG
-
-  - name: 관측 · 평가
-    items:
-      - name: Langfuse
-        note: LLM 트레이싱
-      - name: MLflow
-
-  - name: 백엔드 · 데이터
-    items:
-      - name: FastAPI
-      - name: PostgreSQL
-      - name: Redis
-      - name: Qdrant
-      - name: ChromaDB
-      - name: OpenSearch
-
-  - name: 인프라
-    items:
-      - name: AWS
-        match: [AWS, AWS EC2, AWS RDS, AWS S3, AWS Lightsail]
-        note: Step Functions · Lambda · EC2 · RDS · S3
-      - name: Docker
-      - name: Nginx
-
-  - name: ML
-    items:
-      - name: PyTorch
-      - name: scikit-learn
-      - name: XGBoost
-      - name: Hugging Face
-
-  - name: 언어
-    items:
-      - name: Python
-      - name: TypeScript
-      - name: SQL
-      - name: JavaScript
-
-  - name: 도구 · AX
-    items:
-      - name: Claude Code
-      - name: Jira
-        match: [Jira API]
-      - name: GitHub
-        match: [GitHub API]
+items:
+  - name: Python
+  - name: LangGraph
+  - name: LangChain
+  - name: OpenAI API
+    match: [OpenAI, GPT-4]
+  - name: MCP
+  - name: Langfuse
+  - name: PyTorch
+  - name: Hugging Face
+  - name: FastAPI
+  - name: PostgreSQL
+  - name: Redis
+  - name: Qdrant
+  - name: ChromaDB
+  - name: AWS
+    match: [AWS, AWS EC2, AWS RDS, AWS S3, AWS Lightsail]
+  - name: Docker
+  - name: Claude Code

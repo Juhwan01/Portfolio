@@ -34,22 +34,14 @@ export const findPost = (id: string) => posts.find((p) => p.id === id)
 
 export interface SkillView {
   name: string
-  note?: string
   projects: Project[]
 }
 
 /** skills.yaml with each item's projects collected from project tags. */
-export const skillGroups: { name: string; items: SkillView[] }[] = skills.groups.map((g) => ({
-  name: g.name,
-  items: g.items.map((item) => {
-    const keys = new Set((item.match ?? [item.name]).map((t) => t.toLowerCase()))
-    return {
-      name: item.name,
-      note: item.note,
-      projects: visible.filter((p) => p.tags?.some((t) => keys.has(t.toLowerCase()))),
-    }
-  }),
-}))
+export const skillList: SkillView[] = skills.items.map((item) => {
+  const keys = new Set((item.match ?? [item.name]).map((t) => t.toLowerCase()))
+  return { name: item.name, projects: visible.filter((p) => p.tags?.some((t) => keys.has(t.toLowerCase()))) }
+})
 
 export const fmtMonth = (month: string) => month.replace('-', '.')
 
