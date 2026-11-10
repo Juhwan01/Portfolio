@@ -14,6 +14,21 @@ const getYouTubeEmbedUrl = (url: string) => {
   return match ? `https://www.youtube.com/embed/${match[1]}` : url
 }
 
+function parseSummaryFromContent(content: string): { problem?: string; approach?: string; result?: string } | null {
+  const sectionRegex = /##\s*(Problem|Approach|Result)\s*\n([\s\S]*?)(?=\n##\s(?!#)|$)/gi
+  const sections: Record<string, string> = {}
+  let match
+  while ((match = sectionRegex.exec(content)) !== null) {
+    const lines = match[2].trim().split('\n')
+    const plainLine = lines.find((l) => l.trim() && !l.trim().startsWith('#') && !l.trim().startsWith('---'))
+    if (plainLine) {
+      sections[match[1].toLowerCase()] = plainLine.replace(/^\*+|\*+$/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*_`]/g, '').trim()
+    }
+  }
+  if (!sections.problem && !sections.approach && !sections.result) return null
+  return { problem: sections.problem, approach: sections.approach, result: sections.result }
+}
+
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>()
   const [project, setProject] = useState<Project | null>(null)
@@ -31,10 +46,10 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-screen pt-24 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
         <div className="animate-pulse space-y-4">
-          <div className="h-4 bg-nn-surface-low rounded w-20" />
-          <div className="h-12 bg-nn-surface-low rounded w-3/4" />
-          <div className="h-6 bg-nn-surface-low rounded w-full" />
-          <div className="h-64 bg-nn-surface-low rounded-xl" />
+          <div className="h-4 bg-surface-container-low rounded w-20" />
+          <div className="h-12 bg-surface-container-low rounded w-3/4" />
+          <div className="h-6 bg-surface-container-low rounded w-full" />
+          <div className="h-64 bg-surface-container-low rounded-xl" />
         </div>
       </div>
     )
@@ -43,8 +58,8 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
-        <h2 className="text-2xl text-nn-on-surface mb-4">Project not found</h2>
-        <Link to="/projects" className="text-nn-primary hover:underline">
+        <h2 className="text-2xl text-on-surface mb-4">Project not found</h2>
+        <Link to="/projects" className="text-primary hover:underline">
           Back to Projects
         </Link>
       </div>
@@ -63,15 +78,15 @@ const ProjectDetail = () => {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         {/* Header */}
         <div className="mb-10">
-          <Link to="/projects" className="text-nn-on-surface-variant hover:text-nn-primary text-sm mb-4 inline-block transition-colors">
+          <Link to="/projects" className="text-on-surface-variant hover:text-primary text-sm mb-4 inline-block transition-colors">
             ← Back to Projects
           </Link>
           <div className="flex items-center gap-3 mb-2">
             {project.category && <NNBadge variant="accent">{project.category}</NNBadge>}
             {project.status === 'in_progress' && <NNBadge variant="live">In Progress</NNBadge>}
           </div>
-          <h1 className="nn-display text-nn-on-surface mb-4">{project.title}</h1>
-          <p className="text-lg text-nn-on-surface-variant max-w-3xl">{project.description}</p>
+          <h1 className="nn-display text-on-surface mb-4">{project.title}</h1>
+          <p className="text-lg text-on-surface-variant max-w-3xl">{project.description}</p>
         </div>
 
         {/* Thumbnail */}
@@ -80,9 +95,32 @@ const ProjectDetail = () => {
             src={project.thumbnailUrl}
             alt={project.title}
             loading="lazy"
-            className="w-full rounded-xl mb-10 max-h-[600px] object-contain bg-nn-surface-lowest"
+            className="w-full rounded-xl mb-10 max-h-[600px] object-contain bg-surface-container-lowest"
           />
         )}
+
+        {/* Problem → Approach → Result Summary */}
+        {project.content && (() => {
+          const summary = parseSummaryFromContent(project.content)
+          if (!summary) return null
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {[
+                { label: 'Problem', icon: 'help_outline', value: summary.problem, color: 'text-red-400' },
+                { label: 'Approach', icon: 'settings_suggest', value: summary.approach, color: 'text-secondary' },
+                { label: 'Result', icon: 'trending_up', value: summary.result, color: 'text-green-400' },
+              ].map((item) => item.value && (
+                <div key={item.label} className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className={`material-symbols-outlined text-lg ${item.color}`}>{item.icon}</span>
+                    <span className="font-label text-xs tracking-widest uppercase text-on-surface-variant">{item.label}</span>
+                  </div>
+                  <p className="text-on-surface text-sm leading-relaxed">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          )
+        })()}
 
         {/* Two-column layout */}
         <div className="flex flex-col lg:flex-row gap-8">
@@ -91,8 +129,8 @@ const ProjectDetail = () => {
             {/* Video */}
             {project.videoUrl && (
               <div className="mb-8">
-                <h2 className="nn-headline text-nn-on-surface mb-4">Demo Video</h2>
-                <div className="aspect-video rounded-xl overflow-hidden bg-nn-surface-lowest">
+                <h2 className="nn-headline text-on-surface mb-4">Demo Video</h2>
+                <div className="aspect-video rounded-xl overflow-hidden bg-surface-container-lowest">
                   <iframe
                     src={getYouTubeEmbedUrl(project.videoUrl)}
                     className="w-full h-full"
@@ -120,7 +158,7 @@ const ProjectDetail = () => {
             {/* Image Gallery */}
             {project.images && project.images.length > 0 && (
               <div className="mb-8">
-                <h2 className="nn-headline text-nn-on-surface mb-4">Gallery</h2>
+                <h2 className="nn-headline text-on-surface mb-4">Gallery</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {project.images.map((img, i) => (
                     <img
