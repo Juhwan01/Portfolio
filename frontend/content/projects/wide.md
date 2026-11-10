@@ -24,30 +24,25 @@ responsibilities:
 - AI 코드 분석 프로토타입 — LangGraph 에이전트로 실시간 코드 분석, 맥락 기반 자동완성, 오류 진단·수정 제안
 - 데스크톱 앱 구조 — 파일 시스템·터미널·가상환경 처리를 Electron Main Process에 모으고 React UI와 IPC로 연결
 - 실시간 터미널 — Main Process에서 child_process.spawn으로 명령을 실행하고 출력을 IPC로 스트리밍
-- GitHub 연동과 백엔드 — 소셜 로그인, 저장소를 여는 에디터, 커밋·푸시, PostgreSQL 연동
+- GitHub 연동 — 저장소를 여는 에디터, 커밋·푸시
 links:
   github: https://github.com/Juhwan01/Capstone-Design
   video: /videos/projects/wide/demo.mp4
 cover: /images/projects/wide/thumbnail.png
 ---
 
-## 맥락과 제약
+캡스톤디자인 과제로, 저장소 커밋 16건 중 13건을 맡아 AI 기능·백엔드·앱 통합을 이끌었습니다.
 
-- **2인 팀의 메인 개발:** 캡스톤디자인 과제로, 저장소 커밋 16건 중 13건을 맡아 AI 기능·백엔드·앱 통합을 이끌었습니다.
-- **IDE는 OS에 닿아야 합니다:** 코드 에디터의 핵심은 로컬 파일 읽기·쓰기(`fs.readFile`)와 터미널 명령 실행(`python script.py`, `git status`)입니다.
-- **UI는 웹 기술로:** 화면은 React로 만들기로 했지만, 브라우저 보안 샌드박스 안에서는 위 두 가지가 모두 불가능합니다.
+## 구조 결정
 
-## 핵심 결정
+### 1. 형태: 웹 에디터 대신 Electron 데스크톱 앱
 
-1. **브라우저 앱이 아니라 Electron 데스크톱 앱으로 만든다.** Main Process는 Node.js 런타임에서 OS API를 쓰고, Renderer Process는 Chrome 기반으로 React UI를 그립니다. 웹 기술로 UI를 만들면서도 파일과 터미널에 닿을 수 있는 구조입니다.
-2. **OS 작업은 Main Process에 두고 IPC로 주고받는다.** 파일은 Main에서 `fs` 모듈로 처리해 IPC로 Renderer에 넘기고, 터미널은 `child_process.spawn`으로 띄워 출력을 IPC로 흘려보냅니다. Python 가상환경 생성·활성화도 Main이 관리합니다.
-3. **AI 기능은 LangGraph 에이전트로 구성한다.** 실시간 코드 분석, 맥락 기반 자동완성, 오류 진단과 수정 제안을 에이전트가 맡는 프로토타입을 만들었습니다.
+**왜:** 코드 에디터의 핵심은 로컬 파일 읽기·쓰기(`fs.readFile`)와 터미널 명령 실행(`python script.py`, `git status`)입니다. 처음 만들던 React 웹 에디터에서는 브라우저 보안 샌드박스 때문에 둘 다 막혔습니다.
 
-## 결과
+**바꾼 구조:** Electron으로 옮겨 Main Process는 Node.js 런타임에서 OS API를 쓰고, Renderer Process는 React UI를 그리게 나눴습니다. 파일은 Main에서 `fs` 모듈로 처리해 IPC로 넘기고, 터미널은 `child_process.spawn`으로 띄워 출력을 IPC로 흘려보냅니다. Python 가상환경 생성·활성화도 Main이 맡습니다.
 
-- **수상:** 2024 INJE 캡스톤디자인 경진대회 장려상.
-- **브라우저에서 막혀 있던 IDE 기능:** 파일 시스템 접근, 실시간 터미널, 가상환경 관리를 데스크톱 앱 안에서 동작시켰습니다.
+**결과:** 웹 기술로 만든 UI를 그대로 두고, 브라우저에서 막혀 있던 파일 시스템 접근·실시간 터미널·가상환경 관리를 앱 안에서 동작시켰습니다.
 
-## 막혔던 것
+## 그 밖의 설계
 
-- **브라우저 보안 샌드박스:** 처음에는 React 기반 웹 에디터로 만들려 했지만, 로컬 파일 접근과 터미널 실행이 모두 브라우저에서 막혔습니다. Electron으로 옮겨 OS에 닿는 일을 Main Process로 뺐습니다.
+- **AI 기능은 LangGraph 에이전트로:** 실시간 코드 분석, 맥락 기반 자동완성, 오류 진단과 수정 제안을 에이전트가 맡는 프로토타입을 붙였습니다.

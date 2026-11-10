@@ -6,8 +6,8 @@ import { LinkBadge } from './HomePage'
 import Markdown from './Markdown'
 import { NotFoundPage } from './SiteLayout'
 import { findProject, fmtPeriod, isExternal, profile, projectNeighbors } from './content'
-import type { LinkKind, Project } from './types'
-import { BLUR_FADE_DELAY, Badge, BlurFade, Icons } from './ui'
+import type { LinkKind, Metric, Project } from './types'
+import { BLUR_FADE_DELAY, Badge, BlurFade, Icons, cn } from './ui'
 
 const D = BLUR_FADE_DELAY
 const LINK_ORDER: LinkKind[] = ['appstore', 'playstore', 'website', 'demo', 'github', 'slides', 'video']
@@ -111,22 +111,114 @@ function Facts({ project }: { readonly project: Project }) {
   )
 }
 
+const MINE_BADGE = 'border-transparent bg-lime-300 text-neutral-900 shadow-none hover:bg-lime-300 text-[11px]'
+
 /** Shipped app: its store screens, with the parts I built marked. */
 function Screens({ project }: { readonly project: Project }) {
   const product = project.product!
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {product.features.map((f) => (
-        <figure key={f.title} className="flex flex-col gap-2">
-          <div className="relative aspect-[9/16] overflow-hidden rounded-xl border bg-muted">
-            <img src={f.image} alt={`${f.title} 화면`} loading="lazy" className="h-full w-full object-cover object-top" />
-            {f.mine && <Badge className="absolute top-2 left-2 text-[11px]">담당</Badge>}
+    <div className="flex flex-col gap-4">
+      {product.features.some((f) => f.mine) && (
+        <p className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Badge className={MINE_BADGE}>담당</Badge>
+          표시한 화면이 내가 만든 부분입니다
+        </p>
+      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        {product.features.map((f) => (
+          <figure key={f.title} className="flex flex-col gap-2">
+            <div
+              className={cn(
+                'relative aspect-[9/16] overflow-hidden rounded-xl border bg-muted',
+                f.mine && 'ring-[3px] ring-lime-400 ring-offset-2 ring-offset-background border-transparent',
+              )}
+            >
+              <img src={f.image} alt={`${f.title} 화면`} loading="lazy" className="h-full w-full object-cover object-top" />
+              {f.mine && <Badge className={cn(MINE_BADGE, 'absolute top-2 left-2')}>담당</Badge>}
+            </div>
+            <figcaption className="flex flex-col gap-0.5">
+              <span className="text-sm font-semibold">{f.title}</span>
+              <span className="text-xs text-muted-foreground leading-relaxed">{f.text}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const decimals = (n: number) => (String(n).split('.')[1] ?? '').length
+const fmtNum = (n: number, unit = '', dp = decimals(n)) =>
+  `${n.toLocaleString('ko-KR', { minimumFractionDigits: dp, maximumFractionDigits: dp })}${unit}`
+
+/** One bar of a before/after pair; both bars share the larger value as their scale. */
+function PairBar({ label, value, max, unit, dp, now }: { readonly label: string; readonly value: number; readonly max: number; readonly unit?: string; readonly dp: number; readonly now?: boolean }) {
+  return (
+    <div className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 text-xs">
+      <span className="text-muted-foreground">{label}</span>
+      <div className="h-2">
+        <div
+          className={cn('h-full rounded-r-[4px]', now ? 'bg-foreground' : 'bg-muted-foreground/35')}
+          style={{ width: `${max > 0 ? (value / max) * 100 : 0}%` }}
+        />
+      </div>
+      <span className={cn('tabular-nums', now ? 'font-semibold text-foreground' : 'text-muted-foreground')}>{fmtNum(value, unit, dp)}</span>
+    </div>
+  )
+}
+
+function MetricCard({ m }: { readonly m: Metric }) {
+  const pair = m.before !== undefined && m.after !== undefined
+  const meter = m.part !== undefined && m.whole !== undefined
+  const max = pair ? Math.max(m.before!, m.after!) : 0
+  // 16.0 parses as 16; print both bars with the finer side's decimals (33.1 / 16.0).
+  const dp = pair ? Math.max(decimals(m.before!), decimals(m.after!)) : 0
+  return (
+    <div className="flex flex-col gap-3 rounded-xl border p-4 bg-card">
+      <div className="flex flex-col gap-1">
+        <span className="text-2xl font-semibold tracking-tighter tabular-nums">{m.value}</span>
+        <span className="text-sm font-medium">{m.label}</span>
+      </div>
+      {pair && (
+        <div className="flex flex-col gap-1.5" aria-label={`이전 ${fmtNum(m.before!, m.unit, dp)}, 이후 ${fmtNum(m.after!, m.unit, dp)}`}>
+          <PairBar label="이전" value={m.before!} max={max} unit={m.unit} dp={dp} />
+          <PairBar label="이후" value={m.after!} max={max} unit={m.unit} dp={dp} now />
+        </div>
+      )}
+      {meter && (
+        <div className="grid grid-cols-[1fr_auto] items-center gap-2 text-xs">
+          <div className="h-2 rounded-[4px] bg-muted overflow-hidden">
+            <div className="h-full rounded-r-[4px] bg-foreground" style={{ width: `${(m.part! / m.whole!) * 100}%` }} />
           </div>
-          <figcaption className="flex flex-col gap-0.5">
-            <span className="text-sm font-semibold">{f.title}</span>
-            <span className="text-xs text-muted-foreground leading-relaxed">{f.text}</span>
-          </figcaption>
-        </figure>
+          <span className="tabular-nums font-semibold">
+            {fmtNum(m.part!)} / {fmtNum(m.whole!, m.unit)}
+          </span>
+        </div>
+      )}
+      <span className="mt-auto text-xs text-muted-foreground leading-relaxed">{m.scope}</span>
+    </div>
+  )
+}
+
+/** Metric cards, under their `group` headings when the content gives them. */
+function Metrics({ metrics }: { readonly metrics: readonly Metric[] }) {
+  const groups: { name?: string; items: Metric[] }[] = []
+  for (const m of metrics) {
+    const g = groups.find((x) => x.name === m.group)
+    if (g) g.items.push(m)
+    else groups.push({ name: m.group, items: [m] })
+  }
+  return (
+    <div className="flex flex-col gap-6">
+      {groups.map((g) => (
+        <div key={g.name ?? ''} className="flex flex-col gap-3">
+          {g.name && <h3 className="text-sm font-semibold text-muted-foreground">{g.name}</h3>}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:[&>*:last-child:nth-child(odd)]:col-span-2">
+            {g.items.map((m) => (
+              <MetricCard key={m.label} m={m} />
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   )
@@ -219,15 +311,7 @@ export default function ProjectPage() {
 
         {project.metrics && (
           <Section title="성과" delay={D * 4}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {project.metrics.map((m) => (
-                <div key={m.label} className="flex flex-col gap-1 rounded-xl border p-4 bg-card">
-                  <span className="text-2xl font-semibold tracking-tighter tabular-nums">{m.value}</span>
-                  <span className="text-sm font-medium">{m.label}</span>
-                  <span className="text-xs text-muted-foreground leading-relaxed">{m.scope}</span>
-                </div>
-              ))}
-            </div>
+            <Metrics metrics={project.metrics} />
           </Section>
         )}
 

@@ -12,7 +12,7 @@ import {
   isExternal,
   otherProjects,
   profile,
-  skillGroups,
+  skillList,
   sortedPosts,
 } from './content'
 import Markdown from './Markdown'
@@ -172,22 +172,14 @@ function Skills() {
         <BlurFade delay={D * 9}>
           <h2 className="text-xl font-bold">기술</h2>
         </BlurFade>
-        <div className="flex flex-col gap-4">
-          {skillGroups.map((g, gi) => (
-            <BlurFade key={g.name} delay={D * 10 + gi * 0.05}>
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
-                <span className="text-xs text-muted-foreground sm:w-24 sm:pt-2 flex-none">{g.name}</span>
-                <div className="flex flex-wrap gap-2">
-                  {g.items.map((s) => (
-                    <div
-                      key={s.name}
-                      title={s.projects.length ? `쓴 프로젝트: ${s.projects.map((p) => p.title).join(', ')}` : undefined}
-                      className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2"
-                    >
-                      <span className="text-foreground text-sm font-medium">{s.name}</span>
-                    </div>
-                  ))}
-                </div>
+        <div className="flex flex-wrap gap-2">
+          {skillList.map((s, i) => (
+            <BlurFade key={s.name} delay={D * 10 + i * 0.05}>
+              <div
+                title={s.projects.length ? `쓴 프로젝트: ${s.projects.map((p) => p.title).join(', ')}` : undefined}
+                className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2"
+              >
+                <span className="text-foreground text-sm font-medium">{s.name}</span>
               </div>
             </BlurFade>
           ))}

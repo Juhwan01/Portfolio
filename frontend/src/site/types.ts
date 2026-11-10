@@ -10,6 +10,16 @@ export interface Metric {
   value: string
   label: string
   scope: string
+  /** heading the card is listed under on the project page, e.g. '기술 개선' */
+  group?: string
+  /** before → after on one scale, drawn as two bars */
+  before?: number
+  after?: number
+  /** a part of a whole, drawn as a meter */
+  part?: number
+  whole?: number
+  /** unit printed after the numbers above, e.g. '초' */
+  unit?: string
 }
 
 export interface Feature {
@@ -116,14 +126,8 @@ export interface SkillItem {
   name: string
   /** project tags that count as this skill; defaults to [name] */
   match?: string[]
-  note?: string
-}
-
-export interface SkillGroup {
-  name: string
-  items: SkillItem[]
 }
 
 export interface Skills {
-  groups: SkillGroup[]
+  items: SkillItem[]
 }

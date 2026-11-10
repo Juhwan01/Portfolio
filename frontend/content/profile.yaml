@@ -76,7 +76,7 @@ competitions:
 
 open_source:
   - title: Jira Extended MCP Server
-    note: PyPI jira-extended-mcp · Jira 도구 27개
+    note: PyPI jira-extended-mcp · 이슈 일괄 생성·릴리스·스프린트를 다루는 Jira MCP 서버
     project: jira-extended-mcp
   - title: ArchFlow
     note: PyPI archflow-hub · Jira·GitHub·draw.io 통합 MCP 서버
