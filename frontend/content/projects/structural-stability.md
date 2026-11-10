@@ -1,6 +1,6 @@
 ---
 title: 구조물 안정성 물리 추론 AI
-summary: 정면·상단 두 시점 이미지로 10초 뒤 구조물 붕괴 여부를 예측. 시뮬레이션 영상에서 뽑은 소프트 레이블로 학습하고, 실험실·실제 환경의 색 차이를 Fourier Domain Adaptation으로 줄임.
+summary: 정면·상단 두 시점 이미지로 10초 뒤 구조물 붕괴 여부를 예측합니다. 시뮬레이션 영상에서 뽑은 소프트 레이블로 학습하고, 실험실·실제 환경의 색 차이를 Fourier Domain Adaptation으로 줄였습니다.
 org: DACON
 period:
   start: 2026-03

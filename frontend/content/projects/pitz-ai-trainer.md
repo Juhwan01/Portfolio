@@ -1,6 +1,6 @@
 ---
 title: PITZ AI 트레이너 · AI 리포트
-summary: 운동·식단 기록을 근거로 코칭하고 지난 대화를 기억하는 AI 트레이너와, 기록을 해석해 주는 AI 리포트를 맡아 App Store·Google Play에 출시했다.
+summary: 운동·식단 기록을 근거로 코칭하고 지난 대화를 기억하는 AI 트레이너와, 기록을 해석해 주는 AI 리포트를 맡아 App Store·Google Play에 출시했습니다.
 org: Beans Pirates
 period:
   start: 2026-04

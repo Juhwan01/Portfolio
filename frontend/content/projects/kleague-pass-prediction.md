@@ -1,6 +1,6 @@
 ---
 title: K리그 패스 도착 좌표 예측
-summary: 경기 플레이 시퀀스를 보고 마지막 패스가 도착할 좌표를 예측하는 모델(LSTM + Mixture Density Network). 1인 참가로 Track1 상위 9%.
+summary: 경기 플레이 시퀀스를 보고 마지막 패스가 도착할 좌표를 예측하는 모델(LSTM + Mixture Density Network)입니다. 1인 참가로 Track1 상위 9%에 들었습니다.
 org: DACON · K리그-서울시립대 공개 AI 경진대회 Track1
 period:
   start: 2025-12

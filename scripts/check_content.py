@@ -65,6 +65,9 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
     if meta.get("status") not in STATUSES:
         problems.append(f"{owner}: status '{meta.get('status')}'")
     check_period(owner, meta.get("period"))
+    # Cards sit next to the polite-register intro, so a plain "~했다" summary reads out of place.
+    if meta.get("status") != "archived" and not str(meta.get("summary", "")).endswith("니다."):
+        problems.append(f"{owner}: summary should end in 합니다체 (…니다.)")
     # The page calls string methods on these; an unquoted ": " turns a list item into a mapping
     # and blanks the whole page at runtime.
     for key in ("responsibilities", "tags", "awards", "gallery"):

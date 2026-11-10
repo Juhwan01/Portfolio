@@ -1,6 +1,6 @@
 ---
 title: Jira Extended MCP Server
-summary: 읽기 전용이거나 이슈를 하나씩만 만들던 기존 Jira MCP 대신, AI 에이전트가 이슈 일괄 생성·상태 변경부터 릴리스·스프린트·이슈 링크까지 다루게 한 Jira 전용 MCP 서버.
+summary: 읽기 전용이거나 이슈를 하나씩만 만들던 기존 Jira MCP 대신, AI 에이전트가 이슈 일괄 생성·상태 변경부터 릴리스·스프린트·이슈 링크까지 다루게 한 Jira 전용 MCP 서버입니다.
 period:
   start: 2026-03
   end: 2026-03
