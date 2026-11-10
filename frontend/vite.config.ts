@@ -5,6 +5,7 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 
 const CONTENT_DIR = path.resolve(__dirname, 'content')
+const SITE_URL = 'https://juhwan.dev'
 const FRONTMATTER = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/
 
 /** Read every `*.md` in a content folder as frontmatter fields + `body`. */
@@ -46,6 +47,28 @@ function contentPlugin(): Plugin {
         `export const redirects = ${JSON.stringify(redirects)};`,
         `export const skills = ${JSON.stringify(skills)};`,
       ].join('\n')
+    },
+    // Built from the same content, so new projects and posts are listed without a hand-kept file.
+    generateBundle() {
+      const projects = readMarkdownDir(path.join(CONTENT_DIR, 'projects'), 'slug')
+      const posts = readMarkdownDir(path.join(CONTENT_DIR, 'blog'), 'id')
+      const urls: { loc: string; lastmod?: string }[] = [
+        { loc: '/' },
+        { loc: '/blog' },
+        ...projects.filter((p) => p.status !== 'archived').map((p) => ({ loc: `/projects/${p.slug}` })),
+        ...posts.map((p) => {
+          const date = (p.updated_at ?? p.published_at) as string | undefined
+          return { loc: `/blog/${p.id}`, lastmod: date?.slice(0, 10) }
+        }),
+      ]
+      const body = urls
+        .map(({ loc, lastmod }) => `  <url><loc>${SITE_URL}${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`)
+        .join('\n')
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`,
+      })
     },
     handleHotUpdate({ file, server }) {
       if (!file.startsWith(CONTENT_DIR)) return

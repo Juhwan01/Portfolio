@@ -1,6 +1,6 @@
 ---
 title: PaperGraph
-summary: 논문을 읽다 떠오른 질문을 화면 옆 사이드 패널에 자연어로 물어, 의미 기반 검색과 후속 질문으로 관련 논문을 찾아가는 Electron 데스크톱 AI 챗봇.
+summary: 논문을 읽다 떠오른 질문을 화면 옆 사이드 패널에 자연어로 물어, 의미 기반 검색과 후속 질문으로 관련 논문을 찾아가는 Electron 데스크톱 AI 챗봇입니다.
 period:
   start: 2026-01
   end: null

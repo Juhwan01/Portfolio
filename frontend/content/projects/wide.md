@@ -1,6 +1,6 @@
 ---
 title: W:IDE
-summary: 브라우저에서는 막히는 파일·터미널·가상환경 작업을 Electron Main Process로 풀고, LangGraph 에이전트의 코드 분석·자동완성 프로토타입을 붙인 데스크톱 AI 코드 에디터.
+summary: 브라우저에서는 막히는 파일·터미널·가상환경 작업을 Electron Main Process로 풀고, LangGraph 에이전트의 코드 분석·자동완성 프로토타입을 붙인 데스크톱 AI 코드 에디터입니다.
 org: 인제대학교 캡스톤디자인
 period:
   start: 2024-09

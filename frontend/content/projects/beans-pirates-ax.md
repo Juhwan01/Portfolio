@@ -1,6 +1,6 @@
 ---
 title: 사내 AX — 에이전트 중심 개발 체계
-summary: AI 코딩 에이전트가 팀의 Jira·GitHub·설계 문서를 직접 읽고 쓰도록 도구와 작업 체계를 만들어, 기획부터 배포까지의 업무 흐름을 에이전트 중심으로 바꿨다.
+summary: AI 코딩 에이전트가 팀의 Jira·GitHub·설계 문서를 직접 읽고 쓰도록 도구와 작업 체계를 만들어, 기획부터 배포까지의 업무 흐름을 에이전트 중심으로 바꿨습니다.
 org: Beans Pirates
 period:
   start: 2026-03
@@ -30,8 +30,9 @@ metrics:
   scope: 이 체계로 운영한 챗봇 저장소 · 2026.04–11
 links:
   github: https://github.com/Juhwan01/jira-extended-mcp-server
-cover: /images/projects/archflow/thumbnail.png
+cover: /images/projects/beans-pirates-ax/cover.png
 gallery:
+- /images/projects/archflow/thumbnail.png
 - /images/projects/jira-extended-mcp/thumbnail.png
 ---
 
