@@ -28,14 +28,11 @@ metrics:
 - value: 859건
   label: 머지된 PR
   scope: 이 체계로 운영한 챗봇 저장소 · 2026.04–11
-- value: 268건
-  label: 설계 결정 기록(ADR)
-  scope: 같은 챗봇 저장소 · 2026.04–11
 links:
   github: https://github.com/Juhwan01/jira-extended-mcp-server
-cover: /images/projects/jira-extended-mcp/thumbnail.png
+cover: /images/projects/archflow/thumbnail.png
 gallery:
-- /images/projects/archflow/thumbnail.png
+- /images/projects/jira-extended-mcp/thumbnail.png
 ---
 
 ## 구조 결정

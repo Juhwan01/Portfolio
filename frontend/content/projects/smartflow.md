@@ -1,6 +1,7 @@
 ---
 title: SmartFlow
-summary: 앞 공정의 품질 편차가 다음 공정에 미칠 영향을 미리 예측하고, LLM 에이전트들이 과거 작업 이력(RAG)을 근거로 협상해 공정 파라미터를 스스로 조정하는 다단계 제조 공정 시스템.
+summary: 앞 공정의 품질 편차가 다음 공정에 미칠 영향을 미리 예측하고, LLM 에이전트들이 과거 작업 이력(RAG)을 근거로 협상해 공정 파라미터를 조정하는 다단계 제조 공정 시스템. 데이콘 스마트 제조 AI Agent 해커톤 2025 본선 진출.
+org: DACON · 스마트 제조 AI Agent 해커톤 2025
 period:
   start: 2025-12
   end: 2025-12
@@ -26,7 +27,10 @@ responsibilities:
 - MVP 범위 설정 — 프레스→용접 두 공정과 두께 편차 시 용접 파라미터 재조정 시나리오로 좁힘
 links:
   github: https://github.com/Juhwan01/SmartFlow
+  demo: https://dacon.io/competitions/official/236652
 ---
+
+데이콘 스마트 제조 AI Agent 해커톤 2025에 혼자 낸 프로젝트로, 본선에 진출했습니다.
 
 다단계 제조에서 한 공정의 편차가 다음 공정 품질로 이어지는 연쇄를 미리 예측하고, 공정 파라미터 조정까지 스스로 잇는 것이 목표였습니다. MVP는 프레스 → 용접 두 공정, 두께 편차가 생겼을 때 용접 파라미터를 다시 맞추는 시나리오로 좁혔습니다. 데이터는 Kaggle의 Multi-Stage Manufacturing Process(14,089개 샘플)를 썼습니다.
 
