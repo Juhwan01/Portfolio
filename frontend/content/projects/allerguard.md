@@ -21,7 +21,7 @@ tags:
 responsibilities:
 - AI 베이스라인 — GCP Vision OCR, 원재료명 파싱, 성분 사전 매칭, 사전에 없는 원재료 보완을 LangGraph 흐름으로 묶고 V1 → V3로 개선
 - 성분 사전 매칭 — 원재료마다 다국어 문장 임베딩으로 702개 용어의 성분 사전과 유사도를 재, 기준(0.85)을 넘을 때만 알레르기로 판정
-- 사전 보강 — 사전에 없는 원재료는 로컬 모델로 보완하고(V1 T5 → V2 zero-shot 분류: 학습 없이 후보 중 고르는 모델), V3에서는 검색으로 찾은 분류를 사전에 추가
+- '사전 보강 — 사전에 없는 원재료는 로컬 모델로 보완하고(V1 T5 → V2 zero-shot 분류: 학습 없이 후보 중 고르는 모델), V3에서는 검색으로 찾은 분류를 사전에 추가'
 links:
   github: https://github.com/Goorm-AI-Semi-Project/AllerGuard
 cover: /images/projects/allerguard/thumbnail.png
