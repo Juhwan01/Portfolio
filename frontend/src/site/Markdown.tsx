@@ -1,21 +1,22 @@
 import ReactMarkdown from 'react-markdown'
+import { Link } from 'react-router-dom'
 import remarkGfm from 'remark-gfm'
-import rehypeHighlight from 'rehype-highlight'
-import 'highlight.js/styles/github.css'
 import { isExternal } from './content'
+import { cn } from './ui'
 
-export default function Markdown({ source }: { readonly source: string }) {
+export default function Markdown({ source, className }: { readonly source: string; readonly className?: string }) {
   return (
-    <div className="prose">
+    <div className={cn('prose max-w-full', className)}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight]}
         components={{
-          a: ({ href, children }) =>
-            href && isExternal(href) ? (
+          a: ({ href = '', children }) =>
+            isExternal(href) ? (
               <a href={href} target="_blank" rel="noreferrer">
                 {children}
               </a>
+            ) : href.startsWith('/') ? (
+              <Link to={href}>{children}</Link>
             ) : (
               <a href={href}>{children}</a>
             ),

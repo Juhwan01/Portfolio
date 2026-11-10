@@ -52,13 +52,13 @@ export interface Project {
   merged_into?: string
   product?: Product
   responsibilities?: string[]
-  /** hero accent colour on the dark panel, e.g. '#ff8a7a'. Defaults to the site lime. */
-  accent?: string
   body: string
 }
 
 export interface ProfileItem {
   org: string
+  /** short text in the round mark beside the entry, e.g. 'BP' */
+  mark?: string
   role?: string
   degree?: string
   note?: string
@@ -89,9 +89,10 @@ export interface Profile {
   headline: string
   focus: string
   intro: string
+  /** Markdown for the "소개" section */
+  about: string
   current: { org: string; role: string; summary: string }
   links: { github: string; blog?: string; email: string }
-  highlights: { value: string; label: string; project?: string }[]
   experience: ProfileItem[]
   education: ProfileItem[]
   awards: DatedItem[]

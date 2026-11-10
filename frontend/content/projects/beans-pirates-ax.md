@@ -8,7 +8,6 @@ role: AI Engineer · 도구 설계·개발, 팀 작업 체계 설계
 status: shipped
 featured: true
 order: 2
-accent: '#b8a8ff'
 category: MCP
 tags:
 - MCP

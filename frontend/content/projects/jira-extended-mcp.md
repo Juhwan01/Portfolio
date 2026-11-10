@@ -9,7 +9,6 @@ team: DevTools 1
 status: completed
 featured: false
 order: 13
-accent: '#8fb0ff'
 category: MCP
 tags:
 - Python

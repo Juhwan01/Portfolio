@@ -1,216 +1,134 @@
+/* Article layout adapted from the Magic UI portfolio template's blog post page (MIT) — see THIRD_PARTY.md. */
 import type { ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { LinkBadge } from './HomePage'
 import Markdown from './Markdown'
 import { NotFoundPage } from './SiteLayout'
-import { LINK_LABELS, findProject, fmtPeriod, isExternal, nextProject, profile } from './content'
-import { CoverFrame, accentStyle } from './parts'
-import type { LinkKind, Metric, Project } from './types'
+import { findProject, fmtPeriod, isExternal, profile, projectNeighbors } from './content'
+import type { LinkKind, Project } from './types'
+import { BLUR_FADE_DELAY, Badge, BlurFade, Icons } from './ui'
 
+const D = BLUR_FADE_DELAY
 const LINK_ORDER: LinkKind[] = ['appstore', 'playstore', 'website', 'demo', 'github', 'slides', 'video']
 
-function ProjectLinks({ project }: { readonly project: Project }) {
-  const links = LINK_ORDER.filter((k) => project.links?.[k] && !(k === 'video' && !isExternal(project.links[k]!)))
-  if (!links.length) return null
+export function BackLink({ to, label }: { readonly to: string; readonly label: string }) {
   return (
-    <div className="link-buttons">
-      {links.map((k, i) => (
-        <a key={k} href={project.links![k]} target="_blank" rel="noreferrer" className={i === 0 ? 'primary' : undefined}>
-          {LINK_LABELS[k]}
-        </a>
-      ))}
+    <div className="flex justify-start gap-4 items-center">
+      <Link
+        to={to}
+        className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg px-2 py-1 inline-flex items-center gap-1 mb-6 group"
+      >
+        <Icons.chevronLeft className="size-3 group-hover:-translate-x-px transition-transform" />
+        {label}
+      </Link>
     </div>
   )
 }
 
-function Metrics({ metrics }: { readonly metrics: Metric[] }) {
+export function Divider() {
   return (
-    <ul className="metrics">
-      {metrics.map((m) => (
-        <li key={m.label} className="metric-card">
-          <span className="value">{m.value}</span>
-          <span className="label">{m.label}</span>
-          <span className="scope">{m.scope}</span>
-        </li>
-      ))}
-    </ul>
+    <div className="my-6 flex w-full items-center">
+      <div
+        className="flex-1 h-px bg-border"
+        style={{
+          maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+        }}
+      />
+    </div>
   )
 }
 
-function Block({ title, children }: { readonly title: string; readonly children: ReactNode }) {
+function Section({ title, children, delay }: { readonly title: string; readonly children: ReactNode; readonly delay: number }) {
   return (
-    <section className="section">
-      <div className="wrap block">
-        <h2 className="block-title">{title}</h2>
-        <div>{children}</div>
+    <BlurFade delay={delay} inView>
+      <section className="flex flex-col gap-y-4 mt-12">
+        <h2 className="text-xl font-bold">{title}</h2>
+        {children}
+      </section>
+    </BlurFade>
+  )
+}
+
+export function PrevNext({
+  prev,
+  next,
+}: {
+  readonly prev?: { title: string; to: string }
+  readonly next?: { title: string; to: string }
+}) {
+  if (!prev && !next) return null
+  const card = 'group flex-1 flex flex-col gap-1 p-4 rounded-lg border border-border hover:bg-accent/50 transition-colors'
+  return (
+    <nav className="mt-12 pt-8">
+      <div className="flex flex-col sm:flex-row justify-between gap-4">
+        {prev ? (
+          <Link to={prev.to} className={card}>
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Icons.chevronLeft className="size-3" />
+              이전
+            </span>
+            <span className="text-sm font-medium break-words">{prev.title}</span>
+          </Link>
+        ) : (
+          <div className="hidden sm:block flex-1" />
+        )}
+        {next ? (
+          <Link to={next.to} className={`${card} text-right`}>
+            <span className="flex items-center justify-end gap-1 text-xs text-muted-foreground">
+              다음
+              <Icons.chevronRight className="size-3" />
+            </span>
+            <span className="text-sm font-medium break-words">{next.title}</span>
+          </Link>
+        ) : (
+          <div className="hidden sm:block flex-1" />
+        )}
       </div>
-    </section>
+    </nav>
   )
 }
 
-function Tags({ tags }: { readonly tags?: string[] }) {
-  if (!tags?.length) return null
+function Facts({ project }: { readonly project: Project }) {
+  const rows: [string, string | undefined][] = [
+    ['역할', project.role],
+    ['팀', project.team],
+    ['기간', fmtPeriod(project.period)],
+    ['소속', project.org],
+  ]
   return (
-    <ul className="tags">
-      {tags.map((t) => (
-        <li key={t}>{t}</li>
-      ))}
-    </ul>
-  )
-}
-
-/** Top panel: the app itself for a shipped product, otherwise the project with its cover. */
-function Hero({ project }: { readonly project: Project }) {
-  const product = project.product
-  const phones = product?.features.filter((f) => f.mine).slice(0, 2) ?? []
-  return (
-    <section className="project-hero dark" style={accentStyle(project)}>
-      <div className="wrap">
-        <Link to="/#work" className="back">
-          ← 작업 목록
-        </Link>
-        <div className={project.cover || phones.length ? 'project-hero-grid' : 'project-hero-grid single'}>
-          <div>
-            {product ? (
-              <div className="app-id">
-                {product.icon && <img src={product.icon} alt="" />}
-                <div>
-                  <strong>{product.name}</strong>
-                  <span className="mono">
-                    {project.org} · {fmtPeriod(project.period)}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <p className="mono eyebrow">
-                {fmtPeriod(project.period)}
-                {project.org && ` · ${project.org}`}
-              </p>
-            )}
-            <h1>{product?.tagline ?? project.title}</h1>
-            <p className="hero-lead">{product?.about ?? project.summary}</p>
-            {project.awards && (
-              <ul className="award-badges">
-                {project.awards.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
-              </ul>
-            )}
-            <ProjectLinks project={project} />
+    <dl className="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-sm">
+      {rows
+        .filter(([, v]) => v)
+        .map(([k, v]) => (
+          <div key={k} className="contents">
+            <dt className="text-muted-foreground">{k}</dt>
+            <dd className="text-foreground">{v}</dd>
           </div>
-          {phones.length > 0 ? (
-            <div className="phones" aria-hidden="true">
-              {phones.map((f) => (
-                <img key={f.image} src={f.image} alt="" className="phone" />
-              ))}
-            </div>
-          ) : (
-            project.cover && <CoverFrame project={project} />
-          )}
-        </div>
-
-        {product && (
-          <>
-            <div className="features-head">
-              <h2>앱 주요 기능</h2>
-              <span className="legend">
-                <span className="badge-mine">담당</span> 내가 만든 부분
-              </span>
-            </div>
-            <ul className="features">
-              {product.features.map((f) => (
-                <li key={f.title} className={f.mine ? 'feature mine' : 'feature'}>
-                  <figure>
-                    <img src={f.image} alt={`${f.title} 화면`} loading="lazy" />
-                  </figure>
-                  <h3>
-                    {f.title}
-                    {f.mine && <span className="badge-mine">담당</span>}
-                  </h3>
-                  <p>{f.text}</p>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-    </section>
+        ))}
+    </dl>
   )
 }
 
-function Duties({ project }: { readonly project: Project }) {
+/** Shipped app: its store screens, with the parts I built marked. */
+function Screens({ project }: { readonly project: Project }) {
+  const product = project.product!
   return (
-    <Block title="내가 맡은 일">
-      <dl className="facts">
-        {project.role && (
-          <>
-            <dt>역할</dt>
-            <dd>{project.role}</dd>
-          </>
-        )}
-        {project.team && (
-          <>
-            <dt>팀</dt>
-            <dd>{project.team}</dd>
-          </>
-        )}
-        <dt>기간</dt>
-        <dd>{fmtPeriod(project.period)}</dd>
-        {project.org && (
-          <>
-            <dt>소속</dt>
-            <dd>{project.org}</dd>
-          </>
-        )}
-      </dl>
-      {project.responsibilities && (
-        <ul className="duties">
-          {project.responsibilities.map((r) => {
-            const [head, ...rest] = r.split(' — ')
-            return (
-              <li key={r}>
-                <strong>{head}</strong>
-                {rest.length > 0 && <span> — {rest.join(' — ')}</span>}
-              </li>
-            )
-          })}
-        </ul>
-      )}
-    </Block>
-  )
-}
-
-function Media({ project }: { readonly project: Project }) {
-  const video = project.links?.video && !isExternal(project.links.video) ? project.links.video : undefined
-  const gallery = project.product ? [] : (project.gallery ?? []).filter((src) => src !== project.cover)
-  if (!video && !gallery.length) return null
-  return (
-    <Block title={video ? '시연' : '화면'}>
-      {video && <video className="demo-video" src={video} controls preload="metadata" />}
-      {gallery.length > 0 && (
-        <div className="gallery">
-          {gallery.map((src, i) => (
-            <img key={src} src={src} alt={`${project.title} 화면 ${i + 1}`} loading="lazy" />
-          ))}
-        </div>
-      )}
-    </Block>
-  )
-}
-
-function NextProject({ project }: { readonly project: Project }) {
-  const next = nextProject(project.slug)
-  if (!next) return null
-  return (
-    <section className="section">
-      <div className="wrap">
-        <Link to={`/projects/${next.slug}`} className="next-card" style={accentStyle(next)}>
-          <span className="mono muted">다음 작업</span>
-          <strong>{next.title} →</strong>
-          <span className="muted">{next.summary}</span>
-        </Link>
-      </div>
-    </section>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      {product.features.map((f) => (
+        <figure key={f.title} className="flex flex-col gap-2">
+          <div className="relative aspect-[9/16] overflow-hidden rounded-xl border bg-muted">
+            <img src={f.image} alt={`${f.title} 화면`} loading="lazy" className="h-full w-full object-cover object-top" />
+            {f.mine && <Badge className="absolute top-2 left-2 text-[11px]">담당</Badge>}
+          </div>
+          <figcaption className="flex flex-col gap-0.5">
+            <span className="text-sm font-semibold">{f.title}</span>
+            <span className="text-xs text-muted-foreground leading-relaxed">{f.text}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
   )
 }
 
@@ -220,31 +138,131 @@ export default function ProjectPage() {
   if (!project || (project.status === 'archived' && !project.merged_into)) return <NotFoundPage />
   if (project.merged_into) return <Navigate to={`/projects/${project.merged_into}`} replace />
   if (project.slug !== slug) return <Navigate to={`/projects/${project.slug}`} replace />
+
+  const product = project.product
+  const links = LINK_ORDER.filter((k) => project.links?.[k] && isExternal(project.links[k]!))
+  const video = project.links?.video && !isExternal(project.links.video) ? project.links.video : undefined
+  const gallery = product ? [] : (project.gallery ?? []).filter((src) => src !== project.cover)
+  const { prev, next } = projectNeighbors(project.slug)
+
   return (
     <>
       <Helmet>
         <title>{`${project.title} — ${profile.name}`}</title>
         <meta name="description" content={project.summary} />
       </Helmet>
-      <Hero project={project} />
-      {(project.role || project.responsibilities) && <Duties project={project} />}
-      {project.metrics && (
-        <Block title="성과">
-          <Metrics metrics={project.metrics} />
-        </Block>
-      )}
-      <Media project={project} />
-      {project.body.trim() && (
-        <Block title="자세히">
-          <Markdown source={project.body} />
-        </Block>
-      )}
-      {project.tags?.length ? (
-        <Block title="기술">
-          <Tags tags={project.tags} />
-        </Block>
-      ) : null}
-      <NextProject project={project} />
+      <article id="project">
+        <BlurFade delay={D}>
+          <BackLink to="/#projects" label="프로젝트 목록" />
+          <div className="flex flex-col gap-4">
+            {product?.icon && (
+              <div className="flex items-center gap-3">
+                <img src={product.icon} alt="" className="size-10 rounded-xl border" />
+                <span className="text-sm font-semibold">{product.name}</span>
+              </div>
+            )}
+            <h1 className="font-semibold text-3xl md:text-4xl tracking-tighter leading-tight">{project.title}</h1>
+            <p className="text-sm text-muted-foreground">
+              {fmtPeriod(project.period)}
+              {project.org && ` · ${project.org}`}
+            </p>
+            <p className="text-muted-foreground leading-relaxed">{product?.about ?? project.summary}</p>
+            {(links.length > 0 || project.awards) && (
+              <div className="flex flex-wrap gap-2">
+                {links.map((k) => (
+                  <LinkBadge key={k} kind={k} href={project.links![k]!} />
+                ))}
+                {project.awards?.map((a) => (
+                  <Badge key={a} variant="secondary">
+                    {a}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
+        </BlurFade>
+
+        <Divider />
+
+        <BlurFade delay={D * 2}>
+          {product ? (
+            <Screens project={project} />
+          ) : (
+            project.cover && (
+              <img
+                src={project.cover}
+                alt={`${project.title} 대표 이미지`}
+                className="w-full max-h-[420px] object-cover object-top rounded-xl border bg-muted"
+              />
+            )
+          )}
+        </BlurFade>
+
+        {(project.role || project.responsibilities) && (
+          <Section title="내가 맡은 일" delay={D * 3}>
+            <Facts project={project} />
+            {project.responsibilities && (
+              <ul className="flex flex-col gap-3 mt-2">
+                {project.responsibilities.map((r) => {
+                  const [head, ...rest] = r.split(' — ')
+                  return (
+                    <li key={r} className="text-sm leading-relaxed text-muted-foreground">
+                      <span className="font-semibold text-foreground">{head}</span>
+                      {rest.length > 0 && <> — {rest.join(' — ')}</>}
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+          </Section>
+        )}
+
+        {project.metrics && (
+          <Section title="성과" delay={D * 4}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {project.metrics.map((m) => (
+                <div key={m.label} className="flex flex-col gap-1 rounded-xl border p-4 bg-card">
+                  <span className="text-2xl font-semibold tracking-tighter tabular-nums">{m.value}</span>
+                  <span className="text-sm font-medium">{m.label}</span>
+                  <span className="text-xs text-muted-foreground leading-relaxed">{m.scope}</span>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {(video || gallery.length > 0) && (
+          <Section title={video ? '시연' : '화면'} delay={D * 5}>
+            {video && <video className="w-full rounded-xl border bg-black" src={video} controls preload="metadata" />}
+            {gallery.map((src, i) => (
+              <img key={src} src={src} alt={`${project.title} 화면 ${i + 1}`} loading="lazy" className="w-full rounded-xl border" />
+            ))}
+          </Section>
+        )}
+
+        {project.body.trim() && (
+          <BlurFade delay={D * 6} inView>
+            <div className="mt-12">
+              <Markdown source={project.body} />
+            </div>
+          </BlurFade>
+        )}
+
+        {project.tags && project.tags.length > 0 && (
+          <div className="mt-10 flex flex-wrap gap-1">
+            {project.tags.map((t) => (
+              <Badge key={t} variant="outline" className="text-[11px] font-medium border border-border h-6 w-fit px-2">
+                {t}
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        <PrevNext
+          prev={prev && { title: prev.title, to: `/projects/${prev.slug}` }}
+          next={next && { title: next.title, to: `/projects/${next.slug}` }}
+        />
+      </article>
     </>
   )
 }

@@ -14,11 +14,18 @@ export function findProject(slugOrLegacyId: string): Project | undefined {
   return projects.find((p) => p.slug === slug)
 }
 
-/** The project after this one in list order, wrapping to the first. */
-export function nextProject(slug: string): Project | undefined {
+/** The projects before and after this one in list order. */
+export function projectNeighbors(slug: string): { prev?: Project; next?: Project } {
   const i = visible.findIndex((p) => p.slug === slug)
-  if (i === -1 || visible.length < 2) return undefined
-  return visible[(i + 1) % visible.length]
+  if (i === -1) return {}
+  return { prev: visible[i - 1], next: visible[i + 1] }
+}
+
+/** The posts before (newer) and after (older) this one. */
+export function postNeighbors(id: string): { prev?: Post; next?: Post } {
+  const i = sortedPosts.findIndex((p) => p.id === id)
+  if (i === -1) return {}
+  return { prev: sortedPosts[i - 1], next: sortedPosts[i + 1] }
 }
 
 export const sortedPosts: Post[] = [...posts].sort((a, b) => b.published_at.localeCompare(a.published_at))
@@ -64,9 +71,6 @@ export const LINK_LABELS: Record<LinkKind, string> = {
 }
 
 export const isExternal = (url: string) => /^https?:\/\//.test(url)
-
-/** Default panel accent: the site lime. */
-export const DEFAULT_ACCENT = '#d4f55a'
 
 /** Short name for a project in compact lists: the product name or the title before any " · " or " — ". */
 export const shortTitle = (p: Project) => p.product?.name ?? p.title.split(/ · | — /)[0]

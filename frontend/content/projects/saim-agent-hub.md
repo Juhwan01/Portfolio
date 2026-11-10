@@ -9,7 +9,6 @@ team: AI 1
 status: completed
 featured: false
 order: 15
-accent: '#c9a8ff'
 category: AI
 tags:
 - Python

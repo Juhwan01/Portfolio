@@ -9,7 +9,6 @@ team: AI 1
 status: completed
 featured: false
 order: 14
-accent: '#a8b4ff'
 category: MCP
 tags:
 - Python

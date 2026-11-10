@@ -8,7 +8,8 @@
 frontend/
   content/            사이트에 보이는 글 전부 (프로필, 프로젝트, 블로그) — 작성 규칙은 content/README.md
   public/images|videos  이미지·영상
-  src/site/           화면 (React + Vite). content/는 빌드할 때 virtual:content 로 읽는다
+  src/site/           화면 (React + Vite + Tailwind). content/는 빌드할 때 virtual:content 로 읽는다.
+                      디자인은 Magic UI Portfolio 템플릿(MIT) 기반 — src/site/THIRD_PARTY.md
 backend/              FastAPI — 문의 폼 메일과 예전 /api 경로
 nginx.conf            HTTPS 종단, / → frontend, /api → backend
 docker-compose.yml    Lightsail 한 대에서 db · backend · frontend · nginx

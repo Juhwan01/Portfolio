@@ -9,7 +9,6 @@ team: AI 1 · Backend 1 · Frontend 1
 status: completed
 featured: false
 order: 20
-accent: '#b6ec7a'
 category: Web
 tags:
 - Python

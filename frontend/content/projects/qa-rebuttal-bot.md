@@ -9,7 +9,6 @@ team: AI 1
 status: completed
 featured: false
 order: 18
-accent: '#ffadd2'
 category: AI
 tags:
 - Python

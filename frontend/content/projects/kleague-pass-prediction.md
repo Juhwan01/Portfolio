@@ -10,7 +10,6 @@ team: AI 1
 status: completed
 featured: false
 order: 12
-accent: '#74dcc4'
 category: ML
 tags:
 - Python

@@ -1,6 +1,6 @@
 ---
 title: 포트폴리오
-summary: 이 사이트. 내용을 DB와 관리자 페이지에서 레포의 Markdown·YAML 파일로 옮기고, 결과 중심의 에디토리얼 디자인으로 다시 만들었다.
+summary: 이 사이트. 내용을 DB와 관리자 페이지에서 레포의 Markdown·YAML 파일로 옮기고, 오픈소스 Magic UI 포트폴리오 템플릿(MIT)을 React·Vite로 옮겨 화면을 다시 만들었다.
 period:
   start: 2026-01
   end: 2026-11
@@ -9,7 +9,6 @@ team: Full-stack 1
 status: completed
 featured: false
 order: 21
-accent: '#d4f55a'
 category: Web
 tags:
 - React
@@ -19,11 +18,12 @@ tags:
 - Docker
 - AWS Lightsail
 - Vite
+- Tailwind CSS
 - Nginx
 responsibilities:
 - 첫 버전 풀스택 — React·TypeScript 화면, FastAPI·PostgreSQL 백엔드, Markdown 에디터 기반 관리자 페이지
 - 콘텐츠 이전 — DB 내용을 공개 API로 읽어 Markdown·YAML 파일로 옮기고 원본과 대조, S3의 이미지·영상을 저장소로 이전
-- 에디토리얼 재설계 — 빌드 시점에 콘텐츠를 읽는 Vite 플러그인, 출시 앱용 제품형 페이지와 일반 프로젝트 페이지, 옛 주소 리다이렉트
+- 화면 재구성 — Magic UI 포트폴리오 템플릿(MIT)을 Next.js에서 React·Vite로 옮기고, 빌드 시점에 콘텐츠를 읽는 Vite 플러그인과 옛 주소 리다이렉트를 붙임
 - 배포 정비 — 서버를 origin/main에 맞추고 이미지를 먼저 빌드한 뒤 교체, 끝에 사이트·API 응답 확인
 links:
   github: https://github.com/Juhwan01/Portfolio

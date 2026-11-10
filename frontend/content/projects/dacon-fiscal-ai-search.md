@@ -10,7 +10,6 @@ team: 5인 (팀 DongBee)
 status: completed
 featured: true
 order: 3
-accent: '#8fb6ff'
 category: LLM
 tags:
 - RAG

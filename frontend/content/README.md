@@ -4,7 +4,7 @@
 
 | 경로 | 내용 |
 |---|---|
-| `profile.yaml` | 이름, 소개, 첫 화면 숫자 네 칸(`highlights`: value·label), 경력, 학력, 수상, 오픈소스, 대외 활동 |
+| `profile.yaml` | 이름, 한 줄 소개, "소개"(`about`, Markdown), 경력·학력(`mark`: 동그라미 안 글자), 수상, 대회, 오픈소스, 대외 활동 |
 | `projects/<slug>.md` | 프로젝트 하나에 파일 하나. 파일 이름이 주소가 됩니다(`/projects/<slug>`) |
 | `blog/<id>.md` | 블로그 글. `/blog/<id>`로 보이고 첫 화면 "글"에 나열됩니다 |
 | `skills.yaml` | 첫 화면 "기술". 분류와 순서만 적으면, 쓴 프로젝트는 프로젝트 `tags`에서 자동으로 모입니다 |
@@ -28,7 +28,6 @@ team: AI 4                          # 선택
 status: shipped | completed | in-progress | archived
 featured: true                      # 첫 화면 "선택한 작업"에 노출
 order: 4                            # 작을수록 앞
-accent: '#ff9a8a'                   # 선택. 첫 화면 패널과 카드 배경의 강조색(밝은 색). 없으면 라임
 category: AI
 tags: [Python, RAG]
 awards: [수상명]                     # 선택
