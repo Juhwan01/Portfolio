@@ -22,6 +22,7 @@ export interface Project {
   videoUrl?: string;
   teamComposition?: TeamRole[];
   slideUrl?: string;
+  highlight?: string;
   createdAt: string;
   updatedAt?: string;
 }

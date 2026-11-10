@@ -1,0 +1,172 @@
+---
+title: 'Harness Engineering: AI 에이전트를 프로덕션에 넣는 기술'
+excerpt: OpenAI는 3명의 엔지니어가 코드 한 줄 직접 작성하지 않고 100만 줄의 제품을 만들었다. 비결은 모델이 아니라, 모델을 감싸는 시스템이었다. Harness Engineering이 뭔지, 왜 지금 가장 중요한 엔지니어링 분야인지 정리한다.
+cover_image: https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80
+tags:
+- Harness Engineering
+- AI Agent
+- Context Engineering
+- LLMOps
+- Production AI
+category: case-study
+read_time: 10
+id: harness-engineering
+published_at: '2026-03-28T07:47:59.832142Z'
+updated_at: null
+---
+
+## TL;DR
+
+Harness Engineering은 AI 에이전트를 감싸는 환경, 제약, 피드백 루프를 설계하는 엔지니어링 분야다. OpenAI는 3명이 코드 한 줄 직접 쓰지 않고 100만 줄의 제품을 만들었고, LangChain은 모델을 바꾸지 않고 harness만 개선해서 벤치마크 13.7%p를 올렸다. **모델이 아니라, 모델을 감싸는 시스템이 경쟁력이다.**
+
+---
+
+## 모델은 경쟁력이 아니다
+
+2026년 현재, Claude, GPT, Gemini, 오픈소스 모델들의 성능 차이는 점점 좁아지고 있다. 모델 자체는 더 이상 차별화 요소가 아니다.
+
+그런데 같은 모델을 쓰는 팀이라도 결과가 크게 다르다. 누구는 하루에 3.5개의 PR을 머지하고, 누구는 에이전트가 만든 코드를 디버깅하느라 하루를 날린다. 차이를 만드는 건 모델이 아니라 **모델을 감싸는 시스템**이다.
+
+이 시스템을 설계하는 분야가 **Harness Engineering**이다.
+
+---
+
+## Harness Engineering이란
+
+> "Our most difficult challenges now center on designing environments, feedback loops, and control systems that help agents accomplish our goal: build and maintain complex, reliable software at scale."
+>
+> -- OpenAI Codex 팀, [Harness Engineering](https://openai.com/index/harness-engineering/)
+
+Harness는 말 그대로 "마구(馬具)"다. 말(AI 에이전트)이 아무 방향으로 달리지 않도록 **방향을 잡아주고, 제어하고, 안전하게 만드는 장치** 전체를 뜻한다.
+
+**정의:** AI 에이전트가 프로덕션에서 안정적으로 동작하도록 환경, 제약, 피드백 루프, 검증 시스템을 설계하는 엔지니어링 분야. 모델을 만들거나 학습시키는 게 아니라, 모델을 감싸는 모든 것을 만든다.
+
+[Birgitta Böckeler](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html)(Thoughtworks Distinguished Engineer)는 Martin Fowler 사이트의 관련 글 [Humans and Agents in Software Engineering Loops](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html)에서 이렇게 정의했다:
+
+> "The harness is the collection of specifications, quality checks, and workflow guidance that control different levels of loops inside the how loop."
+
+---
+
+## OpenAI가 보여준 것
+
+[OpenAI Codex 팀의 사례](https://openai.com/index/harness-engineering/)가 이 분야를 정의했다 (2026년 2월 공개).
+
+| 지표 | 수치 |
+|------|------|
+| 엔지니어 수 | **3명** (이후 7명으로 확대) |
+| 기간 | **5개월** (2025년 8월 말~) |
+| 직접 작성한 코드 | **0줄** ("Not even the first file") |
+| 결과물 | **100만 줄+** 코드 |
+| 머지된 PR | **~1,500개** |
+| 엔지니어당 일일 PR | **3.5개** |
+| 예상 시간 절약 | 직접 작성 대비 **~10배** |
+
+이들이 가장 어려웠다고 말한 건 모델 성능이 아니라, 에이전트가 안정적으로 일하게 만드는 시스템 설계였다.
+
+---
+
+## 3가지 핵심 기둥
+
+OpenAI 팀이 제시한 harness의 세 기둥이다.
+
+### 1. Context Engineering
+
+에이전트에게 **적절한 맥락을 제공**하는 기술이다. 단순히 프롬프트를 잘 쓰는 것이 아니라, 코드베이스에 내장된 지식 체계를 설계하는 것이다.
+
+> "Give Codex a map, not a 1,000-page instruction manual."
+>
+> -- OpenAI Codex 팀
+
+1,000페이지짜리 매뉴얼이 아니라 지도를 줘라. 에이전트가 필요한 정보를 필요한 시점에 찾을 수 있는 구조를 만드는 것이 핵심이다.
+
+**실무 구현 형태:**
+
+- **`CLAUDE.md` / `AGENTS.md` / `.cursor/rules`** -- 코드베이스에 버전 관리되는 에이전트 지시 파일
+- **동적 컨텍스트** -- 옵저버빌리티 데이터, 브라우저 탐색 결과 등 실시간 정보 접근
+- **아키텍처 자체가 컨텍스트** -- 코드 구조, 네이밍 컨벤션, 디렉토리 레이아웃이 에이전트에게 "여기서 이렇게 해라"는 신호가 된다
+
+[Mitchell Hashimoto](https://mitchellh.com/writing/my-ai-adoption-journey)(HashiCorp 공동창업자)의 사례가 좋은 예시다. 그의 터미널 에뮬레이터 [Ghostty](https://ghostty.org/) 프로젝트에서, AGENTS.md 파일의 **모든 줄은 과거에 에이전트가 저지른 구체적인 실수에 대응**한다. 에이전트가 실수할 때마다 그 실수를 다시는 반복하지 않도록 규칙을 추가하는 것이다.
+
+### 2. Architectural Constraints
+
+에이전트가 **하면 안 되는 일을 못 하게 막는** 구조적 제약이다.
+
+**왜 필요한가:** 제약 없이 리팩토링을 시키면 에이전트는 코드베이스 전체를 다시 쓸 수도 있다. 프로덕션 데이터에 접근하거나, 보안 설정을 변경하거나, 의도하지 않은 범위까지 수정할 수 있다.
+
+**어떻게 막는가:**
+
+- **커스텀 린터와 구조 테스트** -- LLM 기반 검사와 결정론적 린터를 함께 사용
+- **접근 범위 제한** -- 에이전트가 건드릴 수 있는 파일, 디렉토리, 리소스를 명시적으로 한정
+- **CI 게이트** -- 모든 에이전트 PR이 통과해야 하는 자동화된 검증
+
+> **Vercel v0 팀의 교훈:** 에이전트가 사용할 수 있는 도구의 80%를 제거했더니(16개에서 핵심 몇 개로 축소), 정확도가 80%에서 **100%**로 올랐고, 토큰 소비는 **40% 감소**, 속도는 **3.5배** 빨라졌다. 제약이 곧 성능이다. ([출처](https://vercel.com/blog/we-removed-80-percent-of-our-agents-tools))
+
+### 3. Garbage Collection
+
+에이전트가 시간이 지나면서 만드는 **불일치와 엔트로피를 자동으로 정리**하는 시스템이다.
+
+에이전트가 코드를 생성하면 문서와 코드가 어긋나고, 아키텍처 규칙이 조금씩 위반되고, 스타일이 흐트러진다. 사람이 일일이 잡기 어려운 이런 드리프트를 **주기적으로 돌아다니면서 잡아주는 에이전트**를 따로 둔다.
+
+- **문서-코드 불일치** 탐지
+- **아키텍처 규칙 위반** 검출
+- **미사용 코드, 중복 패턴** 정리
+
+---
+
+## 실제 사례들
+
+| 팀 | 무엇을 했나 | 핵심 교훈 |
+|----|------------|----------|
+| **[OpenAI Codex](https://openai.com/index/harness-engineering/)** | 3명, 5개월, 100만줄, 코드 직접 작성 0줄 | 환경과 피드백 루프 설계가 가장 어렵다 |
+| **[Anthropic](https://www.anthropic.com/engineering/building-c-compiler)** | Claude 16개 병렬로 C 컴파일러 제작 (10만줄 Rust, Linux 커널 컴파일 가능) | 테스트 하네스 설계와 멀티 에이전트 조율이 핵심 |
+| **Stripe** | 에이전트가 주당 1,000개+ PR 머지, 격리 환경 + CI 제한 + 에스컬레이션 규칙 | 격리와 자동 검증이 대규모 에이전트 운용의 전제 |
+| **[Vercel v0](https://vercel.com/blog/we-removed-80-percent-of-our-agents-tools)** | 도구 80% 제거, 정확도 80% → 100% | 제약이 곧 성능 |
+| **[LangChain](https://blog.langchain.com/improving-deep-agents-with-harness-engineering/)** | 모델 변경 없이 벤치마크 13.7%p 상승 (52.8% → 66.5%) | 셀프 검증 미들웨어 하나로 달성 |
+
+**LangChain 사례**가 특히 의미 있다. 모델(GPT-5.2-Codex)은 그대로 두고, 에이전트가 작업을 끝내기 전에 태스크 명세 대비 자체 검증을 강제하는 `PreCompletionChecklistMiddleware`를 추가한 것만으로 Terminal Bench 2.0에서 Top 30 밖에서 **Top 5**로 올라갔다.
+
+> **핵심 명제:** 모델을 바꾸지 않아도 harness를 바꾸면 성능이 바뀐다.
+
+---
+
+## 기존 분야와의 관계
+
+| 분야 | 초점 | Harness Engineering과의 관계 |
+|------|------|---------------------------|
+| **MLOps** | 모델 라이프사이클 (학습, 배포, 모니터링) | 그 다음 단계. 모델이 이미 존재한다고 가정 |
+| **LLMOps** | LLM 운영 (프롬프트, 파인튜닝, 추론 스케일링) | 겹치지만 Harness Engineering이 더 넓음. 에이전트 조율, 제약, 검증 포함 |
+| **Context Engineering** | 모델에게 제공할 정보 큐레이션 | Harness Engineering의 핵심 구성 요소 중 하나 |
+| **AI Engineering** | 사전학습 모델 기반 애플리케이션 구축 | Harness Engineering은 이 안의 세부 분야. 에이전트 신뢰성에 특화 |
+
+---
+
+## 도구 생태계
+
+| 카테고리 | 도구 |
+|---------|------|
+| **Observability** | [LangSmith](https://smith.langchain.com/), [Langfuse](https://langfuse.com/), Arize, Datadog AI |
+| **Evaluation** | [Braintrust](https://www.braintrust.dev/), Terminal Bench, lm-evaluation-harness |
+| **Guardrails** | [Guardrails AI](https://www.guardrailsai.com/) (입출력 검증, PII 탐지, 할루시네이션 방지) |
+| **Prompt Management** | Agenta, Maxim (버전 관리, A/B 테스트) |
+| **Agent Framework** | LangChain/LangGraph, Claude Code, Cursor |
+| **Constraint/Rules** | `CLAUDE.md`, `AGENTS.md`, `.cursor/rules` |
+
+---
+
+## Key Takeaways
+
+1. **모델은 commoditize되었다.** 경쟁력은 모델이 아니라 모델을 감싸는 시스템에 있다.
+2. **Harness의 3기둥:** Context Engineering(맥락 제공) + Architectural Constraints(제약) + Garbage Collection(정리).
+3. **제약이 곧 성능이다.** Vercel은 도구를 줄여서 정확도를 올렸고, LangChain은 검증 단계를 추가해서 벤치마크를 올렸다.
+4. **2025 DORA 리포트**는 AI를 "증폭기(amplifier)"로 정의했다. 좋은 프랙티스가 있으면 속도를 증폭하고, 없으면 기술 부채를 증폭한다.
+5. **Harness Engineering은 그 좋은 프랙티스를 에이전트 시대에 맞게 재정의한 것**이다.
+
+---
+
+## Further Reading
+
+- [OpenAI - Harness Engineering: Leveraging Codex in an Agent-First World](https://openai.com/index/harness-engineering/) -- Harness Engineering을 정의한 원문. 3명의 엔지니어가 Codex로 제품을 만든 과정과 교훈.
+- [Martin Fowler / Birgitta Böckeler - Harness Engineering](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html) -- OpenAI 사례를 분석하고, harness의 결정론적 요소와 LLM 기반 요소를 구분한 해설.
+- [Mitchell Hashimoto - My AI Adoption Journey](https://mitchellh.com/writing/my-ai-adoption-journey) -- HashiCorp 창업자의 AI 에이전트 활용기. AGENTS.md 패턴의 원조.
+- [LangChain - Improving Deep Agents with Harness Engineering](https://blog.langchain.com/improving-deep-agents-with-harness-engineering/) -- 모델 변경 없이 harness 개선만으로 Terminal Bench Top 5에 진입한 과정.
+- [Anthropic - Harness Design for Long-Running Apps](https://www.anthropic.com/engineering/harness-design-long-running-apps) -- 장시간 실행되는 에이전트 앱을 위한 harness 설계 가이드.

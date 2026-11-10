@@ -143,156 +143,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Technical Toolkit */}
+      {/* Tech Stack CTA */}
       <section className="max-w-7xl mx-auto px-8 mb-40">
-        <motion.h2
-          className="font-label text-sm tracking-[0.4em] uppercase text-outline-variant mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        <motion.div
+          className="glass-card rounded-xl p-12 flex flex-col md:flex-row items-center justify-between gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Tech Stack
-        </motion.h2>
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={stagger}
-        >
-          {/* Core Languages */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
-          >
+          <div className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-primary text-4xl">memory</span>
             <div>
-              <span className="material-symbols-outlined text-primary mb-4 text-3xl">
-                code
-              </span>
-              <h4 className="font-headline font-bold text-xl mb-2">
-                Languages
-              </h4>
-              <p className="text-on-surface-variant text-sm font-light">
-                AI 시스템의 기반이 되는 언어들
+              <h3 className="font-headline font-bold text-xl">Tech Stack</h3>
+              <p className="text-on-surface-variant text-sm">
+                PyTorch, LangGraph, FastAPI, Docker, AWS 등 전체 기술 스택을 확인하세요.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 mt-6">
-              {['Python'].map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-surface-container-highest px-3 py-1 rounded-md text-xs font-label text-on-surface"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* AI / ML */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-3 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
+          </div>
+          <Link
+            to="/skills"
+            className="px-8 py-3 bg-primary text-on-primary rounded-md font-bold text-sm tracking-widest hover:brightness-110 transition-all flex items-center gap-2 whitespace-nowrap"
           >
-            <div>
-              <span className="material-symbols-outlined text-secondary mb-4 text-3xl">
-                neurology
-              </span>
-              <h4 className="font-headline font-bold text-xl mb-2">
-                AI / ML
-              </h4>
-              <p className="text-on-surface-variant text-sm font-light">
-                모델 학습부터 LLM 에이전트 오케스트레이션까지
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-6">
-              {['PyTorch', 'LangGraph', 'LangChain', 'Hugging Face', 'RAG', 'MLflow'].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="bg-surface-container-highest px-3 py-1 rounded-md text-xs font-label text-on-surface"
-                  >
-                    {tag}
-                  </span>
-                ),
-              )}
-            </div>
-          </motion.div>
-
-          {/* Cloud */}
-          <motion.div
-            className="md:col-span-4 lg:col-span-1 glass-card p-8 rounded-xl flex lg:flex-col justify-between items-center lg:items-start group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
-          >
-            <span className="material-symbols-outlined text-outline mb-4 text-3xl">
-              cloud
-            </span>
-            <div className="text-right lg:text-left">
-              <h4 className="font-headline font-bold text-xl">Cloud</h4>
-              <p className="text-on-surface-variant text-xs mt-1">
-                AWS / GCP / Docker Compose
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Backend & DevOps */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-4 glass-card p-8 rounded-xl relative overflow-hidden group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
-          >
-            <div className="relative z-10">
-              <h4 className="font-headline font-bold text-xl mb-4">
-                Backend &amp; DevOps
-              </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {[
-                  { name: 'FastAPI', color: 'bg-secondary' },
-                  { name: 'Python', color: 'bg-primary' },
-                  { name: 'Docker', color: 'bg-outline' },
-                  { name: 'Git', color: 'bg-secondary' },
-                ].map((item) => (
-                  <div key={item.name} className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full ${item.color}`} />
-                    <span className="font-label text-sm">{item.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="absolute -right-10 -bottom-10 opacity-5 group-hover:opacity-10 transition-opacity">
-              <span className="material-symbols-outlined text-[120px]">
-                hub
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Database */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-1 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
-          >
-            <h4 className="font-headline font-bold text-xl mb-4">
-              Database
-            </h4>
-            <ul className="space-y-2 font-label text-sm text-on-surface-variant">
-              <li>&#8226; ChromaDB</li>
-              <li>&#8226; OpenSearch</li>
-              <li>&#8226; PostgreSQL</li>
-            </ul>
-          </motion.div>
-
-          {/* Tools */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-1 glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
-            variants={fadeUp}
-          >
-            <h4 className="font-headline font-bold text-xl mb-4">
-              Tools
-            </h4>
-            <ul className="space-y-2 font-label text-sm text-on-surface-variant">
-              <li>&#8226; MCP / Claude Code</li>
-              <li>&#8226; GitHub / Jira</li>
-              <li>&#8226; Notion</li>
-            </ul>
-          </motion.div>
+            View Full Tech Stack
+            <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          </Link>
         </motion.div>
       </section>
 
@@ -620,22 +494,22 @@ export default function AboutPage() {
             variants={fadeUp}
           >
             <span className="font-label text-xs text-outline mb-2 block">
-              DACON · AI Competition
+              Open Source · PyPI
             </span>
             <h4 className="font-headline font-bold text-xl mb-3 text-on-surface">
-              구조물 안정성 물리 추론 AI 경진대회
+              ArchFlow MCP Server
             </h4>
             <p className="text-on-surface-variant text-sm font-light mb-4">
-              Dual-Stream ConvNeXt-V2 + FDA Domain Adaptation으로
-              Train/Test 간 Domain Shift 문제를 해결.
+              Jira Cloud와 draw.io 다이어그램을 브릿지하는 MCP 서버.
+              프로젝트 현황 조회, 이슈-PR-코드 추적, 아키텍처 탐색, 팀 활동 보고서를 지원.
             </p>
             <a
-              className="inline-flex items-center gap-2 text-outline text-xs font-bold uppercase tracking-widest"
-              href="https://github.com/Juhwan01/structural-stability-prediction"
+              className="inline-flex items-center gap-2 text-secondary text-xs font-bold uppercase tracking-widest"
+              href="https://github.com/Juhwan01/ArchFlow"
               target="_blank"
               rel="noopener noreferrer"
             >
-              프로젝트 보기
+              GitHub 저장소
             </a>
           </motion.div>
 

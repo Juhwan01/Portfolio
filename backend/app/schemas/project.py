@@ -27,6 +27,7 @@ class ProjectBase(BaseModel):
     video_url: Optional[str] = None
     team_composition: List[Any] = []
     slide_url: Optional[str] = None
+    highlight: Optional[str] = None
 
     @field_validator('team_composition', 'images', 'tech_stack', mode='before')
     @classmethod
@@ -57,6 +58,7 @@ class ProjectUpdate(BaseModel):
     video_url: Optional[str] = None
     team_composition: Optional[List[Any]] = None
     slide_url: Optional[str] = None
+    highlight: Optional[str] = None
 
 
 class ProjectInDB(ProjectBase):

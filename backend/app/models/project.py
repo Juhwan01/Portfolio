@@ -30,5 +30,6 @@ class Project(Base):
     video_url = Column(String, nullable=True)  # 프로젝트 영상 URL (YouTube 등)
     team_composition = Column(JSON, nullable=True, default=[])  # 팀 구성 [{role, count}]
     slide_url = Column(String, nullable=True)  # Google Slides embed URL
+    highlight = Column(String, nullable=True)  # 핵심 성과 뱃지 (예: "Hit@10 70.6%")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

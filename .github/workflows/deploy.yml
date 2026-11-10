@@ -38,12 +38,21 @@ jobs:
           username: ${{ secrets.LIGHTSAIL_USER }}
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           port: ${{ secrets.LIGHTSAIL_PORT || 22 }}
+          # Fail loudly, keep the server identical to origin/main, and build before swapping so a
+          # failed build leaves the running site untouched. (The old script ignored a failed
+          # `git pull` and rebuilt whatever was on disk, which let the server drift from GitHub.)
           script: |
-            sudo su - -c '
+            sudo -n bash -euo pipefail -c '
               cd /root/Portfolio
-              git pull origin main
-              docker compose down
-              docker compose up -d --build
+              git fetch --prune origin main
+              echo "deploying $(git rev-parse --short HEAD) -> $(git rev-parse --short origin/main)"
+              git reset --hard origin/main
+              docker compose build
+              docker compose up -d --remove-orphans
+              # nginx.conf is a single-file bind mount: recreate so a changed file is picked up.
+              docker compose up -d --force-recreate --no-deps nginx
+              curl -fsS -o /dev/null --retry 10 --retry-delay 3 --retry-all-errors https://juhwan.dev/
+              curl -fsS -o /dev/null --retry 5 --retry-delay 3 --retry-all-errors https://juhwan.dev/api/projects/
               docker image prune -f
-              echo "Deploy complete: $(date)"
+              echo "Deploy complete: $(git rev-parse --short HEAD) at $(date)"
             '

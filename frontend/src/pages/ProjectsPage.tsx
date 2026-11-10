@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getProjects } from '@services/api'
 import { PROJECT_CATEGORIES, CATEGORY_LABELS } from '@utils/constants'
@@ -72,9 +72,16 @@ function FeaturedCard({ project }: { project: Project }) {
           )}
           <span className="font-label text-xs text-on-surface-variant tracking-widest">{year}</span>
         </div>
-        <h3 className="text-4xl font-headline font-extrabold text-on-surface mb-4">
-          {project.title}
-        </h3>
+        <div className="flex items-center gap-3 mb-4">
+          <h3 className="text-4xl font-headline font-extrabold text-on-surface">
+            {project.title}
+          </h3>
+          {project.highlight && (
+            <span className="px-3 py-1 bg-primary/15 text-primary text-xs font-bold rounded-full border border-primary/30 whitespace-nowrap">
+              {project.highlight}
+            </span>
+          )}
+        </div>
         <p className="text-on-surface-variant max-w-xl mb-6 leading-relaxed">
           {project.description}
         </p>
@@ -127,9 +134,16 @@ function MediumCard({ project, index }: { project: Project; index: number }) {
               {(CATEGORY_LABELS[project.category] ?? project.category).toUpperCase()}
             </span>
           )}
-          <h3 className="text-2xl font-headline font-bold text-on-surface mb-4 group-hover:text-secondary transition-colors">
-            {project.title}
-          </h3>
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
+            <h3 className="text-2xl font-headline font-bold text-on-surface group-hover:text-secondary transition-colors">
+              {project.title}
+            </h3>
+            {project.highlight && (
+              <span className="px-2 py-0.5 bg-primary/15 text-primary text-[10px] font-bold rounded-full border border-primary/30 whitespace-nowrap">
+                {project.highlight}
+              </span>
+            )}
+          </div>
           <p className="text-on-surface-variant text-sm mb-6 leading-relaxed line-clamp-3">
             {project.description}
           </p>
@@ -181,9 +195,16 @@ function WideImageCard({ project, index }: { project: Project; index: number }) 
           )}
           <span className="font-label text-xs text-on-surface-variant tracking-widest">{year}</span>
         </div>
-        <h3 className="text-3xl font-headline font-extrabold text-on-surface mb-4">
-          {project.title}
-        </h3>
+        <div className="flex items-center gap-3 mb-4">
+          <h3 className="text-3xl font-headline font-extrabold text-on-surface">
+            {project.title}
+          </h3>
+          {project.highlight && (
+            <span className="px-3 py-1 bg-primary/15 text-primary text-xs font-bold rounded-full border border-primary/30 whitespace-nowrap">
+              {project.highlight}
+            </span>
+          )}
+        </div>
         <p className="text-on-surface-variant mb-6 leading-relaxed line-clamp-3">
           {project.description}
         </p>
@@ -204,11 +225,17 @@ function WideImageCard({ project, index }: { project: Project; index: number }) 
 }
 
 export default function ProjectsPage() {
+  const [searchParams] = useSearchParams()
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState('All')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') ?? '')
   const [visibleArchiveCount, setVisibleArchiveCount] = useState(5)
+
+  useEffect(() => {
+    const urlSearch = searchParams.get('search')
+    if (urlSearch) setSearchQuery(urlSearch)
+  }, [searchParams])
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -270,9 +297,6 @@ export default function ProjectsPage() {
               <p className="text-on-surface-variant text-lg md:text-xl max-w-lg font-light leading-relaxed">
                 AI/ML, 웹 서비스, 백엔드 등 다양한 프로젝트를 소개합니다.
               </p>
-            </div>
-            <div className="hidden lg:block w-32 h-32 border-l border-t border-outline-variant/30 opacity-50 relative">
-              <div className="absolute top-0 right-0 w-4 h-4 bg-secondary" />
             </div>
           </div>
         </motion.section>

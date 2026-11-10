@@ -1,0 +1,18 @@
+# 옛 사이트의 프로젝트 주소(/projects/<DB id>)를 새 주소로 넘긴다. 이전 때 한 번 만든 표라 고칠 일 없음.
+chef's-market: chefs-market
+d2c8c285-0d6b-4201-875e-32867300790e: saim-agent-hub
+5efd3a9a-ef62-4d0f-9959-5203cc6f437a: saim-recsys
+277c5baa-98e7-410d-9a28-9cd4b87ed6aa: yogi-eottae
+allerguard: allerguard
+71c26b00-924b-447f-a84e-25f1753d89df: wide
+5e8986af-a27d-493b-86fc-3d5108939876: papergraph
+lime: lime-streaming
+e59069e5-86d4-4567-99b1-28acbc28f8fc: delusion-diary
+3b0a6432-3ea0-4358-8549-6d4873fb4dbe: qa-rebuttal-bot
+40f91fa2-56bc-461a-b818-50309672acf2: kleague-pass-prediction
+003ff04d-a536-4526-94aa-e0bd9b54ada6: portfolio
+446b115a-a028-421d-8e8b-df443509dc66: archflow
+5337de6d-1891-4e06-885d-f35ee08104fd: jira-extended-mcp
+cae41c4a-7231-4feb-9d10-4dd66605d377: smartflow
+42d9317b-6c7d-4f3d-82c6-7cef43449917: kleague-pass-prediction-notebook
+46d56a4e-f319-404d-a094-d01692f38794: structural-stability
