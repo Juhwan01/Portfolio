@@ -111,7 +111,14 @@ function Facts({ project }: { readonly project: Project }) {
   )
 }
 
-const MINE_BADGE = 'border-transparent bg-lime-300 text-neutral-900 shadow-none hover:bg-lime-300 text-[11px]'
+/** Lime "담당" tag. Its own element: layering lime classes over <Badge> lost to bg-primary in the production CSS order. */
+function MineBadge({ className }: { readonly className?: string }) {
+  return (
+    <span className={cn('inline-flex items-center rounded-md bg-lime-300 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-900', className)}>
+      담당
+    </span>
+  )
+}
 
 /** Shipped app: its store screens, with the parts I built marked. */
 function Screens({ project }: { readonly project: Project }) {
@@ -120,7 +127,7 @@ function Screens({ project }: { readonly project: Project }) {
     <div className="flex flex-col gap-4">
       {product.features.some((f) => f.mine) && (
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
-          <Badge className={MINE_BADGE}>담당</Badge>
+          <MineBadge />
           표시한 화면이 내가 만든 부분입니다
         </p>
       )}
@@ -134,7 +141,7 @@ function Screens({ project }: { readonly project: Project }) {
               )}
             >
               <img src={f.image} alt={`${f.title} 화면`} loading="lazy" className="h-full w-full object-cover object-top" />
-              {f.mine && <Badge className={cn(MINE_BADGE, 'absolute top-2 left-2')}>담당</Badge>}
+              {f.mine && <MineBadge className="absolute top-2 left-2" />}
             </div>
             <figcaption className="flex flex-col gap-0.5">
               <span className="text-sm font-semibold">{f.title}</span>
