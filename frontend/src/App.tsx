@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import HomePage from '@/site/HomePage'
+import PostPage from '@/site/PostPage'
 import ProjectPage from '@/site/ProjectPage'
 import SiteLayout, { NotFoundPage } from '@/site/SiteLayout'
 
@@ -19,6 +20,10 @@ function App() {
           <Route path="/project/:id" element={<LegacyProjectRedirect />} />
           <Route path="/projects" element={<Navigate to="/#work" replace />} />
           <Route path="/about" element={<Navigate to="/#experience" replace />} />
+          <Route path="/skills" element={<Navigate to="/#stack" replace />} />
+          <Route path="/blog" element={<Navigate to="/#writing" replace />} />
+          <Route path="/blog/:id" element={<PostPage />} />
+          <Route path="/contact" element={<Navigate to="/#contact" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

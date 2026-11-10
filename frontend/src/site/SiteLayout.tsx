@@ -14,6 +14,35 @@ function useScrollOnNavigate() {
   }, [pathname, hash])
 }
 
+function ContactBand() {
+  const { links } = profile
+  return (
+    <section className="contact dark" aria-labelledby="contact">
+      <div className="wrap">
+        <p className="mono eyebrow">연락</p>
+        <h2 id="contact">
+          같이 만들 서비스가 있다면
+          <br />
+          편하게 연락 주세요.
+        </h2>
+        <div className="link-buttons">
+          <a href={`mailto:${links.email}`} className="primary">
+            {links.email}
+          </a>
+          <a href={links.github} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          {links.blog && (
+            <a href={links.blog} target="_blank" rel="noreferrer">
+              Blog
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function SiteLayout() {
   useScrollOnNavigate()
   return (
@@ -25,34 +54,29 @@ export default function SiteLayout() {
         <div className="wrap">
           <Link to="/" className="brand">
             {profile.name}
+            <span className="brand-sub mono">{profile.name_en}</span>
           </Link>
           <nav className="nav" aria-label="주요 메뉴">
             <Link to="/#work">작업</Link>
-            <Link to="/#field">현장</Link>
+            <Link to="/#stack">기술</Link>
+            <Link to="/#writing">글</Link>
             <Link to="/#experience">경력</Link>
-            <a href={`mailto:${profile.links.email}`}>연락</a>
+            <a href="#contact" className="nav-cta">
+              연락
+            </a>
           </nav>
         </div>
       </header>
       <main id="main">
         <Outlet />
       </main>
-      <footer className="site-footer">
+      <ContactBand />
+      <footer className="site-footer dark">
         <div className="wrap">
           <span>
             © {new Date().getFullYear()} {profile.name} · {profile.name_en}
           </span>
-          <span className="footer-links">
-            <a href={profile.links.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            {profile.links.blog && (
-              <a href={profile.links.blog} target="_blank" rel="noreferrer">
-                Blog
-              </a>
-            )}
-            <a href={`mailto:${profile.links.email}`}>{profile.links.email}</a>
-          </span>
+          <span className="mono">juhwan.dev</span>
         </div>
       </footer>
     </>
@@ -61,10 +85,14 @@ export default function SiteLayout() {
 
 export function NotFoundPage() {
   return (
-    <div className="wrap not-found">
-      <p className="mono muted">404</p>
-      <h1>페이지를 찾을 수 없습니다</h1>
-      <Link to="/">처음으로</Link>
-    </div>
+    <section className="page-hero dark">
+      <div className="wrap not-found">
+        <p className="mono eyebrow">404</p>
+        <h1>페이지를 찾을 수 없습니다</h1>
+        <Link to="/" className="text-link">
+          처음으로 →
+        </Link>
+      </div>
+    </section>
   )
 }
