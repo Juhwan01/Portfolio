@@ -4,7 +4,7 @@ const SITE_NAME = '정주환 | AI Engineer Portfolio'
 const SITE_URL = 'https://juhwan.dev'
 const DEFAULT_DESCRIPTION =
   'AI 엔지니어 정주환의 포트폴리오. React, FastAPI, Three.js로 구축한 프로젝트와 기술 블로그를 확인하세요.'
-const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`
+const DEFAULT_IMAGE = `${SITE_URL}/og.png`
 
 interface SEOProps {
   readonly title?: string
