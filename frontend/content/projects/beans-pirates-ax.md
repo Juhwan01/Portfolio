@@ -30,8 +30,9 @@ metrics:
   scope: 이 체계로 운영한 챗봇 저장소 · 2026.04–11
 links:
   github: https://github.com/Juhwan01/jira-extended-mcp-server
-cover: /images/projects/archflow/thumbnail.png
+cover: /images/projects/beans-pirates-ax/cover.png
 gallery:
+- /images/projects/archflow/thumbnail.png
 - /images/projects/jira-extended-mcp/thumbnail.png
 ---
 

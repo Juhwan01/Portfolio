@@ -31,7 +31,9 @@ metrics:
 links:
   github: https://github.com/Juhwan01/jira-extended-mcp-server
   demo: https://pypi.org/project/jira-extended-mcp/
-cover: /images/projects/jira-extended-mcp/thumbnail.png
+cover: /images/projects/jira-extended-mcp/cover.png
+gallery:
+- /images/projects/jira-extended-mcp/thumbnail.png
 part_of: beans-pirates-ax
 ---
 
