@@ -1,56 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import ErrorBoundary from '@components/common/ErrorBoundary'
-import ToastContainer from '@components/common/Toast'
-import PublicLayout from '@/layouts/PublicLayout'
-import Home from '@pages/Home'
-import AboutPage from '@pages/AboutPage'
-import ProjectsPage from '@pages/ProjectsPage'
-import ProjectDetail from '@pages/ProjectDetail'
-import SkillsPage from '@pages/SkillsPage'
-import BlogPage from '@pages/BlogPage'
-import BlogPost from '@pages/BlogPost'
-import ContactPage from '@pages/ContactPage'
-import NotFound from '@pages/NotFound'
+import { BrowserRouter as Router, Navigate, Route, Routes, useParams } from 'react-router-dom'
+import HomePage from '@/site/HomePage'
+import ProjectPage from '@/site/ProjectPage'
+import SiteLayout, { NotFoundPage } from '@/site/SiteLayout'
 
-// Admin pages
-import Login from '@pages/admin/Login'
-import AdminLayout from '@pages/admin/AdminLayout'
-import Dashboard from '@pages/admin/Dashboard'
-import ProjectsAdmin from '@pages/admin/ProjectsAdmin'
-import SkillsAdmin from '@pages/admin/SkillsAdmin'
-import BlogAdmin from '@pages/admin/BlogAdmin'
+/** The previous site also served projects at /project/:id. */
+function LegacyProjectRedirect() {
+  const { id = '' } = useParams()
+  return <Navigate to={`/projects/${id}`} replace />
+}
 
 function App() {
   return (
-    <ErrorBoundary>
     <Router>
-      <ToastContainer />
       <Routes>
-        {/* Public routes with shared layout */}
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/project/:id" element={<ProjectDetail />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-
-        {/* Admin routes */}
-        <Route path="/admin/login" element={<Login />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="projects" element={<ProjectsAdmin />} />
-          <Route path="skills" element={<SkillsAdmin />} />
-          <Route path="blog" element={<BlogAdmin />} />
+        <Route element={<SiteLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
+          <Route path="/project/:id" element={<LegacyProjectRedirect />} />
+          <Route path="/projects" element={<Navigate to="/#work" replace />} />
+          <Route path="/about" element={<Navigate to="/#experience" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Router>
-    </ErrorBoundary>
   )
 }
 

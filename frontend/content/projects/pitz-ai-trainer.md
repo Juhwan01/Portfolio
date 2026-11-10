@@ -18,7 +18,39 @@ tags:
 - Redis
 - Langfuse
 - AWS
+product:
+  name: PITZ
+  tagline: 내 몸을 가장 잘 아는 AI 헬스 트레이너
+  about: 신체 데이터와 운동 기록을 바탕으로 운동부터 식단, 일상까지 코칭하는 AI 피트니스 앱입니다. 그중 회원과 대화하는 AI 트레이너 채팅을 맡았습니다.
+  icon: /images/projects/pitz-ai-trainer/app-icon.jpg
+  features:
+  - title: 실시간 코칭
+    text: 운동을 기록하면 세트마다 내게 맞는 무게와 횟수를 안내합니다.
+    image: /images/projects/pitz-ai-trainer/store-coaching.jpg
+  - title: AI 트레이너와 대화
+    text: 기록과 지난 대화를 기억하는 트레이너에게 운동 중에도, 쉬는 날에도 묻고 이야기합니다.
+    image: /images/projects/pitz-ai-trainer/store-chat.jpg
+    mine: true
+  - title: 취향대로 고르는 트레이너
+    text: 말투와 코칭 성향이 다른 트레이너 페르소나 가운데 나와 맞는 코치를 고릅니다.
+    image: /images/projects/pitz-ai-trainer/persona-sua.jpg
+    mine: true
+  - title: 사진 한 장 식단 분석
+    text: 음식 사진으로 칼로리와 영양소를 분석하고 목표에 맞는 피드백을 받습니다.
+    image: /images/projects/pitz-ai-trainer/store-diet.jpg
+responsibilities:
+- 챗봇 서버 설계·개발·운영 전담 — FastAPI·LangGraph 서버를 처음부터 만들어 AWS에 배포하고 장애 대응까지
+- 트레이너 페르소나와 대화 기억 — 대화 흐름은 요약으로, 회원에 대한 사실은 벡터 저장소에 나눠 기억
+- 기록에 근거한 답변 — 기록을 묻는 말이면 회원 DB를 직접 조회해 그 수치로 답하는 흐름
+- 대화로 기록을 바꾸는 에이전트 — 확인 후 실행 구조를 설계하고 에이전트 구조 재편을 주도
+- 품질·비용 관측 — 회원 식별자를 가명화한 트레이싱과 상황별 실사용 시험 체계
 metrics:
+- value: 5개월
+  label: 착수부터 스토어 정식 출시까지
+  scope: 2026.04 서버 착수 → 2026.09 App Store 공개
+- value: 71%
+  label: 2일 이상 재방문
+  scope: 베타 유입 이용자 49명 · 2026.09
 - value: 90% → 0%
   label: 복합 요청 누락률
   scope: 구조 재편 사전 검증 · 같은 실패 사례 10회 재현
@@ -28,9 +60,6 @@ metrics:
 - value: 98%
   label: 요청 최종 반영률
   scope: 사전 검증 · 46개 상황 대화 232건 중 228건
-- value: 71%
-  label: 2일 이상 재방문
-  scope: 베타 유입 이용자 49명 · 2026.09
 links:
   website: https://www.pitz.co.kr
   appstore: https://apps.apple.com/kr/app/id6802202356
@@ -42,10 +71,6 @@ gallery:
 - /images/projects/pitz-ai-trainer/store-coaching.jpg
 - /images/projects/pitz-ai-trainer/store-diet.jpg
 ---
-
-## 한 줄 요약
-
-PITZ 앱 안의 "AI 트레이너"입니다. 회원이 고른 트레이너 페르소나가 운동·식단 기록과 지난 대화를 기억한 채 코칭하고, 대화로 기록을 고쳐 주기도 합니다. 챗봇 서버를 처음부터 혼자 설계해 착수 약 5개월 만에 App Store와 Google Play에 출시했고, 지금도 운영과 개선을 맡고 있습니다.
 
 ## 맥락과 제약
 
