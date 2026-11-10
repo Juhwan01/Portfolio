@@ -3,7 +3,7 @@
 
 name: 정주환
 name_en: Jung Juhwan
-headline: LLM 에이전트를 실서비스로 내보내는 AI 엔지니어
+headline: 에이전트를 실서비스로 내보내는 AI 엔지니어
 focus: LLM Pipeline · RAG · Multi-Agent Systems
 intro: 문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백엔드, 배포와 운영까지 아이디어를 실제 서비스로 만드는 전 과정을 직접 맡아 왔습니다.
 
@@ -117,3 +117,6 @@ timeline:
       - text: 데이콘 K리그-서울시립대 공개 AI 경진대회 Track1 상위 9%
         project: kleague-pass-prediction
       - text: Praises Us 개발팀 팀장으로 여러 프로젝트 리딩
+  - title: 인제대학교 컴퓨터공학과 입학
+    mark: 입학
+    period: { start: 2020-03, end: 2020-03 }
