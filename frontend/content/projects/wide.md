@@ -10,7 +10,6 @@ team: 2인
 status: completed
 featured: true
 order: 5
-accent: '#86e3a6'
 category: AI
 tags:
 - Python

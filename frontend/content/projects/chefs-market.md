@@ -10,7 +10,6 @@ team: Frontend 1 · Backend 2 · AI 2
 status: completed
 featured: true
 order: 6
-accent: '#ffbd73'
 category: ML
 tags:
 - Python

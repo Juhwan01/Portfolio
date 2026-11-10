@@ -9,7 +9,6 @@ team: AI 1
 status: in-progress
 featured: false
 order: 16
-accent: '#9fd8ff'
 category: AI
 tags:
 - OpenSearch

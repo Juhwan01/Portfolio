@@ -32,7 +32,6 @@ PUBLIC = ROOT / "frontend" / "public"
 REQUIRED = ("title", "summary", "period", "status", "order")
 STATUSES = {"shipped", "completed", "in-progress", "archived"}
 MONTH = re.compile(r"^\d{4}-\d{2}$")
-HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 LOCAL_MEDIA = re.compile(r"(/(?:images|videos)/[^\s)\"'>]+)")
 
 problems: list[str] = []
@@ -69,8 +68,6 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
     for m in meta.get("metrics") or []:
         if not m.get("scope"):
             problems.append(f"{owner}: metric '{m.get('value')}' has no scope")
-    if "accent" in meta and not HEX.match(str(meta["accent"])):
-        problems.append(f"{owner}: accent '{meta['accent']}' is not #rrggbb")
     check_local(owner, meta)
     check_local(owner, body)
 
@@ -88,9 +85,8 @@ for section in ("highlights", "awards", "competitions", "open_source"):
     for item in profile.get(section) or []:
         if item.get("project") and item["project"] not in projects:
             problems.append(f"profile.yaml {section}: unknown project '{item['project']}'")
-for i, h in enumerate(profile.get("highlights") or []):
-    if not h.get("value") or not h.get("label"):
-        problems.append(f"profile.yaml highlights[{i}]: needs value and label")
+if not profile.get("about"):
+    problems.append("profile.yaml: about missing")
 for section in ("experience", "education", "activities"):
     for i, item in enumerate(profile.get(section) or []):
         check_period(f"profile.yaml {section}[{i}]", item.get("period"))

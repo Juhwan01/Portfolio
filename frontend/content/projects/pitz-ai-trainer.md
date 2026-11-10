@@ -8,7 +8,6 @@ role: AI Engineer · AI 트레이너 챗봇 설계·개발·운영 전담, AI �
 status: shipped
 featured: true
 order: 1
-accent: '#d4f55a'
 category: AI Agent
 tags:
 - LangGraph
