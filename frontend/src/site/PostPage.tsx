@@ -23,7 +23,7 @@ export function BlogPage() {
           </span>
         </h1>
         <p className="text-sm text-muted-foreground mb-8">
-          AI 에이전트와 LLM 엔지니어링에 관해 정리한 글입니다.
+          모델 출시와 연구, 추론 속도와 가격의 변화가 LLM 서비스 구조에서 무엇을 바꾸는지 따져 본 글입니다.
           {profile.links.blog && (
             <>
               {' '}
