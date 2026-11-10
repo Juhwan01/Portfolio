@@ -76,20 +76,20 @@ export interface ProfileItem {
   points?: string[]
 }
 
-export interface DatedItem {
-  date: string
+/** One activity on the home timeline (a job, a course, a contest, an event, graduation). */
+export interface TimelineEntry {
   title: string
-  project?: string
-}
-
-export interface Activity {
-  title: string
-  org?: string
+  /** two-character label in the round mark, e.g. '수상' */
+  mark: string
   period: Period
+  role?: string
   date_detail?: string
   place?: string
-  summary: string
+  summary?: string
+  /** what came out of the activity; `project` links the line to that project page */
+  items?: { text: string; project?: string }[]
   photos?: string[]
+  /** label → URL */
   links?: Record<string, string>
 }
 
@@ -105,10 +105,7 @@ export interface Profile {
   links: { github: string; blog?: string; email: string }
   experience: ProfileItem[]
   education: ProfileItem[]
-  awards: DatedItem[]
-  competitions: DatedItem[]
-  open_source: { title: string; note: string; project?: string }[]
-  activities: Activity[]
+  timeline: TimelineEntry[]
 }
 
 export interface Post {

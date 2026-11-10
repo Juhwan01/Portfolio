@@ -33,26 +33,6 @@ experience:
       - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
       - AI 리포트 담당 — 운동 기록 해석 리포트와 월간 종합 리포트 배치 파이프라인
       - 사내 AX 전환 — Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계
-  - org: kakao x goorm 생성형 AI 부트캠프
-    mark: kg
-    role: 팀 리더 · 우수수료생
-    period: { start: 2025-05, end: 2025-11 }
-    points:
-      - 요기어때?(우수프로젝트상) AI 팀 리드, AllerGuard AI 베이스라인 설계
-  - org: AI Leaders (SW중심대학사업단)
-    mark: AI
-    role: 팀 리더
-    period: { start: 2024-03, end: 2024-10 }
-    points:
-      - 생성형 AI 심화 과정에서 소수정예 팀 리더로 스터디와 프로젝트 주도
-      - 재정정보 AI 검색 경진대회 Private 4위 / 359팀(팀 DongBee 팀원), 민원누리 SW 경진대회 참가
-  - org: IL LAB · Praises Us
-    mark: IL
-    role: 학부 연구실 부팀장 · 개발팀 팀장
-    period: { start: 2023-03, end: 2026-02 }
-    points:
-      - IL LAB 부팀장으로 AI/ML 연구, 데이콘 K리그 패스 도착 좌표 예측 대회 상위 9%
-      - Praises Us 개발팀 팀장으로 다수 프로젝트 리딩
 
 education:
   - org: 인제대학교
@@ -61,37 +41,15 @@ education:
     period: { start: 2020-03, end: 2026-02 }
     note: GPA 4.16 / 4.5 · 졸업작품 Chef's Market
 
-awards:
-  - date: 2025-11
-    title: kakao x goorm 생성형 AI 과정 우수프로젝트상 · 우수수료생
-    project: yogi-eottae
-  - date: 2024-12
-    title: INJE 캡스톤디자인 경진대회 장려상
-    project: wide
-
-competitions:
-  - date: 2026-01
-    title: 데이콘 K리그-서울시립대 공개 AI 경진대회 Track1 — 상위 9%
-    project: kleague-pass-prediction
-  - date: 2025-12
-    title: 데이콘 스마트 제조 AI Agent 해커톤 2025 — 본선 진출
-    project: smartflow
-  - date: 2024-08
-    title: 데이콘 재정정보 AI 검색 알고리즘 경진대회 — Private 4위 / 359팀
-    project: dacon-fiscal-ai-search
-
-open_source:
-  - title: Jira Extended MCP Server
-    note: PyPI jira-extended-mcp · 이슈 일괄 생성·릴리스·스프린트를 다루는 Jira MCP 서버
-    project: jira-extended-mcp
-  - title: ArchFlow
-    note: PyPI archflow-hub · Jira·GitHub·draw.io 통합 MCP 서버
-    project: archflow
-
-activities:
-  - title: SURF 2026 INCHEON (인천스타트업위크) 전시 참가
-    org: Beans Pirates
+# 첫 화면 "걸어온 길". 활동 하나(소속·과정·대회·행사·졸업·입사)에 한 줄, 그 안에서 거둔 성과를 items로 묶는다.
+# 위에서 아래로 최신순으로 적는다. 한 달짜리 일은 period의 start와 end를 같게 둔다.
+#   mark: 동그라미 안 글자(두 글자) · role: 제목 아래 한 줄 · items[].project: 있으면 그 프로젝트로 링크
+#   photos: 있으면 아래에 작은 사진으로 보인다 · links: 표시 이름 → 주소
+timeline:
+  - title: SURF 2026 INCHEON (인천스타트업위크) 전시
+    mark: 전시
     period: { start: 2026-10, end: 2026-10 }
+    role: Beans Pirates
     date_detail: 2026.10.14 – 10.15
     place: 인천 송도컨벤시아 · 부스 D-04 (Seed)
     summary: AI 피트니스 앱 PITZ와 헬스장 CRM PITZ Manager를 부스에서 시연했습니다.
@@ -100,4 +58,62 @@ activities:
       - /images/activity/surf-2026/booth-desk.jpg
       - /images/activity/surf-2026/booth-demo.jpg
     links:
-      event: https://www.iswsurf.com/
+      행사 소개: https://www.iswsurf.com/
+  - title: Beans Pirates 입사
+    mark: 입사
+    period: { start: 2026-02, end: 2026-02 }
+    role: AI Engineer
+    items:
+      - text: PITZ AI 트레이너·AI 리포트 App Store·Google Play 출시
+        project: pitz-ai-trainer
+      - text: 사내 AX — 에이전트 중심 개발 체계
+        project: beans-pirates-ax
+      - text: 오픈소스 공개 — Jira Extended MCP (PyPI)
+        project: jira-extended-mcp
+      - text: 오픈소스 공개 — ArchFlow (PyPI)
+        project: archflow
+  - title: 인제대학교 컴퓨터공학과 졸업
+    mark: 졸업
+    period: { start: 2026-02, end: 2026-02 }
+    items:
+      - text: 졸업작품 Chef's Market — 5인 팀 팀장
+        project: chefs-market
+  - title: 데이콘 스마트 제조 AI Agent 해커톤 2025
+    mark: 대회
+    period: { start: 2025-12, end: 2025-12 }
+    items:
+      - text: 본선 진출 — SmartFlow
+        project: smartflow
+  - title: kakao x goorm 생성형 AI 부트캠프
+    mark: 교육
+    period: { start: 2025-05, end: 2025-11 }
+    role: 팀 리더 · 우수수료생
+    items:
+      - text: 우수프로젝트상 — 요기어때? AI 팀 리드
+        project: yogi-eottae
+      - text: AllerGuard AI 베이스라인 설계
+        project: allerguard
+  - title: INJE 캡스톤디자인 경진대회
+    mark: 수상
+    period: { start: 2024-09, end: 2024-12 }
+    role: 팀 Praises Us · 메인 개발자(2인 팀)
+    items:
+      - text: 장려상 — W:IDE
+        project: wide
+    photos:
+      - /images/projects/wide/thumbnail.png
+  - title: AI Leaders (SW중심대학사업단)
+    mark: 교육
+    period: { start: 2024-03, end: 2024-10 }
+    role: 팀 리더
+    items:
+      - text: 생성형 AI 심화 과정에서 소수정예 팀을 이끌며 스터디와 프로젝트 주도
+      - text: 민원누리 SW 경진대회 참가
+  - title: IL LAB · Praises Us
+    mark: 연구
+    period: { start: 2023-03, end: 2026-02 }
+    role: 학부 연구실 부팀장 · 개발팀 팀장
+    items:
+      - text: 데이콘 K리그-서울시립대 공개 AI 경진대회 Track1 상위 9%
+        project: kleague-pass-prediction
+      - text: Praises Us 개발팀 팀장으로 여러 프로젝트 리딩
