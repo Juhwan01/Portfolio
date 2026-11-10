@@ -15,6 +15,7 @@ export function BlogPage() {
       <Helmet>
         <title>{`글 — ${profile.name}`}</title>
       </Helmet>
+      <BackLink to="/#writing" label="홈" />
       <BlurFade delay={D}>
         <h1 className="text-2xl font-semibold tracking-tight mb-2">
           글{' '}
