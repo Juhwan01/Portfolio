@@ -99,15 +99,25 @@ if len(orders) != len(set(orders)):
 
 profile = load((CONTENT / "profile.yaml").read_text(encoding="utf-8"))
 check_local("profile.yaml", profile)
-for section in ("highlights", "awards", "competitions", "open_source"):
-    for item in profile.get(section) or []:
-        if item.get("project") and item["project"] not in projects:
-            problems.append(f"profile.yaml {section}: unknown project '{item['project']}'")
 if not profile.get("about"):
     problems.append("profile.yaml: about missing")
-for section in ("experience", "education", "activities"):
+for section in ("experience", "education"):
     for i, item in enumerate(profile.get(section) or []):
         check_period(f"profile.yaml {section}[{i}]", item.get("period"))
+timeline = profile.get("timeline") or []
+for i, entry in enumerate(timeline):
+    owner = f"profile.yaml timeline[{i}] ({entry.get('title')})"
+    problems += [f"{owner}: '{k}' missing" for k in ("title", "mark") if not entry.get(k)]
+    check_period(owner, entry.get("period"))
+    for item in entry.get("items") or []:
+        if not isinstance(item, dict) or not isinstance(item.get("text"), str):
+            problems.append(f"{owner}: each item needs a text line (quote it if it contains ': ')")
+        elif item.get("project") and item["project"] not in projects:
+            problems.append(f"{owner}: unknown project '{item['project']}'")
+# The page shows the file order, which should be newest first.
+starts = [str((e.get("period") or {}).get("start", "")) for e in timeline]
+if starts != sorted(starts, reverse=True):
+    problems.append("profile.yaml timeline: entries are not newest first by period.start")
 
 # CommonMark won't close `**` that ends in punctuation and is glued to a letter (or open one the
 # other way round), so `**"인용"**은` or `**−32%**에` shows literal asterisks. Keep punctuation

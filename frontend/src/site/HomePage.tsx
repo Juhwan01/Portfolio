@@ -16,7 +16,7 @@ import {
   sortedPosts,
 } from './content'
 import Markdown from './Markdown'
-import type { LinkKind, ProfileItem, Project } from './types'
+import type { LinkKind, ProfileItem, Project, TimelineEntry } from './types'
 import { BLUR_FADE_DELAY, Badge, BlurFade, FlickeringGrid, Icons, LogoMark, SectionPill, cn } from './ui'
 
 const D = BLUR_FADE_DELAY
@@ -326,117 +326,89 @@ function Projects() {
   )
 }
 
-/* ---------- awards, competitions, field, open source (timeline) ---------- */
+/* ---------- timeline: one row per activity, its results inside ---------- */
 
-interface TimelineEntry {
-  date: string
-  title: string
-  mark: string
-  image?: string
-  place?: string
-  description?: string
-  links: { label: string; href: string }[]
-}
-
-function timelineEntries(): TimelineEntry[] {
-  const projectLink = (slug?: string) => {
-    const p = slug ? findProject(slug) : undefined
-    return p ? [{ label: p.title, href: `/projects/${p.slug}` }] : []
-  }
-  const awards: TimelineEntry[] = profile.awards.map((a) => ({
-    date: a.date,
-    title: a.title,
-    mark: '수상',
-    links: projectLink(a.project),
-  }))
-  const competitions: TimelineEntry[] = profile.competitions.map((c) => ({
-    date: c.date,
-    title: c.title,
-    mark: '대회',
-    links: projectLink(c.project),
-  }))
-  const field: TimelineEntry[] = profile.activities.map((a) => ({
-    date: a.period.start,
-    title: a.title,
-    mark: '현장',
-    image: a.photos?.[0],
-    place: [a.date_detail, a.place].filter(Boolean).join(' · '),
-    description: a.summary,
-    links: a.links?.event ? [{ label: '행사 소개', href: a.links.event }] : [],
-  }))
-  const openSource: TimelineEntry[] = profile.open_source.map((o) => {
-    const p = o.project ? findProject(o.project) : undefined
-    return {
-      date: p?.period.start ?? '',
-      title: `${o.title} 공개`,
-      mark: 'OSS',
-      description: o.note,
-      links: [
-        ...projectLink(o.project),
-        ...(p?.links?.github ? [{ label: 'GitHub', href: p.links.github }] : []),
-      ],
-    }
-  })
-  return [...awards, ...competitions, ...field, ...openSource].sort((a, b) => b.date.localeCompare(a.date))
-}
-
-function Recognition() {
-  const entries = timelineEntries()
+function TimelineRow({ entry: e, last }: { entry: TimelineEntry; last: boolean }) {
+  const meta = [e.role, e.date_detail, e.place].filter(Boolean).join(' · ')
+  const links = Object.entries(e.links ?? {})
   return (
-    <section id="recognition" className="overflow-hidden">
+    <li className="relative w-full flex items-start gap-5 sm:gap-8 pb-10 last:pb-0">
+      <div className="relative flex shrink-0 justify-center self-stretch">
+        {!last && <div className="absolute left-1/2 -translate-x-1/2 top-0 h-[calc(100%+2.5rem)] w-px bg-border" aria-hidden="true" />}
+        <div className="relative z-10 size-10 bg-card border rounded-full shadow ring-2 ring-border flex items-center justify-center text-[11px] font-semibold text-muted-foreground">
+          {e.mark}
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col gap-1.5 min-w-0 pt-0.5">
+        <time className="text-xs tabular-nums text-muted-foreground">{fmtPeriod(e.period)}</time>
+        <h3 className="font-semibold leading-snug">{e.title}</h3>
+        {meta && <p className="text-sm text-muted-foreground">{meta}</p>}
+        {e.summary && <p className="text-sm text-muted-foreground leading-relaxed break-words">{e.summary}</p>}
+        {e.items && e.items.length > 0 && (
+          <ul className="mt-1.5 flex flex-col gap-1.5">
+            {e.items.map((it) => {
+              const p = it.project ? findProject(it.project) : undefined
+              return (
+                <li key={it.text} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                  <span className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-lime-400" aria-hidden="true" />
+                  {p ? (
+                    <Link to={`/projects/${p.slug}`} className="group/item text-foreground">
+                      <span className="underline-offset-4 group-hover/item:underline">{it.text}</span>
+                      <span className="ml-1 text-muted-foreground">↗</span>
+                    </Link>
+                  ) : (
+                    <span className="text-muted-foreground">{it.text}</span>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        )}
+        {e.photos && e.photos.length > 0 && (
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            {e.photos.map((src) => (
+              <a key={src} href={src} target="_blank" rel="noreferrer">
+                <img
+                  src={src}
+                  alt={`${e.title} 사진`}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full rounded-lg border bg-muted object-cover object-top hover:opacity-90 transition-opacity"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+        {links.length > 0 && (
+          <div className="mt-1.5 flex flex-wrap gap-2">
+            {links.map(([label, href]) => (
+              <a key={href} href={href} target="_blank" rel="noreferrer">
+                <Badge className="text-xs">{label}</Badge>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </li>
+  )
+}
+
+function Timeline() {
+  const entries = profile.timeline
+  return (
+    <section id="timeline" className="overflow-hidden">
       <div className="flex min-h-0 flex-col gap-y-8 w-full">
         <div className="flex flex-col gap-y-4 items-center justify-center">
-          <SectionPill label="수상 · 활동" />
+          <SectionPill label="타임라인" />
           <div className="flex flex-col gap-y-3 items-center justify-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">대회와 현장에서</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">걸어온 길</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              수상과 대회 성적, 부스 전시, 공개한 오픈소스입니다.
+              활동마다 맡은 역할과 거둔 성과를 묶었습니다.
             </p>
           </div>
         </div>
         <ol className="flex flex-col p-4 w-full">
           {entries.map((e, i) => (
-            <li key={e.title} className="relative w-full flex items-start justify-between gap-6 sm:gap-10 pb-8 last:pb-0">
-              <div className="relative flex shrink-0 justify-center self-stretch">
-                {i < entries.length - 1 && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-0 h-[calc(100%+2rem)] w-px bg-border" aria-hidden="true" />
-                )}
-                <div className="relative z-10">
-                  {e.image ? (
-                    <img
-                      src={e.image}
-                      alt=""
-                      className="size-10 bg-card shrink-0 overflow-hidden border rounded-full shadow ring-2 ring-border object-cover flex-none"
-                    />
-                  ) : (
-                    <div className="size-10 bg-card shrink-0 border rounded-full shadow ring-2 ring-border flex items-center justify-center text-[10px] font-semibold text-muted-foreground">
-                      {e.mark}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col justify-start gap-2 min-w-0">
-                {e.date && <time className="text-xs text-muted-foreground">{fmtMonth(e.date)}</time>}
-                <h3 className="font-semibold leading-snug">{e.title}</h3>
-                {e.place && <p className="text-sm text-muted-foreground">{e.place}</p>}
-                {e.description && <p className="text-sm text-muted-foreground leading-relaxed break-words">{e.description}</p>}
-                {e.links.length > 0 && (
-                  <div className="mt-1 flex flex-row flex-wrap items-start gap-2">
-                    {e.links.map((l) =>
-                      isExternal(l.href) ? (
-                        <a key={l.href} href={l.href} target="_blank" rel="noreferrer">
-                          <Badge className="flex items-center gap-1.5 text-xs">{l.label}</Badge>
-                        </a>
-                      ) : (
-                        <Link key={l.href} to={l.href}>
-                          <Badge className="flex items-center gap-1.5 text-xs">{l.label}</Badge>
-                        </Link>
-                      ),
-                    )}
-                  </div>
-                )}
-              </div>
-            </li>
+            <TimelineRow key={e.title} entry={e} last={i === entries.length - 1} />
           ))}
         </ol>
       </div>
@@ -537,7 +509,7 @@ export default function HomePage() {
         <Skills />
         <Projects />
         <BlurFade delay={D * 13} inView>
-          <Recognition />
+          <Timeline />
         </BlurFade>
         <BlurFade delay={D * 14} inView>
           <Writing />
