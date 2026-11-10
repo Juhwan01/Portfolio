@@ -118,11 +118,19 @@
   .prose li::marker {
     @apply text-muted-foreground/70;
   }
+  /* Callouts in posts ("한눈에 보기", "제 해석"): upright text, since synthetic italics read badly in Korean. */
   .prose blockquote {
-    @apply my-6 border-l-4 border-amber-500 bg-muted/50 p-4 rounded-md rounded-l-none italic;
+    @apply my-6 border-l-4 border-amber-500 bg-muted/50 p-4 rounded-md rounded-l-none;
   }
   .prose blockquote p {
     @apply m-0;
+  }
+  .prose blockquote > * + * {
+    @apply mt-2;
+  }
+  .prose blockquote ul,
+  .prose blockquote ol {
+    @apply mb-0 space-y-1.5;
   }
   .prose hr {
     @apply my-10 border-border;

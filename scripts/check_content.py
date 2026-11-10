@@ -106,9 +106,33 @@ for section in ("experience", "education", "activities"):
     for i, item in enumerate(profile.get(section) or []):
         check_period(f"profile.yaml {section}[{i}]", item.get("period"))
 
+# CommonMark won't close `**` that ends in punctuation and is glued to a letter (or open one the
+# other way round), so `**"인용"**은` or `**−32%**에` shows literal asterisks. Keep punctuation
+# outside the markers: `"**인용**"은`.
+PUNCT = set("\"'“”‘’%().,!?:;-−[]")
+WORD = re.compile(r"[가-힣A-Za-z0-9]")
+
+
+def check_bold(owner: str, text: str) -> None:
+    text = re.sub(r"```.*?```", "", text, flags=re.S)
+    for line in text.splitlines():
+        marks = [m.start() for m in re.finditer(r"\*\*", line)]
+        for n, i in enumerate(marks):
+            before, after = line[i - 1 : i], line[i + 2 : i + 3]
+            opening = n % 2 == 0
+            if (opening and after in PUNCT and WORD.match(before)) or (
+                not opening and before in PUNCT and WORD.match(after)
+            ):
+                problems.append(f"{owner}: '**' next to punctuation won't render as bold: {line.strip()[:70]}")
+                break
+
+
 for path in sorted((CONTENT / "blog").glob("*.md")):
     _, fm, body = path.read_text(encoding="utf-8").split("---\n", 2)
     check_local(f"blog/{path.name}", body)
+    check_bold(f"blog/{path.name}", body)
+for path in sorted((CONTENT / "projects").glob("*.md")):
+    check_bold(f"projects/{path.name}", path.read_text(encoding="utf-8").split("---\n", 2)[2])
 skills = load((CONTENT / "skills.yaml").read_text(encoding="utf-8"))
 all_tags = {t.lower() for m in projects.values() if m.get("status") != "archived" for t in m.get("tags") or []}
 seen_skills: set[str] = set()
