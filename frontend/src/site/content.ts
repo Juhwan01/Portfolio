@@ -1,5 +1,5 @@
-import { posts, profile, projects, redirects } from 'virtual:content'
-import type { LinkKind, Period, Project } from './types'
+import { posts, profile, projects, redirects, skills } from 'virtual:content'
+import type { LinkKind, Period, Post, Project } from './types'
 
 export { posts, profile }
 
@@ -14,12 +14,44 @@ export function findProject(slugOrLegacyId: string): Project | undefined {
   return projects.find((p) => p.slug === slug)
 }
 
+/** The project after this one in list order, wrapping to the first. */
+export function nextProject(slug: string): Project | undefined {
+  const i = visible.findIndex((p) => p.slug === slug)
+  if (i === -1 || visible.length < 2) return undefined
+  return visible[(i + 1) % visible.length]
+}
+
+export const sortedPosts: Post[] = [...posts].sort((a, b) => b.published_at.localeCompare(a.published_at))
+
+export const findPost = (id: string) => posts.find((p) => p.id === id)
+
+export interface SkillView {
+  name: string
+  note?: string
+  projects: Project[]
+}
+
+/** skills.yaml with each item's projects collected from project tags. */
+export const skillGroups: { name: string; items: SkillView[] }[] = skills.groups.map((g) => ({
+  name: g.name,
+  items: g.items.map((item) => {
+    const keys = new Set((item.match ?? [item.name]).map((t) => t.toLowerCase()))
+    return {
+      name: item.name,
+      note: item.note,
+      projects: visible.filter((p) => p.tags?.some((t) => keys.has(t.toLowerCase()))),
+    }
+  }),
+}))
+
 export const fmtMonth = (month: string) => month.replace('-', '.')
 
 export function fmtPeriod({ start, end }: Period): string {
   if (!end) return `${fmtMonth(start)} – 현재`
   return start === end ? fmtMonth(start) : `${fmtMonth(start)} – ${fmtMonth(end)}`
 }
+
+export const fmtDate = (iso: string) => iso.slice(0, 10).replace(/-/g, '.')
 
 export const LINK_LABELS: Record<LinkKind, string> = {
   website: '웹사이트',
@@ -32,3 +64,9 @@ export const LINK_LABELS: Record<LinkKind, string> = {
 }
 
 export const isExternal = (url: string) => /^https?:\/\//.test(url)
+
+/** Default panel accent: the site lime. */
+export const DEFAULT_ACCENT = '#d4f55a'
+
+/** Short name for a project in compact lists: the product name or the title before any " · " or " — ". */
+export const shortTitle = (p: Project) => p.product?.name ?? p.title.split(/ · | — /)[0]

@@ -1,13 +1,15 @@
 ---
 title: 포트폴리오
-summary: 이 사이트. 내용을 DB에서 레포 파일로 옮기고, 결과 중심의 에디토리얼 디자인으로 다시 만들었다.
+summary: 이 사이트. 내용을 DB와 관리자 페이지에서 레포의 Markdown·YAML 파일로 옮기고, 결과 중심의 에디토리얼 디자인으로 다시 만들었다.
 period:
   start: 2026-01
   end: 2026-11
+role: 1인 개발 · 설계, 프론트엔드·백엔드, 콘텐츠 이전, 배포
 team: Full-stack 1
 status: completed
 featured: false
 order: 21
+accent: '#d4f55a'
 category: Web
 tags:
 - React
@@ -16,54 +18,37 @@ tags:
 - PostgreSQL
 - Docker
 - AWS Lightsail
-- Three.js
+- Vite
 - Nginx
+responsibilities:
+- 첫 버전 풀스택 — React·TypeScript 화면, FastAPI·PostgreSQL 백엔드, Markdown 에디터 기반 관리자 페이지
+- 콘텐츠 이전 — DB 내용을 공개 API로 읽어 Markdown·YAML 파일로 옮기고 원본과 대조, S3의 이미지·영상을 저장소로 이전
+- 에디토리얼 재설계 — 빌드 시점에 콘텐츠를 읽는 Vite 플러그인, 출시 앱용 제품형 페이지와 일반 프로젝트 페이지, 옛 주소 리다이렉트
+- 배포 정비 — 서버를 origin/main에 맞추고 이미지를 먼저 빌드한 뒤 교체, 끝에 사이트·API 응답 확인
 links:
   github: https://github.com/Juhwan01/Portfolio
-  demo: http://13.124.78.178/
+  demo: https://juhwan.dev
 cover: /images/projects/portfolio/thumbnail.png
 ---
 
-## Problem
+## 맥락과 제약
 
-AI 엔지니어로서의 프로젝트, 기술 스택, 경험을 체계적으로 보여줄 개인 포트폴리오가 필요했습니다. 단순한 정적 페이지가 아닌, 프로젝트를 깊이 있게 설명하고 관리할 수 있는 풀스택 웹 애플리케이션을 목표로 했습니다.
+- **첫 버전(2026.01):** React·TypeScript 프론트엔드, FastAPI·PostgreSQL 백엔드, 관리자 페이지(Markdown 에디터, S3 이미지 업로드)로 만든 다크 테마 사이트였고, 첫 화면에 Three.js 파티클 배경을 썼습니다.
+- **배포 환경:** AWS Lightsail 한 대에서 Docker Compose로 db·backend·frontend·nginx를 띄웁니다. main에 머지하면 GitHub Actions가 배포합니다.
 
-## Approach
+## 핵심 결정
 
-### 1. Neural Noir 디자인 시스템
+1. **내용을 저장소 파일로 옮긴다.** 프로젝트·블로그·스킬을 공개 API로 읽어 `frontend/content/` 아래 Markdown·YAML로 쓰고, S3의 이미지·영상은 `frontend/public/`으로 옮겼습니다. 쓴 파일을 다시 읽어 API 원본과 대조했고, 원본 응답은 `_backup`에 남겼습니다.
+2. **빌드할 때 읽는다.** 작은 Vite 플러그인이 빌드 시점에 `content/`를 읽어 화면에 넘깁니다. DB나 관리자 페이지는 더 쓰지 않습니다.
+3. **결과를 앞에, 수치에는 범위를.** 출시한 앱은 앱 소개·주요 기능(담당 부분 표시)·맡은 일·수치 순서의 제품형 페이지로, 나머지는 단순한 페이지로 보여 줍니다. 모든 머리말을 한 스키마로 정리하고, 수치마다 잰 범위를 붙였습니다.
 
-다크 테마 기반의 자체 디자인 시스템을 설계했습니다. 보더 대신 배경색 차이로 섹션을 구분하는 No-Line Rule, Glass Effect, Neural Glow 등의 원칙을 정의하고 일관되게 적용했습니다.
+## 결과
 
-| 요소 | 값 |
-|------|-----|
-| Background | #0e0e13 |
-| Primary | #a8a4ff |
-| Font | Inter |
-| Glass | backdrop-blur 20px |
+- **내용 수정이 파일 수정으로:** 프로젝트·블로그·프로필이 저장소 파일이 되어, 파일을 고쳐 머지하면 사이트에 반영됩니다.
+- **점검 스크립트:** `check_content.py`가 스키마, 수치의 범위, 미디어 경로, 프로젝트 간 링크, 중복 YAML 키를 검사합니다.
+- **옛 주소 유지:** 예전 `/projects/<DB id>`, `/project/:id` 링크는 새 주소로 넘어갑니다.
 
-### 2. 풀스택 아키텍처
+## 막혔던 것
 
-React + TypeScript 프론트엔드와 FastAPI 백엔드를 Docker Compose로 구성하고, Nginx 리버스 프록시와 Let's Encrypt SSL을 적용했습니다. AWS Lightsail에 배포하고 GitHub Actions로 CI/CD를 구축했습니다.
-
-### 3. 어드민 시스템
-
-프로젝트, 블로그, 스킬을 Markdown 에디터로 관리하는 어드민 패널을 구현했습니다. JWT 인증 기반으로 S3 이미지 업로드, CRUD 전체를 지원합니다.
-
-### 4. 3D Hero 섹션
-
-Three.js와 React Three Fiber로 파티클 애니메이션 배경을 구현한 Hero 섹션으로 첫 인상을 강화했습니다.
-
-## Results
-
-- Neural Noir 디자인 시스템 기반 풀스택 포트폴리오 완성
-- Docker Compose + Nginx + SSL 배포 환경 구축
-- GitHub Actions CI/CD 자동 배포 파이프라인
-- 어드민 패널로 콘텐츠 자체 관리
-
-## Lessons Learned
-
-> **"보여주는 방식"이 "만든 것" 못지않게 중요합니다.**
-
-프로젝트를 잘 만드는 것과 잘 설명하는 것은 별개의 역량입니다. 포트폴리오를 만들면서 각 프로젝트의 문제-접근-결과를 구조화하는 과정에서, 내가 무엇을 왜 만들었는지 다시 정리할 수 있었습니다.
-
-**Tech Stack:** `React` `TypeScript` `FastAPI` `PostgreSQL` `Docker` `AWS Lightsail` `Three.js`
+- **서버가 저장소와 어긋나 있었습니다:** 운영 사이트가 서버에서 직접 고치고 커밋하지 않은 파일로 빌드되고 있었습니다. 예전 배포 스크립트는 실패한 `git pull`을 무시하고 디스크에 있는 것을 빌드해 이 어긋남을 허용했습니다. 서버 파일을 그대로 커밋해 남기고, 배포는 서버를 origin/main에 맞춘 뒤 이미지를 먼저 빌드해 교체하고 사이트·API 응답까지 확인하도록 고쳤습니다.
+- **인증이 빠진 API(2026.03):** 블로그 작성·수정·삭제와 문의 조회 API에 인증이 없어, 인증을 붙이고 업로드 크기 제한·DB 포트 외부 노출 제거 등을 함께 고쳤습니다.

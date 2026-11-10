@@ -52,6 +52,8 @@ export interface Project {
   merged_into?: string
   product?: Product
   responsibilities?: string[]
+  /** hero accent colour on the dark panel, e.g. '#ff8a7a'. Defaults to the site lime. */
+  accent?: string
   body: string
 }
 
@@ -89,7 +91,7 @@ export interface Profile {
   intro: string
   current: { org: string; role: string; summary: string }
   links: { github: string; blog?: string; email: string }
-  highlights: { text: string; project?: string }[]
+  highlights: { value: string; label: string; project?: string }[]
   experience: ProfileItem[]
   education: ProfileItem[]
   awards: DatedItem[]
@@ -107,4 +109,20 @@ export interface Post {
   read_time?: number
   published_at: string
   body: string
+}
+
+export interface SkillItem {
+  name: string
+  /** project tags that count as this skill; defaults to [name] */
+  match?: string[]
+  note?: string
+}
+
+export interface SkillGroup {
+  name: string
+  items: SkillItem[]
+}
+
+export interface Skills {
+  groups: SkillGroup[]
 }

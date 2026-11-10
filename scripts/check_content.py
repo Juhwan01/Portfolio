@@ -32,6 +32,7 @@ PUBLIC = ROOT / "frontend" / "public"
 REQUIRED = ("title", "summary", "period", "status", "order")
 STATUSES = {"shipped", "completed", "in-progress", "archived"}
 MONTH = re.compile(r"^\d{4}-\d{2}$")
+HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 LOCAL_MEDIA = re.compile(r"(/(?:images|videos)/[^\s)\"'>]+)")
 
 problems: list[str] = []
@@ -68,6 +69,8 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
     for m in meta.get("metrics") or []:
         if not m.get("scope"):
             problems.append(f"{owner}: metric '{m.get('value')}' has no scope")
+    if "accent" in meta and not HEX.match(str(meta["accent"])):
+        problems.append(f"{owner}: accent '{meta['accent']}' is not #rrggbb")
     check_local(owner, meta)
     check_local(owner, body)
 
@@ -85,6 +88,9 @@ for section in ("highlights", "awards", "competitions", "open_source"):
     for item in profile.get(section) or []:
         if item.get("project") and item["project"] not in projects:
             problems.append(f"profile.yaml {section}: unknown project '{item['project']}'")
+for i, h in enumerate(profile.get("highlights") or []):
+    if not h.get("value") or not h.get("label"):
+        problems.append(f"profile.yaml highlights[{i}]: needs value and label")
 for section in ("experience", "education", "activities"):
     for i, item in enumerate(profile.get(section) or []):
         check_period(f"profile.yaml {section}[{i}]", item.get("period"))
@@ -92,7 +98,24 @@ for section in ("experience", "education", "activities"):
 for path in sorted((CONTENT / "blog").glob("*.md")):
     _, fm, body = path.read_text(encoding="utf-8").split("---\n", 2)
     check_local(f"blog/{path.name}", body)
-load((CONTENT / "skills.yaml").read_text(encoding="utf-8"))
+skills = load((CONTENT / "skills.yaml").read_text(encoding="utf-8"))
+all_tags = {t.lower() for m in projects.values() if m.get("status") != "archived" for t in m.get("tags") or []}
+seen_skills: set[str] = set()
+for g in (skills or {}).get("groups") or []:
+    if not g.get("name") or not g.get("items"):
+        problems.append(f"skills.yaml: group {g.get('name')!r} needs name and items")
+        continue
+    for item in g["items"]:
+        name = item.get("name")
+        if not name:
+            problems.append(f"skills.yaml {g['name']}: item without name")
+            continue
+        if name in seen_skills:
+            problems.append(f"skills.yaml: '{name}' listed twice")
+        seen_skills.add(name)
+        unused = [t for t in item.get("match") or [] if t.lower() not in all_tags]
+        if unused:
+            print(f"note: skills.yaml '{name}' match {unused} is on no visible project")
 
 visible = sum(1 for m in projects.values() if m.get("status") != "archived")
 featured = sorted((m["order"], s) for s, m in projects.items() if m.get("featured"))

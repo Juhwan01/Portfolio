@@ -3,7 +3,8 @@
 
 name: 정주환
 name_en: Jung Juhwan
-headline: LLM 에이전트를 실서비스로 내보내는 AI 엔지니어
+# *별표*로 감싼 부분은 첫 화면에서 강조색으로 보인다.
+headline: LLM 에이전트를 *실서비스로* 내보내는 AI 엔지니어
 focus: LLM Pipeline · RAG · Multi-Agent Systems
 intro: 문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백엔드, 배포와 운영까지 아이디어를 실제 서비스로 만드는 전 과정을 직접 맡아 왔습니다.
 
@@ -17,15 +18,19 @@ links:
   blog: https://velog.io/@juhwan01/posts
   email: wnghks5432@gmail.com
 
-# 첫 화면의 증거 한 줄
+# 첫 화면 아래 숫자 네 칸. value는 크게, label은 그 아래 작게.
 highlights:
-  - text: App Store·Google Play 출시
+  - value: 앱 출시
+    label: PITZ AI 트레이너 · App Store·Google Play
     project: pitz-ai-trainer
-  - text: 데이콘 4위 / 359팀
+  - value: 4위 / 359팀
+    label: 데이콘 재정정보 AI 검색 · Private
     project: dacon-fiscal-ai-search
-  - text: kakao x goorm 우수프로젝트상
+  - value: 우수프로젝트상
+    label: kakao x goorm 생성형 AI 과정 · 요기어때?
     project: yogi-eottae
-  - text: INJE 캡스톤디자인 장려상
+  - value: 장려상
+    label: INJE 캡스톤디자인 경진대회 · W:IDE
     project: wide
 
 experience:

@@ -38,11 +38,13 @@ function contentPlugin(): Plugin {
       const projects = readMarkdownDir(path.join(CONTENT_DIR, 'projects'), 'slug')
       const posts = readMarkdownDir(path.join(CONTENT_DIR, 'blog'), 'id')
       const redirects = yaml.load(fs.readFileSync(path.join(CONTENT_DIR, 'redirects.yaml'), 'utf8'))
+      const skills = yaml.load(fs.readFileSync(path.join(CONTENT_DIR, 'skills.yaml'), 'utf8'))
       return [
         `export const profile = ${JSON.stringify(profile)};`,
         `export const projects = ${JSON.stringify(projects)};`,
         `export const posts = ${JSON.stringify(posts)};`,
         `export const redirects = ${JSON.stringify(redirects)};`,
+        `export const skills = ${JSON.stringify(skills)};`,
       ].join('\n')
     },
     handleHotUpdate({ file, server }) {

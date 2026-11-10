@@ -1,61 +1,44 @@
 ---
 title: Delusion Diary
-summary: 생성형 AI 활용한 망상 일기장
+summary: 평범한 하루를 적으면 생성형 AI가 드라마틱한 "망상 버전"으로 다시 써 주는 일기장. 3일 해커톤에서 AI 변환 로직과 백엔드 API를 맡음.
 period:
   start: 2024-11
   end: 2024-11
+role: AI · Backend · 일기 변환 로직 설계, 백엔드 API
 team: AI 1 · Backend 1 · Frontend 2
 status: completed
 featured: false
 order: 19
+accent: '#d9b8ff'
 category: AI
 tags:
 - Python
 - Generative AI
 - Prompt Engineering
 - Docker
+responsibilities:
+- 망상 변환 로직 — 일기의 핵심 내용은 남기고 표현을 과장해 드라마틱하게 바꾸는 생성형 AI 로직 설계
+- 프롬프트 개선 — 1차 기본 변환 이후 2차에서 프롬프트를 고쳐 문체와 톤을 다듬음
+- API 설계 — 프론트엔드와 연동할 START/CONTINUE/END 엔드포인트
+- 배포 준비 — Docker 컨테이너화와 디렉토리 구조 정리
 links:
   github: https://github.com/Juhwan01/Delusion-Diary.git
   slides: https://docs.google.com/presentation/d/1wunV-zf--46IJUpXNEKnB7QuYXVegpX6/edit?slide=id.p1#slide=id.p1
 cover: /images/projects/delusion-diary/thumbnail.png
 ---
 
-## Problem
+## 맥락과 제약
 
-일기를 쓰는 것은 자기 성찰에 좋지만, 매일 진지하게 쓰기는 부담스럽습니다. 평범한 하루를 적으면 AI가 드라마틱한 "망상 버전"으로 재탄생시켜주는 서비스를 만들고 싶었습니다.
+- **매일 진지하게 쓰기는 부담:** 일기는 자기 성찰에 좋지만 매일 쓰기는 부담스럽습니다. 평범한 하루를 적으면 AI가 드라마틱한 "망상 버전"으로 다시 써 주는 일기장을 만들었습니다.
+- **3일 해커톤:** 2024년 11월 9–11일. 4인 팀(AI 1, 백엔드 1, 프론트엔드 2)에서 AI 변환 로직과 백엔드 API를 맡았습니다.
 
-## My Role: AI + Backend
+## 핵심 결정
 
-4인 팀(AI 1, Backend 1, Frontend 2)에서 **AI 파이프라인 설계와 백엔드 API 구현**을 담당했습니다.
+1. **핵심 내용은 지키고 표현만 과장한다.** 입력한 일기의 핵심 내용은 그대로 두고, 표현을 과장하고 드라마틱하게 바꾸도록 변환 로직을 설계했습니다.
+2. **먼저 돌아가게 만들고, 문체는 그다음에 다듬는다.** 1차로 기본 텍스트 변환 파이프라인을 빠르게 붙이고, 2차에서 프롬프트를 고쳐 유머러스하면서도 읽기 좋은 문체와 톤을 맞췄습니다.
+3. **있으면 좋은 기능은 버린다.** 3일 안에 MVP를 내기 위해 핵심 기능에만 집중하고, AI 파이프라인과 UI를 병렬로 개발했습니다.
 
-### 1. 생성형 AI 변환 파이프라인
+## 결과
 
-사용자의 평범한 일기를 입력받아 핵심 내용은 유지하면서 과장되고 드라마틱한 "망상 버전"으로 변환하는 AI 로직을 설계했습니다. 1차, 2차에 걸쳐 프롬프트를 반복 개선하여 유머러스하면서도 읽기 좋은 문체를 구현했습니다.
-
-| 단계 | 내용 |
-|------|------|
-| 1차 AI 로직 | 기본 텍스트 변환 파이프라인 |
-| 2차 AI 로직 | 프롬프트 개선으로 문체/톤 최적화 |
-| API 연동 | START/CONTINUE/END 엔드포인트 설계 |
-
-### 2. 백엔드 API 및 배포
-
-Frontend팀과 연동할 REST API를 설계하고, Docker 컨테이너화 및 디렉토리 구조를 정리하여 배포 환경을 구축했습니다. axios Instance를 활용한 유연한 URL 관리로 개발/운영 환경 전환을 간소화했습니다.
-
-### 3. 해커톤 3일 개발
-
-2024년 11월 9일~11일, 3일간의 해커톤에서 개발했습니다. 짧은 시간 내에 MVP를 완성하기 위해 AI 파이프라인과 UI를 병렬로 개발하는 전략을 택했습니다.
-
-## Results
-
-- 생성형 AI 기반 일기 변환 서비스 MVP 완성 (해커톤 3일)
-- 프롬프트 2차 반복 개선으로 일관된 유머러스 문체 구현
-- Docker 컨테이너화 배포 환경 구축
-
-## Lessons Learned
-
-> **3일이라는 제약이 오히려 좋은 의사결정을 만듭니다.**
-
-해커톤의 시간 제약 덕분에 "있으면 좋은 기능"을 과감히 버리고 핵심 기능에만 집중했습니다. 특히 AI 로직을 1차로 빠르게 만들고 2차로 개선하는 반복 접근이 효과적이었고, 이 경험이 이후 프로젝트에서도 MVP 우선 사고방식으로 이어졌습니다.
-
-**Tech Stack:** `Python` `Generative AI` `Prompt Engineering` `Docker`
+- **MVP:** 3일 해커톤 안에 일기 변환 서비스 MVP를 완성했습니다.
+- **문체:** 2차 프롬프트 개선으로 변환 결과가 일관된 유머러스한 문체로 나오도록 맞췄습니다.

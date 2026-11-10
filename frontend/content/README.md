@@ -4,10 +4,10 @@
 
 | 경로 | 내용 |
 |---|---|
-| `profile.yaml` | 이름, 소개, 첫 화면 증거 한 줄, 경력, 학력, 수상, 오픈소스, 대외 활동 |
+| `profile.yaml` | 이름, 소개, 첫 화면 숫자 네 칸(`highlights`: value·label), 경력, 학력, 수상, 오픈소스, 대외 활동 |
 | `projects/<slug>.md` | 프로젝트 하나에 파일 하나. 파일 이름이 주소가 됩니다(`/projects/<slug>`) |
-| `blog/<id>.md` | 블로그 글 |
-| `skills.yaml` | 기술 목록 |
+| `blog/<id>.md` | 블로그 글. `/blog/<id>`로 보이고 첫 화면 "글"에 나열됩니다 |
+| `skills.yaml` | 첫 화면 "기술". 분류와 순서만 적으면, 쓴 프로젝트는 프로젝트 `tags`에서 자동으로 모입니다 |
 | `_backup/2026-11-10/` | 이전 전 DB 원본(공개 API 응답 그대로). 고치지 않습니다 |
 
 이미지와 영상은 `frontend/public/` 아래에 두고 `/images/...`, `/videos/...` 경로로 씁니다.
@@ -28,9 +28,12 @@ team: AI 4                          # 선택
 status: shipped | completed | in-progress | archived
 featured: true                      # 첫 화면 "선택한 작업"에 노출
 order: 4                            # 작을수록 앞
+accent: '#ff9a8a'                   # 선택. 첫 화면 패널과 카드 배경의 강조색(밝은 색). 없으면 라임
 category: AI
 tags: [Python, RAG]
 awards: [수상명]                     # 선택
+responsibilities:                   # 선택. "내가 맡은 일". ' — ' 앞은 굵게 보입니다
+  - 추천 파이프라인 — LLM 대화로 프로필을 받고 벡터 검색으로 후보를 찾는 흐름 설계
 metrics:                            # 선택. 숫자에는 범위를 꼭 붙입니다
   - value: 90% → 0%
     label: 무엇의 수치인지
