@@ -1,0 +1,97 @@
+{
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/6e5dc1aa4c7245e88600e99c9a16bec6.png": {
+    "path": "/images/projects/chefs-market/thumbnail.png",
+    "bytes": 580811,
+    "sha256": "056c37839df8ed90e454fa172eaf25fc3f1b10ea4acc7e002df4c115154958b3"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/4beb7878d7f84f1e8f49c1ed99276ba0.png": {
+    "path": "/images/projects/chefs-market/image-01.png",
+    "bytes": 255483,
+    "sha256": "15f4388fd1782f3a30b37252738dc00fafdefe49260662aa04bc6ea824d65ba0"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/fdb645c968204674b3d7d4e17f7e4d51.mp4": {
+    "path": "/videos/projects/chefs-market/demo.mp4",
+    "bytes": 23709786,
+    "sha256": "f69334ee0910cd08f29f589d1f2b30c2dc3c8f361e699174c07bc4b5bd1bf6d3"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/saim_agent_hub.png": {
+    "path": "/images/projects/saim-agent-hub/thumbnail.png",
+    "bytes": 1489017,
+    "sha256": "25f3b17da98e5e5aa75ad3974ccd65a25fba6166810a4d99b7be2596952fe567"
+  },
+  "https://raw.githubusercontent.com/Juhwan01/SAiM-Recsys/main/docs/moobean_architecture.png": {
+    "path": "/images/projects/saim-recsys/thumbnail.png",
+    "bytes": 142470,
+    "sha256": "724290287928f5e51a7b35bc38405b7e50f05ee49a67273c673ac8869e1124c5"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/10846aa0-0dcd-43a6-a015-52c8655d1095.png": {
+    "path": "/images/projects/yogi-eottae/thumbnail.png",
+    "bytes": 592108,
+    "sha256": "8ba0eaa05bf8221f1aacf1bad622a0264edf9983739655c81271a2ad7361c466"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/6c62a7f2e81346a2a03e7382457e2d66.png": {
+    "path": "/images/projects/allerguard/thumbnail.png",
+    "bytes": 127437,
+    "sha256": "a7d59b831c95062951380ef4844666c75d2531b86f3c023872098f11c2ade473"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/818a005f176f4ff09fc0c8eea2ad190d.png": {
+    "path": "/images/projects/wide/thumbnail.png",
+    "bytes": 234968,
+    "sha256": "a652688951f09458183a1517834ba2c95916b8221b0b45cb78b55622a5adf900"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/d14739f897144bd9a34f42555f0900b3.mp4": {
+    "path": "/videos/projects/wide/demo.mp4",
+    "bytes": 8536174,
+    "sha256": "b935e7e93cabb01c1d27ffa1ec055fa957f5ac24fb63e3fd107a847397886f6a"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/17a521b6d5304dad97d26daec7cd8d73.png": {
+    "path": "/images/projects/papergraph/thumbnail.png",
+    "bytes": 240199,
+    "sha256": "46485c08b56d2593b4d4ddd27677c104d46b471b3ed68f0a5f40c13f83f1fc2a"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/1a9056ca3f90477982a47818e0122016.png": {
+    "path": "/images/projects/papergraph/image-01.png",
+    "bytes": 413145,
+    "sha256": "4a50f03c17f1ce5b79ce377e52a116279211c0d0b45d27bec39125005ec8a3e1"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/fe0d609218ec46428e77a8ab758957ea.png": {
+    "path": "/images/projects/papergraph/image-02.png",
+    "bytes": 461344,
+    "sha256": "2f8cf19acb44a9e5b676b5b473f461dd13dce1282913dfa3fc86de28704a0566"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/6e7cb111-2177-4eba-a9be-256e4259cbe0.png": {
+    "path": "/images/projects/lime-streaming/thumbnail.png",
+    "bytes": 471069,
+    "sha256": "81e09af8898b0be96bbe1b2dfa47dce714f5d27db44bba1c9ac37f55e82162c2"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/000df06f-c9a5-4664-9954-66b2ef228778.PNG": {
+    "path": "/images/projects/delusion-diary/thumbnail.png",
+    "bytes": 75516,
+    "sha256": "b17f35f29b98deeff743899e671a01b64ecd55f7c5f34653f3e822fff5e4b726"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/43e3cc41-2265-4441-851a-670ec5e5589a.PNG": {
+    "path": "/images/projects/qa-rebuttal-bot/thumbnail.png",
+    "bytes": 193319,
+    "sha256": "1696d4277dfc203a298cd9dcd2b0355c6a953f5bab0ca327ff1e58f57ae0c321"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/83ae716d-26b4-4da7-a9ed-b257514820d6.PNG": {
+    "path": "/images/projects/kleague-pass-prediction/thumbnail.png",
+    "bytes": 116846,
+    "sha256": "fd8fc30ebe5b4c66e5ab8fd0bddf9e09d2956cf7490aaa56e503f04dcac044c5"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/d0eee4c8-8c6b-4c2d-8398-25205124a307.PNG": {
+    "path": "/images/projects/portfolio/thumbnail.png",
+    "bytes": 73524,
+    "sha256": "860e425070eea35087bcb1ae1c02e3fc15f066e4fd56c655ddbc20624aff7326"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/archflow_architecture.png": {
+    "path": "/images/projects/archflow/thumbnail.png",
+    "bytes": 124736,
+    "sha256": "655a5ae534d924cbb951857886e520f3715ae7a7b171463ae5e8de943d31d6d1"
+  },
+  "https://portfolio-2026-01-17.s3.ap-northeast-2.amazonaws.com/portfolio/jira_extended_architecture.png": {
+    "path": "/images/projects/jira-extended-mcp/thumbnail.png",
+    "bytes": 49909,
+    "sha256": "053158898b894733ce62207a263999c4f1e918bb907a04ef332470c696f73456"
+  }
+}

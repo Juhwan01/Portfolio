@@ -1,0 +1,120 @@
+- name: Hugging Face
+  category: AI Framework
+  icon: ''
+  order: 0
+  id: 13
+  created_at: '2026-01-22T09:50:48.595576Z'
+- name: LangChain
+  category: AI Framework
+  icon: ''
+  order: 0
+  id: 4
+  created_at: '2026-01-18T14:33:43.214424Z'
+- name: LangGraph
+  category: AI Framework
+  icon: ''
+  order: 0
+  id: 5
+  created_at: '2026-01-18T14:33:53.705889Z'
+- name: PyTorch
+  category: AI Framework
+  icon: ''
+  order: 0
+  id: 3
+  created_at: '2026-01-18T14:33:19.992306Z'
+- name: MLflow
+  category: AI Framework
+  icon: null
+  order: 5
+  id: 38
+  created_at: '2026-03-28T07:10:42.667587Z'
+- name: FastAPI
+  category: Backend Framework
+  icon: ''
+  order: 0
+  id: 12
+  created_at: '2026-01-19T07:01:28.294789Z'
+- name: AWS
+  category: Cloud & DevOps
+  icon: ''
+  order: 0
+  id: 9
+  created_at: '2026-01-18T14:34:51.828197Z'
+- name: Docker
+  category: Cloud & DevOps
+  icon: ''
+  order: 0
+  id: 8
+  created_at: '2026-01-18T14:34:30.806755Z'
+- name: Git
+  category: Cloud & DevOps
+  icon: ''
+  order: 0
+  id: 10
+  created_at: '2026-01-18T14:35:03.552271Z'
+- name: AWS OpenSearch
+  category: Database
+  icon: ''
+  order: 0
+  id: 16
+  created_at: '2026-01-22T09:51:38.430515Z'
+- name: PostgreSQL
+  category: Database
+  icon: ''
+  order: 0
+  id: 11
+  created_at: '2026-01-18T14:35:21.983807Z'
+- name: ChromaDB
+  category: Database
+  icon: null
+  order: 3
+  id: 22
+  created_at: '2026-03-25T11:09:35.289648Z'
+- name: Python
+  category: Language
+  icon: ''
+  order: 0
+  id: 1
+  created_at: '2026-01-17T15:27:17.897660Z'
+- name: SQL
+  category: Language
+  icon: null
+  order: 2
+  id: 39
+  created_at: '2026-03-29T10:59:44.827913Z'
+- name: JavaScript
+  category: Language
+  icon: null
+  order: 3
+  id: 40
+  created_at: '2026-03-29T10:59:44.827913Z'
+- name: MCP
+  category: Tools
+  icon: null
+  order: 1
+  id: 32
+  created_at: '2026-03-25T11:09:37.854715Z'
+- name: Claude Code
+  category: Tools
+  icon: null
+  order: 2
+  id: 33
+  created_at: '2026-03-25T11:09:38.094838Z'
+- name: Jira
+  category: Tools
+  icon: null
+  order: 3
+  id: 34
+  created_at: '2026-03-25T11:09:38.339026Z'
+- name: GitHub
+  category: Tools
+  icon: null
+  order: 4
+  id: 36
+  created_at: '2026-03-28T07:07:04.924254Z'
+- name: Notion
+  category: Tools
+  icon: null
+  order: 5
+  id: 37
+  created_at: '2026-03-28T07:07:04.924254Z'
