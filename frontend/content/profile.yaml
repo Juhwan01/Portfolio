@@ -32,8 +32,8 @@ experience:
     points:
       - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
       - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
-      - AI 리포트 담당 — 운동 기록 해석 리포트와 월간 종합 리포트 배치 파이프라인
-      - 사내 AX 전환 — Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계
+      - AI 리포트(운동 기록 해석 리포트, 월간 종합 리포트 배치 파이프라인) 담당
+      - Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계로 사내 AX 전환
 
 education:
   - org: 인제대학교
@@ -57,6 +57,7 @@ timeline:
     summary: AI 피트니스 앱 PITZ와 헬스장 CRM PITZ Manager를 부스에서 시연했습니다.
     photos:
       - /images/activity/surf-2026/booth-sign.jpg
+      - /images/activity/surf-2026/badge.jpg
       - /images/activity/surf-2026/booth-desk.jpg
       - /images/activity/surf-2026/booth-demo.jpg
     links:
@@ -68,30 +69,30 @@ timeline:
     items:
       - text: PITZ AI 트레이너·AI 리포트 App Store·Google Play 출시
         project: pitz-ai-trainer
-      - text: 사내 AX — 에이전트 중심 개발 체계
+      - text: 에이전트 중심 사내 AX 체계 구축
         project: beans-pirates-ax
-      - text: 오픈소스 공개 — Jira Extended MCP (PyPI)
+      - text: Jira Extended MCP 오픈소스 공개 (PyPI)
         project: jira-extended-mcp
-      - text: 오픈소스 공개 — ArchFlow (PyPI)
+      - text: ArchFlow 오픈소스 공개 (PyPI)
         project: archflow
   - title: 인제대학교 컴퓨터공학과 졸업
     mark: 졸업
     period: { start: 2026-02, end: 2026-02 }
     items:
-      - text: 졸업작품 Chef's Market — 5인 팀 팀장
+      - text: 졸업작품 Chef's Market, 5인 팀 팀장
         project: chefs-market
   - title: 데이콘 스마트 제조 AI Agent 해커톤 2025
     mark: 대회
     period: { start: 2025-12, end: 2025-12 }
     items:
-      - text: 본선 진출 — SmartFlow
+      - text: SmartFlow 본선 진출
         project: smartflow
   - title: kakao x goorm 생성형 AI 부트캠프
     mark: 교육
     period: { start: 2025-05, end: 2025-11 }
     role: 팀 리더 · 우수수료생
     items:
-      - text: 우수프로젝트상 — 요기어때? AI 팀 리드
+      - text: 요기어때? 우수프로젝트상, AI 팀 리드
         project: yogi-eottae
       - text: AllerGuard AI 베이스라인 설계
         project: allerguard
@@ -100,7 +101,7 @@ timeline:
     period: { start: 2024-09, end: 2024-12 }
     role: 팀 Praises Us · 메인 개발자(2인 팀)
     items:
-      - text: 장려상 — W:IDE
+      - text: W:IDE 장려상
         project: wide
     photos:
       - /images/projects/wide/thumbnail.png

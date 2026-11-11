@@ -13,7 +13,7 @@ export function BlogPage() {
   return (
     <section id="blog">
       <Helmet>
-        <title>{`글 — ${profile.name}`}</title>
+        <title>{`글 | ${profile.name}`}</title>
       </Helmet>
       <BackLink to="/#writing" label="홈" />
       <BlurFade delay={D}>
@@ -65,7 +65,7 @@ export default function PostPage() {
   return (
     <section id="post">
       <Helmet>
-        <title>{`${post.title} — ${profile.name}`}</title>
+        <title>{`${post.title} | ${profile.name}`}</title>
         <meta name="description" content={post.excerpt} />
       </Helmet>
       <BackLink to="/blog" label="글 목록" />
