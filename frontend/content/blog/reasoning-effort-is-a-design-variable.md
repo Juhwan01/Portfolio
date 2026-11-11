@@ -31,7 +31,7 @@ published_at: '2026-10-31T13:20:00Z'
 
 ## 강도는 단계의 질과 단계의 수를 맞바꾼다
 
-Artificial Analysis가 10월 28일 새로 낸 지수(v5) 기준 [비교](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)를 보면, 같은 GPT-6 Luna라도 강도에 따라 다른 모델처럼 움직입니다.
+Artificial Analysis가 10월 27일 [새로 낸 지수(v5)](https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5) 기준 [비교](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)를 보면, 같은 GPT-6 Luna라도 강도에 따라 다른 모델처럼 움직입니다.
 
 | GPT-6 Luna | low | max | 차이 |
 |---|---|---|---|
@@ -39,6 +39,8 @@ Artificial Analysis가 10월 28일 새로 낸 지수(v5) 기준 [비교](https:/
 | Terminal-Bench 4.0 | 0.0% | 12.6% | |
 | 첫 토큰까지 | 2.54초 | 71.56초 | 약 28배 |
 | 지수 전체 실행 비용 | $9 | $136 | 약 15배 |
+
+표의 값은 10월 말에 본 측정값입니다. 비교 페이지는 측정을 계속 갱신하기 때문에 지금 열어 보면 숫자가 조금 다를 수 있습니다.
 
 단발 질문이라면 이 표를 보고 예산에 맞는 칸을 고르면 됩니다. 에이전트라면 사정이 다릅니다. 에이전트는 정해진 시간이나 토큰 예산 안에서 여러 단계를 밟습니다. 강도를 올리면 단계 하나하나의 판단은 좋아지지만, **같은 예산으로 밟을 수 있는 단계 수가 줄어듭니다.** LangChain의 xhigh가 진 이유가 이것입니다.
 
@@ -98,3 +100,13 @@ B는 **비용이 A의 56%, 시간은 29% 수준**입니다. 숫자만 보면 B�
 ## 아직 모르는 것
 
 호출마다 맞는 강도를 찾으려면 결국 역할별로 평가 세트를 두고 강도를 바꿔 가며 돌려야 합니다. 그런데 높은 강도로 평가를 돌리는 것 자체가 비쌉니다. Artificial Analysis가 GPT-6 Luna의 지수를 max로 한 번 돌리는 데 $136이 들었습니다. 평가 비용을 아끼려고 표본을 줄이면 강도 사이의 차이가 잡음에 묻힙니다. 어느 정도 크기의 평가 세트면 강도 한 단계 차이를 믿을 만하게 구분할 수 있는지는 아직 감이 없습니다.
+
+## 출처
+
+- OpenAI, [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)
+- Anthropic, [What's new in Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)
+- LangChain, [Improving Deep Agents with harness engineering](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering), 2026-02-17
+- Kingy AI, [GPT-6 Sol vs Luna: Specs, Pricing & Benchmarks](https://kingy.ai/blog/gpt-6-sol-luna-specs-benchmarks-pricing-comparison/), 2026-09-22
+- Artificial Analysis, [Artificial Analysis Intelligence Index v5](https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5), 2026-10-27
+- Artificial Analysis, [GPT-6 Luna (Low) vs. GPT-6 Luna (Max)](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)
+- OpenAI, [Using GPT-5.6](https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6.md)

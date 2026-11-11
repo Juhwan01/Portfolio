@@ -121,3 +121,14 @@ Anthropic 글의 결론도 비슷한 방향입니다. "the space of interesting 
 
 - **LLM이 판정하는 검사도 남는가.** 확인하는 장치가 모델이 바뀌어도 남는다고 썼지만, 평가 에이전트처럼 LLM이 판정하는 검사는 예외일 수 있습니다. Anthropic의 평가자가 LLM 결과물에 너그러웠던 것처럼, 이런 검사는 판정하는 모델의 성향을 그대로 물려받고 모델이 바뀌면 같이 흔들립니다. 결정론적인 검사와 LLM 판정 검사를 어떤 비율로 둘지에 대해서는 아직 제 기준이 없습니다.
 - **하네스 자체는 어떻게 테스트하나.** 지시 파일과 훅과 평가자가 의도대로 일하는지 확인하는 장치가 또 필요한데, 그걸 어디서 멈춰야 하는지는 아직 감이 없습니다. OpenAI 글도 몇 년이 지나면 아키텍처의 일관성이 어떻게 변할지는 아직 모른다는 말로 끝납니다.
+
+## 출처
+
+- OpenAI, [Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/), 2026-02-11
+- martinfowler.com, [Harness Engineering - first thoughts](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html), 2026-02-17
+- Mitchell Hashimoto, [My AI Adoption Journey](https://mitchellh.com/writing/my-ai-adoption-journey), 2026-02-05
+- martinfowler.com, [Humans and Agents in Software Engineering Loops](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html), 2026-03-04
+- arXiv, [Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://arxiv.org/abs/2602.11988v1), 2026-02-12
+- LangChain, [Improving Deep Agents with harness engineering](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering), 2026-02-17
+- Vercel, [We removed 80% of our agent’s tools](https://vercel.com/blog/we-removed-80-percent-of-our-agents-tools), 2025-12-22
+- Anthropic, [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps), 2026-03-24

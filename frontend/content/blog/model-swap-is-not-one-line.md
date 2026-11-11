@@ -16,11 +16,11 @@ published_at: '2026-10-08T12:10:00Z'
 > - Opus 5.5에서는 생각 끄기, 도구 강제, 대화 앞부분 고쳐 쓰기가 **400 에러**가 됩니다.
 > - 이전 모델을 위해 넣어 둔 반복 지시와 우회책은 **지울 후보**입니다.
 
-9월 22일, OpenAI는 GPT-6 Sol과 GPT-6 Luna를, Anthropic은 Claude Opus 5.5를 같은 날 내놨습니다. 가격표만 보면 반가운 날이었습니다.
+9월 22일, OpenAI는 GPT-6 Sol과 GPT-6 Luna를, Anthropic은 Claude Opus 5.5를 같은 날 [내놨습니다](https://techcrunch.com/2026/09/22/anthropic-releases-opus-5.5-with-lower-prices-and-fable-level-performance/). 가격표만 보면 반가운 날이었습니다.
 
 | 모델 (100만 토큰당) | 입력 | 출력 |
 |---|---|---|
-| [GPT-5.6 Luna → GPT-6 Luna](https://developers.openai.com/api/docs/pricing) | $0.20 → $0.10 | $1.20 → $0.50 |
+| [GPT-5.6 Luna → GPT-6 Luna](https://kingy.ai/blog/gpt-6-sol-luna-specs-benchmarks-pricing-comparison/) | $0.20 → $0.10 | $1.20 → $0.50 |
 | [Opus 5 → Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5) | $5 → $4 | $25 → $20 |
 
 이런 날은 모델 ID 한 줄을 바꾸고 청구서가 반으로 줄기를 기대하게 됩니다. 그런데 두 회사의 마이그레이션 문서를 끝까지 읽어 보니 바뀐 건 가격만이 아니었습니다. 그 문서들에서 "한 줄 교체"를 깨뜨리는 대목을 골라, 기존 구조에 대입하면 어디서 비용과 시간이 새는지 따져 봤습니다.
@@ -108,7 +108,7 @@ Anthropic도 [비슷한 경고](https://claude.com/blog/harnessing-claudes-intel
 
 마이그레이션 문서에는 지우라는 이야기도 있습니다.
 
-- OpenAI의 [GPT-5.6 가이드](https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6.md): "Removing repeated instructions and examples and simplifying tool descriptions can improve task performance." 지시는 한 번만 하고, 도구는 그 작업에 필요한 것만 보여 주라고 권합니다.
+- OpenAI의 [GPT-5.6 가이드](https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6.md): "Removing repeated instructions and examples and simplifying tool descriptions can improve task performance and token efficiency." 지시는 한 번만 하고, 도구는 그 작업에 필요한 것만 보여 주라고 권합니다.
 - Anthropic: Opus 5.5가 차트와 스크린샷을 훨씬 정확히 읽게 됐으니, 이전 모델을 위해 넣어 둔 시각 입력 우회책이 필요 없을 수 있다고 적었습니다.
 
 이전 모델의 약점을 메우려고 넣어 둔 반복 지시, 예시, 우회 로직은 새 모델에서는 비용이고 때로는 성능을 깎습니다. 모델 교체 작업에는 **깨진 것을 고치는 일과 필요 없어진 것을 지우는 일**이 함께 있습니다. 지울 후보는 에러로 드러나지 않으니, 각 지시와 우회책이 원래 어떤 실패를 막으려고 들어갔는지 기록이 남아 있어야 찾을 수 있습니다.
@@ -124,4 +124,14 @@ Anthropic도 [비슷한 경고](https://claude.com/blog/harnessing-claudes-intel
 
 ## 아직 정하지 못한 것
 
-새 모델은 두 달에 한 번꼴로 나오는데, 이 측정을 매번 처음부터 하기는 어렵습니다. 결국 같은 과제 묶음과 측정 스크립트를 코드처럼 관리하고, 모델 ID와 추론 강도만 바꿔 돌릴 수 있게 만들어 두는 수밖에 없다고 생각합니다. 다만 그 묶음이 어떤 작업을 얼마나 담아야 대표성이 생기는지, 몇 개면 충분한지에 대한 기준은 아직 찾지 못했습니다.
+새 모델은 두 달에 한 번꼴로 나오는데(Opus 5에서 Opus 5.5까지도 두 달이었습니다), 이 측정을 매번 처음부터 하기는 어렵습니다. 결국 같은 과제 묶음과 측정 스크립트를 코드처럼 관리하고, 모델 ID와 추론 강도만 바꿔 돌릴 수 있게 만들어 두는 수밖에 없다고 생각합니다. 다만 그 묶음이 어떤 작업을 얼마나 담아야 대표성이 생기는지, 몇 개면 충분한지에 대한 기준은 아직 찾지 못했습니다.
+
+## 출처
+
+- TechCrunch, [Anthropic releases Opus 5.5 with lower prices and Fable-level performance](https://techcrunch.com/2026/09/22/anthropic-releases-opus-5.5-with-lower-prices-and-fable-level-performance/), 2026-09-22
+- Kingy AI, [GPT-6 Sol vs Luna: Specs, Pricing & Benchmarks](https://kingy.ai/blog/gpt-6-sol-luna-specs-benchmarks-pricing-comparison/), 2026-09-22
+- Anthropic, [What's new in Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)
+- OpenAI, [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching)
+- Anthropic, [Agent Harness Design: 3 Patterns for Harnessing Claude's Intelligence](https://claude.com/blog/harnessing-claudes-intelligence), 2026-04-02
+- OpenAI, [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)
+- OpenAI, [Using GPT-5.6](https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6.md)
