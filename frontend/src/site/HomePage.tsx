@@ -365,7 +365,7 @@ function TimelineRow({ entry: e, last }: { entry: TimelineEntry; last: boolean }
           </ul>
         )}
         {e.photos && e.photos.length > 0 && (
-          <div className="mt-2 grid grid-cols-3 gap-2">
+          <div className={cn('mt-2 grid gap-2', e.photos.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3')}>
             {e.photos.map((src) => (
               <a key={src} href={src} target="_blank" rel="noreferrer">
                 <img
@@ -499,7 +499,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>{`${profile.name} — ${profile.current.role}`}</title>
+        <title>{`${profile.name} | ${profile.current.role}`}</title>
       </Helmet>
       <main className="min-h-dvh flex flex-col gap-14 relative">
         <Hero />

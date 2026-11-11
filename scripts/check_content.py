@@ -43,6 +43,19 @@ def check_local(owner: str, value) -> None:
             problems.append(f"{owner}: missing file {path}")
 
 
+def check_dash(owner: str, value) -> None:
+    """Visible copy joined as "A — B" reads machine-written; responsibilities use ' — ' only as a hidden separator."""
+    if isinstance(value, dict):
+        for v in value.values():
+            check_dash(owner, v)
+    elif isinstance(value, list):
+        for v in value:
+            check_dash(owner, v)
+    elif isinstance(value, str) and "\u2014" in value:
+        line = next(l for l in value.splitlines() if "\u2014" in l)
+        problems.append(f"{owner}: em dash in visible text: {line.strip()[:60]}")
+
+
 def check_period(owner: str, period) -> None:
     if not isinstance(period, dict) or not period.get("start"):
         problems.append(f"{owner}: period.start missing")
@@ -88,6 +101,9 @@ for path in sorted((CONTENT / "projects").glob("*.md")):
             problems.append(f"{owner}: metric '{m.get('value')}' part must be within 0..whole")
     check_local(owner, meta)
     check_local(owner, body)
+    if meta.get("status") != "archived":
+        shown = {k: v for k, v in meta.items() if k != "responsibilities"}
+        check_dash(owner, [shown, body])
 
 for slug, meta in projects.items():
     for key in ("part_of", "merged_into"):
@@ -99,6 +115,7 @@ if len(orders) != len(set(orders)):
 
 profile = load((CONTENT / "profile.yaml").read_text(encoding="utf-8"))
 check_local("profile.yaml", profile)
+check_dash("profile.yaml", profile)
 if not profile.get("about"):
     problems.append("profile.yaml: about missing")
 for section in ("experience", "education"):
@@ -144,6 +161,7 @@ for path in sorted((CONTENT / "blog").glob("*.md")):
     _, fm, body = path.read_text(encoding="utf-8").split("---\n", 2)
     check_local(f"blog/{path.name}", body)
     check_bold(f"blog/{path.name}", body)
+    check_dash(f"blog/{path.name}", [load(fm), body])
 for path in sorted((CONTENT / "projects").glob("*.md")):
     check_bold(f"projects/{path.name}", path.read_text(encoding="utf-8").split("---\n", 2)[2])
 skills = load((CONTENT / "skills.yaml").read_text(encoding="utf-8"))

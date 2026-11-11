@@ -247,7 +247,7 @@ export default function ProjectPage() {
   return (
     <>
       <Helmet>
-        <title>{`${project.title} — ${profile.name}`}</title>
+        <title>{`${project.title} | ${profile.name}`}</title>
         <meta name="description" content={project.summary} />
       </Helmet>
       <article id="project">
@@ -305,9 +305,9 @@ export default function ProjectPage() {
                 {project.responsibilities.map((r) => {
                   const [head, ...rest] = r.split(' — ')
                   return (
-                    <li key={r} className="text-sm leading-relaxed text-muted-foreground">
+                    <li key={r} className="flex flex-col gap-0.5 text-sm leading-relaxed text-muted-foreground">
                       <span className="font-semibold text-foreground">{head}</span>
-                      {rest.length > 0 && <> — {rest.join(' — ')}</>}
+                      {rest.length > 0 && <span>{rest.join(' ')}</span>}
                     </li>
                   )
                 })}
