@@ -338,7 +338,7 @@ export default function AboutPage() {
                   <div className="glass-card p-6 rounded-xl border border-outline-variant/10">
                     <p className="text-on-surface-variant font-light mb-4">
                       <strong>우수수료생</strong> 선정. 팀 리더로서 AllerGuard(OCR-NLI-RAG),
-                      요기어때(<strong>우수프로젝트상</strong>, RAG + 자체 GraphHopper 라우팅 엔진) 등
+                      여긴어때(<strong>우수프로젝트상</strong>, RAG + 자체 GraphHopper 라우팅 엔진) 등
                       LLM 기반 실전 프로젝트 주도.
                     </p>
                     <div className="flex gap-2 flex-wrap">
@@ -444,7 +444,7 @@ export default function AboutPage() {
             </h4>
             <p className="text-on-surface-variant text-sm font-light mb-4">
               6개월 생성형 AI 과정에서 <strong>우수수료생</strong>으로 선정.
-              팀 리더로 개발한 &ldquo;요기어때&rdquo;가 <strong>우수프로젝트상</strong> 수상.
+              팀 리더로 개발한 &ldquo;여긴어때&rdquo;가 <strong>우수프로젝트상</strong> 수상.
               RAG + 자체 GraphHopper 라우팅 엔진으로 이동 편의성 기반 추천 구현.
             </p>
           </motion.div>
