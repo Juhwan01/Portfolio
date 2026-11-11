@@ -92,10 +92,13 @@ timeline:
     period: { start: 2025-05, end: 2025-11 }
     role: 팀 리더 · 우수수료생
     items:
-      - text: 요기어때? 우수프로젝트상, AI 팀 리드
+      - text: 여긴어때? 우수프로젝트상, AI 팀 리드
         project: yogi-eottae
       - text: AllerGuard AI 베이스라인 설계
         project: allerguard
+    photos:
+      - /images/activity/goorm-bootcamp-2025/excellent-graduate.png
+      - /images/activity/goorm-bootcamp-2025/best-project.png
   - title: INJE 캡스톤디자인 경진대회
     mark: 수상
     period: { start: 2024-09, end: 2024-12 }
