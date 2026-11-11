@@ -39,7 +39,7 @@ JEPA(Joint Embedding Predictive Architecture)는 입력에서 보이는 부분�
 | 시기 | 이름 | 내용 |
 |---|---|---|
 | 2022 | LeCun [입장문](https://openreview.net/forum?id=BZ5a1r-kVsf) | 방향 제시 |
-| 2023 | I-JEPA | 이미지 |
+| 2023 | [I-JEPA](https://arxiv.org/abs/2301.08243) | 이미지 |
 | 2024 | V-JEPA | 영상 |
 | 2025.06 | [V-JEPA 2](https://arxiv.org/abs/2506.09985) | 인터넷 영상 100만 시간 넘게 사전학습, 로봇 영상 62시간 미만만 더 학습해 처음 보는 실험실의 로봇 팔로 물건을 옮김(컵 과제 성공률 두 실험실 평균 80%) |
 | 2025.12 | [VL-JEPA](https://arxiv.org/abs/2512.10942) | 답 문장의 임베딩을 예측하고, 필요할 때만 문장으로 풀어냄 |
@@ -74,7 +74,7 @@ V-JEPA 2는 NVIDIA Cosmos와 같은 계획 방식으로 견줬을 때 행동 하
 - 새로 들어온 문서가 이미 본 것과 같은지 보는 **중복 판정**
 - 지켜보는 대상의 상태가 바뀌었는지 보는 **변화 감지**
 
-VL-JEPA의 selective decoding을 앱 패턴으로 바꾸면, 상태를 싸게 임베딩해 두고 직전 상태와 비교해서 **의미 있게 달라졌을 때만 생성 모델을 부르는** 방식이 됩니다. 회의나 로그 스트림을 30초마다 요약하는 기능을 예로 들어 계산해 보겠습니다. 한 시간이면 120번 호출합니다. 내용이 실제로 바뀌는 순간에만 부르고, 그 비율이 VL-JEPA와 같다고 가정하면 약 42번이 됩니다.
+VL-JEPA의 selective decoding을 앱 패턴으로 바꾸면, 상태를 싸게 임베딩해 두고 직전 상태와 비교해서 **의미 있게 달라졌을 때만 생성 모델을 부르는** 방식이 됩니다. 회의나 로그 스트림을 30초마다 요약하는 기능을 예로 들어 계산해 보겠습니다. 한 시간이면 120번 호출합니다. 내용이 실제로 바뀌는 순간에만 부르고, 그 비율이 VL-JEPA와 같다고 가정하면 약 42번이 됩니다. 단가는 GPT-6 Luna의 [공개 가격](https://developers.openai.com/api/docs/models/gpt-6-luna)으로 잡았습니다.
 
 ```
 요약 1회 (GPT-6 Luna, 입력 4,000 · 출력 300)
@@ -125,3 +125,21 @@ JEPA 쪽에 힘을 싣는 주장도 있습니다.
 ## 아직 모르는 것
 
 의미 공간에서 판단하는 방식이 어디까지 갈 수 있는지는 모릅니다. 라우팅처럼 단순한 판단은 되겠지만, 여러 조건을 함께 따져야 하는 판단까지 임베딩 비교로 될지는 의문입니다. VL-JEPA 저자들의 단서처럼, 추론과 도구 사용이 필요한 일에서는 아직 토큰을 생성하는 모델 말고 대안이 없습니다. JEPA 쪽이 그 경계를 얼마나 밀어낼지는 AMI의 첫 제품에서 어느 정도 드러날 것 같습니다.
+
+## 출처
+
+- Engadget, [Meta's Chief AI Scientist is leaving the company after 12 years](https://www.engadget.com/ai/metas-chief-ai-scientist-is-leaving-the-company-after-12-years-224325268.html), 2025-11-19
+- AMI Labs, [Official launch](https://amilabs.xyz/updates), 2026-03-10
+- AI News, [The billion-dollar startup with a different idea for AI](https://www.artificialintelligence-news.com/news/the-billion-dollar-startup-with-a-different-idea-for-ai-ami-labs-yann-lecun/), 2026-04-23
+- Meta, [V-JEPA: The next step toward Yann LeCun's vision of advanced machine intelligence (AMI)](https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/), 2024-02-15
+- OpenReview, [A Path Towards Autonomous Machine Intelligence](https://openreview.net/forum?id=BZ5a1r-kVsf)
+- arXiv, [Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture](https://arxiv.org/abs/2301.08243), 2023-01-19
+- arXiv, [V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985), 2025-06-11
+- arXiv, [VL-JEPA: Joint Embedding Predictive Architecture for Vision-language](https://arxiv.org/abs/2512.10942), 2025-12-11
+- arXiv, [RoboJEPA: Scaling Robotic Latent World Models](https://arxiv.org/abs/2610.10515), 2026-10-07
+- arXiv, [VL-JEPA: Joint Embedding Predictive Architecture for Vision-language (v2)](https://arxiv.org/html/2512.10942v2), 2026-02-02
+- OpenAI, [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)
+- arXiv, [Critique of World Model](https://arxiv.org/html/2507.05169v5), 2026-06-17
+- arXiv, [LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels](https://arxiv.org/abs/2603.19312), 2026-03-13
+- arXiv, [Proving and Improving the Platonic Representation Hypothesis with JEPAs](https://arxiv.org/abs/2610.39302), 2026-10-29
+- arXiv, [LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures](https://arxiv.org/abs/2509.14252), 2025-09-11

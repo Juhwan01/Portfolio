@@ -22,8 +22,8 @@ published_at: '2026-10-24T09:30:00Z'
 |---|---|---|
 | OpenAI [Fast mode](https://developers.openai.com/api/docs/guides/fast-mode) (7월 30일 Priority processing에서 이름 변경) | 최대 2.5배 | 표준의 2배 |
 | OpenAI Ultrafast (8월 [미리 공개](https://the-decoder.com/gpt-5-6-sol-goes-14x-faster-as-openai-launches-ultrafast-mode-powered-by-cerebras/), Cerebras 칩) | GPT-5.6 Sol을 초당 최대 750토큰 | [가격표](https://developers.openai.com/api/docs/pricing) 기준 GPT-6.1 Sol 표준의 6배 |
-| Anthropic [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) (Opus 5.5) | 초당 출력 토큰 최대 2.5배 | 표준의 2배 |
-| Inception [Mercury 3](https://www.inceptionlabs.ai/models) (10월, 확산 방식 모델) | 초당 1,068토큰 (회사 발표, 독립 측정 없음) | 유료 등급이 아니라 모델 자체 |
+| Anthropic [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) (Opus 5.5) | 초당 출력 토큰 최대 2.5배 | [가격표](https://platform.claude.com/docs/en/about-claude/pricing) 기준 표준의 2배 |
+| Inception [Mercury 3](https://www.inceptionlabs.ai/models) (10월 [출시](https://thenextweb.com/news/inception-mercury-3-diffusion-llm), 확산 방식 모델) | 초당 1,068토큰 (회사 발표, 독립 측정 없음) | 유료 등급이 아니라 모델 자체 |
 
 이렇게 되면 묻는 방식도 달라져야 합니다. 더 빠른 모델을 기다리기보다, 지금 구조에서 **어느 구간이 두 배 값을 낼 만한지**를 먼저 따져야 합니다. 아래는 그 계산입니다.
 
@@ -54,7 +54,7 @@ B는 두 배 값을 내도 3분의 1밖에 줄지 않습니다. 12.5초 중 첫 
 >
 > B 같은 구조라면 같은 돈으로 속도를 사기보다 **호출 하나를 없애는 편**이 낫습니다. 호출 하나가 사라지면 2.87초가 통째로 빠집니다. 서로 기다릴 필요가 없는 호출을 병렬로 돌리는 것도 방법입니다.
 
-추론 모델이라면 계산이 하나 더 붙습니다. 사고 토큰도 출력 토큰이라, 생각을 길게 하는 호출일수록 디코딩 속도의 몫이 커집니다. Artificial Analysis의 [측정](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)에서 GPT-6 Luna의 첫 응답 토큰까지 걸린 시간은 추론 강도 low에서 2.54초, max에서 71.56초였습니다. 이런 호출에서는 "첫 토큰까지"의 대부분이 사실상 생각을 생성하는 시간입니다.
+추론 모델이라면 계산이 하나 더 붙습니다. 사고 토큰도 출력 토큰이라, 생각을 길게 하는 호출일수록 디코딩 속도의 몫이 커집니다. Artificial Analysis의 [측정](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)에서 GPT-6 Luna의 첫 응답 토큰까지 걸린 시간은 추론 강도 low에서 몇 초인데, max에서는 1분을 넘깁니다. 이런 호출에서는 "첫 토큰까지"의 대부분이 사실상 생각을 생성하는 시간입니다.
 
 ## 아낀 시간을 어디에 쓸까
 
@@ -87,7 +87,7 @@ B는 두 배 값을 내도 3분의 1밖에 줄지 않습니다. 12.5초 중 첫 
 | 사람이 기다림 | 채팅, 검색 답변 | 표준, 필요하면 fast | 1배 ~ 2배 |
 | 아무도 안 기다림 | 밤사이 요약, 월간 리포트, 쌓인 데이터 분류 | Batch (OpenAI는 Flex도 같은 값) | 0.5배 |
 
-[OpenAI](https://developers.openai.com/api/docs/pricing)와 Anthropic 모두 Batch로 보내면 50%를 깎아 줍니다. Anthropic은 fast mode를 Batch와 같이 쓸 수 없다고 문서에 적어 두었습니다.
+[OpenAI](https://developers.openai.com/api/docs/pricing)와 [Anthropic](https://platform.claude.com/docs/en/build-with-claude/batch-processing) 모두 Batch로 보내면 50%를 깎아 줍니다. Anthropic은 fast mode를 Batch와 같이 쓸 수 없다고 문서에 적어 두었습니다.
 
 같은 모델을 쓰더라도 사용자 앞 경로는 표준의 두 배, 뒤에서 도는 경로는 절반으로 돌릴 수 있습니다. **네 배 차이**입니다. 그러니 구조도를 그릴 때 각 경로에 "사람이 이 결과를 기다리는가"를 표시해 두는 것이 비용 설계의 출발점이 됩니다.
 
@@ -101,3 +101,16 @@ B는 두 배 값을 내도 3분의 1밖에 줄지 않습니다. 12.5초 중 첫 
 
 - **14.8초를 6.8초로 줄이는 게 두 배 값어치가 있는가.** 응답 시간과 만족도, 재방문 사이의 관계는 서비스마다 다르고, 직접 A/B로 재 보기 전에는 감으로 말할 수밖에 없습니다.
 - **빨라진 시간을 검증에 다시 쓰면 품질이 정말 오르는가.** 검토 호출이 잡아낼 수 있는 종류의 오류라면 효과가 있겠지만, 검토하는 모델도 같은 착각을 한다면 시간만 씁니다. 어떤 오류가 검사로 잡히고 어떤 오류는 안 잡히는지부터 나눠 봐야 답할 수 있을 것 같습니다.
+
+## 출처
+
+- OpenAI, [Fast mode](https://developers.openai.com/api/docs/guides/fast-mode)
+- The Decoder, [GPT-5.6 Sol goes 14x faster as OpenAI launches Ultrafast mode powered by Cerebras](https://the-decoder.com/gpt-5-6-sol-goes-14x-faster-as-openai-launches-ultrafast-mode-powered-by-cerebras/), 2026-08-14
+- OpenAI, [Pricing](https://developers.openai.com/api/docs/pricing)
+- Anthropic, [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode)
+- Anthropic, [Pricing](https://platform.claude.com/docs/en/about-claude/pricing)
+- Inception, [Our Models](https://www.inceptionlabs.ai/models)
+- The Next Web, [Inception says its Mercury 3 model beats GPT-6 Luna and runs far faster](https://thenextweb.com/news/inception-mercury-3-diffusion-llm), 2026-10-20
+- Artificial Analysis, [GPT-6 Luna (Low) vs. GPT-6 Luna (Max)](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)
+- Anthropic, [Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+- Google, [DiffusionGemma: 4x faster text generation](https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/), 2026-06-10
