@@ -72,7 +72,7 @@ function DatedRow({ item, title, sub, open }: { readonly item: ProfileItem; read
   return (
     <div className="flex items-center gap-x-3 justify-between w-full text-left">
       <div className="flex items-center gap-x-3 flex-1 min-w-0">
-        <LogoMark text={item.mark ?? item.org.slice(0, 2)} />
+        <LogoMark text={item.mark ?? item.org.slice(0, 2)} src={item.logo} />
         <div className="flex-1 min-w-0 gap-0.5 flex flex-col">
           <div className="font-semibold leading-snug flex items-center gap-2">
             {title}

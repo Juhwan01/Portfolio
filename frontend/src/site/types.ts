@@ -69,6 +69,8 @@ export interface ProfileItem {
   org: string
   /** short text in the round mark beside the entry, e.g. 'BP' */
   mark?: string
+  /** image shown in the round mark instead of `mark`, e.g. '/images/orgs/inje.png' */
+  logo?: string
   role?: string
   degree?: string
   note?: string

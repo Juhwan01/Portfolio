@@ -26,6 +26,7 @@ links:
 experience:
   - org: Beans Pirates
     mark: BP
+    logo: /images/projects/pitz-ai-trainer/app-icon.jpg   # 회사 로고가 공개돼 있지 않아 서비스(PITZ) 앱 아이콘을 씀
     role: AI Engineer
     period: { start: 2026-02 }
     points:
@@ -37,6 +38,7 @@ experience:
 education:
   - org: 인제대학교
     mark: INJE
+    logo: /images/orgs/inje.png
     degree: 컴퓨터공학과 졸업
     period: { start: 2020-03, end: 2026-02 }
     note: GPA 4.16 / 4.5 · 졸업작품 Chef's Market
