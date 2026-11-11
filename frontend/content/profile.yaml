@@ -32,8 +32,8 @@ experience:
     points:
       - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
       - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
-      - AI 리포트(운동 기록 해석 리포트, 월간 종합 리포트 배치 파이프라인) 담당
-      - Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계로 사내 AX 전환
+      - 운동 기록을 해석하는 AI 리포트와 월간 종합 리포트 배치 파이프라인 담당
+      - 사내 AX 전환을 위한 Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계 구축
 
 education:
   - org: 인제대학교
