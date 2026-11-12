@@ -23,7 +23,7 @@ tags:
 responsibilities:
 - 콘텐츠 구조 — DB·관리자 페이지에 있던 프로젝트·글·프로필을 Markdown·YAML 파일로 옮기고, 빌드할 때 읽는 Vite 플러그인 작성
 - 화면 — Magic UI 포트폴리오 템플릿(MIT)을 Next.js에서 React·Vite로 옮김
-- 내용 점검 — 머리말 형식, 수치의 측정 범위, 이미지 경로를 검사하는 스크립트
+- 내용 점검 — 머리말(front matter) 형식, 수치의 측정 범위, 이미지 경로를 검사하는 스크립트
 links:
   github: https://github.com/Juhwan01/Portfolio
   demo: https://juhwan.dev
@@ -43,4 +43,4 @@ cover: /images/projects/portfolio/thumbnail.png
 ## 그 밖의 설계
 
 - **디자인은 검증된 템플릿에서:** 직접 만든 디자인 대신 오픈소스 Magic UI 포트폴리오 템플릿(MIT)을 React·Vite로 옮기고, 시간은 내용을 정리하는 데 썼습니다.
-- **내용 점검 스크립트:** 머리말 형식, 수치의 측정 범위, 전후 수치 짝, 이미지 경로를 스크립트로 검사합니다.
+- **내용 점검 스크립트:** 머리말(front matter) 형식, 수치의 측정 범위, 전후 수치 짝, 이미지 경로를 스크립트로 검사합니다.

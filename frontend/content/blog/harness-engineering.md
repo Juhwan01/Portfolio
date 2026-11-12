@@ -11,7 +11,7 @@ published_at: '2026-03-28T07:47:59.832142Z'
 ---
 
 > **한눈에 보기**
-> - 널리 퍼진 하네스의 **"세 기둥" 분류는 OpenAI 원문이 아니라** Böckeler의 해석입니다.
+> - 널리 퍼진 하네스의 **"세 기둥" 분류는 OpenAI 원문이 아니라** Thoughtworks의 Birgitta Böckeler가 붙인 해석입니다.
 > - AGENTS.md 같은 지시 파일은 **모델이 혼자 알 수 없는 것만** 적을 때 일합니다. 저장소 개요를 적은 파일은 성공률을 못 올리고 추론 비용만 20% 넘게 늘렸습니다.
 > - 하네스를 **알려 주는 장치**와 **확인하는 장치**로 나누면, 효과가 컸던 사례는 대부분 확인하는 쪽이고, 모델이 좋아질 때 낡는 쪽은 알려 주는 쪽입니다.
 
@@ -25,10 +25,10 @@ OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있
 
 | 항목 | 내용 |
 |---|---|
-| 기간 | 2025년 8월 말 빈 저장소에 첫 커밋, 다섯 달 뒤 |
+| 기간 | 2025년 8월 말 빈 저장소에 첫 커밋을 한 뒤 다섯 달 |
 | 결과물 | 코드 약 100만 줄, 머지된 PR 약 1,500개 |
 | 사람 | 엔지니어 셋으로 시작해 글을 쓸 무렵 일곱 |
-| 속도 | 셋이던 시기 기준 한 사람이 하루 평균 PR 3.5개, 손으로 짰을 때의 약 10분의 1 시간 (추정) |
+| 속도 | 셋이던 시기 기준 한 사람이 하루 평균 PR 3.5개. 걸린 시간은 손으로 짰을 때의 약 10분의 1 (추정) |
 | 직접 쓴 코드 | 없음. 첫 AGENTS.md조차 Codex가 씀 |
 
 숫자보다 눈에 들어온 건 목차였습니다. 소제목에 이런 것들이 차례로 나옵니다.
@@ -38,21 +38,21 @@ OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있
 - 아키텍처와 취향을 강제하기
 - 엔트로피와 가비지 컬렉션
 
-AGENTS.md는 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 인용되는 "give Codex a map, not a 1,000-page instruction manual"이라는 구절이 이 대목에서 나옵니다.
+이 팀은 AGENTS.md를 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 인용되는 "give Codex a map, not a 1,000-page instruction manual"이라는 구절이 이 대목에서 나옵니다.
 
 금요일 이야기로 돌아가면, 그들은 이 일을 계속 사람 손으로 하지 않았습니다.
 
 - 지켜야 할 원칙을 "**golden principles**"로 정리하고, 그 원칙에 어긋난 곳을 찾아 리팩터링 PR을 여는 Codex 작업을 백그라운드에서 주기적으로 돌렸습니다.
 - 문서와 코드가 어긋난 곳을 고치는 에이전트도 따로 있었습니다.
-- 아키텍처와 취향은 별도 절에서 직접 만든 **린터와 구조 테스트**로 강제했습니다.
+- 아키텍처와 취향은 직접 만든 **린터와 구조 테스트**로 강제했습니다. 원문은 이 부분을 별도 절에서 다룹니다.
 
 사람이 치우던 일을 정해진 주기로 도는 검사와 수리 작업으로 바꾼 것입니다.
 
 ## "세 기둥"과 "하네스"는 누구의 말인가
 
-- **세 기둥:** 하네스를 컨텍스트 엔지니어링, 아키텍처 제약, 가비지 컬렉션의 세 기둥으로 설명하는 분류는 원문에 없습니다. Thoughtworks의 Birgitta Böckeler가 2월 17일 [메모](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html)에서 OpenAI 글을 읽고 묶은 것이고, 그는 옆에 "(grouping based on my interpretation)"이라고 분명히 적었습니다. 쓸 만한 정리지만 OpenAI의 주장으로 옮기면 안 됩니다. 같은 메모에서 그는 OpenAI 글 본문에 "harness"라는 단어가 한 번밖에 나오지 않는다는 점도 짚었습니다.
-- **harness engineering이라는 말:** 엿새 먼저 나온 Ghostty 개발자 Mitchell Hashimoto의 [글](https://mitchellh.com/writing/my-ai-adoption-journey)에 이미 있었습니다. 그는 업계에서 통하는 이름이 따로 있는지는 모르겠다면서 "I've grown to calling this 'harness engineering'"이라고 썼습니다.
-- **하네스의 정의:** 3월 4일 같은 사이트에 실린 Kief Morris의 [글](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html)에 있는 문장이 가장 정확하다고 봅니다. "The collection of specifications, quality checks, and workflow guidance that control different levels of loops inside the how loop is the agent's harness." 명세, 품질 검사, 작업 지침. 모델에게 알려 주는 것과 결과를 확인하는 것이 한 문장에 같이 들어 있습니다.
+- **세 기둥:** 하네스를 컨텍스트 엔지니어링, 아키텍처 제약, 가비지 컬렉션의 세 기둥으로 설명하는 분류는 원문에 없습니다. Thoughtworks의 Birgitta Böckeler가 2월 17일 [메모](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html)에서 OpenAI 글을 읽고 묶은 것이고, 그는 그 분류 옆에 "(grouping based on my interpretation)"이라고 분명히 적었습니다. 쓸 만한 정리지만 OpenAI의 주장으로 옮기면 안 됩니다. 같은 메모에서 그는 OpenAI 글 본문에 "harness"라는 단어가 한 번밖에 나오지 않는다는 점도 짚었습니다.
+- **harness engineering이라는 말:** OpenAI 글보다 엿새 먼저 나온 Ghostty 개발자 Mitchell Hashimoto의 [글](https://mitchellh.com/writing/my-ai-adoption-journey)에 이미 있었습니다. 그는 업계에서 통하는 이름이 따로 있는지는 모르겠다면서 "I've grown to calling this 'harness engineering'"이라고 썼습니다.
+- **하네스의 정의:** 3월 4일 Böckeler의 메모와 같은 사이트(martinfowler.com)에 실린 Kief Morris의 [글](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html)에 있는 문장이 가장 정확하다고 봅니다. "The collection of specifications, quality checks, and workflow guidance that control different levels of loops inside the how loop is the agent's harness." 명세, 품질 검사, 작업 지침. 모델에게 알려 주는 것과 결과를 확인하는 것이 한 문장에 같이 들어 있습니다.
 
 ## 지시 파일은 얼마나 일하나
 
@@ -61,7 +61,7 @@ AGENTS.md는 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 �
 | 자료 | 무엇을 봤나 | 결과 |
 |---|---|---|
 | Hashimoto의 AGENTS.md (2월) | 줄 하나하나를 실제로 본 실패에 대한 답으로 적음 | "Each line in that file is based on a bad agent behavior, and it almost completely resolved them all" |
-| ETH Zurich·LogicStar [AGENTS.md 평가 연구](https://arxiv.org/abs/2602.11988v1) (2월) | 여러 저장소에서 컨텍스트 파일의 효과를 잼 | 성공률은 대체로 오르지 않고, 추론 비용은 20% 넘게 늘어남. 저장소 개요는 도움이 안 됐고, 그 저장소만의 비표준 관행을 적은 부분만 쓸모 있었음 |
+| ETH Zurich·LogicStar [AGENTS.md 평가 연구](https://arxiv.org/abs/2602.11988v1) (2월) | 여러 저장소에서 지시 파일(논문의 말로는 context file)의 효과를 잼 | 성공률은 대체로 오르지 않고, 추론 비용은 20% 넘게 늘어남. 저장소 개요는 도움이 안 됐고, 그 저장소만의 비표준 관행을 적은 부분만 쓸모 있었음 |
 
 > **제 해석**
 >
@@ -69,7 +69,7 @@ AGENTS.md는 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 �
 
 ## 확인하는 쪽에서 나온 숫자들
 
-Böckeler의 메모에는 이런 문장도 있습니다. "What I am missing in the write-up is verification of functionality and behaviour." OpenAI 글에도 Codex가 버그를 재현하고, Chrome DevTools로 앱을 띄워 고친 결과를 확인하는 대목이 있기는 합니다. 다만 Böckeler가 보기에 그 비중은 구조와 취향을 지키는 장치에 비해 작았습니다. 그런데 비슷한 시기에 나온 다른 사례들은 바로 그 **확인하는 쪽**에서 큰 숫자를 냈습니다.
+Böckeler의 메모에는 이런 문장도 있습니다. "What I am missing in the write-up is verification of functionality and behaviour." OpenAI 글에도 Codex가 버그를 재현하고, Chrome DevTools로 앱을 띄워 고친 결과를 확인하는 대목이 있기는 합니다. 다만 Böckeler가 보기에 그 비중은 구조와 취향을 지키는 장치에 비해 작았습니다. 그런데 비슷한 시기에 나온 다른 사례들은 바로 그 **결과를 확인하는 쪽**에서 큰 숫자를 냈습니다.
 
 | 사례 | 바꾼 것 | 결과 |
 |---|---|---|
@@ -99,9 +99,9 @@ Anthropic 글에서 가장 오래 남는 문장은 이것입니다. "every compo
 
 글에는 실제로 가정이 무너진 사례가 나옵니다.
 
-- **컨텍스트 리셋:** Sonnet 4.5는 컨텍스트 한도에 가까워졌다고 느끼면 일을 서둘러 마무리하려는 "context anxiety"가 강해서, 하네스가 컨텍스트를 주기적으로 리셋해 줘야 했습니다. Opus 4.5가 그 버릇을 스스로 거의 없애자("largely removed that behavior on its own") 리셋을 통째로 걷어냈습니다.
+- **컨텍스트 리셋:** Sonnet 4.5는 컨텍스트 한도에 가까워졌다고 느끼면 일을 서둘러 마무리하려는 "context anxiety"가 강해서, 하네스가 컨텍스트를 주기적으로 리셋해 줘야 했습니다. Opus 4.5에서는 하네스의 도움 없이도 그 버릇이 거의 사라져서("largely removed that behavior on its own") 리셋을 통째로 걷어냈습니다.
 - **스프린트 분해:** Opus 4.6에서는 일을 스프린트로 쪼개 주던 구조도 뺐습니다. 모델이 그런 분해 없이도 일을 해낼 수 있었기 때문입니다.
-- **평가 에이전트:** Opus 4.6에서는 생성 쪽 능력의 경계에 있는 부분에만 남겼다고 합니다.
+- **평가 에이전트:** Opus 4.6에서는 일하는 에이전트가 해낼 수 있는 한계 근처의 과제에만 남겼다고 합니다.
 
 > **제 해석**
 >
@@ -120,7 +120,7 @@ Anthropic 글의 결론도 비슷한 방향입니다. "the space of interesting 
 ## 아직 모르는 것
 
 - **LLM이 판정하는 검사도 남는가.** 확인하는 장치가 모델이 바뀌어도 남는다고 썼지만, 평가 에이전트처럼 LLM이 판정하는 검사는 예외일 수 있습니다. Anthropic의 평가자가 LLM 결과물에 너그러웠던 것처럼, 이런 검사는 판정하는 모델의 성향을 그대로 물려받고 모델이 바뀌면 같이 흔들립니다. 결정론적인 검사와 LLM 판정 검사를 어떤 비율로 둘지에 대해서는 아직 제 기준이 없습니다.
-- **하네스 자체는 어떻게 테스트하나.** 지시 파일과 훅과 평가자가 의도대로 일하는지 확인하는 장치가 또 필요한데, 그걸 어디서 멈춰야 하는지는 아직 감이 없습니다. OpenAI 글도 몇 년이 지나면 아키텍처의 일관성이 어떻게 변할지는 아직 모른다는 말로 끝납니다.
+- **하네스 자체는 어떻게 테스트하나.** 지시 파일, 훅, 평가자가 의도대로 일하는지 확인하는 장치가 또 필요한데, 확인 장치를 다시 확인하는 일을 어디서 멈춰야 하는지는 아직 감이 없습니다. OpenAI 글도 몇 년이 지나면 아키텍처의 일관성이 어떻게 변할지는 아직 모른다는 말로 끝납니다.
 
 ## 출처
 
