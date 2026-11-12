@@ -13,8 +13,8 @@ published_at: '2026-11-11T05:00:00Z'
 > **한눈에 보기**
 > - 10월 18일 공개된 [gpu-unlock](https://github.com/Zagitta/gpu-unlock)은 GeForce RTX 20·30·40 시리즈의 텐서 연산 제한을 풀어 BF16 행렬곱을 **+65~100%** 올립니다. 사용자들이 올린 측정을 모은 숫자이고, 100%는 RTX 4090의 순간 최대치입니다.
 > - 이 제한은 NVIDIA 백서에 처음부터 적혀 있었습니다. RTX 3090의 FP32 누적 텐서 연산은 **71 TFLOPS**, 같은 GA102 칩을 쓴 RTX A6000은 **154.8 TFLOPS**입니다.
-> - LLM 추론에서 빨라지는 건 입력을 읽는 **prefill**(+25~55%)입니다. 토큰을 하나씩 뽑는 decode는 그대로이고, llama.cpp용 GGUF 양자화 모델은 15% 이하입니다.
-> - 그래서 같은 해제라도 출력이 긴 채팅은 **약 1%**, 출력이 거의 없는 채점·임베딩 작업은 **20~29%** 줄어듭니다(아래 가정 기준).
+> - LLM 추론에서 빨라지는 건 입력을 읽는 **prefill**(+25~55%)입니다. 토큰을 하나씩 뽑는 decode는 그대로이고, llama.cpp용 GGUF 양자화 모델은 이득이 15% 이하입니다.
+> - 그래서 같은 해제라도 응답 시간은 출력이 긴 채팅에서 **약 1%**, 출력이 거의 없는 채점·임베딩 작업에서 **20~29%** 줄어듭니다(아래 가정 기준).
 
 10월 18일 GitHub에 올라온 저장소 하나가 3주 남짓 만에 별 1만 8천 개를 넘겼습니다(11월 11일 기준 약 18,600개). README 맨 위 문구는 이렇습니다.
 
@@ -30,7 +30,7 @@ README의 첫 문단은 이렇습니다.
 
 정리하면 이렇습니다.
 
-- **무엇을 푸나:** FP16·BF16·TF32 행렬 연산을 FP32로 누적할 때 걸린 절반 속도 제한입니다. 같은 칩을 쓴 RTX A 시리즈 같은 프로용 카드에는 이 제한이 없습니다.
+- **무엇을 푸나:** FP16·BF16·TF32 행렬 연산을 FP32로 누적할 때 걸린 절반 속도 제한입니다. 같은 칩을 쓰는 프로용 카드(RTX A 시리즈 등)에는 이 제한이 없습니다.
 - **어떻게 푸나:** 리눅스 커널 모듈이 부팅 중 NVIDIA 드라이버보다 먼저 올라와 속도 선택 레지스터를 바꾸고 GPU를 리셋한 뒤, 손대지 않은 드라이버에 카드를 넘깁니다. 채굴 전용 CMP 카드의 제한을 풀던 기존 기법을 가져왔다고 적혀 있습니다.
 - **지원 범위:** RTX 30은 "안정"(사용자 보고 100건 이상), RTX 20과 40은 "실험", RTX 50은 지원하지 않습니다.
 - **결과:** "Outputs are bit-identical before and after; only the speed changes."
@@ -57,13 +57,13 @@ RTX 4090은 텐서 코어보다 전력 한도에 먼저 걸려서, 큰 행렬곱
 | RTX A6000 (GA102) | 154.8 TFLOPS | **154.8 TFLOPS** |
 | GeForce RTX 4090 (AD102) | 330.3 TFLOPS | **165.2 TFLOPS** |
 
-희소성 기능을 쓰지 않은 값이고, [Ampere GA102 백서](https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf)의 표 3·표 9와 [Ada 백서](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) 부록 A에서 옮겼습니다. 같은 칩인데 GeForce만 FP32 누적 줄이 절반입니다. 같은 백서 표 3의 데이터센터용 A40(GA102)도 두 줄이 149.7 TFLOPS로 같습니다. 백서 값은 기준 부스트 클럭으로 계산한 최대치라, 실제 카드에서 잰 앞의 표(RTX 3090 75 TFLOPS)와는 조금 다릅니다.
+희소성 기능을 쓰지 않은 값이고, [Ampere GA102 백서](https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf)의 표 3·표 9와 [Ada 백서](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) 부록 A에서 옮겼습니다. 같은 칩인데 GeForce만 FP32 누적 값이 절반입니다. 같은 백서 표 3의 데이터센터용 A40(GA102)도 두 값이 149.7 TFLOPS로 같습니다. 백서 값은 기준 부스트 클럭으로 계산한 최대치라, 실제 카드에서 잰 앞의 표(RTX 3090 75 TFLOPS)와는 조금 다릅니다.
 
-그럼 실제 학습과 추론은 어느 줄을 쓸까요. [PyTorch 문서](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html)는 "Half-precision GEMM operations are typically done with intermediate accumulations (reduction) in single-precision"이라고 적습니다. 정확도와 오버플로 때문에 FP32로 누적하는 쪽이 기본이라는 뜻입니다. 같은 RTX 3090 표에서 INT8 텐서 연산은 284 TOPS로 이 제한을 받지 않았습니다. 저장소 표에서 INT8·FP8·INT4로 계산하는 모델이 "No change"인 것과 맞아떨어집니다. 가중치만 4비트로 줄이고 계산은 FP16으로 하는 AWQ·GPTQ 모델은 prefill 이득을 받는 쪽으로 따로 적혀 있습니다.
+그럼 실제 학습과 추론은 둘 중 어느 쪽을 쓸까요. [PyTorch 문서](https://docs.pytorch.org/docs/stable/notes/numerical_accuracy.html)는 "Half-precision GEMM operations are typically done with intermediate accumulations (reduction) in single-precision"이라고 적습니다. 정확도와 오버플로 때문에 FP32로 누적하는 쪽이 기본이라는 뜻입니다. 백서에서 RTX 3090의 INT8 텐서 연산은 284 TOPS로 이 제한을 받지 않았습니다. 저장소 표에서 INT8·FP8·INT4로 계산하는 모델이 "No change"인 것과 맞아떨어집니다. 가중치만 4비트로 줄이고 계산은 FP16으로 하는 AWQ·GPTQ 모델은 prefill 이득을 받는 쪽으로 따로 적혀 있습니다.
 
 > **제 해석**
 >
-> 로컬 장비로 처리량을 어림할 때 GeForce 스펙표의 큰 숫자(FP16 누적)를 쓰면 **두 배 낙관**하게 됩니다. 이번 해제는 없던 성능을 만든 게 아니라, GeForce를 표의 둘째 줄에서 첫째 줄로 옮긴 것에 가깝습니다. 스펙표를 볼 때는 "내 프레임워크가 어느 정밀도로 누적하나"를 먼저 확인하는 게 맞습니다.
+> 로컬 장비로 처리량을 어림할 때 GeForce 스펙표의 큰 숫자(FP16 누적)를 쓰면 **두 배 높게** 잡게 됩니다. 이번 해제는 없던 성능을 만든 게 아니라, GeForce의 FP32 누적 값을 표에 이미 적힌 FP16 누적 값 수준으로 맞춘 것에 가깝습니다. 스펙표를 볼 때는 "내 프레임워크가 어느 정밀도로 누적하나"를 먼저 확인하는 게 맞습니다.
 
 ## 응답 시간 식에서 줄어드는 항
 
@@ -75,7 +75,7 @@ RTX 4090은 텐서 코어보다 전력 한도에 먼저 걸려서, 큰 행렬곱
           + 모델 밖에서 쓰는 시간
 ```
 
-API의 유료 fast 등급은 가운데 decode 항을 줄였습니다. 이번 해제는 반대로 **첫 항**을 줄입니다. 이유는 두 단계가 막히는 곳이 다르기 때문입니다.
+API의 유료 fast 등급은 가운데 decode 항을 줄였습니다. 이번 해제는 반대로 **첫 항**(prefill)을 줄입니다. 이유는 두 단계가 막히는 곳이 다르기 때문입니다.
 
 - **prefill:** 입력 토큰 전체를 한꺼번에 큰 행렬곱으로 처리합니다. 연산 속도에 묶여 있어서 텐서 코어가 빨라지면 같이 빨라집니다.
 - **decode:** 토큰 하나를 만들 때마다 모델 가중치 전체를 메모리에서 다시 읽습니다. 메모리 대역폭에 묶여 있어서 텐서 코어가 두 배가 돼도 거의 그대로입니다.
@@ -87,7 +87,11 @@ decode의 상한은 계산으로 바로 나옵니다. 80억 파라미터 BF16 �
 초당 토큰 상한  ≈ 936GB/s ÷ 16GB ≈ 58토큰 (텐서 연산 속도와 무관)
 ```
 
-이제 호출 모양별로 넣어 보겠습니다. 설명을 위해 정한 가정은 셋입니다. 해제 전 prefill은 초당 3,000토큰, decode는 초당 45토큰(위 상한보다 낮게)으로 잡았습니다. 해제 뒤 prefill은 1.4배로 잡았는데, 저장소 표의 "첫 토큰 시간 25~30% 감소"와 맞춘 값입니다(1 ÷ 1.4 ≈ 0.71).
+이제 호출 모양별로 넣어 보겠습니다. 설명을 위해 정한 가정은 셋입니다.
+
+- 해제 전 prefill: 초당 3,000토큰
+- 해제 전 decode: 초당 45토큰 (위 상한 58토큰보다 낮게 잡음)
+- 해제 뒤 prefill: 1.4배. 저장소 표의 "첫 토큰 시간 25~30% 감소"와 맞춘 값입니다(1 ÷ 1.4 ≈ 0.71).
 
 | 호출 모양 | 입력 / 출력 토큰 | 해제 전 | 해제 후 | 차이 |
 |---|---|---|---|---|
@@ -101,7 +105,7 @@ decode의 상한은 계산으로 바로 나옵니다. 80억 파라미터 BF16 �
 
 > **제 해석**
 >
-> 에이전트는 입력이 길고 출력이 짧아서 이득을 볼 것 같지만, 실제로는 **접두부 캐시와 같은 항을 두고 겹칩니다**. [vLLM 문서](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching.html)도 자동 접두부 캐시가 "only reduces the time of processing the queries (the prefilling phase)"라고 적습니다. 시스템 프롬프트와 도구 정의, 이전 대화를 캐시로 재사용하고 있다면 다시 읽는 토큰이 이미 적어서, 해제가 줄일 몫도 거의 남지 않습니다(위 표의 −14%가 −3%로).
+> 에이전트는 입력이 길고 출력이 짧아서 이득을 볼 것 같지만, 실제로는 **접두부 캐시가 줄이는 항과 같은 항**을 줄이기 때문에 이득이 겹칩니다. [vLLM 문서](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching.html)도 자동 접두부 캐시가 "only reduces the time of processing the queries (the prefilling phase)"라고 적습니다. 시스템 프롬프트와 도구 정의, 이전 대화를 캐시로 재사용하고 있다면 다시 읽는 토큰이 이미 적어서, 해제가 줄일 몫도 거의 남지 않습니다(위 표의 −14%가 −3%로).
 
 ## API로 에이전트를 만드는 입장에서
 
@@ -111,7 +115,7 @@ GeForce가 쓰이는 곳은 책상 위의 개발 단계입니다. 그리고 위 
 
 - **평가셋 돌리기:** 문항마다 프롬프트가 달라 캐시가 잘 안 맞고, 채점 모델은 긴 대화 기록을 읽고 점수 몇 토큰만 냅니다. 표의 "LLM 채점" 줄입니다.
 - **임베딩 색인과 재순위:** decode가 아예 없는 작업이라 prefill이 빨라진 만큼 거의 그대로 줄어듭니다. 문서 수십만 건을 다시 색인하는 일이 대표적입니다.
-- **LoRA 실험:** 저장소 표 기준 BF16 미세조정이 +25~50%입니다. 같은 밤에 돌릴 수 있는 설정 조합이 그만큼 늘어납니다.
+- **LoRA 실험:** 저장소 표 기준 BF16 미세조정 속도가 +25~50%입니다. 같은 밤에 돌릴 수 있는 설정 조합이 그만큼 늘어납니다.
 
 > **제 해석**
 >

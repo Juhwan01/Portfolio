@@ -1,6 +1,6 @@
 ---
 title: '추론 강도를 어디에 쓸까: 올리면 좋아진다는 가정이 깨지는 곳'
-excerpt: 이제 거의 모든 모델 API에 추론 강도 파라미터가 있습니다. 올릴수록 똑똑해질 것 같지만, 에이전트 벤치마크에서는 최고 강도가 한 단계 아래보다 낮게 나오기도 합니다. 강도를 호출의 역할마다 따로 정하는 설계 변수로 보고, 높은 강도 한 번과 낮은 강도에 검사를 붙이는 방식을 비교해 봅니다.
+excerpt: 이제 거의 모든 모델 API에 추론 강도 파라미터가 있습니다. 올릴수록 똑똑해질 것 같지만, 에이전트 벤치마크에서는 최고 강도의 점수가 한 단계 아래보다 낮게 나오기도 합니다. 강도를 호출의 역할마다 따로 정하는 설계 변수로 보고, 높은 강도 한 번과 낮은 강도에 검사를 붙이는 방식을 비교해 봅니다.
 tags:
 - Reasoning Models
 - LLM Architecture
@@ -11,27 +11,27 @@ published_at: '2026-10-31T13:20:00Z'
 ---
 
 > **한눈에 보기**
-> - 추론 강도를 올린다고 늘 좋아지지는 않습니다. LangChain에서는 **xhigh(53.9%)가 high(63.6%)보다 낮았고**, 이유는 시간 제한이었습니다.
+> - 추론 강도를 올린다고 늘 좋아지지는 않습니다. LangChain의 Terminal Bench 2.0 실험에서는 **xhigh(53.9%)가 high(63.6%)보다 낮았고**, 이유는 시간 제한이었습니다.
 > - 에이전트에게 강도는 **단계 하나의 질과 밟을 수 있는 단계 수를 맞바꾸는 값**입니다.
-> - 그래서 강도는 호출의 역할마다 따로 정하고, **검사로 잡히는 실패에는 강도 대신 검사를 붙이는 편**이 쌉니다. 아래 예시에서는 비용 56%, 시간 29%였습니다.
+> - 그래서 강도는 호출의 역할마다 따로 정하고, **검사로 잡히는 실패에는 강도 대신 검사를 붙이는 편**이 쌉니다. 토큰 수를 가정한 아래 예시에서는 비용이 높은 강도 한 번의 56%, 시간은 29% 수준이었습니다.
 
 ## 높을수록 좋은 다이얼처럼 보이지만
 
 추론 강도는 이제 거의 모든 API의 기본 파라미터입니다.
 
 - **OpenAI:** [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)는 none부터 max까지 여섯 단계가 있고 기본값은 medium입니다.
-- **Anthropic:** [Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)와 Fable 5.1은 생각을 아예 끌 수 없어서, effort가 생각의 양을 조절하는 유일한 손잡이입니다.
+- **Anthropic:** [Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)와 Fable 5.1은 생각을 아예 끌 수 없어서, effort(Anthropic API의 추론 강도 파라미터)가 생각의 양을 조절하는 유일한 손잡이입니다.
 
 손잡이가 하나뿐이고 눈금이 매겨져 있으면 높을수록 좋은 다이얼처럼 보입니다. 실제 숫자는 그렇지 않았습니다.
 
-| 출처 | 한 단계 아래 | 최고 강도 | 왜 |
+| 출처 | 낮은 쪽 | 한 단계 위 | 왜 |
 |---|---|---|---|
 | LangChain [하네스 개선 기록](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering) (2월, Terminal Bench 2.0) | high 63.6% | xhigh 53.9% | 단계마다 오래 생각하다 시간 제한에 걸림 |
 | OpenAI GPT-6 Luna 출시 차트 ([정리된 표](https://kingy.ai/blog/gpt-6-sol-luna-specs-benchmarks-pricing-comparison/), AutomationBench) | high 14.5% | xhigh 12.6% | 설명 없음 |
 
 ## 강도는 단계의 질과 단계의 수를 맞바꾼다
 
-Artificial Analysis가 10월 27일 [새로 낸 지수(v5)](https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5) 기준 [비교](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)를 보면, 같은 GPT-6 Luna라도 강도에 따라 다른 모델처럼 움직입니다.
+Artificial Analysis가 10월 27일 새로 낸 [지수(v5)](https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5)로 매긴 [비교](https://artificialanalysis.ai/models/comparisons/gpt-6-luna-low-vs-gpt-6-luna)를 보면, 같은 GPT-6 Luna라도 강도에 따라 다른 모델처럼 움직입니다.
 
 | GPT-6 Luna | low | max | 차이 |
 |---|---|---|---|
@@ -50,7 +50,7 @@ Artificial Analysis가 10월 27일 [새로 낸 지수(v5)](https://artificialana
 
 ## 호출마다 맞는 강도가 다르다
 
-LangChain이 결국 쓴 것도 계획과 검증에는 xhigh, 그 사이 구현에는 high를 주는 "**reasoning sandwich**"였습니다. 최종 66.5%는 이 배분과 다른 하네스 개선을 모두 합친 결과이고, 강도 배분을 이리저리 바꿔 본 시험들 사이에 큰 차이는 없었다고도 적었습니다. 샌드위치가 정답이라기보다, 한 에이전트 안에서도 단계마다 강도를 달리 줄 수 있다는 예로 보는 편이 맞겠습니다.
+LangChain이 결국 쓴 것도 계획과 검증에는 xhigh, 그 사이 구현에는 high를 주는 "**reasoning sandwich**"였습니다. Terminal Bench 2.0 최종 점수 66.5%는 이 배분과 다른 하네스 개선을 모두 합친 결과이고, 강도 배분을 이리저리 바꿔 본 시험들 사이에 큰 차이는 없었다고도 적었습니다. 샌드위치가 정답이라기보다, 한 에이전트 안에서도 단계마다 강도를 달리 줄 수 있다는 예로 보는 편이 맞겠습니다.
 
 이걸 일반적인 LLM 앱 구조로 옮기면 호출을 역할별로 나눠 볼 수 있습니다.
 
@@ -64,7 +64,7 @@ Opus 5.5는 메시지마다 effort를 바꾸는 기능도 [베타로 지원합�
 
 ## 높은 강도 한 번, 낮은 강도에 검사 한 번
 
-지난주 [속도에 관한 글](/blog/faster-inference-architecture)에서 빨라진 시간을 "쓰고 확인하기"에 다시 쓰는 이야기를 했는데, 추론 강도에서도 같은 선택이 나옵니다. 같은 과제를 두 가지로 푸는 경우를 계산해 보겠습니다. GPT-6 Luna 단가(입력 $0.10, 출력 $0.50, 100만 토큰당)에 초당 100토큰을 가정했고, 토큰 수는 설명을 위해 정한 값입니다.
+지난주 [속도에 관한 글](/blog/faster-inference-architecture)에서 빨라진 시간을 "쓰고 확인하기"에 다시 쓰는 이야기를 했는데, 추론 강도에서도 같은 선택이 나옵니다. 같은 과제를 두 가지로 푸는 경우를 계산해 보겠습니다. GPT-6 Luna 단가(입력 $0.10, 출력 $0.50, 100만 토큰당)를 쓰고 생성 속도는 초당 100토큰으로 가정했고, 토큰 수는 설명을 위해 정한 값입니다.
 
 ```
 A. 높은 강도로 한 번
@@ -75,7 +75,7 @@ A. 높은 강도로 한 번
 B. 낮은 강도로 쓰고, 다른 호출로 검사
    생성: 입력 3,000 · 출력 800(사고 300 + 답 500)  → 8초,  $0.00070
    검사: 입력 3,500 · 출력 300                     → 3초,  $0.00050
-   검사에서 20%가 걸려 한 번 다시 쓴다고 하면
+   답의 20%가 검사에 걸려 생성과 검사를 한 번 더 돈다고 하면
    기대 시간 11 + 0.2 × 11 = 13.2초
    기대 비용 $0.00120 + 0.2 × $0.00120 = $0.00144
 ```
@@ -94,7 +94,7 @@ B는 **비용이 A의 56%, 시간은 29% 수준**입니다. 숫자만 보면 B�
 
 ## 눈에 잘 안 띄는 비용
 
-- **추론이 다음 턴으로 따라옵니다.** GPT-5.6부터는 이전 턴의 추론 내용이 기본으로 다음 턴에 이어집니다. 가이드에 따르면 기본값이 이전 모델의 current_turn에서 all_turns로 바뀌었습니다. 대화가 길어질수록 앞선 생각들이 입력으로 따라오니, 강도를 올린 대가가 뒤의 턴에서도 조금씩 청구됩니다. 캐시가 상당 부분을 덜어 주겠지만 0은 아닙니다.
+- **추론이 다음 턴으로 따라옵니다.** GPT-5.6부터는 이전 턴의 추론 내용이 기본으로 다음 턴에 이어집니다. GPT-5.6 가이드에 따르면 이 설정의 기본값이 이전 모델의 current_turn에서 all_turns로 바뀌었습니다. 대화가 길어질수록 앞선 생각들이 입력으로 따라오니, 강도를 올린 대가가 뒤의 턴에서도 조금씩 청구됩니다. 캐시가 상당 부분을 덜어 주겠지만 0은 아닙니다.
 - **같은 이름의 강도가 모델마다 다릅니다.** [모델 교체 글](/blog/model-swap-is-not-one-line)에서도 썼듯, 모델을 바꿀 때 강도 설정은 그대로 옮겨지지 않습니다. Opus 5.5는 기본 effort가 Opus 5의 high에서 medium으로 내려갔는데, 같은 effort에서 더 많이 생각하는 경향이 있다고 [문서](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)에 적혀 있습니다. 같은 "medium"이 모델마다 다른 양의 생각을 뜻하니, 모델을 바꾸면 강도 설정도 다시 재야 합니다.
 
 ## 아직 모르는 것
