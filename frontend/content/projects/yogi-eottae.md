@@ -27,7 +27,7 @@ responsibilities:
 - 추천 파이프라인 — LLM과의 대화로 13가지 항목의 프로필을 받고 ChromaDB 벡터 검색으로 후보를 찾는 RAG 흐름 설계
 - 이동 마찰 점수 — 도보·환승·시간으로 이동 부담을 정의하고 유사도·평점과 합친 최종 점수 설계
 - 대중교통 라우팅 서버 — GTFS 데이터를 정제해 GraphHopper 서버를 직접 구축하고, 후보 경로를 비동기로 동시 계산
-- 식당 데이터 — 7,700개 가게 리뷰 크롤링과 표준·한글·영어 3단계 매칭
+- 식당 데이터 — 가게 리뷰 크롤링과 표준·한글·영어 3단계 매칭
 links:
   github: https://github.com/Goorm-AI-Semi-Project/YGYT
 cover: /images/projects/yogi-eottae/thumbnail.png
@@ -59,4 +59,4 @@ cover: /images/projects/yogi-eottae/thumbnail.png
 
 ## 그 밖의 설계
 
-- **식당 데이터 매칭:** 표준·한글·영어 3단계 매칭으로 6,842개 가게 데이터를 매핑했습니다.
+- **식당 데이터 매칭:** 표준·한글·영어 3단계 매칭으로 가게 데이터를 매핑했습니다.
