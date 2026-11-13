@@ -20,7 +20,7 @@ responsibilities:
 - Jira Extended MCP — 이슈 일괄 생성·일괄 상태 변경·릴리스·스프린트·이슈 링크까지 에이전트가 다루는 Jira MCP 서버를 만들어 PyPI에 공개
 - ArchFlow — Jira·GitHub·draw.io를 MCP 서버 하나로 묶어, 티켓 하나로 이슈 상태·관련 PR·아키텍처 위치를 함께 답하게 함
 - 사내 Claude Code 하네스 — 계획·구현·리뷰 에이전트, Jira 동기화 스킬, 프롬프트 인젝션 방어 훅, 보안 검사 CI를 묶은 팀용 플러그인
-- 티켓 단위 작업 체계 — 챗봇 개발을 트랙으로 나누고 티켓 하나를 git worktree 하나·PR 하나로 처리, 트랙 사이 인계는 Jira 쪽지로
+- 티켓 단위 작업 체계 — 챗봇 개발을 트랙으로 나누고 티켓 하나를 git worktree 하나·PR 하나로 처리, 트랙 사이 인계는 인계용 Jira 티켓으로
 metrics:
 - value: 850회+
   label: PyPI 누적 다운로드
@@ -48,7 +48,7 @@ gallery:
 
 ### 2. 팀 도구: 에이전트가 직접 읽고 쓰는 MCP 서버
 
-**왜:** 기존 Jira MCP는 읽기 위주이거나 이슈를 하나씩만 만들어, 스프린트 시작 때 수십 개 이슈를 만들고 릴리스에 묶는 실제 업무를 에이전트에 맡기기 어려웠습니다. 이슈·코드·구조도도 Jira·GitHub·draw.io에 흩어져 있었습니다.
+**왜:** 기존 Jira MCP는 읽기 전용이거나 일괄 상태 변경·릴리스 관리를 지원하지 않아, 스프린트 시작 때 수십 개 이슈를 만들고 릴리스에 묶는 실제 업무를 에이전트에 맡기기 어려웠습니다. 이슈·코드·구조도도 Jira·GitHub·draw.io에 흩어져 있었습니다.
 
 **구조:** [Jira Extended MCP](/projects/jira-extended-mcp)로 이슈 일괄 생성·상태 변경·릴리스·스프린트를 에이전트가 직접 처리하게 했습니다. [ArchFlow](/projects/archflow)로는 Jira·GitHub·draw.io를 MCP 서버 하나에 묶어, 티켓 하나를 물으면 이슈 상태·관련 PR·아키텍처 위치를 함께 답하게 했습니다.
 

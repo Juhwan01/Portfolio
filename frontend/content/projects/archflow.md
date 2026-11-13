@@ -1,6 +1,6 @@
 ---
 title: ArchFlow
-summary: Jira·GitHub·draw.io 세 탭을 오가며 맞춰 보던 이슈·코드·구조도를, Claude Code 안에서 질문 하나로 추적하게 한 통합 MCP 서버(Context Hub)입니다.
+summary: Jira·GitHub·draw.io 세 탭을 오가며 맞춰 보던 이슈·코드·구조도를, Claude Code 안에서 질문 하나로 추적하게 한 통합 MCP 서버입니다.
 period:
   start: 2026-03
   end: 2026-03
