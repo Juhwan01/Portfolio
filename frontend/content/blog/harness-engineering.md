@@ -15,9 +15,11 @@ published_at: '2026-03-28T07:47:59.832142Z'
 > - AGENTS.md 같은 지시 파일은 **모델이 혼자 알 수 없는 것만** 적을 때 일합니다. ETH Zurich 연구에서 지시 파일은 성공률을 오히려 낮추는 경향이 있었고 추론 비용은 20% 넘게 늘렸습니다. 저장소 개요도 도움이 되지 않았습니다.
 > - 하네스를 **알려 주는 장치**와 **확인하는 장치**로 나누면, 효과가 컸던 사례는 대부분 확인하는 쪽이고, 모델이 좋아질 때 낡는 쪽은 알려 주는 쪽입니다.
 
-OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있던 문장은 숫자들이 나오는 대목에서 한참 내려간 곳에 있습니다. 팀이 한때 **매주 금요일, 그러니까 일주일의 20%를 에이전트가 만든 "AI slop"을 치우는 데 썼다**는 고백입니다.
+OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있던 문장은 숫자들이 나오는 대목에서 한참 내려간 곳에 있습니다. 팀이 한때 **매주 금요일, 그러니까 일주일의 20%를 에이전트가 만든 "AI slop"을 치우는 데 썼다**는 고백입니다. AI slop은 AI가 쏟아 낸 어설픈 결과물을 낮춰 부르는 말입니다.
 
-그 문장을 기준으로 다시 읽으면, 이 글은 코드를 한 줄도 직접 쓰지 않고 제품을 만들었다는 자랑이라기보다 에이전트가 쌓는 엔트로피를 어떻게 다스렸는지에 관한 기록에 가깝습니다. 글이 나오고 한 달 반 동안 "하네스"라는 말은 빠르게 퍼졌고, 그사이 원문과 다르게 전해지는 부분도 생겼습니다. 원문이 말한 것, 주변 글이 말한 것, 제가 읽은 것을 나눠 정리해 둡니다.
+그 문장을 기준으로 다시 읽으면, 이 글은 코드를 한 줄도 직접 쓰지 않고 제품을 만들었다는 자랑이라기보다 에이전트가 쌓는 엔트로피(코드가 빨리 늘수록 함께 쌓이는 어수선함)를 어떻게 다스렸는지에 관한 기록에 가깝습니다. 글이 나오고 한 달 반 동안 "하네스"라는 말은 빠르게 퍼졌고, 그사이 원문과 다르게 전해지는 부분도 생겼습니다. 원문이 말한 것, 주변 글이 말한 것, 제가 읽은 것을 나눠 정리해 둡니다.
+
+쉽게 말해 하네스는 모델 바깥에서 에이전트(스스로 코드를 읽고 고치며 일하는 AI)의 일을 잡아 주는 장치 전체입니다. AGENTS.md 같은 지시 파일(저장소에 넣어 두고 에이전트가 일하기 전에 먼저 읽는 안내문), 도구, 테스트처럼 모델을 감싸는 것들이고, 영어 harness는 말에 채우는 마구를 뜻합니다.
 
 ## 원문이 실제로 한 이야기
 
@@ -26,33 +28,33 @@ OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있
 | 항목 | 내용 |
 |---|---|
 | 기간 | 2025년 8월 말 빈 저장소에 첫 커밋을 한 뒤 다섯 달 |
-| 결과물 | 코드 약 100만 줄, 머지된 PR 약 1,500개 |
+| 결과물 | 코드 약 100만 줄, 머지된 PR(코드 변경 요청) 약 1,500개 |
 | 사람 | 엔지니어 셋으로 시작해 글을 쓸 무렵 일곱 |
 | 속도 | 셋이던 시기 기준 한 사람이 하루 평균 PR 3.5개. 걸린 시간은 손으로 짰을 때의 약 10분의 1 (추정) |
-| 직접 쓴 코드 | 없음. 첫 AGENTS.md조차 Codex가 씀 |
+| 직접 쓴 코드 | 없음. 첫 AGENTS.md조차 Codex(OpenAI의 코딩 에이전트)가 씀 |
 
 숫자보다 눈에 들어온 건 목차였습니다. 소제목에 이런 것들이 차례로 나옵니다.
 
 - 저장소의 지식을 기록 원본으로
 - 에이전트가 읽을 수 있게
 - 아키텍처와 취향을 강제하기
-- 엔트로피와 가비지 컬렉션
+- 엔트로피와 가비지 컬렉션(원래는 안 쓰는 메모리를 치우는 기능, 여기서는 쌓인 지저분한 코드를 치우는 일)
 
-이 팀은 AGENTS.md를 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 인용되는 "give Codex a map, not a 1,000-page instruction manual"이라는 구절이 이 대목에서 나옵니다.
+이 팀은 AGENTS.md를 100줄 남짓으로 짧게 두고 목차로만 씁니다. 많이 인용되는 "give Codex a map, not a 1,000-page instruction manual"(천 쪽짜리 설명서 말고 지도를 주라)이라는 구절이 이 대목에서 나옵니다.
 
 금요일 이야기로 돌아가면, 그들은 이 일을 계속 사람 손으로 하지 않았습니다.
 
-- 지켜야 할 원칙을 "**golden principles**"로 정리하고, 그 원칙에 어긋난 곳을 찾아 리팩터링 PR을 여는 Codex 작업을 백그라운드에서 주기적으로 돌렸습니다.
+- 지켜야 할 원칙을 "**golden principles**"로 정리하고, 그 원칙에 어긋난 곳을 찾아 리팩터링(동작은 그대로 두고 코드를 정리하는 일) PR을 여는 Codex 작업을 백그라운드에서 주기적으로 돌렸습니다.
 - 문서와 코드가 어긋난 곳을 고치는 에이전트도 따로 있었습니다.
-- 아키텍처와 취향은 직접 만든 **린터와 구조 테스트**로 강제했습니다. 원문은 이 부분을 별도 절에서 다룹니다.
+- 아키텍처와 취향은 직접 만든 **린터와 구조 테스트**로 강제했습니다. 원문은 이 부분을 별도 절에서 다룹니다. 린터는 코드를 실행하지 않고 규칙에 어긋난 곳을 찾아 주는 도구로, 글로 치면 맞춤법 검사기입니다.
 
 사람이 치우던 일을 정해진 주기로 도는 검사와 수리 작업으로 바꾼 것입니다.
 
 ## "세 기둥"과 "하네스"는 누구의 말인가
 
-- **세 기둥:** 하네스를 컨텍스트 엔지니어링, 아키텍처 제약, 가비지 컬렉션의 세 기둥으로 설명하는 분류는 원문에 없습니다. Thoughtworks의 Birgitta Böckeler가 2월 17일 [메모](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html)에서 OpenAI 글을 읽고 묶은 것이고, 그는 그 분류 옆에 "(grouping based on my interpretation)"이라고 분명히 적었습니다. 쓸 만한 정리지만 OpenAI의 주장으로 옮기면 안 됩니다. 같은 메모에서 그는 OpenAI 글 본문에 "harness"라는 단어가 한 번밖에 나오지 않는다는 점도 짚었습니다.
-- **harness engineering이라는 말:** OpenAI 글보다 엿새 먼저 나온 Ghostty 개발자 Mitchell Hashimoto의 [글](https://mitchellh.com/writing/my-ai-adoption-journey)에 이미 있었습니다. 그는 업계에서 통하는 이름이 따로 있는지는 모르겠다면서 "I've grown to calling this 'harness engineering'"이라고 썼습니다.
-- **하네스의 정의:** Böckeler의 메모와 같은 사이트(martinfowler.com)에 3월 4일 실린 Kief Morris의 [글](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html)에 있는 문장이 가장 정확하다고 봅니다. "The collection of specifications, quality checks, and workflow guidance that control different levels of loops inside the how loop is the agent's harness." 명세, 품질 검사, 작업 지침. 모델에게 알려 주는 것과 결과를 확인하는 것이 한 문장에 같이 들어 있습니다.
+- **세 기둥:** 하네스를 컨텍스트 엔지니어링, 아키텍처 제약, 가비지 컬렉션의 세 기둥으로 설명하는 분류는 원문에 없습니다. Thoughtworks의 Birgitta Böckeler가 2월 17일 [메모](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html)에서 OpenAI 글을 읽고 묶은 것이고, 그는 그 분류 옆에 "(grouping based on my interpretation)", 곧 자기 해석에 따른 분류라고 분명히 적었습니다. 쓸 만한 정리지만 OpenAI의 주장으로 옮기면 안 됩니다. 같은 메모에서 그는 OpenAI 글 본문에 "harness"라는 단어가 한 번밖에 나오지 않는다는 점도 짚었습니다.
+- **harness engineering이라는 말:** OpenAI 글보다 엿새 먼저 나온 Ghostty 개발자 Mitchell Hashimoto의 [글](https://mitchellh.com/writing/my-ai-adoption-journey)에 이미 있었습니다. 그는 업계에서 통하는 이름이 따로 있는지는 모르겠다면서 "I've grown to calling this 'harness engineering'"(이걸 하네스 엔지니어링이라고 부르게 됐다)이라고 썼습니다.
+- **하네스의 정의:** Böckeler의 메모와 같은 사이트(martinfowler.com)에 3월 4일 실린 Kief Morris의 [글](https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html)에 있는 문장이 가장 정확하다고 봅니다. "The collection of specifications, quality checks, and workflow guidance that control different levels of loops inside the how loop is the agent's harness." 에이전트가 일을 해 나가는 과정을 통제하는 명세, 품질 검사, 작업 지침을 모두 묶은 것이 에이전트의 하네스라는 뜻입니다. 모델에게 알려 주는 것과 결과를 확인하는 것이 한 문장에 같이 들어 있습니다.
 
 ## 지시 파일은 얼마나 일하나
 
@@ -60,16 +62,18 @@ OpenAI의 하네스 엔지니어링 글에서 제가 가장 오래 붙잡고 있
 
 | 자료 | 무엇을 봤나 | 결과 |
 |---|---|---|
-| Hashimoto의 AGENTS.md (2월) | 줄 하나하나를 실제로 본 실패에 대한 답으로 적음 | "Each line in that file is based on a bad agent behavior, and it almost completely resolved them all" |
+| Hashimoto의 AGENTS.md (2월) | 줄 하나하나를 실제로 본 실패에 대한 답으로 적음 | "Each line in that file is based on a bad agent behavior, and it almost completely resolved them all" (줄마다 실제로 본 잘못된 행동에서 나왔고, 그 행동이 거의 다 사라졌다) |
 | ETH Zurich·LogicStar [AGENTS.md 평가 연구](https://arxiv.org/abs/2602.11988v1) (2월) | 여러 저장소에서 지시 파일(논문의 말로는 context file)의 효과를 잼 | 성공률은 오히려 낮아지는 경향이었고, 추론 비용은 20% 넘게 늘어남. 저장소 개요는 도움이 안 됐고, 논문은 사람이 쓰는 파일에 꼭 필요한 요구 사항만 적으라고 권함 |
 
 > **제 해석**
 >
-> 둘의 차이는 **파일에 무엇을 적었느냐**에 있습니다. ETH 연구에서 효과가 없던 건 모델이 코드를 읽기만 해도 알아낼 저장소 개요였고, 논문이 남기라고 권한 "꼭 필요한 요구 사항"이 사실상 Hashimoto가 적은 종류의 줄입니다. 모델이 혼자서는 알 수 없는 것만 짧게 적으면 일을 하고, 이미 아는 걸 되풀이하면 토큰만 먹습니다. OpenAI가 AGENTS.md를 100줄짜리 목차로 줄인 것도 같은 방향입니다.
+> 둘의 차이는 **파일에 무엇을 적었느냐**에 있습니다. ETH 연구에서 효과가 없던 건 모델이 코드를 읽기만 해도 알아낼 저장소 개요였고, 논문이 남기라고 권한 "꼭 필요한 요구 사항"이 사실상 Hashimoto가 적은 종류의 줄입니다. 모델이 혼자서는 알 수 없는 것만 짧게 적으면 일을 하고, 이미 아는 걸 되풀이하면 토큰(모델이 글을 쪼개 세는 단위이자 요금 단위)만 먹습니다.
+>
+> 가상의 예로, "이 저장소는 웹앱입니다"는 모델이 코드를 읽으면 알아낼 줄이고, "이 폴더는 다른 팀이 관리하니 고치지 마세요"는 모델이 혼자서는 알 수 없는 줄입니다. OpenAI가 AGENTS.md를 100줄짜리 목차로 줄인 것도 같은 방향입니다.
 
 ## 확인하는 쪽에서 나온 숫자들
 
-Böckeler의 메모에는 이런 문장도 있습니다. "What I am missing in the write-up is verification of functionality and behaviour." OpenAI 글에도 Codex가 버그를 재현하고, Chrome DevTools로 앱을 띄워 고친 결과를 확인하는 대목이 있기는 합니다. 다만 Böckeler가 보기에 그 비중은 구조와 취향을 지키는 장치에 비해 작았습니다.
+Böckeler의 메모에는 글에 기능과 동작의 검증이 빠져 있다는 이런 문장도 있습니다. "What I am missing in the write-up is verification of functionality and behaviour." OpenAI 글에도 Codex가 버그를 재현하고, Chrome DevTools로 앱을 띄워 고친 결과를 확인하는 대목이 있기는 합니다. 다만 Böckeler가 보기에 그 비중은 구조와 취향을 지키는 장치에 비해 작았습니다.
 
 그런데 비슷한 시기에 나온 다른 사례들은 바로 그 **결과를 확인하는 쪽**에서 큰 숫자를 냈습니다.
 
@@ -81,7 +85,7 @@ Böckeler의 메모에는 이런 문장도 있습니다. "What I am missing in t
 
 사례마다 덧붙일 점이 있습니다.
 
-- **LangChain:** 그들이 효과가 컸다고 꼽은 건 자기 검증과 트레이싱이었고("self-verification & tracing help a lot"), 에이전트가 끝내려는 순간 붙잡아 과제 명세와 대조하는 검증을 한 번 더 돌게 하는 미들웨어가 그중 하나입니다. 추론 강도를 xhigh로만 돌리면 시간 제한에 걸려 53.9%에 그쳤고 high로는 63.6%였습니다. 그들이 쓴 건 계획과 검증에는 xhigh, 그 사이 구현에는 high를 쓰는 "reasoning sandwich"였는데, 강도 배분을 바꿔 본 시험들 사이에 큰 차이는 없었다고 합니다. 저는 이 결과를 **강도보다 검증 단계를 두었느냐가 더 컸던** 사례로 읽습니다.
+- **LangChain:** 그들이 효과가 컸다고 꼽은 건 자기 검증과 트레이싱(에이전트가 한 일을 순서대로 기록해 두는 것)이었습니다("self-verification & tracing help a lot"). 에이전트가 끝내려는 순간 붙잡아 과제 명세와 대조하는 검증을 한 번 더 돌게 하는 미들웨어(중간에 끼어드는 코드)가 그중 하나입니다. 추론 강도(모델이 답하기 전에 얼마나 오래 생각할지 정하는 설정)를 high보다 한 단계 위인 xhigh로만 돌리면 시간 제한에 걸려 53.9%에 그쳤고 high로는 63.6%였습니다. 그들이 쓴 건 계획과 검증에는 xhigh, 그 사이 구현에는 high를 쓰는 "reasoning sandwich"였는데, 강도 배분을 바꿔 본 시험들 사이에 큰 차이는 없었다고 합니다. 저는 이 결과를 **강도보다 검증 단계를 두었느냐가 더 컸던** 사례로 읽습니다.
 - **Vercel:** 정확도가 80%에서 100%가 됐다는 숫자도 있는데, 질문 다섯 개로 잰 값(4/5에서 5/5)이라 크게 기대지는 않으려 합니다. 제가 가져가는 건 에이전트가 할 수 있는 일의 범위를 좁혔더니 시간과 토큰이 같이 줄었다는 쪽입니다.
 - **Anthropic:** 평가자도 LLM이라 LLM이 만든 결과물에 너그러운 경향이 있었고, 초기에는 문제를 제대로 찾아 놓고도 별일 아니라고 스스로 설득한 뒤 통과시키는 일이 있었다고 합니다.
 
@@ -91,17 +95,19 @@ Böckeler의 메모에는 이런 문장도 있습니다. "What I am missing in t
 
 | | 알려 주는 장치 | 확인하는 장치 |
 |---|---|---|
-| 예 | 시스템 프롬프트, AGENTS.md, 스킬·도구 설명, 컨텍스트 리셋, 작업 분해 | 타입 검사, 린터, 테스트, CI, 평가 에이전트 |
+| 예 | 시스템 프롬프트, AGENTS.md, 스킬·도구 설명, 컨텍스트 리셋, 작업 분해 | 타입 검사, 린터, 테스트, CI(코드를 올릴 때마다 자동으로 도는 테스트), 평가 에이전트 |
 | 위 자료에서 | 개요를 적은 지시 파일은 성공률을 못 올림. 효과는 구체적인 실패를 막는 줄에서만 나옴 | 끝에 확인을 붙인 LangChain·Anthropic, 범위를 좁힌 Vercel, 취향을 검사로 바꾼 OpenAI가 큰 숫자를 냄 |
-| 모델이 좋아지면 | 낡음 | 결정론적인 검사는 그대로 남음 |
+| 모델이 좋아지면 | 낡음 | 결정론적인 검사(같은 결과물이면 언제나 같은 판정을 내는 검사)는 그대로 남음 |
+
+운전에 빗대면, 초보 운전자에게 주는 "여기서 미리 차선을 바꾸세요" 쪽지는 알려 주는 장치라서 운전에 익숙해지면 필요 없어집니다. 과속 단속 카메라는 확인하는 장치라서 운전 실력과 상관없이 늘 같은 것을 잽니다.
 
 ## 모델이 좋아지면 무엇이 낡는가
 
-Anthropic 글에서 가장 오래 남는 문장은 이것입니다. "every component in a harness encodes an assumption about what the model can't do on its own." 그리고 그 가정들은 "worth stress testing"이라고 덧붙입니다.
+Anthropic 글에서 가장 오래 남는 문장은 이것입니다. "every component in a harness encodes an assumption about what the model can't do on its own." 하네스의 부품 하나하나에 모델이 혼자서는 못 하는 일에 대한 가정이 담겨 있다는 말입니다. 그리고 그 가정들은 "worth stress testing"(세게 시험해 볼 만하다)이라고 덧붙입니다.
 
 글에는 실제로 가정이 무너진 사례가 나옵니다.
 
-- **컨텍스트 리셋:** Sonnet 4.5는 컨텍스트 한도에 가까워졌다고 느끼면 일을 서둘러 마무리하려는 "context anxiety"가 강해서, 하네스가 컨텍스트를 주기적으로 리셋해 줘야 했습니다. Opus 4.5에서는 하네스의 도움 없이도 그 버릇이 거의 사라져서("largely removed that behavior on its own") 리셋을 통째로 걷어냈습니다.
+- **컨텍스트 리셋:** Sonnet 4.5는 컨텍스트 한도(모델이 한 번에 읽고 기억할 수 있는 글의 길이)에 가까워졌다고 느끼면 일을 서둘러 마무리하려는 "context anxiety"가 강해서, 하네스가 컨텍스트를 주기적으로 리셋해(작업을 정리해 넘기고 새 대화로 다시 시작하게 해) 줘야 했습니다. Opus 4.5에서는 하네스의 도움 없이도 그 버릇이 거의 사라져서("largely removed that behavior on its own") 리셋을 통째로 걷어냈습니다.
 - **스프린트 분해:** Opus 4.6에서는 일을 스프린트로 쪼개 주던 구조도 뺐습니다. 모델이 그런 분해 없이도 일을 해낼 수 있었기 때문입니다.
 - **평가 에이전트:** Opus 4.6에서는 일하는 에이전트가 해낼 수 있는 한계 근처의 과제에만 남겼다고 합니다.
 
