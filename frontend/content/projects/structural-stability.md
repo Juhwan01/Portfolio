@@ -1,12 +1,12 @@
 ---
 title: 구조물 안정성 물리 추론 AI
-summary: 정면·상단 두 시점 이미지로 10초 뒤 구조물 붕괴 여부를 예측합니다. 시뮬레이션 영상에서 뽑은 소프트 레이블로 학습하고, 실험실·실제 환경의 색 차이를 Fourier Domain Adaptation으로 줄였습니다.
+summary: 구조물 사진 두 장(정면·위)으로 10초 뒤 무너질지를 예측하는 모델입니다. 혼자 참가해 버전마다 기법을 더하며, 예측 오차를 첫 모델보다 81% 줄였습니다.
 org: DACON
 period:
   start: 2026-03
   end: 2026-03
 role: 1인 참가 · 데이터 분석, 도메인 적응, 모델 설계·학습, 앙상블 전담
-team: AI 1
+team: 1인
 status: completed
 featured: false
 order: 11
@@ -22,7 +22,7 @@ responsibilities:
 - 도메인 차이 측정 — Train(실험실)과 Dev(실제 환경)의 색상·조명 차이를 Hue·Value·RGB 거리로 재고, 차이가 저주파에 몰려 있음을 확인
 - 두 시점 모델 — 시점마다 ConvNeXt-V2 인코더를 두고 Transformer Cross-Attention으로 융합, 움직임·붕괴 시점·심각도 보조 과제
 - 소프트 레이블 — 대회 제공 시뮬레이션 영상으로 영상 모델을 학습시키고, 그 예측을 불안정한 정도의 연속값으로 써 정답 레이블과 혼합
-- FDA 적용 — 별도 학습 없이 Train 이미지의 저주파 성분만 Dev 것으로 바꿔 색 분포를 맞춤
+- 주파수 기반 색 맞춤(FDA) — 별도 학습 없이 Train 이미지의 저주파 성분만 Dev 것으로 바꿔 색 분포를 맞춤
 metrics:
 - value: −81%
   label: 예측 오차(LogLoss)

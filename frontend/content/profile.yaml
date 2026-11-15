@@ -11,7 +11,7 @@ intro: 문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백
 about: |
   문제를 정의하고 끝까지 해결합니다. 모델 설계부터 백엔드, 배포와 운영까지 아이디어를 실제 서비스로 만드는 전 과정을 직접 맡아 왔습니다.
 
-  지금은 Beans Pirates에서 AI 피트니스 앱 PITZ의 [AI 트레이너 챗봇과 AI 리포트](/projects/pitz-ai-trainer)를 맡아 App Store·Google Play에 출시했고, 에이전트가 팀의 Jira·GitHub·설계 문서를 직접 읽고 일하는 [사내 AX 체계](/projects/beans-pirates-ax)를 만들고 있습니다.
+  지금은 Beans Pirates에서 AI 피트니스 앱 PITZ의 [AI 트레이너 챗봇과 AI 리포트](/projects/pitz-ai-trainer)를 맡아 App Store·Google Play에 출시했고, 에이전트가 팀의 Jira·GitHub·설계 문서를 직접 읽고 일하는 [사내 AI 전환(AX) 체계](/projects/beans-pirates-ax)를 만들고 있습니다.
 
 current:
   org: Beans Pirates
@@ -33,7 +33,7 @@ experience:
       - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
       - 대화로 운동·식단 기록을 바꾸는 에이전트의 구조 재편 주도
       - 운동 기록을 해석하는 AI 리포트와 월간 종합 리포트 배치 파이프라인 담당
-      - 사내 AX 전환을 위한 Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 하네스, 티켓 단위 에이전트 작업 체계 구축
+      - 사내 AI 전환(AX)을 위한 Jira·GitHub 연동 MCP 서버, 팀용 Claude Code 플러그인, 티켓 단위 에이전트 작업 체계 구축
 
 education:
   - org: 인제대학교
@@ -114,6 +114,8 @@ timeline:
     period: { start: 2024-03, end: 2024-10 }
     role: 팀 리더
     items:
+      - text: 데이콘 재정정보 AI 검색 경진대회 4위 (359팀 중, 5인 팀으로 참가)
+        project: dacon-fiscal-ai-search
       - text: 생성형 AI 심화 과정에서 소수정예 팀을 이끌며 스터디와 프로젝트 주도
       - text: 민원누리 SW 경진대회 참가
   - title: IL LAB · Praises Us
