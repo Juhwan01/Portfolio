@@ -125,6 +125,7 @@ function Screens({ project }: { readonly project: Project }) {
   const product = project.product!
   return (
     <div className="flex flex-col gap-4">
+      {product.about && <p className="text-sm text-muted-foreground leading-relaxed">{product.about}</p>}
       {product.features.some((f) => f.mine) && (
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
           <MineBadge />
@@ -265,7 +266,7 @@ export default function ProjectPage() {
               {fmtPeriod(project.period)}
               {project.org && ` · ${project.org}`}
             </p>
-            <p className="text-muted-foreground leading-relaxed">{product?.about ?? project.summary}</p>
+            <p className="text-muted-foreground leading-relaxed">{project.summary}</p>
             {(links.length > 0 || project.awards) && (
               <div className="flex flex-wrap gap-2">
                 {links.map((k) => (

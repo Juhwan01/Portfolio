@@ -1,11 +1,11 @@
 ---
 title: SAiM Agent Hub
-summary: 운동 코칭·식단 분석·신체 리포트를 한 API로 제공하는 헬스 트레이닝 멀티 에이전트 시스템입니다. 거대한 프롬프트 하나 대신 오케스트레이터와 전문 에이전트 6개로 나누고, 에이전트마다 필요한 맥락만 조립해 넣었습니다.
+summary: 운동 코칭·식단 분석·신체 리포트를 한 API로 제공하는 헬스 트레이닝 AI 시스템입니다. 일을 나눠 맡은 AI 에이전트들이 각자 필요한 데이터만 받아 답하게 설계했습니다.
 period:
   start: 2026-03
   end: 2026-03
 role: AI Engineer(1인 개발) · 멀티 에이전트 구조 설계, LangGraph 워크플로우 구현, 안전장치 통합
-team: AI 1
+team: 1인
 status: completed
 featured: false
 order: 15

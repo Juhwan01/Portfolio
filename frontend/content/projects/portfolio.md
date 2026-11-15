@@ -6,7 +6,7 @@ period:
   end: 2026-11
 role: 1인 개발
 team: Full-stack 1
-status: completed
+status: archived
 featured: false
 order: 21
 category: Web

@@ -1,12 +1,12 @@
 ---
-title: Allerguard
-summary: 식품 라벨 사진에서 원재료를 읽어 알레르기 유발 성분을 찾아 경고하는 서비스입니다. 팀 최종 코드의 골격이 된 AI 베이스라인(OCR → 원재료 파싱 → 성분 사전 매칭 → 사전 보강)을 설계·구현했습니다.
+title: AllerGuard
+summary: 식품 라벨 사진에서 원재료를 읽어 알레르기 유발 성분을 찾아 경고하는 서비스입니다. 팀 최종 코드의 뼈대가 된 AI 베이스라인(글자 인식부터 성분 판정까지의 기본 흐름)을 설계·구현했습니다.
 org: kakao x goorm 생성형 AI 부트캠프
 period:
   start: 2025-09
   end: 2025-09
-role: 팀원 · AI 베이스라인 설계·구현
-team: AI 4
+role: 팀원 · AI 기본 흐름(베이스라인) 설계·구현
+team: 4인
 status: completed
 featured: false
 order: 10
@@ -21,7 +21,7 @@ tags:
 responsibilities:
 - AI 베이스라인 — GCP Vision OCR, 원재료명 파싱, 성분 사전 매칭, 사전에 없는 원재료 보완을 LangGraph 흐름으로 묶고 V1 → V3로 개선
 - 성분 사전 매칭 — 원재료마다 다국어 문장 임베딩으로 성분 사전과 유사도를 재고, 기준(0.85)을 넘을 때만 알레르기로 판정
-- '사전 보강 — 사전에 없는 원재료는 로컬 모델로 보완하고(V1 T5 → V2 zero-shot 분류: 학습 없이 후보 중 고르는 모델), V3에서는 Google 검색으로 찾은 분류를 사전에 추가'
+- 사전 보강 — 사전에 없는 원재료는 로컬 모델로 분류하고(V1 T5, V2 zero-shot), V3부터는 Google 검색으로 찾은 분류를 사전에 추가
 links:
   github: https://github.com/Goorm-AI-Semi-Project/AllerGuard
 cover: /images/projects/allerguard/thumbnail.png
@@ -37,7 +37,7 @@ kakao x goorm 생성형 AI 부트캠프의 2주 스프린트(2025.09.03–09.16)
 
 **구조:** GCP Vision OCR로 글자를 뽑고, 원재료명 부분을 잘라 원재료 단위로 나눈 뒤, 원재료마다 성분 사전과 임베딩 유사도를 잽니다. 기준(0.85)을 넘으면 알레르기로 판정하고, 사전에 없는 원재료만 다음 단계인 사전 보강으로 넘깁니다. 이 베이스라인에는 유료 LLM 호출이 없습니다.
 
-**결과와 반영:** 이 베이스라인이 팀 최종 코드의 골격이 됐습니다. 베이스라인의 처리 흐름(LangGraph 노드 8개)은 그대로 두고, 팀이 그 위에 GPT-4.1 원재료 파서(교차오염 문구 추출), Tavily 검색, Gradio 화면을 더했습니다.
+**결과와 반영:** 이 베이스라인이 팀 최종 코드의 뼈대가 됐습니다. 베이스라인의 처리 흐름(LangGraph 노드 8개)은 그대로 두고, 팀이 그 위에 GPT-4.1 원재료 파서(교차오염 문구 추출), Tavily 검색, Gradio 화면을 더했습니다.
 
 ## 그 밖의 설계
 

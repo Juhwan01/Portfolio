@@ -1,15 +1,15 @@
 ---
 title: K리그 패스 도착 좌표 예측
-summary: 경기 플레이 시퀀스를 보고 마지막 패스가 도착할 좌표를 예측하는 모델(LSTM + Mixture Density Network)입니다. 1인 참가로 Track1 상위 9%에 들었습니다.
+summary: 축구 경기 흐름을 보고 마지막 패스가 도착할 위치를 예측하는 모델입니다. 혼자 참가해 데이콘 K리그 대회 Track1에서 상위 9%에 들었습니다.
 org: DACON · K리그-서울시립대 공개 AI 경진대회 Track1
 period:
   start: 2025-12
   end: 2026-01
-role: 1인 참가 · EDA부터 최종 모델(V15)까지 전담
-team: AI 1
+role: 1인 참가 · 데이터 분석부터 최종 모델까지 전담
+team: 1인
 status: completed
 featured: false
-order: 12
+order: 8
 category: ML
 tags:
 - Python
@@ -21,7 +21,7 @@ tags:
 responsibilities:
 - 확률 분포 예측 — LSTM-MDN으로 도착 좌표를 가우시안 혼합으로 예측하고, 가우시안 수를 2개에서 10개로 확장
 - 물리·전술 분리 — LSTM은 위치·속도·각도를, N-gram·팀 ID 임베딩은 최근 3~5개 액션의 전술 패턴을 따로 학습
-- 대칭 활용 — 경기장 좌우 대칭으로 Y축 증강, 추론 때는 같은 대칭으로 TTA
+- 대칭 활용 — 경기장을 좌우로 뒤집어 학습 데이터를 2배로 늘리고, 예측할 때도 뒤집은 결과를 함께 평균
 - 단계별 실험 — V10부터 V15까지 기법을 한 번에 하나씩 더해 효과를 확인
 metrics:
 - value: 상위 9%

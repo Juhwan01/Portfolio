@@ -6,7 +6,7 @@ period:
   end: 2024-11
 role: AI · Backend · 일기 전개 로직 설계, 백엔드 API
 team: AI 1 · Backend 1 · Frontend 2
-status: completed
+status: archived
 featured: false
 order: 19
 category: AI
