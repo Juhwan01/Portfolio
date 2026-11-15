@@ -39,7 +39,7 @@ education:
   - org: 인제대학교
     mark: INJE
     logo: /images/orgs/inje.png
-    degree: 컴퓨터공학과 졸업
+    degree: 컴퓨터공학부 차석 졸업
     period: { start: 2020-03, end: 2026-02 }
     note: GPA 4.16 / 4.5 · 졸업작품 Chef's Market
 
@@ -75,10 +75,11 @@ timeline:
         project: jira-extended-mcp
       - text: ArchFlow 오픈소스 공개 (PyPI)
         project: archflow
-  - title: 인제대학교 컴퓨터공학과 졸업
+  - title: 인제대학교 컴퓨터공학부 졸업
     mark: 졸업
     period: { start: 2026-02, end: 2026-02 }
     items:
+      - text: 차석 졸업, GPA 4.16 / 4.5
       - text: 졸업작품 Chef's Market, 5인 팀 팀장
         project: chefs-market
   - title: 데이콘 스마트 제조 AI Agent 해커톤 2025
@@ -123,6 +124,6 @@ timeline:
       - text: 데이콘 K리그-서울시립대 공개 AI 경진대회 Track1 상위 9%
         project: kleague-pass-prediction
       - text: Praises Us 개발팀 팀장으로 여러 프로젝트 리딩
-  - title: 인제대학교 컴퓨터공학과 입학
+  - title: 인제대학교 컴퓨터공학부 입학
     mark: 입학
     period: { start: 2020-03, end: 2020-03 }

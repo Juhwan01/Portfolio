@@ -204,7 +204,7 @@ export default function AboutPage() {
                     인제대학교
                   </h3>
                   <p className="text-secondary font-label text-sm uppercase tracking-wider">
-                    컴퓨터공학과 졸업
+                    컴퓨터공학부 졸업
                   </p>
                 </div>
                 <div className="mt-4 md:mt-0 md:pl-12">
