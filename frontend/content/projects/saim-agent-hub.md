@@ -6,7 +6,7 @@ period:
   end: 2026-03
 role: AI Engineer(1인 개발) · 멀티 에이전트 구조 설계, LangGraph 워크플로우 구현, 안전장치 통합
 team: 1인
-status: completed
+status: archived
 featured: false
 order: 15
 category: AI
