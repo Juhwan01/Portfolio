@@ -6,7 +6,7 @@ period:
   end: null
 role: 개인 프로젝트 · 검색 엔진, 백엔드 API, 데스크톱 앱 전체 설계·구현
 team: AI 1
-status: archived
+status: in-progress
 featured: false
 order: 16
 category: AI

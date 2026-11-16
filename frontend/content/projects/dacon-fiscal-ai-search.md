@@ -8,8 +8,8 @@ period:
 role: 팀원 · 재정 문서 검색·답변 생성 파이프라인 개발 및 성능 개선
 team: 5인(팀 DongBee)
 status: completed
-featured: true
-order: 3
+featured: false
+order: 13
 category: LLM
 tags:
 - RAG

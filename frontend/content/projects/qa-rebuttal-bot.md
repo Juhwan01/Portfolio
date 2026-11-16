@@ -6,7 +6,7 @@ period:
   end: 2024-08
 role: 1인 개발 · 기획, LangGraph 파이프라인, Streamlit UI
 team: AI 1
-status: archived
+status: completed
 featured: false
 order: 18
 category: AI
