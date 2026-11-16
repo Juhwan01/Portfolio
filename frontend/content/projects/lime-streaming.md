@@ -6,7 +6,7 @@ period:
   end: 2021-08
 role: Backend · DevOps · AI 채팅 필터링
 team: AI 1 · Backend 1 · Frontend 1
-status: archived
+status: completed
 featured: false
 order: 20
 category: Web

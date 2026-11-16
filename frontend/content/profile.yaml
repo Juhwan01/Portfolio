@@ -114,8 +114,6 @@ timeline:
     period: { start: 2024-03, end: 2024-10 }
     role: 팀 리더
     items:
-      - text: 데이콘 재정정보 AI 검색 경진대회 4위 (359팀 중, 5인 팀으로 참가)
-        project: dacon-fiscal-ai-search
       - text: 생성형 AI 심화 과정에서 소수정예 팀을 이끌며 스터디와 프로젝트 주도
       - text: 민원누리 SW 경진대회 참가
   - title: IL LAB · Praises Us
