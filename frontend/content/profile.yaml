@@ -28,6 +28,7 @@ experience:
     mark: BP
     logo: /images/projects/pitz-ai-trainer/app-icon.jpg   # 회사 로고가 공개돼 있지 않아 서비스(PITZ) 앱 아이콘을 씀
     role: AI Engineer
+    note: 2월 합류, 5월 정식 채용   # 역할 옆에 붙는다. 증빙 서류의 입사일(5월)과 합류 시점(2월)이 달라서 둘 다 적음
     period: { start: 2026-02 }
     points:
       - PITZ AI 트레이너 챗봇 서버 설계·개발·운영 전담, App Store·Google Play 출시
@@ -62,10 +63,17 @@ timeline:
       - /images/activity/surf-2026/booth-demo.jpg
     links:
       행사 소개: https://www.iswsurf.com/
-  - title: Beans Pirates 입사
-    mark: 입사
-    period: { start: 2026-02, end: 2026-02 }
+  - title: Beans Pirates 정식 채용
+    mark: 채용
+    period: { start: 2026-05, end: 2026-05 }
     role: AI Engineer
+    summary: 팀원으로 참여한 중소벤처기업부 재도전성공패키지에 팀이 선정된 뒤 정식 팀원으로 채용됐습니다.
+    links:
+      선정 기업 보도: https://www.veritas-a.com/news/articleView.html?idxno=632241
+  - title: Beans Pirates 합류
+    mark: 합류
+    period: { start: 2026-02, end: 2026-02 }
+    role: 초기 멤버 · AI Engineer
     items:
       - text: PITZ AI 트레이너·AI 리포트 App Store·Google Play 출시
         project: pitz-ai-trainer
