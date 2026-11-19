@@ -1,4 +1,5 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
+from ...core.security import get_current_user
 from ...services.s3_service import upload_file_to_s3
 import uuid
 
@@ -6,7 +7,7 @@ router = APIRouter()
 
 
 @router.post("/image")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(file: UploadFile = File(...), _: dict = Depends(get_current_user)):
     """Upload an image to S3"""
     # Validate file size (max 10MB)
     contents = await file.read()
