@@ -123,7 +123,7 @@ function Work() {
                     aria-expanded={isOpen}
                     onClick={() => setOpen(isOpen ? null : work.org)}
                   >
-                    <DatedRow item={work} title={work.org} sub={work.role} open={isOpen} />
+                    <DatedRow item={work} title={work.org} sub={[work.role, work.note].filter(Boolean).join(' · ')} open={isOpen} />
                   </button>
                   {isOpen && work.points && (
                     <ul className="ml-11 md:ml-[3.25rem] list-disc pl-4 space-y-1 text-xs sm:text-sm text-muted-foreground">
