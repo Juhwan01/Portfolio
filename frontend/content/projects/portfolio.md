@@ -27,7 +27,7 @@ responsibilities:
 links:
   github: https://github.com/Juhwan01/Portfolio
   demo: https://juhwan.dev
-cover: /images/projects/portfolio/thumbnail.png
+cover: /images/projects/portfolio/cover.png
 ---
 
 ## 구조 결정
